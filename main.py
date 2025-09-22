@@ -408,14 +408,14 @@ class NewGameScreen:
         self.player_grid_container = ttk.Frame(self.player_random_frame)
         self.player_more_button_container = ttk.Frame(self.player_random_frame)
 
-        def get_random_player_names():
+        def get_player_names():
             """Get random player names from DeepSeek"""
             self.player_random_button.config(state='disabled', text="Getting names...")
             self.player_status_label.config(text="Getting some names!")
             self.frame.update()
 
             try:
-                names = get_random_player_names()
+                names = get_random_player_names()  # Call the imported function
 
                 # Add new names to all generated player names list
                 self.all_generated_player_names.extend(names)
@@ -466,7 +466,7 @@ class NewGameScreen:
 
             # Add more random button in persistent container
             more_button = ttk.Button(self.player_more_button_container, text="More Random Names", width=25,
-                                   command=get_random_player_names)
+                                   command=get_player_names)
             more_button.pack()
             self.player_random_names_buttons.append(more_button)
 
@@ -475,7 +475,7 @@ class NewGameScreen:
             self.player_name_var.set(name)
             self.player_random_frame.pack_forget()  # Hide the random names frame
 
-        self.player_random_button.config(command=get_random_player_names)
+        self.player_random_button.config(command=get_player_names)
 
         # Buttons
         button_frame = ttk.Frame(self.frame)
