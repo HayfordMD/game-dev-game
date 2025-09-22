@@ -266,6 +266,135 @@ class LoadGameMenu:
             except Exception as e:
                 messagebox.showerror("Delete Error", f"Failed to delete save file: {str(e)}")
 
+class NewGameScreen:
+    def __init__(self, parent, on_back, on_create_studio):
+        self.parent = parent
+        self.on_back = on_back
+        self.on_create_studio = on_create_studio
+        self.frame = None
+
+    def show(self):
+        if self.frame:
+            self.frame.destroy()
+
+        self.frame = ttk.Frame(self.parent)
+        self.frame.pack(fill='both', expand=True)
+
+        # Title
+        title_label = ttk.Label(self.frame, text="Create New Studio",
+                               font=('Arial', 24, 'bold'))
+        title_label.pack(pady=30)
+
+        # Main content frame
+        content_frame = ttk.Frame(self.frame)
+        content_frame.pack(expand=True)
+
+        # Studio name section
+        ttk.Label(content_frame, text="Name Your Studio", font=('Arial', 14, 'bold')).pack(pady=(20, 10))
+
+        name_frame = ttk.Frame(content_frame)
+        name_frame.pack(pady=10)
+
+        self.studio_name_var = tk.StringVar(value="My Game Studio")
+        name_entry = ttk.Entry(name_frame, textvariable=self.studio_name_var, width=30, font=('Arial', 12))
+        name_entry.pack(side='left', padx=10)
+
+        # Random name button
+        self.random_button = ttk.Button(name_frame, text="Random Name?", width=15)
+        self.random_button.pack(side='left', padx=10)
+
+        # Random names frame (initially hidden)
+        self.random_frame = ttk.LabelFrame(content_frame, text="Choose a Generated Name")
+        self.random_names_buttons = []
+        self.status_label = ttk.Label(self.random_frame, text="", font=('Arial', 10, 'italic'))
+        self.status_label.pack(pady=10)
+
+        def get_random_names():
+            """Get random studio names from DeepSeek"""
+            self.random_button.config(state='disabled', text="Getting names...")
+            self.status_label.config(text="Getting some names!")
+            self.frame.update()
+
+            try:
+                names = get_random_studio_names()
+
+                # Clear existing buttons
+                for btn in self.random_names_buttons:
+                    btn.destroy()
+                self.random_names_buttons.clear()
+
+                self.status_label.config(text="Choose one or click 'More Random' for new options:")
+
+                # Create buttons for each name
+                buttons_frame = ttk.Frame(self.random_frame)
+                buttons_frame.pack(pady=10)
+
+                for i, name in enumerate(names):
+                    btn = ttk.Button(buttons_frame, text=name, width=35,
+                                   command=lambda n=name: select_random_name(n))
+                    btn.pack(pady=3)
+                    self.random_names_buttons.append(btn)
+
+                # More random button
+                more_button = ttk.Button(buttons_frame, text="More Random Names", width=35,
+                                       command=get_random_names)
+                more_button.pack(pady=10)
+                self.random_names_buttons.append(more_button)
+
+                # Show the frame
+                self.random_frame.pack(fill='x', padx=50, pady=20)
+
+            except Exception as e:
+                self.status_label.config(text=f"Error getting names: {str(e)}")
+            finally:
+                self.random_button.config(state='normal', text="Random Name?")
+
+        def select_random_name(name):
+            """Select a random name and put it in the entry field"""
+            self.studio_name_var.set(name)
+            self.random_frame.pack_forget()  # Hide the random names frame
+
+        self.random_button.config(command=get_random_names)
+
+        # Player name entry
+        ttk.Label(content_frame, text="Your Name:", font=('Arial', 12)).pack(pady=(40, 5))
+        self.player_name_var = tk.StringVar(value="Game Developer")
+        ttk.Entry(content_frame, textvariable=self.player_name_var, width=30, font=('Arial', 12)).pack(pady=5)
+
+        # Difficulty selection
+        ttk.Label(content_frame, text="Difficulty:", font=('Arial', 12)).pack(pady=(30, 5))
+        self.difficulty_var = tk.StringVar(value="Normal")
+        difficulty_combo = ttk.Combobox(content_frame, textvariable=self.difficulty_var,
+                                       values=["Easy", "Normal", "Hard"],
+                                       state="readonly", width=27, font=('Arial', 12))
+        difficulty_combo.pack(pady=5)
+
+        # Buttons
+        button_frame = ttk.Frame(self.frame)
+        button_frame.pack(side='bottom', pady=30)
+
+        ttk.Button(button_frame, text="Create Studio",
+                  command=self.create_studio, width=15).pack(side='left', padx=10)
+        ttk.Button(button_frame, text="Back to Menu",
+                  command=self.on_back, width=15).pack(side='left', padx=10)
+
+    def create_studio(self):
+        """Create new studio"""
+        if not self.studio_name_var.get().strip():
+            messagebox.showwarning("Invalid Name", "Please enter a studio name.")
+            return
+
+        if not self.player_name_var.get().strip():
+            messagebox.showwarning("Invalid Name", "Please enter your name.")
+            return
+
+        # Call the create studio callback
+        self.on_create_studio(
+            self.studio_name_var.get().strip(),
+            self.player_name_var.get().strip(),
+            self.difficulty_var.get()
+        )
+
 class MainGameWindow:
     def __init__(self, parent, game_data, save_manager, on_save, on_menu):
         self.parent = parent
@@ -426,7 +555,7 @@ class GameDevStudioApp:
         # Initialize UI components
         self.current_screen = None
         self.start_menu = StartMenu(self.root,
-                                  self.new_game,
+                                  self.show_new_game_screen,
                                   self.show_load_menu,
                                   self.show_options,
                                   self.quit_game)
@@ -436,6 +565,10 @@ class GameDevStudioApp:
                                     self.show_start_menu,
                                     self.load_game)
 
+        self.new_game_screen = NewGameScreen(self.root,
+                                           self.show_start_menu,
+                                           self.create_new_studio)
+
         # Show start menu
         self.show_start_menu()
 
@@ -444,6 +577,12 @@ class GameDevStudioApp:
         self.clear_screen()
         self.start_menu.show()
         self.current_screen = "start"
+
+    def show_new_game_screen(self):
+        """Show the new game screen"""
+        self.clear_screen()
+        self.new_game_screen.show()
+        self.current_screen = "new_game"
 
     def show_load_menu(self):
         """Show the load game menu"""
@@ -471,127 +610,22 @@ class GameDevStudioApp:
         for widget in self.root.winfo_children():
             widget.destroy()
 
-    def new_game(self):
-        """Start a new game"""
-        # Show new game dialog
-        dialog = tk.Toplevel(self.root)
-        dialog.title("New Game")
-        dialog.geometry("500x400")
-        dialog.transient(self.root)
-        dialog.grab_set()
+    def create_new_studio(self, studio_name, player_name, difficulty):
+        """Create new studio with provided data"""
+        # Create new game data
+        self.game_data.reset_to_defaults()
+        self.game_data.set(studio_name, 'player_data', 'studio_name')
+        self.game_data.set(player_name, 'player_data', 'player_name')
+        self.game_data.set(difficulty, 'settings', 'difficulty')
 
-        # Studio name section
-        ttk.Label(dialog, text="Name Your Studio", font=('Arial', 12, 'bold')).pack(pady=(10, 5))
+        # Show success message and return to main menu
+        messagebox.showinfo("Studio Created",
+                          f"'{studio_name}' has been created!\n\n"
+                          f"You can now start working on your first game.\n"
+                          f"Use 'Load Game' to continue with this studio.")
 
-        name_frame = ttk.Frame(dialog)
-        name_frame.pack(pady=5)
-
-        studio_name_var = tk.StringVar(value="My Game Studio")
-        name_entry = ttk.Entry(name_frame, textvariable=studio_name_var, width=25, font=('Arial', 10))
-        name_entry.pack(side='left', padx=5)
-
-        # Random name button
-        random_button = ttk.Button(name_frame, text="Random Name?", width=12)
-        random_button.pack(side='left', padx=5)
-
-        # Random names frame (initially hidden)
-        random_frame = ttk.LabelFrame(dialog, text="Choose a Generated Name")
-        random_names_buttons = []
-        status_label = ttk.Label(random_frame, text="", font=('Arial', 9, 'italic'))
-        status_label.pack(pady=5)
-
-        def get_random_names():
-            """Get random studio names from DeepSeek"""
-            random_button.config(state='disabled', text="Getting names...")
-            status_label.config(text="Getting some names!")
-            dialog.update()
-
-            try:
-                names = get_random_studio_names()
-
-                # Clear existing buttons
-                for btn in random_names_buttons:
-                    btn.destroy()
-                random_names_buttons.clear()
-
-                status_label.config(text="Choose one or click 'More Random' for new options:")
-
-                # Create buttons for each name
-                buttons_frame = ttk.Frame(random_frame)
-                buttons_frame.pack(pady=5)
-
-                for i, name in enumerate(names):
-                    btn = ttk.Button(buttons_frame, text=name, width=25,
-                                   command=lambda n=name: select_random_name(n))
-                    btn.pack(pady=2)
-                    random_names_buttons.append(btn)
-
-                # More random button
-                more_button = ttk.Button(buttons_frame, text="More Random", width=25,
-                                       command=get_random_names)
-                more_button.pack(pady=5)
-                random_names_buttons.append(more_button)
-
-                # Show the frame
-                random_frame.pack(fill='x', padx=20, pady=10)
-
-            except Exception as e:
-                status_label.config(text=f"Error getting names: {str(e)}")
-            finally:
-                random_button.config(state='normal', text="Random Name?")
-
-        def select_random_name(name):
-            """Select a random name and put it in the entry field"""
-            studio_name_var.set(name)
-            random_frame.pack_forget()  # Hide the random names frame
-
-        random_button.config(command=get_random_names)
-
-        # Player name entry
-        ttk.Label(dialog, text="Your Name:", font=('Arial', 10)).pack(pady=(20, 5))
-        player_name_var = tk.StringVar(value="Game Developer")
-        ttk.Entry(dialog, textvariable=player_name_var, width=30).pack(pady=5)
-
-        # Difficulty selection
-        ttk.Label(dialog, text="Difficulty:", font=('Arial', 10)).pack(pady=(20, 5))
-        difficulty_var = tk.StringVar(value="Normal")
-        difficulty_combo = ttk.Combobox(dialog, textvariable=difficulty_var,
-                                       values=["Easy", "Normal", "Hard"],
-                                       state="readonly", width=27)
-        difficulty_combo.pack(pady=5)
-
-        def create_new_game():
-            """Create new game and stay in main menu"""
-            if not studio_name_var.get().strip():
-                messagebox.showwarning("Invalid Name", "Please enter a studio name.")
-                return
-
-            if not player_name_var.get().strip():
-                messagebox.showwarning("Invalid Name", "Please enter your name.")
-                return
-
-            # Create new game data
-            self.game_data.reset_to_defaults()
-            self.game_data.set(studio_name_var.get().strip(), 'player_data', 'studio_name')
-            self.game_data.set(player_name_var.get().strip(), 'player_data', 'player_name')
-            self.game_data.set(difficulty_var.get(), 'settings', 'difficulty')
-
-            dialog.destroy()
-
-            # Show success message and stay in main menu
-            messagebox.showinfo("Studio Created",
-                              f"'{studio_name_var.get()}' has been created!\n\n"
-                              f"You can now start working on your first game.\n"
-                              f"Use 'Load Game' to continue with this studio.")
-
-        # Buttons
-        button_frame = ttk.Frame(dialog)
-        button_frame.pack(pady=30)
-
-        ttk.Button(button_frame, text="Create Studio",
-                  command=create_new_game).pack(side='left', padx=5)
-        ttk.Button(button_frame, text="Cancel",
-                  command=dialog.destroy).pack(side='left', padx=5)
+        # Return to start menu
+        self.show_start_menu()
 
     def load_game(self, filename):
         """Load a game from save file"""
