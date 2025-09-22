@@ -293,6 +293,8 @@ class Game:
     def draw(self):
         if self.current_screen == "start":
             self.start_menu.draw()
+        elif self.current_screen == "load_game":
+            self.load_game_screen.draw()
         elif self.current_screen == "options":
             self.options_menu.draw()
         elif self.current_screen == "game":
