@@ -4,6 +4,9 @@ import yaml
 import os
 from datetime import datetime
 from pathlib import Path
+import sys
+sys.path.append(os.path.dirname(os.path.abspath(__file__)))
+from deepseek.services.naming import get_random_studio_names
 
 class SaveManager:
     def __init__(self):
