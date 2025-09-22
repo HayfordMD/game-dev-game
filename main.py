@@ -268,10 +268,17 @@ class Game:
                 result = self.start_menu.handle_event(event)
                 if result == "new_game":
                     self.current_screen = "game"
+                elif result == "load_game":
+                    self.current_screen = "load_game"
                 elif result == "options":
                     self.current_screen = "options"
                 elif result == "quit":
                     self.running = False
+
+            elif self.current_screen == "load_game":
+                result = self.load_game_screen.handle_event(event)
+                if result == "back":
+                    self.current_screen = "start"
 
             elif self.current_screen == "options":
                 result = self.options_menu.handle_event(event)
