@@ -1,0 +1,160 @@
+game_metadata:
+  version: "1.0.0"
+  save_name: "Successful Indie Studio"
+  created_date: "2025-09-22T10:30:00Z"
+  last_played: "2025-09-22T15:45:00Z"
+  playtime_hours: 12.5
+
+player_data:
+  studio_name: "Pixel Dreams Studio"
+  player_name: "Alex Developer"
+  current_money: 75000
+  reputation: 65
+  stress_level: 35
+  energy: 70
+
+skills:
+  programming: 70
+  art: 45
+  design: 60
+  marketing: 40
+  business: 55
+  project_management: 50
+
+studio_stats:
+  games_published: 2
+  total_sales: 120000
+  awards_won: 1
+  employees_hired: 3
+  years_in_business: 1
+
+current_projects:
+  - project_id: "proj_001"
+    name: "Space Cats Adventure"
+    genre: "Platformer"
+    platform: "PC"
+    progress_percent: 65
+    team_assigned: ["emp_001", "emp_002"]
+    deadline: "2025-12-01"
+    budget_allocated: 30000
+    budget_spent: 18000
+
+employees:
+  - id: "emp_001"
+    name: "Sarah Coder"
+    role: "Programmer"
+    skills:
+      programming: 80
+      teamwork: 75
+    salary: 60000
+    happiness: 85
+    stress: 20
+    hire_date: "2025-02-15"
+
+  - id: "emp_002"
+    name: "Mike Artist"
+    role: "2D Artist"
+    skills:
+      art: 85
+      creativity: 90
+    salary: 55000
+    happiness: 80
+    stress: 25
+    hire_date: "2025-04-01"
+
+  - id: "emp_003"
+    name: "Jenny Designer"
+    role: "Game Designer"
+    skills:
+      design: 75
+      creativity: 80
+    salary: 58000
+    happiness: 75
+    stress: 30
+    hire_date: "2025-06-15"
+
+completed_games:
+  - id: "game_001"
+    name: "Block Puzzle Pro"
+    genre: "Puzzle"
+    platform: "Mobile"
+    release_date: "2025-05-15"
+    development_time_months: 3
+    budget: 15000
+    sales: 45000
+    rating: 8.1
+    team_size: 2
+
+  - id: "game_002"
+    name: "Retro Racer"
+    genre: "Racing"
+    platform: "PC"
+    release_date: "2025-08-01"
+    development_time_months: 5
+    budget: 25000
+    sales: 75000
+    rating: 8.7
+    team_size: 3
+
+market_data:
+  current_trends:
+    - genre: "Indie Puzzle"
+      popularity: 70
+      saturation: 50
+    - genre: "Retro Games"
+      popularity: 65
+      saturation: 40
+    - genre: "Platformers"
+      popularity: 60
+      saturation: 55
+
+  platform_data:
+    PC:
+      market_share: 40
+      difficulty: "Medium"
+    Mobile:
+      market_share: 35
+      difficulty: "Easy"
+    Console:
+      market_share: 25
+      difficulty: "Hard"
+
+game_types:
+  unlocked:
+    - "Text Adventure"
+    - "Simple Puzzle"
+    - "Platformer"
+    - "Racing Game"
+  locked:
+    - "RPG"
+    - "FPS"
+    - "Strategy"
+    - "MMO"
+    - "VR Game"
+
+research_progress:
+  "Advanced Graphics": 45
+  "Mobile Optimization": 80
+  "AI Programming": 25
+  "Multiplayer Systems": 10
+
+events_history:
+  - date: "2025-07-10"
+    type: "award_won"
+    description: "Block Puzzle Pro wins Best Mobile Game at Indie Awards"
+    effects:
+      - "reputation: +15"
+      - "team_happiness: +10"
+
+  - date: "2025-08-20"
+    type: "employee_promotion"
+    description: "Sarah Coder promoted to Senior Programmer"
+    effects:
+      - "emp_001.role: Senior Programmer"
+      - "emp_001.salary: 70000"
+
+settings:
+  auto_save_enabled: true
+  auto_save_interval_minutes: 5
+  difficulty: "Normal"
+  tutorial_completed: true

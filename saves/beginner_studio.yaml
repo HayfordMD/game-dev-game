@@ -1,0 +1,96 @@
+game_metadata:
+  version: "1.0.0"
+  save_name: "Starting Out Studio"
+  created_date: "2025-09-22T09:00:00Z"
+  last_played: "2025-09-22T12:30:00Z"
+  playtime_hours: 3.5
+
+player_data:
+  studio_name: "First Games Studio"
+  player_name: "New Developer"
+  current_money: 15000
+  reputation: 10
+  stress_level: 15
+  energy: 95
+
+skills:
+  programming: 30
+  art: 20
+  design: 35
+  marketing: 15
+  business: 20
+  project_management: 10
+
+studio_stats:
+  games_published: 1
+  total_sales: 8000
+  awards_won: 0
+  employees_hired: 0
+  years_in_business: 0
+
+current_projects: []
+
+employees: []
+
+completed_games:
+  - id: "game_001"
+    name: "My First Text Game"
+    genre: "Text Adventure"
+    platform: "PC"
+    release_date: "2025-09-20"
+    development_time_months: 1
+    budget: 2000
+    sales: 8000
+    rating: 6.5
+    team_size: 1
+
+market_data:
+  current_trends:
+    - genre: "Text Adventure"
+      popularity: 45
+      saturation: 30
+    - genre: "Simple Puzzle"
+      popularity: 55
+      saturation: 40
+
+  platform_data:
+    PC:
+      market_share: 50
+      difficulty: "Easy"
+    Mobile:
+      market_share: 30
+      difficulty: "Medium"
+    Console:
+      market_share: 20
+      difficulty: "Hard"
+
+game_types:
+  unlocked:
+    - "Text Adventure"
+    - "Simple Puzzle"
+  locked:
+    - "Platformer"
+    - "Racing Game"
+    - "RPG"
+    - "FPS"
+    - "Strategy"
+    - "MMO"
+    - "VR Game"
+
+research_progress:
+  "Basic Graphics": 15
+  "Sound Design": 5
+
+events_history:
+  - date: "2025-09-20"
+    type: "first_game_release"
+    description: "Released your first game: My First Text Game"
+    effects:
+      - "reputation: +5"
+      - "confidence: +10"
+
+settings:
+  auto_save_enabled: true
+  auto_save_interval_minutes: 10
+  difficulty: "Easy"
+  tutorial_completed: false
