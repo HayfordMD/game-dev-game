@@ -408,6 +408,75 @@ class NewGameScreen:
         self.player_grid_container = ttk.Frame(self.player_random_frame)
         self.player_more_button_container = ttk.Frame(self.player_random_frame)
 
+        def get_random_player_names():
+            """Get random player names from DeepSeek"""
+            self.player_random_button.config(state='disabled', text="Getting names...")
+            self.player_status_label.config(text="Getting some names!")
+            self.frame.update()
+
+            try:
+                names = get_random_player_names()
+
+                # Add new names to all generated player names list
+                self.all_generated_player_names.extend(names)
+
+                # Rebuild the entire buttons display
+                rebuild_player_buttons_display()
+
+                # Show the frame
+                self.player_random_frame.pack(fill='x', padx=50, pady=20)
+
+            except Exception as e:
+                self.player_status_label.config(text=f"Error getting names: {str(e)}")
+            finally:
+                self.player_random_button.config(state='normal', text="Random Name?")
+
+        def rebuild_player_buttons_display():
+            """Rebuild the player buttons display with all generated names"""
+            # Clear existing buttons but keep frames
+            for btn in self.player_random_names_buttons:
+                btn.destroy()
+            self.player_random_names_buttons.clear()
+
+            if not self.all_generated_player_names:
+                return
+
+            self.player_status_label.config(text="Choose one or click 'More Random' for new options:")
+
+            # Pack persistent containers if not already packed
+            if not self.player_grid_container.winfo_viewable():
+                self.player_grid_container.pack(pady=10, padx=10, fill='x')
+            if not self.player_more_button_container.winfo_viewable():
+                self.player_more_button_container.pack(pady=10)
+
+            # Create buttons in rows of 5 in the persistent grid container
+            names_per_row = 5
+            for i, name in enumerate(self.all_generated_player_names):
+                row = i // names_per_row
+                col = i % names_per_row
+
+                btn = ttk.Button(self.player_grid_container, text=name, width=20,
+                               command=lambda n=name: select_random_player_name(n))
+                btn.grid(row=row, column=col, padx=2, pady=2, sticky='ew')
+                self.player_random_names_buttons.append(btn)
+
+            # Configure column weights for even distribution
+            for col in range(names_per_row):
+                self.player_grid_container.columnconfigure(col, weight=1)
+
+            # Add more random button in persistent container
+            more_button = ttk.Button(self.player_more_button_container, text="More Random Names", width=25,
+                                   command=get_random_player_names)
+            more_button.pack()
+            self.player_random_names_buttons.append(more_button)
+
+        def select_random_player_name(name):
+            """Select a random player name and put it in the entry field"""
+            self.player_name_var.set(name)
+            self.player_random_frame.pack_forget()  # Hide the random names frame
+
+        self.player_random_button.config(command=get_random_player_names)
+
         # Buttons
         button_frame = ttk.Frame(self.frame)
         button_frame.pack(side='bottom', pady=30)
