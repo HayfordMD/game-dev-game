@@ -28,13 +28,15 @@ class DeepSeekNamingService:
         if not self.api_key:
             return self._get_fallback_names()
 
-        prompt = """Give me a name for a game studio. I need exactly 3 options:
+        prompt = """Give me 5 game studio names. I need:
 
 1. One descriptive/technical name like "Sun Systems Development" or "ID Software"
 2. One fierce/elemental name like "Shark Systems", "Shadow Games", "Light House Studios", or "Fast Games"
 3. One simple/brandable name like "Bungie", "Blizzard", "FOREDATING", "AXEL", or "QUBIT"
+4. One creative/artistic name like "Pixel Dreams", "Neon Canvas", "Digital Muse"
+5. One tech/modern name like "ByteForge", "CodeCraft", "DataFlow Studios"
 
-Return only the three names, one per line, no explanations."""
+Return only the five names, one per line, no explanations."""
 
         try:
             headers = {
@@ -61,15 +63,15 @@ Return only the three names, one per line, no explanations."""
                 content = result['choices'][0]['message']['content'].strip()
                 names = [name.strip() for name in content.split('\n') if name.strip()]
 
-                # Ensure we have exactly 3 names
-                if len(names) >= 3:
-                    return names[:3]
+                # Ensure we have exactly 5 names
+                if len(names) >= 5:
+                    return names[:5]
                 else:
-                    # If we got fewer than 3, pad with fallback names
+                    # If we got fewer than 5, pad with fallback names
                     fallback = self._get_fallback_names()
-                    while len(names) < 3:
-                        names.append(fallback[len(names) % 3])
-                    return names[:3]
+                    while len(names) < 5:
+                        names.append(fallback[len(names) % 5])
+                    return names[:5]
             else:
                 print(f"DeepSeek API error: {response.status_code} - {response.text}")
                 return self._get_fallback_names()
@@ -86,50 +88,122 @@ Return only the three names, one per line, no explanations."""
         Fallback names when API is not available
 
         Returns:
-            List of 3 predetermined studio names
+            List of 5 predetermined studio names
         """
         import random
 
-        descriptive_names = [
-            "Digital Systems Development",
-            "Code Forge Studios",
-            "Pixel Engine Works",
-            "Interactive Media Labs",
-            "Game Logic Studios"
+        all_names = [
+            "Digital Systems Development", "Code Forge Studios", "Pixel Engine Works", "Interactive Media Labs", "Game Logic Studios",
+            "Storm Games", "Iron Wolf Studios", "Lightning Studios", "Fire Mountain Games", "Thunder Bay Studios",
+            "Zenith", "Apex", "Nexus", "Prism", "Flux",
+            "Pixel Dreams", "Neon Canvas", "Digital Muse", "Creative Labs", "Art Engine",
+            "ByteForge", "CodeCraft", "DataFlow Studios", "TechCore", "Binary Studios"
         ]
 
-        fierce_elemental_names = [
-            "Storm Games",
-            "Iron Wolf Studios",
-            "Lightning Studios",
-            "Fire Mountain Games",
-            "Thunder Bay Studios"
+        # Shuffle and return 5 names
+        random.shuffle(all_names)
+        return all_names[:5]
+
+    def generate_player_names(self) -> List[str]:
+        """
+        Generate 10 random American player names using DeepSeek API
+
+        Returns:
+            List of 10 player names
+        """
+        if not self.api_key:
+            return self._get_fallback_player_names()
+
+        prompt = """Give me 10 random American names. These are for game characters/players.
+
+Return only the names, one per line, no explanations. Mix of first names only and full names (first + last). Examples: John, Sarah Martinez, Mike, Jennifer Chen, etc."""
+
+        try:
+            headers = {
+                "Authorization": f"Bearer {self.api_key}",
+                "Content-Type": "application/json"
+            }
+
+            data = {
+                "model": "deepseek-chat",
+                "messages": [
+                    {
+                        "role": "user",
+                        "content": prompt
+                    }
+                ],
+                "max_tokens": 150,
+                "temperature": 0.8
+            }
+
+            response = requests.post(self.base_url, headers=headers, json=data, timeout=10)
+
+            if response.status_code == 200:
+                result = response.json()
+                content = result['choices'][0]['message']['content'].strip()
+                names = [name.strip() for name in content.split('\n') if name.strip()]
+
+                # Ensure we have exactly 10 names
+                if len(names) >= 10:
+                    return names[:10]
+                else:
+                    # If we got fewer than 10, pad with fallback names
+                    fallback = self._get_fallback_player_names()
+                    while len(names) < 10:
+                        names.append(fallback[len(names) % 10])
+                    return names[:10]
+            else:
+                print(f"DeepSeek API error: {response.status_code} - {response.text}")
+                return self._get_fallback_player_names()
+
+        except requests.exceptions.RequestException as e:
+            print(f"Network error calling DeepSeek API: {e}")
+            return self._get_fallback_player_names()
+        except Exception as e:
+            print(f"Error calling DeepSeek API: {e}")
+            return self._get_fallback_player_names()
+
+    def _get_fallback_player_names(self) -> List[str]:
+        """
+        Fallback player names when API is not available
+
+        Returns:
+            List of 10 predetermined player names
+        """
+        import random
+
+        american_names = [
+            "Alex", "Jordan Smith", "Taylor", "Casey Johnson", "Morgan",
+            "Riley Davis", "Cameron", "Quinn Miller", "Avery", "Dakota Brown",
+            "Sage Wilson", "River", "Phoenix Garcia", "Sky Martinez", "Kai",
+            "Blake Anderson", "Drew", "Lane Cooper", "Rowan", "Ember"
         ]
 
-        simple_brandable_names = [
-            "Zenith",
-            "Apex",
-            "Nexus",
-            "Prism",
-            "Flux"
-        ]
-
-        return [
-            random.choice(descriptive_names),
-            random.choice(fierce_elemental_names),
-            random.choice(simple_brandable_names)
-        ]
+        # Shuffle and return 10 names
+        random.shuffle(american_names)
+        return american_names[:10]
 
 # Convenience function for easy import
 def get_random_studio_names() -> List[str]:
     """
-    Get 3 random studio names
+    Get 5 random studio names
 
     Returns:
-        List of 3 studio names
+        List of 5 studio names
     """
     service = DeepSeekNamingService()
     return service.generate_studio_names()
+
+# Convenience function for player names
+def get_random_player_names() -> List[str]:
+    """
+    Get 10 random player names
+
+    Returns:
+        List of 10 player names
+    """
+    service = DeepSeekNamingService()
+    return service.generate_player_names()
 
 # Test function
 def test_naming_service():

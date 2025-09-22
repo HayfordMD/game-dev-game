@@ -6,7 +6,7 @@ from datetime import datetime
 from pathlib import Path
 import sys
 sys.path.append(os.path.dirname(os.path.abspath(__file__)))
-from deepseek.services.naming import get_random_studio_names
+from deepseek.services.naming import get_random_studio_names, get_random_player_names
 
 class SaveManager:
     def __init__(self):
@@ -306,6 +306,7 @@ class NewGameScreen:
         # Random names frame (initially hidden)
         self.random_frame = ttk.LabelFrame(content_frame, text="Choose a Generated Name")
         self.random_names_buttons = []
+        self.all_generated_names = []  # Keep track of all generated names
         self.status_label = ttk.Label(self.random_frame, text="", font=('Arial', 10, 'italic'))
         self.status_label.pack(pady=10)
 
@@ -318,28 +319,11 @@ class NewGameScreen:
             try:
                 names = get_random_studio_names()
 
-                # Clear existing buttons
-                for btn in self.random_names_buttons:
-                    btn.destroy()
-                self.random_names_buttons.clear()
+                # Add new names to all generated names list
+                self.all_generated_names.extend(names)
 
-                self.status_label.config(text="Choose one or click 'More Random' for new options:")
-
-                # Create buttons for each name
-                buttons_frame = ttk.Frame(self.random_frame)
-                buttons_frame.pack(pady=10)
-
-                for i, name in enumerate(names):
-                    btn = ttk.Button(buttons_frame, text=name, width=35,
-                                   command=lambda n=name: select_random_name(n))
-                    btn.pack(pady=3)
-                    self.random_names_buttons.append(btn)
-
-                # More random button
-                more_button = ttk.Button(buttons_frame, text="More Random Names", width=35,
-                                       command=get_random_names)
-                more_button.pack(pady=10)
-                self.random_names_buttons.append(more_button)
+                # Rebuild the entire buttons display
+                rebuild_buttons_display()
 
                 # Show the frame
                 self.random_frame.pack(fill='x', padx=50, pady=20)
@@ -349,6 +333,46 @@ class NewGameScreen:
             finally:
                 self.random_button.config(state='normal', text="Random Name?")
 
+        def rebuild_buttons_display():
+            """Rebuild the buttons display with all generated names"""
+            # Clear existing buttons
+            for btn in self.random_names_buttons:
+                btn.destroy()
+            self.random_names_buttons.clear()
+
+            if not self.all_generated_names:
+                return
+
+            self.status_label.config(text="Choose one or click 'More Random' for new options:")
+
+            # Create grid container
+            grid_frame = ttk.Frame(self.random_frame)
+            grid_frame.pack(pady=10, padx=10, fill='x')
+
+            # Create buttons in rows of 5
+            names_per_row = 5
+            for i, name in enumerate(self.all_generated_names):
+                row = i // names_per_row
+                col = i % names_per_row
+
+                btn = ttk.Button(grid_frame, text=name, width=20,
+                               command=lambda n=name: select_random_name(n))
+                btn.grid(row=row, column=col, padx=2, pady=2, sticky='ew')
+                self.random_names_buttons.append(btn)
+
+            # Configure column weights for even distribution
+            for col in range(names_per_row):
+                grid_frame.columnconfigure(col, weight=1)
+
+            # Add more random button at bottom
+            more_button_frame = ttk.Frame(self.random_frame)
+            more_button_frame.pack(pady=10)
+
+            more_button = ttk.Button(more_button_frame, text="More Random Names", width=25,
+                                   command=get_random_names)
+            more_button.pack()
+            self.random_names_buttons.append(more_button)
+
         def select_random_name(name):
             """Select a random name and put it in the entry field"""
             self.studio_name_var.set(name)
@@ -357,17 +381,19 @@ class NewGameScreen:
         self.random_button.config(command=get_random_names)
 
         # Player name entry
-        ttk.Label(content_frame, text="Your Name:", font=('Arial', 12)).pack(pady=(40, 5))
-        self.player_name_var = tk.StringVar(value="Game Developer")
-        ttk.Entry(content_frame, textvariable=self.player_name_var, width=30, font=('Arial', 12)).pack(pady=5)
+        ttk.Label(content_frame, text="Your Name:", font=('Arial', 14, 'bold')).pack(pady=(40, 10))
 
-        # Difficulty selection
-        ttk.Label(content_frame, text="Difficulty:", font=('Arial', 12)).pack(pady=(30, 5))
-        self.difficulty_var = tk.StringVar(value="Normal")
-        difficulty_combo = ttk.Combobox(content_frame, textvariable=self.difficulty_var,
-                                       values=["Easy", "Normal", "Hard"],
-                                       state="readonly", width=27, font=('Arial', 12))
-        difficulty_combo.pack(pady=5)
+        player_name_frame = ttk.Frame(content_frame)
+        player_name_frame.pack(pady=10)
+
+        self.player_name_var = tk.StringVar(value="Game Developer")
+        player_name_entry = ttk.Entry(player_name_frame, textvariable=self.player_name_var, width=30, font=('Arial', 12))
+        player_name_entry.pack(side='left', padx=10)
+
+        # Player name generator button
+        player_name_button = ttk.Button(player_name_frame, text="Random Name?", width=15,
+                                       command=self.open_player_name_generator)
+        player_name_button.pack(side='left', padx=10)
 
         # Buttons
         button_frame = ttk.Frame(self.frame)
@@ -391,9 +417,130 @@ class NewGameScreen:
         # Call the create studio callback
         self.on_create_studio(
             self.studio_name_var.get().strip(),
-            self.player_name_var.get().strip(),
-            self.difficulty_var.get()
+            self.player_name_var.get().strip()
         )
+
+    def open_player_name_generator(self):
+        """Open player name generator window"""
+        # Create new window positioned above the main window
+        name_window = tk.Toplevel(self.parent)
+        name_window.title("Choose Player Name")
+        name_window.geometry("500x600")
+        name_window.transient(self.parent)
+        name_window.grab_set()
+
+        # Position window in center of main window
+        main_x = self.parent.winfo_x()
+        main_y = self.parent.winfo_y()
+        main_width = self.parent.winfo_width()
+        main_height = self.parent.winfo_height()
+
+        # Calculate center position
+        center_x = main_x + (main_width - 500) // 2
+        center_y = main_y + (main_height - 600) // 2
+
+        name_window.geometry(f"500x600+{center_x}+{center_y}")
+
+        # Title
+        ttk.Label(name_window, text="Choose Your Name", font=('Arial', 16, 'bold')).pack(pady=20)
+
+        # Name entry section
+        entry_frame = ttk.Frame(name_window)
+        entry_frame.pack(pady=10, padx=20, fill='x')
+
+        ttk.Label(entry_frame, text="ENTER NAME", font=('Arial', 12, 'bold')).pack()
+        name_var = tk.StringVar(value=self.player_name_var.get())
+        name_entry = ttk.Entry(entry_frame, textvariable=name_var, width=40, font=('Arial', 12))
+        name_entry.pack(pady=10)
+
+        # Random name button
+        random_frame = ttk.Frame(name_window)
+        random_frame.pack(pady=10)
+
+        generate_button = ttk.Button(random_frame, text="GENERATE RANDOM NAMES", width=25,
+                                   font=('Arial', 11, 'bold'))
+        generate_button.pack()
+
+        # Separator
+        separator_frame = ttk.Frame(name_window)
+        separator_frame.pack(fill='x', padx=20, pady=10)
+        ttk.Separator(separator_frame, orient='horizontal').pack(fill='x')
+
+        # Buttons section
+        buttons_frame = ttk.Frame(name_window)
+        buttons_frame.pack(fill='both', expand=True, padx=20, pady=10)
+
+        ttk.Label(buttons_frame, text="BUTTONS", font=('Arial', 12, 'bold')).pack()
+
+        # Scrollable frame for name buttons
+        canvas = tk.Canvas(buttons_frame, height=300)
+        scrollbar = ttk.Scrollbar(buttons_frame, orient="vertical", command=canvas.yview)
+        scrollable_frame = ttk.Frame(canvas)
+
+        scrollable_frame.bind(
+            "<Configure>",
+            lambda e: canvas.configure(scrollregion=canvas.bbox("all"))
+        )
+
+        canvas.create_window((0, 0), window=scrollable_frame, anchor="nw")
+        canvas.configure(yscrollcommand=scrollbar.set)
+
+        canvas.pack(side="left", fill="both", expand=True)
+        scrollbar.pack(side="right", fill="y")
+
+        name_buttons = []
+
+        def generate_names():
+            """Generate and display random names"""
+            generate_button.config(state='disabled', text="Generating...")
+            name_window.update()
+
+            try:
+                names = get_random_player_names()
+
+                # Clear existing buttons
+                for btn in name_buttons:
+                    btn.destroy()
+                name_buttons.clear()
+
+                # Create buttons for each name
+                for i, name in enumerate(names):
+                    btn = ttk.Button(scrollable_frame, text=name, width=35,
+                                   command=lambda n=name: select_name(n))
+                    btn.pack(pady=2, padx=10, fill='x')
+                    name_buttons.append(btn)
+
+            except Exception as e:
+                messagebox.showerror("Error", f"Failed to generate names: {str(e)}")
+            finally:
+                generate_button.config(state='normal', text="GENERATE RANDOM NAMES")
+
+        def select_name(selected_name):
+            """Select a name and put it in the entry field"""
+            name_var.set(selected_name)
+
+        def submit_name():
+            """Submit the selected name"""
+            if not name_var.get().strip():
+                messagebox.showwarning("Invalid Name", "Please enter or select a name.")
+                return
+
+            self.player_name_var.set(name_var.get().strip())
+            name_window.destroy()
+
+        generate_button.config(command=generate_names)
+
+        # Bottom separator and submit
+        bottom_separator_frame = ttk.Frame(name_window)
+        bottom_separator_frame.pack(fill='x', padx=20, pady=(10, 5))
+        ttk.Separator(bottom_separator_frame, orient='horizontal').pack(fill='x')
+
+        # Submit button
+        submit_frame = ttk.Frame(name_window)
+        submit_frame.pack(pady=15)
+
+        ttk.Button(submit_frame, text="SUBMIT", command=submit_name, width=20,
+                  style='Accent.TButton').pack()
 
 class MainGameWindow:
     def __init__(self, parent, game_data, save_manager, on_save, on_menu):
@@ -413,7 +560,7 @@ class MainGameWindow:
 
         # Create notebook for tabs
         notebook = ttk.Notebook(self.frame)
-        notebook.pack(fill='both', expand=True, padx=10, pady=10)
+        notebook.pack(fill='both', expand=True, padx=10, pady=(5, 10))
 
         # Studio Overview Tab
         self.create_studio_tab(notebook)
@@ -443,7 +590,7 @@ class MainGameWindow:
 
         # Studio info
         info_frame = ttk.LabelFrame(studio_frame, text="Studio Information")
-        info_frame.pack(fill='x', padx=10, pady=5)
+        info_frame.pack(fill='x', padx=10, pady=(5, 10))
 
         player_data = self.game_data.get('player_data')
         studio_stats = self.game_data.get('studio_stats')
@@ -456,7 +603,7 @@ class MainGameWindow:
 
         # Skills frame
         skills_frame = ttk.LabelFrame(studio_frame, text="Skills")
-        skills_frame.pack(fill='x', padx=10, pady=5)
+        skills_frame.pack(fill='x', padx=10, pady=(5, 15))
 
         skills = self.game_data.get('skills')
         for skill, level in skills.items():
@@ -476,17 +623,17 @@ class MainGameWindow:
         notebook.add(projects_frame, text="Projects")
 
         ttk.Label(projects_frame, text="Current Projects",
-                 font=('Arial', 14, 'bold')).pack(pady=10)
+                 font=('Arial', 16, 'bold')).pack(pady=(15, 10))
 
         # Current projects list
         current_projects = self.game_data.get('current_projects')
         if not current_projects:
             ttk.Label(projects_frame, text="No active projects",
-                     font=('Arial', 10, 'italic')).pack(pady=20)
+                     font=('Arial', 12, 'italic')).pack(pady=(30, 20))
 
         # New project button
         ttk.Button(projects_frame, text="Start New Project",
-                  command=self.start_new_project).pack(pady=10)
+                  command=self.start_new_project, width=20).pack(pady=15)
 
     def create_team_tab(self, notebook):
         """Create team tab"""
@@ -494,18 +641,18 @@ class MainGameWindow:
         notebook.add(team_frame, text="Team")
 
         ttk.Label(team_frame, text="Team Members",
-                 font=('Arial', 14, 'bold')).pack(pady=10)
+                 font=('Arial', 16, 'bold')).pack(pady=(15, 10))
 
         employees = self.game_data.get('employees')
         if not employees:
             ttk.Label(team_frame, text="No employees hired yet",
-                     font=('Arial', 10, 'italic')).pack(pady=20)
+                     font=('Arial', 12, 'italic')).pack(pady=(30, 10))
             ttk.Label(team_frame, text="You are working solo for now!",
-                     font=('Arial', 10)).pack()
+                     font=('Arial', 12)).pack()
 
         # Hire button
         ttk.Button(team_frame, text="Hire Employee",
-                  command=self.hire_employee).pack(pady=10)
+                  command=self.hire_employee, width=20).pack(pady=20)
 
     def create_market_tab(self, notebook):
         """Create market tab"""
@@ -513,25 +660,25 @@ class MainGameWindow:
         notebook.add(market_frame, text="Market")
 
         ttk.Label(market_frame, text="Game Market Analysis",
-                 font=('Arial', 14, 'bold')).pack(pady=10)
+                 font=('Arial', 16, 'bold')).pack(pady=(15, 10))
 
         # Game types info
         game_types_frame = ttk.LabelFrame(market_frame, text="Available Game Types")
-        game_types_frame.pack(fill='x', padx=10, pady=5)
+        game_types_frame.pack(fill='x', padx=10, pady=(10, 15))
 
         game_types = self.game_data.get('game_types', {})
         unlocked = game_types.get('unlocked', [])
         locked = game_types.get('locked', [])
 
         ttk.Label(game_types_frame, text="Unlocked Types:",
-                 font=('Arial', 10, 'bold')).pack(anchor='w')
+                 font=('Arial', 12, 'bold')).pack(anchor='w', pady=(5, 5))
         for game_type in unlocked:
-            ttk.Label(game_types_frame, text=f"  • {game_type}").pack(anchor='w')
+            ttk.Label(game_types_frame, text=f"  • {game_type}", font=('Arial', 11)).pack(anchor='w')
 
         ttk.Label(game_types_frame, text="Locked Types:",
-                 font=('Arial', 10, 'bold')).pack(anchor='w', pady=(10,0))
+                 font=('Arial', 12, 'bold')).pack(anchor='w', pady=(15, 5))
         for game_type in locked:
-            ttk.Label(game_types_frame, text=f"  • {game_type} (Requires research)").pack(anchor='w')
+            ttk.Label(game_types_frame, text=f"  • {game_type} (Requires research)", font=('Arial', 11)).pack(anchor='w')
 
     def start_new_project(self):
         """Start a new game project"""
@@ -545,8 +692,18 @@ class GameDevStudioApp:
     def __init__(self):
         self.root = tk.Tk()
         self.root.title("Game Dev Studio")
-        self.root.geometry("800x600")
-        self.root.minsize(600, 400)
+
+        # Center the window on screen
+        window_width = 1920
+        window_height = 1080
+        screen_width = self.root.winfo_screenwidth()
+        screen_height = self.root.winfo_screenheight()
+
+        center_x = int(screen_width/2 - window_width/2)
+        center_y = int(screen_height/2 - window_height/2)
+
+        self.root.geometry(f'{window_width}x{window_height}+{center_x}+{center_y}')
+        self.root.minsize(800, 600)
 
         # Initialize managers and data
         self.save_manager = SaveManager()
@@ -610,13 +767,13 @@ class GameDevStudioApp:
         for widget in self.root.winfo_children():
             widget.destroy()
 
-    def create_new_studio(self, studio_name, player_name, difficulty):
+    def create_new_studio(self, studio_name, player_name):
         """Create new studio with provided data"""
         # Create new game data
         self.game_data.reset_to_defaults()
         self.game_data.set(studio_name, 'player_data', 'studio_name')
         self.game_data.set(player_name, 'player_data', 'player_name')
-        self.game_data.set(difficulty, 'settings', 'difficulty')
+        self.game_data.set("Normal", 'settings', 'difficulty')  # Default difficulty
 
         # Show success message and return to main menu
         messagebox.showinfo("Studio Created",
