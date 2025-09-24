@@ -461,7 +461,7 @@ class HappinessSystem:
         # Initialize happiness data if not present
         if 'happiness_system' not in self.game_data.data:
             self.game_data.data['happiness_system'] = {
-                'current_happiness': 50,  # Start at neutral
+                'current_happiness': 60,  # Start at 60%
                 'max_happiness': 100,
                 'relationships': {
                     'friends': 0,  # Number of friends

@@ -69,6 +69,19 @@ class UnlockSystem:
         """Check for unlocks when creating a game"""
         unlocked = []
 
+        # Track Arcade game count for Racing unlock
+        if game_type == 'Arcade':
+            if 'arcade_games_count' not in self.game_data.data:
+                self.game_data.data['arcade_games_count'] = 0
+            self.game_data.data['arcade_games_count'] += 1
+
+            # Racing game type - unlocked by creating 3 Arcade games
+            if self.game_data.data['arcade_games_count'] >= 3:
+                if 'Racing' not in self.permanent_unlocks['game_types']:
+                    self.permanent_unlocks['game_types'].append('Racing')
+                    self.save_permanent_unlocks()
+                    unlocked.append(('game_type', 'Racing', 'Created 3 Arcade games - Racing unlocked!'))
+
         # Office game type - unlocked by creating Ping game with Table Tennis and Arcade
         if (game_name and game_name.lower() == 'ping' and
             topic == 'Table Tennis' and
@@ -77,6 +90,21 @@ class UnlockSystem:
                 self.permanent_unlocks['game_types'].append('Office')
                 self.save_permanent_unlocks()
                 unlocked.append(('game_type', 'Office', 'Created the legendary Ping game!'))
+
+        # RPG game type - unlocked by creating Text Adventure + Fantasy
+        if (topic == 'Fantasy' and game_type == 'Text Adventure'):
+            if 'RPG' not in self.permanent_unlocks['game_types']:
+                self.permanent_unlocks['game_types'].append('RPG')
+                self.save_permanent_unlocks()
+                unlocked.append(('game_type', 'RPG', 'Combined Fantasy with Text Adventures to discover RPGs!'))
+
+        # Motion-Control game type - unlocked by creating Rhythm + Music topic
+        if (game_type == 'Rhythm' and
+            (topic in ['Music Creation', 'Music', 'Rhythm Games', 'Dance'])):
+            if 'Motion-Control' not in self.permanent_unlocks['game_types']:
+                self.permanent_unlocks['game_types'].append('Motion-Control')
+                self.save_permanent_unlocks()
+                unlocked.append(('game_type', 'Motion-Control', 'Music and rhythm games inspired motion controls!'))
 
         return unlocked
 

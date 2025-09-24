@@ -60,6 +60,10 @@ class UnlockViewer:
                 'Music Creation', 'Rhythm Games', 'Painting', 'Sculpture', 'Architecture',
                 'Dance', 'Poetry', 'Theater', 'Film Production', 'Photography',
                 'Fashion', 'Interior Design', 'Toy Making', 'Dreamscapes',
+                # Sports
+                'Golf', 'Basketball', 'Football', 'Soccer', 'Baseball', 'Tennis',
+                'Hockey', 'Boxing', 'Wrestling', 'Skateboarding', 'Skiing', 'Surfing',
+                'Olympics', 'Cricket', 'Rugby', 'Volleyball', 'Swimming', 'Track & Field',
                 # Other
                 'Ninjas', 'Pirates', 'Racing', 'Dinosaurs', 'Robots', 'Bugs'
             ]
@@ -75,7 +79,7 @@ class UnlockViewer:
                 'Strategy', 'MMORPG', 'Rhythm', 'Visual Novel', 'Horror',
                 'Sandbox', 'Open World', 'Battle Royale', 'MOBA', 'Idle',
                 'Office', 'Retro', 'Educational', 'Motion-Control', 'Touch-Based',
-                'VR', 'AR'
+                'VR', 'AR', 'Monsters', 'Board Game'
             ]
             self.label_prefix = "Type"
 

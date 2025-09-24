@@ -866,6 +866,22 @@ class GameDevStudioApp:
 
     def create_new_studio(self, studio_name, player_name):
         """Create new studio with provided data"""
+        # Show loading screen
+        self.clear_screen()
+        loading_frame = tk.Frame(self.root, bg='#1a1a2e')
+        loading_frame.pack(fill='both', expand=True)
+
+        loading_label = tk.Label(loading_frame, text="Setting up your new studio...",
+                               font=('Arial', 16, 'bold'), bg='#1a1a2e', fg='white')
+        loading_label.pack(pady=200)
+
+        status_label = tk.Label(loading_frame, text="Generating competitor companies...",
+                              font=('Arial', 12), bg='#1a1a2e', fg='#888888')
+        status_label.pack(pady=10)
+
+        # Update display
+        self.root.update()
+
         # Create new game data
         self.game_data.reset_to_defaults()
         self.game_data.set(studio_name, 'player_data', 'studio_name')
@@ -879,10 +895,14 @@ class GameDevStudioApp:
             'companies': competitors,
             'generated_date': datetime.now().isoformat()
         }
+
+        # Update status
+        status_label.config(text=f"Created {len(competitors)} competitor companies. Loading studio...")
+        self.root.update()
         print(f"Created {len(competitors)} competitor companies")
 
-        # Show the studio room
-        self.show_studio_room()
+        # Brief delay to show the message
+        self.root.after(500, self.show_studio_room)
 
     def load_game(self, filename):
         """Load a game from save file"""
