@@ -6,7 +6,9 @@ from datetime import datetime
 from pathlib import Path
 import sys
 sys.path.append(os.path.dirname(os.path.abspath(__file__)))
-from deepseek.services.naming import get_random_studio_names, get_random_player_names
+from deepseek.services.naming import get_random_studio_names, get_random_player_names, get_competitor_companies
+from buildings.studio_room import StudioRoomScreen
+from dev_menu import DevMenu
 
 class SaveManager:
     def __init__(self):
@@ -809,6 +811,12 @@ class GameDevStudioApp:
                                            self.show_start_menu,
                                            self.create_new_studio)
 
+        # Initialize development menu
+        self.dev_menu = DevMenu(self)
+
+        # Bind global hotkey for dev menu
+        self.root.bind('<Alt-Shift-Q>', lambda e: self.dev_menu.show())
+
         # Show start menu
         self.show_start_menu()
 
@@ -841,6 +849,12 @@ class GameDevStudioApp:
         self.main_game.show()
         self.current_screen = "game"
 
+    def show_studio_room(self):
+        """Show the studio room screen"""
+        self.clear_screen()
+        self.studio_room = StudioRoomScreen(self.root, self.game_data, self.show_start_menu)
+        self.current_screen = "studio_room"
+
     def show_options(self):
         """Show options menu"""
         messagebox.showinfo("Options", "Options menu coming soon!")
@@ -858,14 +872,17 @@ class GameDevStudioApp:
         self.game_data.set(player_name, 'player_data', 'player_name')
         self.game_data.set("Normal", 'settings', 'difficulty')  # Default difficulty
 
-        # Show success message and return to main menu
-        messagebox.showinfo("Studio Created",
-                          f"'{studio_name}' has been created!\n\n"
-                          f"You can now start working on your first game.\n"
-                          f"Use 'Load Game' to continue with this studio.")
+        # Generate competitor companies
+        print("Generating competitor companies...")
+        competitors = get_competitor_companies()
+        self.game_data.data['competitors'] = {
+            'companies': competitors,
+            'generated_date': datetime.now().isoformat()
+        }
+        print(f"Created {len(competitors)} competitor companies")
 
-        # Return to start menu
-        self.show_start_menu()
+        # Show the studio room
+        self.show_studio_room()
 
     def load_game(self, filename):
         """Load a game from save file"""

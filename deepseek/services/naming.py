@@ -163,6 +163,100 @@ Return only the names, one per line, no explanations. Mix of first names only an
             print(f"Error calling DeepSeek API: {e}")
             return self._get_fallback_player_names()
 
+    def generate_competitor_companies(self) -> List[str]:
+        """
+        Generate 20 competitor game company names using DeepSeek API for 1978 era
+
+        Returns:
+            List of 20 competitor company names
+        """
+        if not self.api_key:
+            return self._get_fallback_competitor_names()
+
+        prompt = """Give me 20 game company names that would exist in 1978. These are competitors in the early computer/arcade game era.
+
+Mix of:
+- Technical names (like "Digital Systems", "Binary Labs")
+- Creative names (like "Cosmic Games", "Star Software")
+- Simple corporate names (like "Interactive Inc", "Software Corp")
+
+Return only the company names, one per line, no explanations or numbering."""
+
+        try:
+            headers = {
+                "Authorization": f"Bearer {self.api_key}",
+                "Content-Type": "application/json"
+            }
+
+            data = {
+                "model": "deepseek-chat",
+                "messages": [
+                    {
+                        "role": "user",
+                        "content": prompt
+                    }
+                ],
+                "max_tokens": 300,
+                "temperature": 0.8
+            }
+
+            response = requests.post(self.base_url, headers=headers, json=data, timeout=10)
+
+            if response.status_code == 200:
+                result = response.json()
+                content = result['choices'][0]['message']['content'].strip()
+                names = [name.strip() for name in content.split('\n') if name.strip()]
+
+                # Ensure we have exactly 20 names
+                if len(names) >= 20:
+                    return names[:20]
+                else:
+                    # If we got fewer than 20, pad with fallback names
+                    fallback = self._get_fallback_competitor_names()
+                    while len(names) < 20:
+                        names.append(fallback[len(names) % 20])
+                    return names[:20]
+            else:
+                print(f"DeepSeek API error: {response.status_code} - {response.text}")
+                return self._get_fallback_competitor_names()
+
+        except requests.exceptions.RequestException as e:
+            print(f"Network error calling DeepSeek API: {e}")
+            return self._get_fallback_competitor_names()
+        except Exception as e:
+            print(f"Error calling DeepSeek API: {e}")
+            return self._get_fallback_competitor_names()
+
+    def _get_fallback_competitor_names(self) -> List[str]:
+        """
+        Fallback competitor names when API is not available
+
+        Returns:
+            List of 20 predetermined competitor company names
+        """
+        return [
+            "Pixel Dynamics",
+            "Binary Arts",
+            "Cosmic Software",
+            "MicroVision Games",
+            "Arcade Masters",
+            "Digital Frontier",
+            "Byte Works",
+            "Silicon Dreams",
+            "Vector Graphics Inc",
+            "Quantum Entertainment",
+            "Data Storm Studios",
+            "Circuit Board Games",
+            "Neon Software",
+            "Mainframe Studios",
+            "Logic Gate Games",
+            "Synth Wave Interactive",
+            "Electron Entertainment",
+            "RAM Raiders",
+            "Motherboard Media",
+            "Transistor Games"
+        ]
+
     def _get_fallback_player_names(self) -> List[str]:
         """
         Fallback player names when API is not available
@@ -204,6 +298,17 @@ def get_random_player_names() -> List[str]:
     """
     service = DeepSeekNamingService()
     return service.generate_player_names()
+
+# Get competitor company names for 1978 era
+def get_competitor_companies() -> List[str]:
+    """
+    Get 20 competitor game company names appropriate for 1978 era using DeepSeek API
+
+    Returns:
+        List of 20 competitor company names
+    """
+    service = DeepSeekNamingService()
+    return service.generate_competitor_companies()
 
 # Test function
 def test_naming_service():
