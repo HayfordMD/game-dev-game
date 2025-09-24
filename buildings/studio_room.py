@@ -354,77 +354,13 @@ class StudioRoomScreen:
             # Make label clickable too
             lbl.bind("<Button-1>", lambda e, s=sched_type: on_schedule_select(s))
 
-        # Buttons
+        # Cancel button only
         button_frame = tk.Frame(sleep_window)
         button_frame.pack(pady=30)
 
-        def confirm_sleep():
-            new_schedule = selected_schedule.get()
-
-            # Set new schedule
-            success, message = self.time_system.set_schedule(new_schedule)
-            if not success:
-                messagebox.showwarning("Cannot Change Schedule", message)
-                return
-
-            # Get schedule info
-            schedule_info = self.time_system.get_schedule_info()
-
-            # Sleep and advance time
-            self.time_system.advance_time(schedule_info['sleep_hours'])
-
-            # Restore energy based on sleep hours
-            base_restoration = schedule_info['sleep_hours'] * 12
-            self.energy_system.set_energy(min(100, base_restoration))
-
-            # Reduce stress
-            stress_reduction = 10
-            if new_schedule == SleepSchedule.RESTORATIVE.value:
-                stress_reduction = schedule_info.get('stress_reduction', 5) + 10
-
-            current_stress = self.game_data.data['player_data'].get('stress_level', 0)
-            self.game_data.data['player_data']['stress_level'] = max(0, current_stress - stress_reduction)
-
-            # Daily update for energy system
-            self.energy_system.daily_update()
-
-            sleep_window.destroy()
-            self.update_status_display()
-
-            # Update pillow text
-            schedule_text = new_schedule.replace("Crunch Time", "Crunch")
-            self.canvas.itemconfig(self.pillow_text, text=schedule_text)
-
-            messagebox.showinfo("Good Morning!",
-                              f"You slept for {schedule_info['sleep_hours']} hours\n"
-                              f"Energy: {self.energy_system.get_energy()}%\n"
-                              f"Schedule: {new_schedule}")
-
-        def just_sleep():
-            # Sleep without changing schedule
-            schedule_info = self.time_system.get_schedule_info()
-            self.time_system.advance_time(schedule_info['sleep_hours'])
-
-            base_restoration = schedule_info['sleep_hours'] * 12
-            self.energy_system.set_energy(min(100, base_restoration))
-
-            current_stress = self.game_data.data['player_data'].get('stress_level', 0)
-            self.game_data.data['player_data']['stress_level'] = max(0, current_stress - 10)
-
-            self.energy_system.daily_update()
-
-            sleep_window.destroy()
-            self.update_status_display()
-
-        tk.Button(button_frame, text="Sleep & Set Schedule", command=confirm_sleep,
-                 bg='#4CAF50', fg='white', font=('Arial', 12, 'bold'),
-                 padx=30, pady=10).pack(side='left', padx=10)
-        tk.Button(button_frame, text="Just Sleep", command=just_sleep,
-                 bg='#2196F3', fg='white', font=('Arial', 12, 'bold'),
-                 padx=30, pady=10).pack(side='left', padx=10)
         tk.Button(button_frame, text="Cancel", command=sleep_window.destroy,
                  bg='#555', fg='white', font=('Arial', 12),
-                 padx=30, pady=10).pack(side='left', padx=10)
+                 padx=30, pady=10).pack()
 
     def update_player_position(self):
         """Update player position based on target"""
