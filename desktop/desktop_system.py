@@ -6,8 +6,8 @@ Provides the computer interface for game development
 import tkinter as tk
 from tkinter import ttk, messagebox
 from systems.unlock_system import UnlockSystem
-from desktop.topics_unlocks import TopicsUnlockPage
-from desktop.types_unlocks import TypesUnlockPage
+from desktop.unlock_viewer import UnlockViewer
+from desktop.game_engine import GameEngineWindow
 
 
 class DesktopScreen:
@@ -167,6 +167,11 @@ class DesktopScreen:
 
     def open_openengine(self):
         """Open the OpenEngine game development application"""
+        # Open the new game engine window with list-based selection
+        GameEngineWindow(self.desktop_window, self.game_data)
+        return
+
+        # Old code below (not used anymore)
         if self.openengine_active:
             return
 
@@ -382,11 +387,11 @@ class DesktopScreen:
 
     def open_topics_unlocks(self):
         """Open the topics unlock page"""
-        TopicsUnlockPage(self.desktop_window, self.game_data)
+        UnlockViewer(self.desktop_window, self.game_data, view_type="topics")
 
     def open_types_unlocks(self):
         """Open the game types unlock page"""
-        TypesUnlockPage(self.desktop_window, self.game_data)
+        UnlockViewer(self.desktop_window, self.game_data, view_type="types")
 
     def close_desktop(self):
         """Close the desktop and return to room"""
