@@ -36,7 +36,7 @@ class TimeSystem:
             "quick_week": 6720,      # 1 week in 90 seconds
             "quick_month": 25920,    # 1 month in 100 seconds
             "quick_quarter": 64800,  # 3 months in 120 seconds
-            "max_speed": 55000       # Maximum allowed speed
+            "max_speed": 60500       # Maximum allowed speed (10% faster)
         }
 
         # Default to real-time (1:1)

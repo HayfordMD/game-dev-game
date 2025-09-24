@@ -295,7 +295,7 @@ class StudioRoomScreen:
         selected_schedule = tk.StringVar(value=schedule)
 
         def on_schedule_select(schedule_type):
-            """Handle immediate schedule selection"""
+            """Handle schedule selection (without sleeping)"""
             new_schedule = schedule_type
 
             # Set new schedule
@@ -304,38 +304,12 @@ class StudioRoomScreen:
                 messagebox.showwarning("Cannot Change Schedule", message)
                 return
 
-            # Get schedule info
-            schedule_info = self.time_system.get_schedule_info()
-
-            # Sleep and advance time
-            self.time_system.advance_time(schedule_info['sleep_hours'])
-
-            # Restore energy based on sleep hours
-            base_restoration = schedule_info['sleep_hours'] * 12
-            self.energy_system.set_energy(min(100, base_restoration))
-
-            # Reduce stress
-            stress_reduction = 10
-            if new_schedule == SleepSchedule.RESTORATIVE.value:
-                stress_reduction = schedule_info.get('stress_reduction', 5) + 10
-
-            current_stress = self.game_data.data['player_data'].get('stress_level', 0)
-            self.game_data.data['player_data']['stress_level'] = max(0, current_stress - stress_reduction)
-
-            # Daily update for energy system
-            self.energy_system.daily_update()
-
-            sleep_window.destroy()
-            self.update_status_display()
-
             # Update pillow text
             schedule_text = new_schedule.replace("Crunch Time", "Crunch")
             self.canvas.itemconfig(self.pillow_text, text=schedule_text)
 
-            messagebox.showinfo("Good Morning!",
-                              f"You slept for {schedule_info['sleep_hours']} hours\n"
-                              f"Energy: {self.energy_system.get_energy()}%\n"
-                              f"Schedule: {new_schedule}")
+            sleep_window.destroy()
+            messagebox.showinfo("Schedule Changed", f"Sleep schedule set to: {new_schedule}\nClick bed again to sleep.")
 
         for sched_type, description in schedules.items():
             frame = tk.Frame(options_frame, relief='groove', bd=2, padx=10, pady=10, cursor="hand2")
@@ -354,13 +328,47 @@ class StudioRoomScreen:
             # Make label clickable too
             lbl.bind("<Button-1>", lambda e, s=sched_type: on_schedule_select(s))
 
-        # Cancel button only
+        # Buttons for sleep and cancel
         button_frame = tk.Frame(sleep_window)
         button_frame.pack(pady=30)
 
+        def sleep_now():
+            """Sleep with current schedule"""
+            schedule_info = self.time_system.get_schedule_info()
+
+            # Sleep and advance time
+            self.time_system.advance_time(schedule_info['sleep_hours'])
+
+            # Restore energy based on sleep hours
+            base_restoration = schedule_info['sleep_hours'] * 12
+            self.energy_system.set_energy(min(100, base_restoration))
+
+            # Reduce stress
+            stress_reduction = 10
+            current_schedule = self.game_data.data['time'].get('sleep_schedule', 'Normal')
+            if current_schedule == SleepSchedule.RESTORATIVE.value:
+                stress_reduction = schedule_info.get('stress_reduction', 5) + 10
+
+            current_stress = self.game_data.data['player_data'].get('stress_level', 0)
+            self.game_data.data['player_data']['stress_level'] = max(0, current_stress - stress_reduction)
+
+            # Daily update for energy system
+            self.energy_system.daily_update()
+
+            sleep_window.destroy()
+            self.update_status_display()
+
+            messagebox.showinfo("Good Morning!",
+                              f"You slept for {schedule_info['sleep_hours']} hours\n"
+                              f"Energy: {self.energy_system.get_energy()}%\n"
+                              f"Schedule: {current_schedule}")
+
+        tk.Button(button_frame, text="Sleep Now", command=sleep_now,
+                 bg='#4CAF50', fg='white', font=('Arial', 12, 'bold'),
+                 padx=30, pady=10).pack(side='left', padx=10)
         tk.Button(button_frame, text="Cancel", command=sleep_window.destroy,
                  bg='#555', fg='white', font=('Arial', 12),
-                 padx=30, pady=10).pack()
+                 padx=30, pady=10).pack(side='left', padx=10)
 
     def update_player_position(self):
         """Update player position based on target"""
@@ -556,7 +564,7 @@ class StudioRoomScreen:
             (6720, "3x"),        # Quick Week (shown as 3x)
             (25920, "4x"),       # Quick Month (shown as 4x)
             (64800, "5x"),       # Quick Quarter (shown as 5x)
-            (55000, "MAX")       # Maximum speed
+            (60500, "MAX")       # Maximum speed (10% faster than before)
         ]
 
         # Find current speed in cycle
@@ -595,7 +603,10 @@ class StudioRoomScreen:
             time_str = f"{display_hour:02d}:{minute:02d}:{second:02d} {am_pm}"
             date_str = self.time_system.get_date_string()
             self.time_label.config(text=f"{date_str} - {time_str}")
-        elif current_speed >= 64800:  # 5x or MAX speed - only show day and AM/PM
+        elif current_speed >= 60000:  # MAX speed - only show date
+            date_str = self.time_system.get_date_string()
+            self.time_label.config(text=date_str)
+        elif current_speed >= 64800:  # 5x speed - show day and AM/PM
             hour = int(time_data.get('hour', 8))
             am_pm = "AM" if hour < 12 else "PM"
             date_str = self.time_system.get_date_string()
