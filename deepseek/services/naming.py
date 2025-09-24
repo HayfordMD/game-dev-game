@@ -2,6 +2,10 @@ import requests
 import json
 import os
 from typing import List, Optional
+from dotenv import load_dotenv
+
+# Load environment variables from .env file
+load_dotenv()
 
 class DeepSeekNamingService:
     def __init__(self, api_key: Optional[str] = None):
