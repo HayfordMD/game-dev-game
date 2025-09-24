@@ -110,9 +110,9 @@ COMPANY_NAMES = {
         "Micro Computer Corp", "Personal Systems Inc", "Home Computing Ltd", "Desktop Technologies",
         "8-Bit Systems", "Microprocessor Magic", "RAM Technologies Corp", "ROM Systems Inc",
         "Floppy Disk Corp", "Cassette Storage Ltd", "Video Display Inc", "Keyboard Interface Corp",
-        "BASIC Software", "CP/M Systems", "Altair Compatible Inc", "Apple Grove Computing",
-        "Commodore Systems", "Radio Electronics Corp", "Tandy Technologies", "Sinclair Research",
-        "Atari Computing", "Texas Digital", "Intel Compatible Corp", "Zilog Systems",
+        "BASIC Software", "CP/M Systems", "Altair Compatible Inc", "Fruit Grove Computing",
+        "Commando Systems", "Radio Electronics Corp", "Radio Tech Corp", "Spectrum Research",
+        "Game Computing", "Lone Star Digital", "Processor Compatible Corp", "Z-Chip Systems",
         "MOS Technology Inc", "6502 Systems", "Z80 Computing", "8080 Technologies",
         "S-100 Bus Corp", "Parallel Port Inc", "Serial Systems Ltd", "ASCII Terminal Corp",
         "Green Screen Technologies", "Dot Matrix Inc", "Daisy Wheel Corp", "Acoustic Coupler Ltd",
@@ -123,101 +123,101 @@ COMPANY_NAMES = {
 
     "1980-1984": [
         # PC era, arcade games boom
-        "IBM Compatible Corp", "Clone Systems Inc", "MS-DOS Technologies", "Lotus Software",
-        "WordPerfect Corp", "dBase Systems", "Arcade Games Inc", "Coin-Op Technologies",
+        "Business Compatible Corp", "Clone Systems Inc", "Disk OS Technologies", "Spreadsheet Software",
+        "Word Processing Corp", "dBase Systems", "Arcade Games Inc", "Coin-Op Technologies",
         "Vector Graphics Corp", "Sprite Systems", "Joystick Interface Inc", "Game Cartridge Corp",
         "16-Bit Computing", "GUI Systems Ltd", "Mouse Interface Corp", "Hard Drive Technologies",
         "Winchester Disk Inc", "EGA Graphics Corp", "Sound Blaster Inc", "MIDI Systems Ltd",
-        "Pac-Man Technologies", "Space Invader Corp", "Donkey Kong Inc", "Frogger Systems",
+        "Pellet Eater Tech", "Space Invader Corp", "Barrel Jumper Inc", "Road Crossing Systems",
         "Centipede Computing", "Defender Technologies", "Galaga Games", "Q*bert Corp",
         "Zaxxon Systems", "Robotron Inc", "Tempest Technologies", "Missile Command Corp",
         "Asteroids Inc", "Breakout Systems", "Pong Evolution Ltd", "Tennis for Two Corp",
-        "Adventure Games Inc", "Text Parser Systems", "Sierra Compatible", "LucasArts Style Corp",
+        "Adventure Games Inc", "Text Parser Systems", "Mountain Compatible", "Point Style Corp",
         "Point Click Inc", "Parser Technologies", "8088 Systems", "80286 Computing Corp"
     ],
 
     "1985-1989": [
         # GUI era, Nintendo dominance
-        "Windows Systems Corp", "Macintosh Software", "Desktop Publishing Inc", "LaserJet Corp",
+        "Window OS Corp", "Computer Software", "Desktop Publishing Inc", "Laser Printer Corp",
         "PostScript Technologies", "Vector Font Systems", "TrueType Inc", "PageMaker Corp",
-        "Nintendo Compatible", "Super Mario Systems", "Zelda Technologies", "Metroid Corp",
-        "Sega Systems Inc", "Sonic Speed Corp", "16-Bit Console Ltd", "Blast Processing Inc",
+        "Console Compatible", "Jump Platform Systems", "Adventure Quest Tech", "Space Bounty Corp",
+        "Speed Systems Inc", "Blue Blur Corp", "16-Bit Console Ltd", "Blast Processing Inc",
         "VGA Graphics Corp", "256 Color Systems", "Sound Card Inc", "AdLib Technologies",
-        "Roland MIDI Corp", "Yamaha Sound Inc", "Creative Audio Ltd", "3D Graphics Systems",
+        "MIDI Systems Corp", "Sound Synthesis Inc", "Audio Innovation Ltd", "3D Graphics Systems",
         "Polygon Rendering Inc", "Texture Mapping Corp", "Ray Casting Technologies", "Wolf3D Systems",
-        "Commander Keen Corp", "Duke Nukem Inc", "Prince of Persia Ltd", "SimCity Systems",
-        "Tetris Technologies", "Game Boy Compatible", "Portable Gaming Inc", "Link Cable Corp",
-        "Turbo Graphics", "Neo Geo Systems", "Arcade Perfect Inc", "Fighting Game Corp",
+        "Platform Hero Corp", "Action Duke Inc", "Persian Platform Ltd", "City Builder Systems",
+        "Block Puzzle Tech", "Portable Gaming Compatible", "Portable Gaming Inc", "Link Cable Corp",
+        "Turbo Graphics", "Arcade Perfect Systems", "Arcade Perfect Inc", "Fighting Game Corp",
         "Beat Em Up Ltd", "Shoot Em Up Inc", "Platform Game Systems", "RPG Technologies"
     ],
 
     "1990-1994": [
         # Internet emerges, 3D gaming
-        "World Wide Web Corp", "Mosaic Browser Inc", "Netscape Compatible", "HTML Systems Ltd",
+        "World Wide Web Corp", "First Browser Inc", "Navigator Compatible", "HTML Systems Ltd",
         "HTTP Technologies", "TCP/IP Corp", "Ethernet Systems", "Token Ring Inc",
-        "Doom Engine Corp", "Quake Technologies", "Build Engine Inc", "3D Realms Systems",
+        "FPS Engine Corp", "Arena Shooter Tech", "Build Engine Inc", "3D Action Systems",
         "Polygon Graphics Ltd", "Texture Cache Corp", "Z-Buffer Inc", "Gouraud Shading Systems",
         "CD-ROM Technologies", "Multimedia Corp", "FMV Games Inc", "Interactive Movie Ltd",
         "Virtual Reality Systems", "VR Headset Corp", "Motion Control Inc", "Force Feedback Ltd",
-        "Super Nintendo Compatible", "Genesis Does Corp", "32-Bit Systems", "64-Bit Technologies",
-        "PlayStation Inc", "Saturn Systems", "3DO Interactive", "Jaguar Technologies",
-        "Fighting Game Corp", "Street Fighter Systems", "Mortal Kombat Inc", "Tekken Technologies",
-        "Final Fantasy Corp", "Dragon Quest Inc", "Chrono Systems", "Secret of Mana Ltd",
+        "16-Bit Compatible", "Blast Processing Corp", "32-Bit Systems", "64-Bit Technologies",
+        "Game Station Inc", "Ring Planet Systems", "3DO Interactive", "Big Cat Technologies",
+        "Fighting Game Corp", "Fighting Street Systems", "Fatal Combat Inc", "Iron Fist Technologies",
+        "Fantasy Quest Corp", "Dragon Adventure Inc", "Time Travel Systems", "Secret World Ltd",
         "LAN Party Corp", "IPX Gaming Inc", "Null Modem Systems", "BBS Door Games Ltd"
     ],
 
     "1995-1999": [
         # Dot-com boom, online gaming
-        "Yahoo Compatible Corp", "Amazon Systems Inc", "eBay Technologies", "PayPal Processing",
+        "Search Portal Corp", "Online Store Inc", "Auction Site Tech", "Payment Processing",
         "Dot Com Ventures", "E-Commerce Systems", "SSL Secure Corp", "HTTPS Technologies",
-        "Java Applet Inc", "Flash Animation Corp", "Shockwave Games", "RealPlayer Systems",
-        "MP3 Technologies", "Napster Compatible", "Winamp Skins Inc", "ICQ Messaging Corp",
-        "AOL Instant Systems", "GeoCities Hosting", "Angelfire Pages", "Tripod Sites Inc",
-        "Counter-Strike Servers", "Quake Arena Corp", "Unreal Tournament", "Half-Life Mods Inc",
-        "StarCraft Strategies", "Warcraft Online", "Diablo Dungeons Corp", "EverQuest Worlds",
-        "Ultima Online Systems", "MMO Technologies", "MUD Games Inc", "MMORPG Corp",
-        "Nintendo 64 Dev", "PlayStation One Games", "Dreamcast Studios", "DVD Game Corp",
-        "USB Technologies", "FireWire Systems", "Pentium Optimized", "3dfx Voodoo Inc",
-        "GeForce Graphics", "ATI Radeon Corp", "DirectX Games", "OpenGL Systems Ltd"
+        "Applet Games Inc", "Vector Animation Corp", "Web Games Corp", "Media Player Systems",
+        "Audio Compression Tech", "File Sharing Compatible", "Music Player Inc", "Instant Message Corp",
+        "Chat Systems Inc", "Free Hosting Corp", "Web Pages Inc", "Personal Sites Inc",
+        "Tactical Shooter Servers", "Arena FPS Corp", "Tournament Shooter", "Shooter Mods Inc",
+        "Strategy Game Corp", "Fantasy RTS Online", "Dungeon Crawler Corp", "Fantasy MMO Worlds",
+        "Classic Online Systems", "MMO Technologies", "MUD Games Inc", "MMORPG Corp",
+        "64-Bit Console Dev", "Game Station One Games", "Dream Console Studios", "DVD Game Corp",
+        "USB Technologies", "FireWire Systems", "CPU Optimized", "3D Graphics Inc",
+        "Graphics Force Corp", "Graphics Card Corp", "Graphics API Games", "3D API Systems Ltd"
     ],
 
     "2000-2004": [
         # Social media dawn, mobile gaming starts
-        "Friendster Networks", "MySpace Pages Inc", "LinkedIn Professional", "Orkut Social Corp",
+        "Friend Networks", "Social Pages Inc", "Professional Network", "Social Circle Corp",
         "Blog Platform Systems", "RSS Feed Technologies", "Podcast Network Inc", "Wiki Collaborative",
-        "BitTorrent Games", "Kazaa Share Corp", "LimeWire Downloads", "eMule Networks Inc",
-        "Steam Platform Corp", "Xbox Live Systems", "PlayStation Network", "GameCube Connect",
-        "Halo Multiplayer Inc", "GTA Open World Corp", "Sims Life Systems", "World of Warcraft",
-        "Second Life Virtual", "Flash Games Portal", "Newgrounds Compatible", "Miniclip Games",
-        "PopCap Casual Corp", "Big Fish Games", "Yahoo Games Inc", "MSN Gaming Zone",
+        "Torrent Games", "File Share Corp", "Wire Downloads", "Mule Networks Inc",
+        "Digital Platform Corp", "Game Box Live Systems", "Game Station Network", "Cube Connect",
+        "Ring Multiplayer Inc", "Crime City Corp", "Life Sim Systems", "Fantasy World Online",
+        "Virtual Life World", "Vector Games Portal", "Animation Compatible", "Mini Game Portal",
+        "Casual Gaming Corp", "Large Fish Games", "Portal Games Inc", "Network Gaming Zone",
         "Java Mobile Games", "J2ME Technologies", "Palm Pilot Apps", "Pocket PC Games",
-        "Nokia N-Gage Dev", "Game Boy Advance", "Nintendo DS Touch", "PSP Portable Corp",
+        "Phone Gaming Dev", "Portable Advance", "Dual Screen Touch", "Portable Station Corp",
         "Wi-Fi Gaming Inc", "Bluetooth Multiplayer", "Browser Games Ltd", "AJAX Interactive"
     ],
 
     "2005-2009": [
         # Facebook era, iPhone revolution
-        "Facebook Apps Inc", "Twitter Games Corp", "YouTube Gaming", "Gmail Platform Systems",
-        "iPhone App Store", "Android Market Dev", "Mobile Gaming Corp", "Touch Screen Games",
+        "Social Apps Inc", "Micro Blog Games Corp", "Video Platform Gaming", "Email Platform Systems",
+        "Phone App Store", "Robot Market Dev", "Mobile Gaming Corp", "Touch Screen Games",
         "Accelerometer Control", "GPS Gaming Inc", "Augmented Reality App", "QR Code Games",
-        "Wii Motion Gaming", "Xbox 360 Live", "PlayStation 3 Network", "Achievement Systems",
+        "Motion Gaming System", "Game Box 360 Live", "Game Station 3 Network", "Achievement Systems",
         "Trophy Hunter Corp", "Gamerscore Inc", "DLC Content Corp", "Season Pass Games",
         "Free to Play Inc", "Microtransaction Corp", "Virtual Currency", "Loot Box Systems",
-        "Unity Engine Games", "Unreal Engine 3", "Source Engine Mods", "CryEngine Studios",
+        "United Engine Games", "Fantasy Engine 3", "Valve Engine Mods", "Cry Tech Studios",
         "Physics Gaming Corp", "Havok Ragdoll Inc", "Motion Capture Studio", "Facial Animation",
         "HD Graphics Corp", "1080p Gaming Inc", "Blu-ray Games", "Digital Download Only",
-        "Steam Workshop Mods", "User Generated Content", "Minecraft Clones Inc", "Indie Bundle Games"
+        "Steam Workshop Mods", "User Generated Content", "Block Builder Inc", "Indie Bundle Games"
     ],
 
     "2010-2014": [
         # Mobile dominance, indie boom
-        "Instagram Filters Inc", "Snapchat Games", "WhatsApp Connect", "Vine Loop Games",
-        "Kickstarter Funded", "Indiegogo Games", "Early Access Corp", "Greenlight Games",
+        "Photo Filter Inc", "Snap Games", "Message Connect", "Loop Video Games",
+        "Crowd Funded", "Fund Games", "Early Access Corp", "Vote Games",
         "Humble Bundle Dev", "itch.io Indie", "Game Jolt Upload", "Desura Platform Inc",
-        "Twitch Streaming", "Let's Play Games", "YouTube Gaming Corp", "Patreon Supported",
-        "Unity 3D Mobile", "Unreal Engine 4", "GameMaker Studio", "Construct Games Inc",
-        "Flappy Bird Clones", "Angry Birds Style", "Candy Crush Match", "Clash of Clans",
-        "Minecraft Inspired", "Terraria Like Games", "Rogue-like Revival", "Souls-like Difficulty",
+        "Stream Gaming", "Let's Play Games", "Video Gaming Corp", "Support Funded",
+        "United 3D Mobile", "Fantasy Engine 4", "Game Creator Studio", "Build Games Inc",
+        "Flap Game Clones", "Bird Launch Style", "Sweet Match Games", "Clan Battle Games",
+        "Block Builder Inspired", "2D Mining Games", "Rogue-like Revival", "Souls-like Difficulty",
         "Battle Royale Proto", "MOBA Mobile Corp", "Tower Defense Plus", "Idle Clicker Games",
         "Freemium Model Inc", "Pay to Win Corp", "Cosmetic Only Store", "Battle Pass System",
         "Cloud Gaming Beta", "Cross Platform Play", "4K Gaming Ready", "VR Revival Corp"
@@ -225,7 +225,7 @@ COMPANY_NAMES = {
 
     "2015-2019": [
         # Streaming era, battle royale boom
-        "Discord Gaming Inc", "Slack Integrated", "Microsoft Teams App", "Zoom Games Corp",
+        "Chat Gaming Inc", "Work Chat Integrated", "Microsoft Teams App", "Zoom Games Corp",
         "Fortnite Inspired", "PUBG Style Games", "Apex Legends Like", "Overwatch Heroes",
         "Hero Shooter Corp", "Battle Royale Inc", "Auto Chess Games", "Card Battler Digital",
         "Nintendo Switch Dev", "PlayStation 4 Pro", "Xbox One X Enhanced", "Ray Tracing Demo",
@@ -242,8 +242,8 @@ COMPANY_NAMES = {
         "Zoom Gaming Social", "Remote Play Together", "Parsec Streaming", "Steam Remote Play",
         "Among Us Inspired", "Fall Guys Style", "Valorant Tactical", "Genshin Impact Like",
         "COVID Game Jams", "Quarantine Indies", "Work From Home Dev", "Discord Activities",
-        "Wordle Clone Games", "Netflix Gaming Div", "Apple Arcade Plus", "Xbox Cloud Gaming",
-        "PlayStation 5 Exclusive", "Xbox Series X|S", "Steam Deck Verified", "ROG Ally Ready",
+        "Wordle Clone Games", "Stream Gaming Div", "Fruit Arcade Plus", "Cloud Gaming Pro",
+        "Game Station 5 Exclusive", "Game Box Series X|S", "Portable Deck Verified", "Gaming Ally Ready",
         "Unreal Engine 5", "Unity 2022 LTS", "Godot 4 Engine", "ChatGPT Integrated",
         "Stable Diffusion Art", "Midjourney Assets", "DALL-E Graphics", "AI Dungeon Style",
         "GPT-4 NPCs Inc", "Procedural Dialog AI", "Machine Learning Boss", "Neural Network Games",

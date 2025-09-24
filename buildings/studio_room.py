@@ -1,13 +1,13 @@
 import tkinter as tk
 from tkinter import Canvas, messagebox, ttk
 import math
-from game_systems import TimeSystem, EnergySystem, SleepSchedule
+from systems.game_systems import TimeSystem, EnergySystem, SleepSchedule, HygieneSystem, HappinessSystem
+from buildings.base_room import BaseRoom
+from desktop.desktop_system import DesktopScreen
 
-class StudioRoomScreen:
+class StudioRoomScreen(BaseRoom):
     def __init__(self, root, game_data, on_back=None):
-        self.root = root
-        self.game_data = game_data
-        self.on_back = on_back
+        super().__init__(root, game_data, on_back)
 
         # Room dimensions (4x smaller - cramped)
         self.room_width = 400
@@ -34,6 +34,8 @@ class StudioRoomScreen:
         # Initialize game systems
         self.time_system = TimeSystem(game_data)
         self.energy_system = EnergySystem(game_data)
+        self.hygiene_system = HygieneSystem(game_data)
+        self.happiness_system = HappinessSystem(game_data)
 
         self.setup_ui()
         self.draw_room()
@@ -69,10 +71,20 @@ class StudioRoomScreen:
                                   bg='#2a2a2a', fg='#90EE90')
         self.time_label.pack(side='left', padx=20)
 
-        # Energy display (center)
+        # Energy display
         self.energy_label = tk.Label(status_frame, text="", font=('Arial', 11, 'bold'),
                                     bg='#2a2a2a', fg='white')
-        self.energy_label.pack(side='left', padx=20)
+        self.energy_label.pack(side='left', padx=10)
+
+        # Hygiene display
+        self.hygiene_label = tk.Label(status_frame, text="", font=('Arial', 11, 'bold'),
+                                     bg='#2a2a2a', fg='white')
+        self.hygiene_label.pack(side='left', padx=10)
+
+        # Happiness display
+        self.happiness_label = tk.Label(status_frame, text="", font=('Arial', 11, 'bold'),
+                                       bg='#2a2a2a', fg='white')
+        self.happiness_label.pack(side='left', padx=10)
 
         # Speed control button (right)
         self.speed_button = tk.Button(status_frame, text="⏩ 1x",
@@ -91,7 +103,7 @@ class StudioRoomScreen:
         # Controls hint
         controls_frame = tk.Frame(self.main_frame, bg='#2a2a2a')
         controls_frame.pack()
-        tk.Label(controls_frame, text="Click to move | Click on bed to sleep",
+        tk.Label(controls_frame, text="Click to move | Click bed to sleep | Click shower to clean",
                 font=('Arial', 10), bg='#2a2a2a', fg='white').pack()
 
         # Back button
@@ -176,21 +188,33 @@ class StudioRoomScreen:
         self.canvas.create_text(desk_x + desk_width//2, desk_y + desk_height + 5,
                                text="DESK", font=('Arial', 6), fill='#999')
 
+        # Store desk info for interaction
+        self.furniture_items['desk'] = {
+            'x': desk_x, 'y': desk_y,
+            'width': desk_width, 'height': desk_height
+        }
+
         # Draw shower (bottom left)
         shower_x, shower_y = 10, self.room_height - 80
         shower_width, shower_height = 50, 60
         # Shower base
         self.canvas.create_rectangle(shower_x, shower_y, shower_x + shower_width, shower_y + shower_height,
-                                    fill='#87CEEB', outline='#4682B4', width=2)
+                                    fill='#87CEEB', outline='#4682B4', width=2, tags="shower")
         # Shower head
         self.canvas.create_oval(shower_x + 15, shower_y + 5, shower_x + 35, shower_y + 20,
-                               fill='#C0C0C0', outline='#808080')
+                               fill='#C0C0C0', outline='#808080', tags="shower")
         # Shower door (glass effect)
         self.canvas.create_rectangle(shower_x + 3, shower_y + 25, shower_x + shower_width - 3, shower_y + shower_height - 3,
-                                    fill='#B0E0E6', outline='#4682B4', stipple='gray50')
+                                    fill='#B0E0E6', outline='#4682B4', stipple='gray50', tags="shower")
         # Shower label
         self.canvas.create_text(shower_x + shower_width//2, shower_y + shower_height + 5,
                                text="SHOWER", font=('Arial', 6), fill='#999')
+
+        # Store shower info for interaction
+        self.furniture_items['shower'] = {
+            'x': shower_x, 'y': shower_y,
+            'width': shower_width, 'height': shower_height
+        }
 
         # Draw fridge (bottom right)
         fridge_x, fridge_y = self.room_width - 100, self.room_height - 90
@@ -240,10 +264,24 @@ class StudioRoomScreen:
         click_x, click_y = event.x, event.y
 
         # Check if click is on bed
-        bed = self.furniture_items['bed']
-        if (bed['x'] <= click_x <= bed['x'] + bed['width'] and
-            bed['y'] <= click_y <= bed['y'] + bed['height']):
+        bed = self.furniture_items.get('bed', {})
+        if (bed.get('x', 0) <= click_x <= bed.get('x', 0) + bed.get('width', 0) and
+            bed.get('y', 0) <= click_y <= bed.get('y', 0) + bed.get('height', 0)):
             self.sleep_in_bed()
+            return
+
+        # Check if click is on desk
+        desk = self.furniture_items.get('desk', {})
+        if (desk.get('x', 0) <= click_x <= desk.get('x', 0) + desk.get('width', 0) and
+            desk.get('y', 0) <= click_y <= desk.get('y', 0) + desk.get('height', 0)):
+            self.use_desk()
+            return
+
+        # Check if click is on shower
+        shower = self.furniture_items.get('shower', {})
+        if (shower.get('x', 0) <= click_x <= shower.get('x', 0) + shower.get('width', 0) and
+            shower.get('y', 0) <= click_y <= shower.get('y', 0) + shower.get('height', 0)):
+            self.use_shower()
             return
 
         # Otherwise, set as movement target
@@ -369,6 +407,31 @@ class StudioRoomScreen:
         tk.Button(button_frame, text="Cancel", command=sleep_window.destroy,
                  bg='#555', fg='white', font=('Arial', 12),
                  padx=30, pady=10).pack(side='left', padx=10)
+
+    def use_shower(self):
+        """Handle using the shower"""
+        # Take shower
+        success, message = self.hygiene_system.take_shower()
+
+        # Advance time (showering takes 30 minutes)
+        self.time_system.advance_time(0.5)
+
+        # Update displays
+        self.update_status_display()
+
+        # Show result
+        messagebox.showinfo("Shower", f"{message}\nFeeling refreshed!")
+
+    def use_desk(self):
+        """Handle using the desk - opens desktop screen"""
+        # Open the desktop screen when using the desk
+        DesktopScreen(self.root, self.game_data, self.close_desktop)
+
+    def close_desktop(self):
+        """Called when desktop is closed"""
+        # Redraw the room since desktop was modal
+        self.draw_room()
+        self.update_status_display()
 
     def update_player_position(self):
         """Update player position based on target"""
@@ -620,8 +683,15 @@ class StudioRoomScreen:
         energy = self.energy_system.get_energy()
         productivity = self.energy_system.get_productivity_modifier()
         energy_color = '#90EE90' if energy >= 50 else '#FFA500' if energy >= 30 else '#FF6B6B'
-        self.energy_label.config(text=f"Energy: {energy}% (Prod: {int(productivity*100)}%)", fg=energy_color)
+        self.energy_label.config(text=f"Energy: {energy}%", fg=energy_color)
 
-    def back_to_menu(self):
-        if self.on_back:
-            self.on_back()
+        # Hygiene display
+        hygiene = self.hygiene_system.get_hygiene()
+        hygiene_color = '#87CEEB' if hygiene >= 70 else '#FFD700' if hygiene >= 40 else '#FF6B6B'
+        self.hygiene_label.config(text=f"Hygiene: {hygiene}%", fg=hygiene_color)
+
+        # Happiness display
+        self.happiness_system.calculate_happiness()
+        happiness = self.happiness_system.get_happiness()
+        happiness_color = '#90EE90' if happiness >= 70 else '#FFD700' if happiness >= 50 else '#FF6B6B'
+        self.happiness_label.config(text=f"Happiness: {happiness}%", fg=happiness_color)

@@ -8,7 +8,7 @@ import sys
 sys.path.append(os.path.dirname(os.path.abspath(__file__)))
 from deepseek.services.naming import get_random_studio_names, get_random_player_names, get_competitor_companies
 from buildings.studio_room import StudioRoomScreen
-from dev_menu import DevMenu
+from systems.dev_menu import DevMenu
 
 class SaveManager:
     def __init__(self):

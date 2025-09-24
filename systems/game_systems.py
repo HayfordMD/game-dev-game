@@ -351,3 +351,270 @@ class EnergySystem:
         # Slowly reduce caffeine tolerance
         if energy_data['caffeine_tolerance'] > 0:
             energy_data['caffeine_tolerance'] = max(0, energy_data['caffeine_tolerance'] - 0.5)
+
+
+class HygieneSystem:
+    """Hygiene system that affects NPC recruitment and retention"""
+
+    def __init__(self, game_data):
+        self.game_data = game_data
+
+        # Initialize hygiene data if not present
+        if 'hygiene_system' not in self.game_data.data:
+            self.game_data.data['hygiene_system'] = {
+                'current_hygiene': 75,  # Start at 75%
+                'max_hygiene': 100,
+                'last_shower_day': 0,  # Track days since last shower
+                'deodorant_uses': 10,  # Quick hygiene boost
+                'soap_quality': 1  # Multiplier for shower effectiveness
+            }
+
+    def get_hygiene(self):
+        """Get current hygiene level"""
+        return self.game_data.data['hygiene_system']['current_hygiene']
+
+    def set_hygiene(self, value):
+        """Set hygiene to specific value"""
+        hygiene_data = self.game_data.data['hygiene_system']
+        hygiene_data['current_hygiene'] = max(0, min(hygiene_data['max_hygiene'], value))
+
+    def take_shower(self):
+        """Take a shower to restore hygiene"""
+        hygiene_data = self.game_data.data['hygiene_system']
+
+        # Base restoration depends on soap quality
+        base_restoration = 40 * hygiene_data['soap_quality']
+        self.set_hygiene(min(100, self.get_hygiene() + base_restoration))
+
+        # Reset days since shower
+        hygiene_data['last_shower_day'] = 0
+
+        return True, f"Hygiene restored to {self.get_hygiene()}%"
+
+    def use_deodorant(self):
+        """Quick hygiene boost"""
+        hygiene_data = self.game_data.data['hygiene_system']
+
+        if hygiene_data['deodorant_uses'] <= 0:
+            return False, "No deodorant left!"
+
+        hygiene_data['deodorant_uses'] -= 1
+        self.set_hygiene(min(100, self.get_hygiene() + 15))
+
+        return True, f"Quick freshening up! Hygiene: {self.get_hygiene()}%"
+
+    def daily_degradation(self):
+        """Daily hygiene degradation"""
+        hygiene_data = self.game_data.data['hygiene_system']
+
+        # Hygiene decreases by 1% daily
+        base_decrease = 1
+
+        # Worse if haven't showered in days
+        days_since_shower = hygiene_data['last_shower_day']
+        if days_since_shower > 3:
+            # After 3 days, increase degradation
+            base_decrease += (days_since_shower - 3) * 0.5
+
+        self.set_hygiene(self.get_hygiene() - base_decrease)
+        hygiene_data['last_shower_day'] += 1
+
+    def daily_update(self):
+        """Daily update for hygiene system"""
+        self.daily_degradation()
+
+    def get_recruitment_modifier(self):
+        """Get modifier for NPC recruitment based on hygiene"""
+        hygiene = self.get_hygiene()
+
+        if hygiene >= 80:
+            return 1.0  # No penalty
+        elif hygiene >= 60:
+            return 0.8  # 20% harder to recruit
+        elif hygiene >= 40:
+            return 0.5  # 50% harder to recruit
+        elif hygiene >= 20:
+            return 0.2  # 80% harder to recruit
+        else:
+            return 0.05  # Nearly impossible to recruit
+
+    def get_retention_modifier(self):
+        """Get modifier for NPC retention based on hygiene"""
+        hygiene = self.get_hygiene()
+
+        if hygiene >= 70:
+            return 1.0  # No penalty
+        elif hygiene >= 50:
+            return 0.9  # 10% more likely to quit
+        elif hygiene >= 30:
+            return 0.7  # 30% more likely to quit
+        else:
+            return 0.4  # 60% more likely to quit
+
+
+class HappinessSystem:
+    """Happiness system that affects game quality"""
+
+    def __init__(self, game_data):
+        self.game_data = game_data
+
+        # Initialize happiness data if not present
+        if 'happiness_system' not in self.game_data.data:
+            self.game_data.data['happiness_system'] = {
+                'current_happiness': 50,  # Start at neutral
+                'max_happiness': 100,
+                'relationships': {
+                    'friends': 0,  # Number of friends
+                    'romantic_partner': None,  # None, 'girlfriend', 'wife'
+                    'family_contact': True  # In contact with family
+                },
+                'recent_activities': [],  # Track recent fun activities
+                'last_social_day': 0  # Days since last social interaction
+            }
+
+    def get_happiness(self):
+        """Get current happiness level"""
+        return self.game_data.data['happiness_system']['current_happiness']
+
+    def set_happiness(self, value):
+        """Set happiness to specific value"""
+        happiness_data = self.game_data.data['happiness_system']
+        happiness_data['current_happiness'] = max(0, min(happiness_data['max_happiness'], value))
+
+    def calculate_happiness(self):
+        """Calculate happiness based on various factors"""
+        happiness_data = self.game_data.data['happiness_system']
+        base_happiness = 30  # Base level
+
+        # Relationship bonuses
+        relationships = happiness_data['relationships']
+
+        # Friends bonus (max +20)
+        friend_bonus = min(20, relationships['friends'] * 4)
+        base_happiness += friend_bonus
+
+        # Romantic partner bonus
+        if relationships['romantic_partner'] == 'girlfriend':
+            base_happiness += 15
+        elif relationships['romantic_partner'] == 'wife':
+            base_happiness += 20
+
+        # Family contact bonus
+        if relationships['family_contact']:
+            base_happiness += 5
+
+        # Hygiene affects happiness
+        if hasattr(self.game_data, 'hygiene_system'):
+            hygiene = HygieneSystem(self.game_data).get_hygiene()
+            if hygiene >= 70:
+                base_happiness += 5
+            elif hygiene < 30:
+                base_happiness -= 10
+
+        # Sleep schedule affects happiness
+        sleep_schedule = self.game_data.data.get('time', {}).get('sleep_schedule', 'Normal')
+        if sleep_schedule == 'Crunch Time':
+            base_happiness -= 15
+        elif sleep_schedule == 'Restorative':
+            base_happiness += 10
+
+        # Energy affects happiness
+        energy_system = EnergySystem(self.game_data)
+        energy = energy_system.get_energy()
+        if energy >= 80:
+            base_happiness += 5
+        elif energy < 30:
+            base_happiness -= 10
+
+        # Social isolation penalty
+        days_since_social = happiness_data['last_social_day']
+        if days_since_social > 7:
+            base_happiness -= min(20, (days_since_social - 7) * 2)
+
+        # Recent activities bonus (temporary)
+        if len(happiness_data['recent_activities']) > 0:
+            base_happiness += min(10, len(happiness_data['recent_activities']) * 3)
+
+        # Update happiness
+        self.set_happiness(base_happiness)
+        return base_happiness
+
+    def add_friend(self):
+        """Add a new friend"""
+        happiness_data = self.game_data.data['happiness_system']
+        happiness_data['relationships']['friends'] += 1
+        happiness_data['last_social_day'] = 0
+        self.calculate_happiness()
+        return f"Made a new friend! Total friends: {happiness_data['relationships']['friends']}"
+
+    def lose_friend(self):
+        """Lose a friend"""
+        happiness_data = self.game_data.data['happiness_system']
+        if happiness_data['relationships']['friends'] > 0:
+            happiness_data['relationships']['friends'] -= 1
+            self.calculate_happiness()
+            return f"Lost a friend. Remaining friends: {happiness_data['relationships']['friends']}"
+        return "No friends to lose..."
+
+    def start_relationship(self):
+        """Start a romantic relationship"""
+        happiness_data = self.game_data.data['happiness_system']
+        if happiness_data['relationships']['romantic_partner'] is None:
+            happiness_data['relationships']['romantic_partner'] = 'girlfriend'
+            happiness_data['last_social_day'] = 0
+            self.calculate_happiness()
+            return "Started a new relationship! Happiness increased!"
+        return "Already in a relationship"
+
+    def get_married(self):
+        """Get married"""
+        happiness_data = self.game_data.data['happiness_system']
+        if happiness_data['relationships']['romantic_partner'] == 'girlfriend':
+            happiness_data['relationships']['romantic_partner'] = 'wife'
+            self.calculate_happiness()
+            return "Got married! Congratulations!"
+        return "Need to be in a relationship first"
+
+    def social_activity(self, activity_name):
+        """Record a social activity"""
+        happiness_data = self.game_data.data['happiness_system']
+        happiness_data['recent_activities'].append(activity_name)
+        happiness_data['last_social_day'] = 0
+
+        # Keep only last 3 activities
+        if len(happiness_data['recent_activities']) > 3:
+            happiness_data['recent_activities'].pop(0)
+
+        self.calculate_happiness()
+        return f"Enjoyed {activity_name}! Happiness: {self.get_happiness()}%"
+
+    def daily_update(self):
+        """Daily happiness update"""
+        happiness_data = self.game_data.data['happiness_system']
+
+        # Increment days since social interaction
+        happiness_data['last_social_day'] += 1
+
+        # Recent activities fade over time
+        if len(happiness_data['recent_activities']) > 0 and happiness_data['last_social_day'] > 3:
+            happiness_data['recent_activities'].pop(0)
+
+        # Recalculate happiness
+        self.calculate_happiness()
+
+    def get_game_rating_modifier(self):
+        """Get modifier for game rating based on happiness"""
+        happiness = self.get_happiness()
+
+        if happiness == 0:
+            return -8  # Severe penalty
+        elif happiness < 30:
+            return -5  # Major penalty
+        elif happiness < 50:
+            return -2  # Minor penalty
+        elif happiness >= 50 and happiness < 70:
+            return 0  # Neutral
+        elif happiness >= 70:
+            return 1  # Bonus
+        else:
+            return 0

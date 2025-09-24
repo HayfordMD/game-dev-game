@@ -1,0 +1,401 @@
+================================================================================
+COMPLETE CONSOLE DATABASE
+================================================================================
+
+NOTE: Console names are fixed, but manufacturers randomize each game session
+================================================================================
+
+================================================================================
+CONSOLE LINEAGES OVERVIEW
+================================================================================
+
+Phoenix:
+  1978-83: Phoenix
+  1984-89: Phoenix II
+  1990-94: Phoenix Super
+  1995-99: Phoenix Pro
+  2000-05: Phoenix Next
+  2006-09: Phoenix Elite
+  2010-17: Phoenix Revolution
+  2018-24: Phoenix Eternal
+  2025-30: Phoenix Ascension
+
+Dragon:
+  1978-83: Dragon
+  1984-89: Dragon Plus
+  1990-94: Dragon 64
+  1995-99: Dragon 2000
+  2000-05: Dragon X
+  2006-09: Dragon Supreme
+  2010-17: Dragon Master
+  2018-24: Dragon Legacy
+  2025-30: ---
+
+Sphinx:
+  1978-83: Sphinx
+  1984-89: Sphinx 2
+  1990-94: Sphinx III
+  1995-99: Pyramid
+  2000-05: Pyramid 1000
+  2006-09: Pyramid Pro
+  2010-17: Pyramid X
+  2018-24: Pyramid Elite
+  2025-30: ---
+
+Titan:
+  1978-83: Titan
+  1984-89: Titan 100
+  1990-94: Titan 2000
+  1995-99: Titan Pro
+  2000-05: Titan X
+  2006-09: Titan Elite
+  2010-17: Titan Omega
+  2018-24: ---
+  2025-30: ---
+
+Griffin:
+  1978-83: Griffin
+  1984-89: Griffin II
+  1990-94: Griffin Super
+  1995-99: Griffin Max
+
+Hydra:
+  1978-83: Hydra
+  1984-89: Hydra Plus
+  1990-94: Hydra 3000
+  1995-99: ---
+
+Valkyrie:
+  1978-83: Valkyrie
+  1984-89: Valkyrie II
+  1990-94: Valkyrie Next
+  1995-99: ---
+
+Odyssey:
+  1978-83: Odyssey
+  1984-89: Odyssey II
+  1990-94: ---
+
+Dynasty:
+  1978-83: Dynasty
+  1984-89: Dynasty Plus
+  1990-94: ---
+
+Empire:
+  1978-83: Empire
+  1984-89: ---
+  1990-94: ---
+
+Quantum:
+  1978-83: ---
+  1984-89: ---
+  1990-94: ---
+  1995-99: Quantum
+  2000-05: Quantum 2
+  2006-09: Quantum Pro
+  2010-17: Quantum X
+  2018-24: Quantum Sequence
+  2025-30: Quantum Beyond
+
+Aurora:
+  1978-83: ---
+  1984-89: ---
+  1990-94: ---
+  1995-99: ---
+  2000-05: Aurora
+  2006-09: Aurora 3200
+  2010-17: Aurora Pro
+  2018-24: Aurora X
+  2025-30: Aurora Radiant
+
+Neural:
+  1978-83: ---
+  1984-89: ---
+  1990-94: ---
+  1995-99: ---
+  2000-05: ---
+  2006-09: ---
+  2010-17: Neural
+  2018-24: Neural Link
+  2025-30: Neural Connect
+
+Cosmos:
+  1978-83: ---
+  1984-89: ---
+  1990-94: ---
+  1995-99: ---
+  2000-05: ---
+  2006-09: ---
+  2010-17: Cosmos
+  2018-24: Cosmos 5000
+  2025-30: Cosmos Universal
+
+================================================================================
+DETAILED GENERATION BREAKDOWN
+================================================================================
+
+EARLY 80S (1978-1983)
+------------------------------------------------------------
+
+LINEAGE CONSOLES:
+   1. Phoenix                       
+   2. Dragon                        
+   3. Sphinx                        
+   4. Titan                         
+   5. Griffin                       
+   6. Hydra                         
+   7. Valkyrie                      
+   8. Odyssey                       
+   9. Dynasty                       
+  10. Empire                        
+
+STANDALONE CONSOLES:
+
+COMPUTERS:
+  - PC                            
+  - MAC                           
+
+HANDHELDS:
+  - PocketBuddy                   
+  - MicroPlay                     
+  - GoGamer                       
+
+LATE 80S (1984-1989)
+------------------------------------------------------------
+
+LINEAGE CONSOLES:
+   1. Phoenix II                    
+   2. Dragon Plus                   
+   3. Sphinx 2                      
+   4. Titan 100                     
+   5. Griffin II                    
+   6. Hydra Plus                    
+   7. Valkyrie II                   
+   8. Odyssey II                    
+   9. Dynasty Plus                  
+
+STANDALONE CONSOLES:
+   1. Thunder Station               
+
+COMPUTERS:
+  - PC                            
+  - MAC                           
+
+HANDHELDS:
+  - PocketBuddy Color             
+  - MicroPlay Plus                
+  - GoGamer 2000                  
+
+EARLY 90S (1990-1994)
+------------------------------------------------------------
+
+LINEAGE CONSOLES:
+   1. Phoenix Super                 
+   2. Dragon 64                     
+   3. Sphinx III                    
+   4. Titan 2000                    
+   5. Griffin Super                 
+   6. Hydra 3000                    
+   7. Valkyrie Next                 
+
+STANDALONE CONSOLES:
+   1. Eclipse Drive                 
+   2. Zenith Engine                 
+
+COMPUTERS:
+  - PC                            
+  - MAC                           
+
+HANDHELDS:
+  - PocketBuddy Advance           
+  - MicroPlay Pro                 
+  - GoGamer Pro                   
+
+LATE 90S (1995-1999)
+------------------------------------------------------------
+
+LINEAGE CONSOLES:
+   1. Phoenix Pro                   
+   2. Dragon 2000                   
+   3. Pyramid                       
+   4. Titan Pro                     
+   5. Griffin Max                   
+   6. Quantum                       
+
+STANDALONE CONSOLES:
+   1. Harmony Console               
+   2. Serenity Station              
+   3. Eternity Box                  
+
+COMPUTERS:
+  - PC                            
+  - MAC                           
+
+HANDHELDS:
+  - PocketBuddy Touch             
+  - MicroPlay Vision              
+  - GoGamer Touch                 
+
+EARLY 2000S (2000-2005)
+------------------------------------------------------------
+
+LINEAGE CONSOLES:
+   1. Phoenix Next                  
+   2. Dragon X                      
+   3. Pyramid 1000                  
+   4. Titan X                       
+   5. Quantum 2                     
+   6. Aurora                        
+
+STANDALONE CONSOLES:
+   1. Legacy System                 
+   2. Oracle Engine                 
+   3. Mystic Core                   
+
+COMPUTERS:
+  - PC                            
+  - MAC                           
+
+HANDHELDS:
+  - PocketBuddy 3D                
+  - MicroPlay HD                  
+  - GoGamer Ultra                 
+
+LATE 2000S (2006-2009)
+------------------------------------------------------------
+
+LINEAGE CONSOLES:
+   1. Phoenix Elite                 
+   2. Dragon Supreme                
+   3. Pyramid Pro                   
+   4. Titan Elite                   
+   5. Quantum Pro                   
+   6. Aurora 3200                   
+
+STANDALONE CONSOLES:
+   1. Arcane Station                
+   2. Ethereal Console              
+   3. Celestial Box                 
+
+COMPUTERS:
+  - PC                            
+  - MAC                           
+
+HANDHELDS:
+  - PocketBuddy Ultra             
+  - MicroPlay Touch               
+  - Mobile Phone Gaming           
+
+EARLY 2010S (2010-2017)
+------------------------------------------------------------
+
+LINEAGE CONSOLES:
+   1. Phoenix Revolution            
+   2. Dragon Master                 
+   3. Pyramid X                     
+   4. Titan Omega                   
+   5. Quantum X                     
+   6. Aurora Pro                    
+   7. Neural                        
+   8. Cosmos                        
+
+STANDALONE CONSOLES:
+   1. Astral Machine                
+
+COMPUTERS:
+  - PC                            
+  - MAC                           
+
+HANDHELDS:
+  - GoGamer Cloud                 
+  - Tablet Gaming                 
+  - Smartphone Gaming             
+
+LATE 2010S (2018-2024)
+------------------------------------------------------------
+
+LINEAGE CONSOLES:
+   1. Phoenix Eternal               
+   2. Dragon Legacy                 
+   3. Pyramid Elite                 
+   4. Quantum Sequence              
+   5. Aurora X                      
+   6. Neural Link                   
+   7. Cosmos 5000                   
+
+STANDALONE CONSOLES:
+   1. Nebula System                 
+
+COMPUTERS:
+  - PC                            
+  - MAC                           
+
+HANDHELDS:
+  - HandyMax Neural               
+  - Portable PC Gaming            
+  - Cloud Gaming Device           
+
+FUTURE 2025 (2025-2030)
+------------------------------------------------------------
+
+LINEAGE CONSOLES:
+   1. Phoenix Ascension             
+   2. Quantum Beyond                
+   3. Aurora Radiant                
+   4. Neural Connect                
+   5. Cosmos Universal              
+
+STANDALONE CONSOLES:
+   1. Void Station                  
+   2. Plasma Core                   
+   3. Fusion Drive                  
+   4. Reality Engine                
+   5. Dream Console                 
+   6. Mind Box                      
+   7. Soul Machine                  
+   8. Spirit System                 
+   9. Phantom Platform              
+  10. Ghost Drive                   
+  11. Cyber Matrix                  
+  12. Digital Realm                 
+  13. Virtual Throne                
+  14. Meta Station                  
+  15. Holo Core                     
+  16. Nano System                   
+  17. Micro Universe                
+  18. Macro Engine                  
+  19. Terra Console                 
+  20. Luna Box                      
+  21. Solar Drive                   
+  22. Stellar Platform              
+  23. Galactic Station              
+  24. Universal Core                
+  25. Infinite Loop                 
+
+COMPUTERS:
+  - PC                            
+  - MAC                           
+
+HANDHELDS:
+  - Neural Portable               
+  - Holographic Mobile            
+  - Brain Interface Gaming        
+
+================================================================================
+PLATFORMS AVAILABLE IN 1985 (Example):
+------------------------------------------------------------
+Consoles: 10
+  - Phoenix II
+  - Dragon Plus
+  - Sphinx 2
+  - Titan 100
+  - Griffin II
+
+Computers: 2
+  - PC
+  - MAC
+
+Handhelds: 3
+  - PocketBuddy Color
+  - MicroPlay Plus
+  - GoGamer 2000
