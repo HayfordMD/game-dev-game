@@ -83,6 +83,14 @@ class DevelopmentStageWindow:
             current_year
         )
 
+        # Ensure we have at least 1 score (matching max_bounces which is at least 1)
+        # and each score is at least 2 points
+        if not self.precalculated_scores:
+            self.precalculated_scores = [2] * max(1, self.max_bounces)
+        else:
+            # Ensure each precalculated score is at least 2
+            self.precalculated_scores = [max(2, score) for score in self.precalculated_scores]
+
         # Calculate weighted skill for display
         self.weighted_skill = self.score_calculator.calculate_weighted_skill(
             self.developer_stats,
@@ -113,7 +121,10 @@ class DevelopmentStageWindow:
         print(f"Performance Level: {self.bounce_details['percentage']:.1f}%")
         print(f"Weighted Skill: {self.weighted_skill:.1f}/100")
         print(f"Pre-calculated scores: {self.precalculated_scores}")
-        print(f"Expected Avg: {sum(self.precalculated_scores)/len(self.precalculated_scores):.1f} pts/bounce")
+        if self.precalculated_scores:
+            print(f"Expected Avg: {sum(self.precalculated_scores)/len(self.precalculated_scores):.1f} pts/bounce")
+        else:
+            print("Expected Avg: 0.0 pts/bounce (no scores pre-calculated)")
 
         print("\n" + "-"*30 + " BOUNCE CALCULATION " + "-"*28)
         print(f"Expected Bounces: {self.bounce_details['expected_bounces']}")
@@ -449,10 +460,10 @@ class DevelopmentStageWindow:
         controls_frame = tk.Frame(self.window, bg='#1a1a1a')
         controls_frame.pack(pady=10)
 
-        # Progress label
+        # Progress label - hidden for suspense
         self.progress_label = tk.Label(
             controls_frame,
-            text=f"Bounce: 0/{self.max_bounces}",
+            text="Press SPACE to bounce!",  # Don't show count for suspense
             font=('Arial', 12),
             fg='#888888',
             bg='#1a1a1a'
@@ -634,7 +645,18 @@ class DevelopmentStageWindow:
 
         self.bounce_count += 1
         print(f"[DEBUG] Bounce {self.bounce_count}/{self.max_bounces} - Stage: {self.stage.value}")
-        self.progress_label.config(text=f"Bounce: {self.bounce_count}/{self.max_bounces}")
+        # Don't show exact count for suspense
+        if self.bounce_count >= self.max_bounces:
+            self.progress_label.config(text="All bounces complete!")
+        else:
+            encouraging_messages = [
+                "Keep bouncing!",
+                "More bouncing!",
+                "Continue bouncing!",
+                "Keep going!",
+                "Don't stop!"
+            ]
+            self.progress_label.config(text=random.choice(encouraging_messages))
 
         # Reset index for scoring if needed
         if not hasattr(self, 'current_bounce_index'):
@@ -643,13 +665,27 @@ class DevelopmentStageWindow:
         # Generate points based on stage
         points = self.generate_stage_points()
 
-        # Chance to generate bugs (except during bug squashing)
+        # Chance to generate bugs (including Planning stage!)
         if self.stage != DevelopmentStage.BUG_SQUASHING:
-            bug_chance = 0.15  # 15% chance per bounce
+            # Higher chance in Planning stage for more chaos
+            bug_chance = 0.20 if self.stage == DevelopmentStage.PLANNING else 0.15
             if random.random() < bug_chance:
                 bugs_generated = random.randint(1, 3)
                 self.stage_scores.bugs += bugs_generated
                 points['bugs'] = bugs_generated
+                print(f"[DEBUG] BUGS GENERATED! {bugs_generated} bugs created on bounce {self.bounce_count}")
+
+                # Show bug notification on canvas
+                bug_text = self.canvas.create_text(
+                    400, 200,
+                    text=f"⚠️ {bugs_generated} BUG{'S' if bugs_generated > 1 else ''} CREATED! ⚠️",
+                    font=('Arial', 16, 'bold'),
+                    fill='#FF0000',
+                    tags='bug_notice'
+                )
+                # Remove after 2 seconds
+                self.window.after(2000, lambda: self.canvas.delete(bug_text))
+
                 # Update bug counter
                 self.bug_label.config(text=f"Bugs: {self.stage_scores.bugs}")
         else:
@@ -687,13 +723,10 @@ class DevelopmentStageWindow:
             self.current_bounce_index += 1
         else:
             # Fallback if we somehow run out
-            total_points = 1
+            total_points = 2
 
-        # Distribute points to appropriate categories
-        points = self.score_calculator.distribute_points_to_categories(
-            total_points,
-            self.score_stage
-        )
+        # Ensure minimum of 2 points per bounce
+        total_points = max(2, total_points)
 
         # Initialize all categories to 0
         all_points = {
@@ -705,9 +738,33 @@ class DevelopmentStageWindow:
             'story': 0
         }
 
-        # Update with actual points
-        for category, value in points.items():
-            all_points[category] = value
+        # If we have 2 or fewer points, distribute them randomly
+        if total_points <= 2:
+            categories = list(all_points.keys())
+            if total_points == 1:
+                # Give 1 point to a random category
+                chosen = random.choice(categories)
+                all_points[chosen] = 1
+            else:  # total_points == 2
+                # Either give 2 to one category or 1 each to two categories
+                if random.random() < 0.5:
+                    # Give 2 points to one category
+                    chosen = random.choice(categories)
+                    all_points[chosen] = 2
+                else:
+                    # Give 1 point each to two different categories
+                    chosen_cats = random.sample(categories, 2)
+                    all_points[chosen_cats[0]] = 1
+                    all_points[chosen_cats[1]] = 1
+        else:
+            # Use the normal distribution for higher point values
+            points = self.score_calculator.distribute_points_to_categories(
+                total_points,
+                self.score_stage
+            )
+            # Update with actual points
+            for category, value in points.items():
+                all_points[category] = value
 
         return all_points
 
@@ -1171,10 +1228,32 @@ class DevelopmentStageWindow:
 
     def proceed_from_summary(self):
         """Clear summary and proceed to next stage"""
+        print("\n" + "="*60)
+        print("[CONTINUE BUTTON PRESSED]")
+
         if self.stage == DevelopmentStage.PLANNING:
-            # For Planning stage, launch the minigame directly
-            game_type = self.game_data.get('current_game', {}).get('type', 'Unknown')
-            game_topic = self.game_data.get('current_game', {}).get('topic', 'Unknown')
+            # Get game info properly
+            if hasattr(self.game_data, 'data'):
+                current_game = self.game_data.data.get('current_game', {})
+            else:
+                current_game = self.game_data.get('current_game', {})
+
+            game_type = current_game.get('type', 'Unknown')
+            game_topic = current_game.get('topic', 'Unknown')
+            game_name = current_game.get('name', 'Unknown')
+
+            print(f"Stage: {self.stage.value}")
+            print(f"Planning complete for: {game_name}")
+            print(f"Game Type: {game_type}")
+            print(f"Topic: {game_topic}")
+            print(f"Total Score: {sum(self.category_scores.values())}")
+            print(f"Bugs Generated: {self.stage_scores.bugs}")
+            print("\nScore Breakdown:")
+            for category, score in self.category_scores.items():
+                if score > 0:
+                    print(f"  {category}: {score}")
+            print(f"\nAction: Launching {game_type} minigame...")
+            print("="*60 + "\n")
 
             # Clear summary elements
             self.canvas.delete("summary")
@@ -1307,58 +1386,77 @@ class DevelopmentStageWindow:
 
     def launch_minigame(self, game_type: str, game_topic: str):
         """Launch the appropriate minigame based on game type and topic"""
-        print(f"[DEBUG] Launching minigame for {game_type} - {game_topic}")
+        print("\n" + "="*60)
+        print(f"[MINIGAME] Launching Development Minigame")
+        print(f"[MINIGAME] Game Type: {game_type}")
+        print(f"[MINIGAME] Topic: {game_topic}")
+        print(f"[MINIGAME] Planning Score: {sum(self.category_scores.values())}")
+        print("="*60 + "\n")
 
         try:
-            # Map game types to minigames
+            import subprocess
+            import sys
+            import os
+
+            # Map game type + topic combinations to specific minigames
+            minigame_path = None
+
             if game_type.lower() == "arcade":
-                if "tennis" in game_topic.lower() or "table tennis" in game_topic.lower():
-                    # Launch Table Tennis Arcade
-                    print(f"[DEBUG] Starting Table Tennis Arcade game")
-                    import subprocess
-                    import sys
-                    # Run as separate process and wait for completion
-                    result = subprocess.run(
-                        [sys.executable, "DevelopmentGames/arcade/TableTennisArcade.py"],
-                        capture_output=True,
-                        text=True
-                    )
-                    # Get score from output if available
-                    self.on_minigame_complete(50)  # Default score for now
-
+                # Map arcade topics to their games
+                if "table tennis" in game_topic.lower():
+                    minigame_path = "DevelopmentGames/arcade/TableTennisArcade.py"
+                    print(f"[MINIGAME] Selected: Table Tennis Arcade")
+                elif "temple" in game_topic.lower():
+                    minigame_path = "DevelopmentGames/arcade/TempleArcade.py"
+                    print(f"[MINIGAME] Selected: Temple Arcade")
                 elif "space" in game_topic.lower():
-                    # Launch Space Arcade
-                    print(f"[DEBUG] Starting Space Arcade game")
-                    import subprocess
-                    import sys
-                    result = subprocess.run(
-                        [sys.executable, "DevelopmentGames/arcade/SpaceArcade.py"],
-                        capture_output=True,
-                        text=True
-                    )
-                    self.on_minigame_complete(50)
-
+                    # Check if SpaceArcade exists, otherwise use TempleArcade
+                    if os.path.exists("DevelopmentGames/arcade/SpaceArcade.py"):
+                        minigame_path = "DevelopmentGames/arcade/SpaceArcade.py"
+                        print(f"[MINIGAME] Selected: Space Arcade")
+                    else:
+                        minigame_path = "DevelopmentGames/arcade/TempleArcade.py"
+                        print(f"[MINIGAME] Space game not found, using Temple Arcade")
                 else:
-                    # Generic arcade game - use Temple Arcade
-                    print(f"[DEBUG] Starting Temple Arcade game for {game_topic}")
-                    import subprocess
-                    import sys
+                    # Default arcade game
+                    minigame_path = "DevelopmentGames/arcade/TempleArcade.py"
+                    print(f"[MINIGAME] No specific match, using Temple Arcade")
+
+                if minigame_path and os.path.exists(minigame_path):
+                    print(f"[MINIGAME] Launching: {minigame_path}")
                     result = subprocess.run(
-                        [sys.executable, "DevelopmentGames/arcade/TempleArcade.py"],
+                        [sys.executable, minigame_path],
                         capture_output=True,
                         text=True
                     )
-                    self.on_minigame_complete(50)
+                    # Parse score from output or use default
+                    score = self.parse_minigame_score(result.stdout)
+                    print(f"[MINIGAME] Completed with score: {score}")
+                    self.distribute_minigame_score_to_gtgiss(score)
+                else:
+                    print(f"[MINIGAME] File not found: {minigame_path}")
+                    self.distribute_minigame_score_to_gtgiss(30)  # Default score
 
             elif game_type.lower() in ["text adventure", "adventure"]:
-                # Launch DeepAdventure with topic
-                print(f"[DEBUG] Starting Text Adventure for topic: {game_topic}")
-                from DevelopmentGames.textadventure.DeepAdventure import play_game
-                self.window.withdraw()
+                # Launch DeepAdventure as a subprocess
+                print(f"[MINIGAME] Starting Text Adventure for topic: {game_topic}")
+                minigame_path = "DevelopmentGames/textadventure/DeepAdventure.py"
 
-                # Create a simple wrapper to run the game
-                score = play_game(game_topic=game_topic)
-                self.on_minigame_complete(score if score else 50)
+                if os.path.exists(minigame_path):
+                    print(f"[MINIGAME] Launching: {minigame_path}")
+                    # Pass topic as command line argument
+                    result = subprocess.run(
+                        [sys.executable, minigame_path, "--topic", game_topic],
+                        capture_output=True,
+                        text=True
+                    )
+                    # Parse score from output or use default
+                    score = self.parse_minigame_score(result.stdout)
+                    print(f"[MINIGAME] Completed with score: {score}")
+                    self.distribute_minigame_score_to_gtgiss(score)
+                else:
+                    print(f"[MINIGAME] File not found: {minigame_path}")
+                    self.distribute_minigame_score_to_gtgiss(30)  # Default score
 
             else:
                 # No minigame for this type yet
@@ -1369,19 +1467,68 @@ class DevelopmentStageWindow:
             print(f"[ERROR] Failed to launch minigame: {e}")
             self.finish_stage_completion()
 
+    def parse_minigame_score(self, output: str) -> int:
+        """Parse score from minigame output"""
+        # Look for "SCORE:" or "Final Score:" in output
+        import re
+        score_patterns = [
+            r"SCORE:\s*(\d+)",
+            r"Final Score:\s*(\d+)",
+            r"Score:\s*(\d+)",
+            r"Points:\s*(\d+)"
+        ]
+
+        for pattern in score_patterns:
+            match = re.search(pattern, output, re.IGNORECASE)
+            if match:
+                score = int(match.group(1))
+                print(f"[MINIGAME] Parsed score from output: {score}")
+                return score
+
+        print(f"[MINIGAME] No score found in output, using default")
+        return 30  # Default score if not found
+
+    def distribute_minigame_score_to_gtgiss(self, score: int):
+        """Distribute minigame score randomly to GTGISS categories"""
+        print(f"\n[GTGISS] Distributing {score} points from minigame")
+
+        # GTGISS = Gameplay, Technical, Graphics, Innovation, Sound, Story
+        categories = ['gameplay', 'technical', 'graphics', 'innovation', 'sound_audio', 'story']
+
+        # Randomly distribute the score
+        remaining = score
+        distribution = {}
+
+        while remaining > 0 and categories:
+            # Pick a random category
+            category = random.choice(categories)
+
+            # Assign 1-5 points (or remaining if less)
+            points = min(random.randint(1, min(5, remaining)), remaining)
+
+            if category not in distribution:
+                distribution[category] = 0
+            distribution[category] += points
+            remaining -= points
+
+        # Apply distribution
+        for category, points in distribution.items():
+            if category not in self.category_scores:
+                self.category_scores[category] = 0
+            self.category_scores[category] += points
+            print(f"[GTGISS] +{points} to {category} (total: {self.category_scores[category]})")
+
+        print(f"[GTGISS] New total score: {sum(self.category_scores.values())}\n")
+
+        # Continue with stage completion
+        if hasattr(self, 'window') and self.window:
+            self.window.deiconify()
+        self.finish_stage_completion()
+
     def on_minigame_complete(self, minigame_score: int):
         """Handle minigame completion"""
         print(f"[DEBUG] Minigame complete with score: {minigame_score}")
-
-        # Add minigame score bonus to development
-        if minigame_score > 0:
-            # Distribute bonus points based on minigame performance
-            bonus = minigame_score // 10  # Convert minigame score to development points
-            self.category_scores['gameplay'] += bonus
-            self.category_scores['innovation'] += bonus // 2
-
-        self.window.deiconify()
-        self.finish_stage_completion()
+        self.distribute_minigame_score_to_gtgiss(minigame_score)
 
     def finish_stage_completion(self):
         """Finish the stage completion process"""
@@ -1402,12 +1549,13 @@ class DevelopmentStageWindow:
 class MultiStageDevelopment:
     """Manages the full multi-stage development process"""
 
-    def __init__(self, root, game_data, game_name: str, game_type: str, game_topic: str):
+    def __init__(self, root, game_data, game_name: str, game_type: str, game_topic: str, preloaded_adventure_data=None):
         self.root = root
         self.game_data = game_data
         self.game_name = game_name
         self.game_type = game_type
         self.game_topic = game_topic
+        self.preloaded_adventure_data = preloaded_adventure_data
 
         # Total scores across all stages
         self.total_scores = StageScores()
@@ -1510,6 +1658,26 @@ class MultiStageDevelopment:
             # Get or create developer stats
             developer_stats = create_player_developer() if developer == "You (Player)" else DeveloperStats(name=developer)
 
+            # Update game_data with current game information
+            if hasattr(self.game_data, 'data'):
+                self.game_data.data['current_game'] = {
+                    'name': self.game_name,
+                    'type': self.game_type,
+                    'topic': self.game_topic
+                }
+                # Store preloaded adventure data if available
+                if self.preloaded_adventure_data:
+                    self.game_data.data['preloaded_adventure_data'] = self.preloaded_adventure_data
+            else:
+                self.game_data['current_game'] = {
+                    'name': self.game_name,
+                    'type': self.game_type,
+                    'topic': self.game_topic
+                }
+                # Store preloaded adventure data if available
+                if self.preloaded_adventure_data:
+                    self.game_data['preloaded_adventure_data'] = self.preloaded_adventure_data
+
             # Create stage window with animation
             stage_window = DevelopmentStageWindow(
                 self.root,
@@ -1553,6 +1721,20 @@ class MultiStageDevelopment:
         team_stats = create_player_developer()
         team_stats.name = "Entire Team"
         # Could average multiple developers here in the future
+
+        # Update game_data with current game information
+        if hasattr(self.game_data, 'data'):
+            self.game_data.data['current_game'] = {
+                'name': self.game_name,
+                'type': self.game_type,
+                'topic': self.game_topic
+            }
+        else:
+            self.game_data['current_game'] = {
+                'name': self.game_name,
+                'type': self.game_type,
+                'topic': self.game_topic
+            }
 
         # Create stage window directly without selection
         stage_window = DevelopmentStageWindow(

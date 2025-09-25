@@ -41,7 +41,6 @@
 2. Fantasy - Available from start
 3. Space - Available from start
 4. Temple - Available from start
-5. Adventure - Available from start
 
 ### Horror (7)
 6. Zombies

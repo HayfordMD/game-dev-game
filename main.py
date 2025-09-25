@@ -327,6 +327,9 @@ class NewGameScreen:
             self.frame.update()
 
             try:
+                self.status_label.config(text="Calling AI to generate creative studio names...")
+                self.frame.update()
+
                 names = get_random_studio_names()
 
                 # Add new names to all generated names list
@@ -581,7 +584,7 @@ class NewGameScreen:
 
         def generate_names():
             """Generate and display random names"""
-            generate_button.config(state='disabled', text="Generating...")
+            generate_button.config(state='disabled', text="Calling AI...")
             name_window.update()
 
             try:
@@ -895,21 +898,31 @@ class GameDevStudioApp:
                             font=('Arial', 12), bg='#1a1a2e', fg='#cccccc')
         info_label.pack(pady=10)
 
-        status_label = tk.Label(loading_frame, text="Loading default competitor companies...",
+        status_label = tk.Label(loading_frame, text="Setting up default configuration...",
                               font=('Arial', 12), bg='#1a1a2e', fg='#888888')
         status_label.pack(pady=10)
+
+        progress_label = tk.Label(loading_frame, text="",
+                                font=('Arial', 11), bg='#1a1a2e', fg='#ffcc00')
+        progress_label.pack(pady=5)
 
         # Update display
         self.root.update()
 
         # Create new game data
+        progress_label.config(text="✓ Initializing game data...")
+        self.root.update()
         self.game_data.reset_to_defaults()
         self.game_data.set(studio_name, 'player_data', 'studio_name')
         self.game_data.set(player_name, 'player_data', 'player_name')
         self.game_data.set("Normal", 'settings', 'difficulty')
 
         # Use default competitor companies
-        print("Using default competitor companies...")
+        status_label.config(text="Loading pre-configured competitor companies...")
+        progress_label.config(text="(Quick Start uses cached companies)")
+        self.root.update()
+
+        print("Using default competitor companies (no API call)...")
         competitors = get_default_competitor_companies()
         self.game_data.data['competitors'] = {
             'companies': competitors,
@@ -918,7 +931,8 @@ class GameDevStudioApp:
         }
 
         # Update status
-        status_label.config(text=f"Loaded {len(competitors)} default companies. Starting game...")
+        status_label.config(text=f"✓ Loaded {len(competitors)} companies")
+        progress_label.config(text="Ready to start!")
         self.root.update()
         print(f"Loaded {len(competitors)} default competitor companies")
 
@@ -940,17 +954,28 @@ class GameDevStudioApp:
                               font=('Arial', 12), bg='#1a1a2e', fg='#888888')
         status_label.pack(pady=10)
 
+        # Progress indicator
+        progress_label = tk.Label(loading_frame, text="",
+                                font=('Arial', 11), bg='#1a1a2e', fg='#ffcc00')
+        progress_label.pack(pady=5)
+
         # Update display
         self.root.update()
 
         # Create new game data
+        progress_label.config(text="✓ Initializing game data...")
+        self.root.update()
         self.game_data.reset_to_defaults()
         self.game_data.set(studio_name, 'player_data', 'studio_name')
         self.game_data.set(player_name, 'player_data', 'player_name')
         self.game_data.set("Normal", 'settings', 'difficulty')  # Default difficulty
 
         # Generate competitor companies
-        print("Generating competitor companies...")
+        status_label.config(text="Calling AI to generate unique competitor companies...")
+        progress_label.config(text="This may take a moment...")
+        self.root.update()
+
+        print("Generating competitor companies via API...")
         competitors = get_competitor_companies()
         self.game_data.data['competitors'] = {
             'companies': competitors,
@@ -958,7 +983,8 @@ class GameDevStudioApp:
         }
 
         # Update status
-        status_label.config(text=f"Created {len(competitors)} competitor companies. Loading studio...")
+        status_label.config(text=f"✓ Created {len(competitors)} competitor companies")
+        progress_label.config(text="Generating backstory and finalizing setup...")
         self.root.update()
         print(f"Created {len(competitors)} competitor companies")
 

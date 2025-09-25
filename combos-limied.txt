@@ -1,0 +1,22 @@
+3. Platformer
+4. Puzzle
+5. Shooter
+1. Text Adventure - Available from start
+2. Arcade - Available from start
+10. Simulation
+RPG
+
+
+Zombies
+Temple
+Fantasy
+Space
+Table Tennis
+Postal Work
+Questing Heroes
+World War II
+City Building
+Ocean Exploration
+Golf
+Painting
+Bugs

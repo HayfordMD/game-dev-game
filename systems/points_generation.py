@@ -926,15 +926,15 @@ class PointsGenerator:
 
 # Helper function to create default player stats
 def create_player_developer() -> DeveloperStats:
-    """Create the player character with moderate starting skills"""
+    """Create the player character with starting skills of 1 (will progress over time)"""
     return DeveloperStats(
         name="You (Player)",
-        engineering=6,
-        marketing=2,
+        engineering=1,
+        marketing=1,
         leadership=1,
-        design=5,
-        research=4,
-        communication=2,
+        design=1,
+        research=1,
+        communication=1,
         months_with_company=0,
         projects_completed=0
     )

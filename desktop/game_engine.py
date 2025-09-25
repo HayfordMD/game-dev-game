@@ -45,6 +45,8 @@ class GameEngineWindow:
         self.selected_type = None
         self.generated_names = []  # Store generated names
         self.current_name_index = 0  # Track which name we're showing
+        self.preloaded_adventure_data = None  # Store preloaded adventure data
+        self.preload_thread = None  # Track preload thread
 
         self.setup_ui()
 
@@ -243,6 +245,10 @@ class GameEngineWindow:
             self.generated_names = [default_name]
             self.current_name_index = 0
 
+            # If Text Adventure is selected, start preloading the adventure data
+            if self.selected_type == 'Text Adventure':
+                self.preload_text_adventure()
+
             # Estimate development time (simplified)
             base_days = 30
             if self.selected_type in ['Online']:
@@ -272,6 +278,69 @@ class GameEngineWindow:
             self.generated_names = []  # Clear generated names
             self.current_name_index = 0
 
+    def preload_text_adventure(self):
+        """Start preloading text adventure data in background"""
+        import threading
+        import sys
+        import os
+
+        # Cancel any existing preload thread
+        if self.preload_thread and self.preload_thread.is_alive():
+            return  # Already preloading
+
+        def preload_worker():
+            """Worker thread to preload adventure data"""
+            try:
+                import json
+                print(f"[PRELOAD] Starting background API request for Text Adventure - {self.selected_topic}")
+
+                # Add deepseek path to imports
+                sys.path.append(os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), 'deepseek'))
+                from deepseek_client import DeepSeekClient
+
+                client = DeepSeekClient()
+
+                # First try a simple test request for a boon
+                print(f"[PRELOAD] Testing API with simple boon request for {self.selected_topic}")
+                boon = client.test_boon_request(self.selected_topic)
+                if boon:
+                    print(f"[PRELOAD] API test successful! Boon: {boon}")
+                    print(f"[PRELOAD] Now using incremental generation...")
+                else:
+                    print(f"[PRELOAD] API test failed, but continuing...")
+
+                # Use incremental generation for faster results
+                self.preloaded_adventure_data = client.generate_adventure_incremental(self.selected_topic)
+
+                if self.preloaded_adventure_data:
+                    print(f"[PRELOAD] Successfully preloaded adventure data for {self.selected_topic}")
+
+                    # Save to cache file for DeepAdventure to find
+                    cache_file = f"/tmp/adventure_cache_{self.selected_topic.replace(' ', '_')}.json"
+                    try:
+                        with open(cache_file, 'w') as f:
+                            json.dump(self.preloaded_adventure_data, f)
+                        print(f"[PRELOAD] Saved to cache: {cache_file}")
+                    except Exception as cache_error:
+                        print(f"[PRELOAD] Failed to save cache: {cache_error}")
+                else:
+                    print(f"[PRELOAD] Failed to preload adventure data for {self.selected_topic}")
+
+            except Exception as e:
+                print(f"[PRELOAD] Error during preload: {e}")
+                import traceback
+                traceback.print_exc()
+                self.preloaded_adventure_data = None
+
+        # Start the preload thread
+        self.preload_thread = threading.Thread(target=preload_worker)
+        self.preload_thread.daemon = True
+        self.preload_thread.start()
+
+        # Update status to show preloading
+        if self.status_label:
+            self.status_label.config(text="Ready to create game! (Preloading adventure data...)")
+
     def go_to_planning(self):
         """Start multi-stage development process"""
         game_name = self.name_entry.get().strip()
@@ -290,13 +359,14 @@ class GameEngineWindow:
         # Close this window
         self.window.destroy()
 
-        # Start multi-stage development
+        # Start multi-stage development with preloaded data
         multi_stage = MultiStageDevelopment(
             self.parent,
             self.game_data,
             game_name,
             self.selected_type,
-            self.selected_topic
+            self.selected_topic,
+            preloaded_adventure_data=self.preloaded_adventure_data if self.selected_type == 'Text Adventure' else None
         )
 
     def open_developer_selection(self, game_name):

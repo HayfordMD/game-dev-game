@@ -1,8 +1,13 @@
 import requests
 import json
 import os
+import logging
 from typing import List, Optional
 from dotenv import load_dotenv
+
+# Set up logging
+logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+logger = logging.getLogger(__name__)
 
 # Load environment variables from .env file
 load_dotenv()
@@ -32,7 +37,10 @@ class DeepSeekNamingService:
             [descriptive_name, fierce_elemental_name, simple_brandable_name]
         """
         if not self.api_key:
+            logger.info("No API key available, using fallback studio names")
             return self._get_fallback_names()
+
+        logger.info("Calling DeepSeek API to generate studio names...")
 
         prompt = """Give me 5 game studio names. I need:
 
@@ -63,6 +71,7 @@ Return only the five names, one per line, no explanations."""
             }
 
             response = requests.post(self.base_url, headers=headers, json=data, timeout=10)
+            logger.info(f"DeepSeek API response status: {response.status_code}")
 
             if response.status_code == 200:
                 result = response.json()
@@ -71,22 +80,24 @@ Return only the five names, one per line, no explanations."""
 
                 # Ensure we have exactly 5 names
                 if len(names) >= 5:
+                    logger.info(f"Successfully generated {len(names)} studio names")
                     return names[:5]
                 else:
                     # If we got fewer than 5, pad with fallback names
+                    logger.warning(f"Only got {len(names)} names, padding with fallbacks")
                     fallback = self._get_fallback_names()
                     while len(names) < 5:
                         names.append(fallback[len(names) % 5])
                     return names[:5]
             else:
-                print(f"DeepSeek API error: {response.status_code} - {response.text}")
+                logger.error(f"DeepSeek API error: {response.status_code} - {response.text}")
                 return self._get_fallback_names()
 
         except requests.exceptions.RequestException as e:
-            print(f"Network error calling DeepSeek API: {e}")
+            logger.error(f"Network error calling DeepSeek API: {e}")
             return self._get_fallback_names()
         except Exception as e:
-            print(f"Error calling DeepSeek API: {e}")
+            logger.error(f"Error calling DeepSeek API: {e}")
             return self._get_fallback_names()
 
     def _get_fallback_names(self) -> List[str]:
@@ -118,7 +129,10 @@ Return only the five names, one per line, no explanations."""
             List of 10 player names
         """
         if not self.api_key:
+            logger.info("No API key available, using fallback player names")
             return self._get_fallback_player_names()
+
+        logger.info("Calling DeepSeek API to generate player names...")
 
         prompt = """Give me 10 random American names. These are for game characters/players.
 
@@ -143,6 +157,7 @@ Return only the names, one per line, no explanations. Mix of first names only an
             }
 
             response = requests.post(self.base_url, headers=headers, json=data, timeout=10)
+            logger.info(f"DeepSeek API response status: {response.status_code}")
 
             if response.status_code == 200:
                 result = response.json()
@@ -159,14 +174,14 @@ Return only the names, one per line, no explanations. Mix of first names only an
                         names.append(fallback[len(names) % 10])
                     return names[:10]
             else:
-                print(f"DeepSeek API error: {response.status_code} - {response.text}")
+                logger.error(f"DeepSeek API error: {response.status_code} - {response.text}")
                 return self._get_fallback_player_names()
 
         except requests.exceptions.RequestException as e:
-            print(f"Network error calling DeepSeek API: {e}")
+            logger.error(f"Network error calling DeepSeek API: {e}")
             return self._get_fallback_player_names()
         except Exception as e:
-            print(f"Error calling DeepSeek API: {e}")
+            logger.error(f"Error calling DeepSeek API: {e}")
             return self._get_fallback_player_names()
 
     def generate_competitor_companies(self) -> List[str]:
@@ -177,7 +192,10 @@ Return only the names, one per line, no explanations. Mix of first names only an
             List of 20 competitor company names
         """
         if not self.api_key:
+            logger.info("No API key available, using fallback competitor names")
             return self._get_fallback_competitor_names()
+
+        logger.info("Calling DeepSeek API to generate competitor companies...")
 
         prompt = """Give me 20 game company names that would exist in 1978. These are competitors in the early computer/arcade game era.
 
@@ -207,6 +225,7 @@ Return only the company names, one per line, no explanations or numbering."""
             }
 
             response = requests.post(self.base_url, headers=headers, json=data, timeout=10)
+            logger.info(f"DeepSeek API response status: {response.status_code}")
 
             if response.status_code == 200:
                 result = response.json()
@@ -223,14 +242,14 @@ Return only the company names, one per line, no explanations or numbering."""
                         names.append(fallback[len(names) % 20])
                     return names[:20]
             else:
-                print(f"DeepSeek API error: {response.status_code} - {response.text}")
+                logger.error(f"DeepSeek API error: {response.status_code} - {response.text}")
                 return self._get_fallback_competitor_names()
 
         except requests.exceptions.RequestException as e:
-            print(f"Network error calling DeepSeek API: {e}")
+            logger.error(f"Network error calling DeepSeek API: {e}")
             return self._get_fallback_competitor_names()
         except Exception as e:
-            print(f"Error calling DeepSeek API: {e}")
+            logger.error(f"Error calling DeepSeek API: {e}")
             return self._get_fallback_competitor_names()
 
     def generate_game_names(self, prompt: str, count: int = 2) -> List[str]:

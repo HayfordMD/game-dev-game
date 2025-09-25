@@ -57,11 +57,15 @@ class UnlockSystem:
 
         # Starting game types (only these at beginning)
         if year >= 1978:
-            unlocks['game_types'].extend(['Text Adventure', 'Arcade'])
+            unlocks['game_types'].extend(['Text Adventure', 'Arcade', 'RPG'])
 
-        # Starting topics
+        # Starting topics - Updated list
         if year >= 1978:
-            unlocks['topics'].extend(['Table Tennis', 'Fantasy', 'Space', 'Temple'])
+            unlocks['topics'].extend([
+                'Zombies', 'Temple', 'Fantasy', 'Space', 'Table Tennis',
+                'Postal Work', 'Questing Heroes', 'World War II', 'City Building',
+                'Ocean Exploration', 'Golf', 'Painting', 'Bugs'
+            ])
 
         return unlocks
 
@@ -69,27 +73,29 @@ class UnlockSystem:
         """Check for unlocks when creating a game"""
         unlocked = []
 
-        # Track Arcade game count for Racing unlock
-        if game_type == 'Arcade':
-            if 'arcade_games_count' not in self.game_data.data:
-                self.game_data.data['arcade_games_count'] = 0
-            self.game_data.data['arcade_games_count'] += 1
-
-            # Racing game type - unlocked by creating 3 Arcade games
-            if self.game_data.data['arcade_games_count'] >= 3:
-                if 'Racing' not in self.permanent_unlocks['game_types']:
-                    self.permanent_unlocks['game_types'].append('Racing')
-                    self.save_permanent_unlocks()
-                    unlocked.append(('game_type', 'Racing', 'Created 3 Arcade games - Racing unlocked!'))
+        # # Track Arcade game count for Racing unlock
+        # # Commented out - Racing not in active game types list
+        # if game_type == 'Arcade':
+        #     if 'arcade_games_count' not in self.game_data.data:
+        #         self.game_data.data['arcade_games_count'] = 0
+        #     self.game_data.data['arcade_games_count'] += 1
+        #
+        #     # Racing game type - unlocked by creating 3 Arcade games
+        #     if self.game_data.data['arcade_games_count'] >= 3:
+        #         if 'Racing' not in self.permanent_unlocks['game_types']:
+        #             self.permanent_unlocks['game_types'].append('Racing')
+        #             self.save_permanent_unlocks()
+        #             unlocked.append(('game_type', 'Racing', 'Created 3 Arcade games - Racing unlocked!'))
 
         # No special unlock for Ping game anymore (Office type removed)
 
-        # RPG game type - unlocked by creating Text Adventure + Fantasy
-        if (topic == 'Fantasy' and game_type == 'Text Adventure'):
-            if 'RPG' not in self.permanent_unlocks['game_types']:
-                self.permanent_unlocks['game_types'].append('RPG')
-                self.save_permanent_unlocks()
-                unlocked.append(('game_type', 'RPG', 'Combined Fantasy with Text Adventures to discover RPGs!'))
+        # # RPG game type - unlocked by creating Text Adventure + Fantasy
+        # # Commented out - RPG now unlocked by year in generation_unlocks
+        # if (topic == 'Fantasy' and game_type == 'Text Adventure'):
+        #     if 'RPG' not in self.permanent_unlocks['game_types']:
+        #         self.permanent_unlocks['game_types'].append('RPG')
+        #         self.save_permanent_unlocks()
+        #         unlocked.append(('game_type', 'RPG', 'Combined Fantasy with Text Adventures to discover RPGs!'))
 
 
         return unlocked
@@ -136,26 +142,37 @@ class UnlockSystem:
                 self.save_permanent_unlocks()
                 unlocked.append(('topic', 'Dinosaurs', 'Created 3 adventure games!'))
 
-        # Strategy game type - unlocked after 1992 or by making 2 board games
-        if year >= 1992:
-            if 'Strategy' not in self.permanent_unlocks['game_types']:
-                self.permanent_unlocks['game_types'].append('Strategy')
-                self.save_permanent_unlocks()
-                unlocked.append(('game_type', 'Strategy', 'Year 1992 reached!'))
+        # # RPG game type - now available from start
+        # # Commented out - RPG is in starting game types
+        # if year >= 1989:
+        #     if 'RPG' not in self.permanent_unlocks['game_types']:
+        #         self.permanent_unlocks['game_types'].append('RPG')
+        #         self.save_permanent_unlocks()
+        #         unlocked.append(('game_type', 'RPG', 'Year 1989 reached - RPG games now available!'))
 
-        # Online game type - available 1994-2000
-        if year >= 1994 and year <= 2000:
-            if 'Online' not in self.game_data.data['unlocks']['game_types']:
-                self.game_data.data['unlocks']['game_types'].append('Online')
-                unlocked.append(('game_type', 'Online', 'Online gaming is now available (with connection issues)!'))
+        # # Strategy game type - unlocked after 1992 or by making 2 board games
+        # # Commented out - not in active game types list
+        # if year >= 1992:
+        #     if 'Strategy' not in self.permanent_unlocks['game_types']:
+        #         self.permanent_unlocks['game_types'].append('Strategy')
+        #         self.save_permanent_unlocks()
+        #         unlocked.append(('game_type', 'Strategy', 'Year 1992 reached!'))
 
-        # Educational game type - unlocked by high happiness
-        happiness = self.game_data.data.get('player_data', {}).get('happiness', 60)
-        if happiness >= 90:
-            if 'Educational' not in self.permanent_unlocks['game_types']:
-                self.permanent_unlocks['game_types'].append('Educational')
-                self.save_permanent_unlocks()
-                unlocked.append(('game_type', 'Educational', 'Achieved 90% happiness!'))
+        # # Online game type - available 1994-2000
+        # # Commented out - not in active game types list
+        # if year >= 1994 and year <= 2000:
+        #     if 'Online' not in self.game_data.data['unlocks']['game_types']:
+        #         self.game_data.data['unlocks']['game_types'].append('Online')
+        #         unlocked.append(('game_type', 'Online', 'Online gaming is now available (with connection issues)!'))
+
+        # # Educational game type - unlocked by high happiness
+        # # Commented out - not in active game types list
+        # happiness = self.game_data.data.get('player_data', {}).get('happiness', 60)
+        # if happiness >= 90:
+        #     if 'Educational' not in self.permanent_unlocks['game_types']:
+        #         self.permanent_unlocks['game_types'].append('Educational')
+        #         self.save_permanent_unlocks()
+        #         unlocked.append(('game_type', 'Educational', 'Achieved 90% happiness!'))
 
         return unlocked
 
@@ -215,30 +232,36 @@ class UnlockSystem:
         """Get information about all possible unlocks and their requirements"""
         return {
             'generation_unlocks': [
-                {'year': 1978, 'topics': ['Table Tennis', 'Fantasy', 'Space', 'Temple'],
-                 'game_types': ['Text Adventure', 'Arcade']},
-                {'year': 1983, 'topics': ['Dragons', 'Medieval Europe', 'Wild West', 'Pirates'],
+                {'year': 1978, 'topics': ['Zombies', 'Temple', 'Fantasy', 'Space', 'Table Tennis',
+                                          'Postal Work', 'Questing Heroes', 'World War II', 'City Building',
+                                          'Ocean Exploration', 'Golf', 'Painting', 'Bugs'],
+                 'game_types': ['Text Adventure', 'Arcade', 'RPG']},
+                {'year': 1983, 'topics': [],  # ['Dragons', 'Medieval Europe', 'Wild West', 'Pirates'],
                  'game_types': ['Platformer', 'Puzzle']},
-                {'year': 1985, 'topics': ['Zombies', 'Cyberpunk', 'Ninjas'],
-                 'game_types': ['Shooter', 'Fighting']},
-                {'year': 1987, 'topics': ['Post-Apocalyptic', 'Vampires', 'Alien Invasion', 'Golf'],
-                 'game_types': ['Adventure', 'Action']},
-                {'year': 1990, 'topics': ['City Building', 'War', 'Mechs', 'Robots'],
+                {'year': 1985, 'topics': [],  # ['Zombies', 'Cyberpunk', 'Ninjas'],
+                 'game_types': ['Shooter']},  # 'Fighting' removed
+                # {'year': 1987, 'topics': ['Post-Apocalyptic', 'Vampires', 'Alien Invasion', 'Golf'],
+                #  'game_types': ['Adventure', 'Action']},  # Commented out
+                {'year': 1990, 'topics': [],  # ['City Building', 'War', 'Mechs', 'Robots'],
                  'game_types': ['Simulation']},
-                {'year': 1995, 'topics': ['Gods & Titans', 'Ghosts', 'AI Uprising'],
-                 'game_types': ['Visual Novel']}
+                # {'year': 1995, 'topics': ['Gods & Titans', 'Ghosts', 'AI Uprising'],
+                #  'game_types': ['Visual Novel']},  # Commented out
+                # {'year': 1989, 'topics': [],
+                #  'game_types': ['RPG']}  # RPG now available from start
             ],
             'special_unlocks': [
                 {'name': 'Bugs', 'type': 'topic', 'requirement': 'Have < 40% hygiene between 1978-1983',
                  'permanent': True},
                 {'name': 'Dinosaurs', 'type': 'topic', 'requirement': 'Create 3 successful adventure games',
                  'permanent': True},
-                {'name': 'Strategy', 'type': 'game_type', 'requirement': 'Reach year 1992 or create 2 board games',
-                 'permanent': True},
-                {'name': 'Online', 'type': 'game_type', 'requirement': 'Available from 1994 to 2000',
-                 'permanent': False},
-                {'name': 'Educational', 'type': 'game_type', 'requirement': 'Achieve 90% happiness',
-                 'permanent': True}
+                # {'name': 'Strategy', 'type': 'game_type', 'requirement': 'Reach year 1992 or create 2 board games',
+                #  'permanent': True},
+                # {'name': 'Online', 'type': 'game_type', 'requirement': 'Available from 1994 to 2000',
+                #  'permanent': False},
+                # {'name': 'Educational', 'type': 'game_type', 'requirement': 'Achieve 90% happiness',
+                #  'permanent': True}
+                # {'name': 'RPG', 'type': 'game_type', 'requirement': 'Available from start',
+                #  'permanent': False}  # RPG now in starting types
             ],
             'current_permanent': self.permanent_unlocks,
             'current_save': self.game_data.data['unlocks']

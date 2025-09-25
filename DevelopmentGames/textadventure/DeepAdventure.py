@@ -469,6 +469,7 @@ Powered by DeepSeek AI (when available) or local generation
         # Show loading animation
         self.display_text("Initializing adventure generation...\n", color=self.victory_color, clear=True)
         self.display_text(f"Topic: {self.topic}\n", color=self.dim_color)
+        self.display_text("Note: API generation can take up to 2 minutes to complete.\n", color=self.danger_color)
         self.display_text("\n", color=self.dim_color)
 
         # Create loading animation
@@ -516,6 +517,24 @@ Powered by DeepSeek AI (when available) or local generation
         generation_thread.daemon = True
         generation_thread.start()
 
+    def check_for_preloaded_data(self):
+        """Check for preloaded adventure data in temp file"""
+        try:
+            # Check for preloaded data file
+            cache_file = f"/tmp/adventure_cache_{self.topic.replace(' ', '_')}.json"
+            if os.path.exists(cache_file):
+                # Check if cache is fresh (less than 5 minutes old)
+                if time.time() - os.path.getmtime(cache_file) < 300:
+                    with open(cache_file, 'r') as f:
+                        data = json.load(f)
+                        print(f"[PRELOAD] Found cached adventure data for {self.topic}")
+                        # Delete the cache file after reading
+                        os.remove(cache_file)
+                        return data
+        except Exception as e:
+            print(f"[PRELOAD] Error checking cache: {e}")
+        return None
+
     def animate_loading(self):
         """Animate loading indicator"""
         if not self.loading_active:
@@ -561,25 +580,41 @@ Powered by DeepSeek AI (when available) or local generation
     def generate_game_background(self):
         """Generate game in background thread"""
         try:
-            # Add deepseek path to imports
-            sys.path.append(os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))), 'deepseek'))
-            from deepseek_client import DeepSeekClient
+            # Check for preloaded data first
+            preloaded_data = self.check_for_preloaded_data()
+            if preloaded_data:
+                self.api_status = "Using preloaded adventure data!"
+                self.game_data = preloaded_data
+                api_success = True
+                print("[PRELOAD] Using preloaded adventure data!")
+            else:
+                # Add deepseek path to imports
+                sys.path.append(os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))), 'deepseek'))
+                from deepseek_client import DeepSeekClient
 
-            # Update status
-            self.api_status = "Requesting adventure from DeepSeek API..."
+                # Update status
+                self.api_status = "Requesting adventure from DeepSeek API..."
 
-            # Try API generation with timeout
-            api_success = False
-            try:
-                client = DeepSeekClient()
+                # Try API generation with timeout
+                api_success = False
+                try:
+                    client = DeepSeekClient()
 
-                # Update status to show we're waiting
-                self.api_status = "API request sent, waiting for response..."
+                    # Update status to show we're waiting
+                    self.api_status = "API request sent - using incremental generation..."
 
-                self.game_data = client.generate_adventure_game(self.topic)
-                if self.game_data:
-                    api_success = True
-                    self.api_status = "Response received! Processing..."
+                    # Try incremental generation first (faster)
+                    self.game_data = client.generate_adventure_incremental(self.topic)
+                    if self.game_data:
+                        api_success = True
+                        self.api_status = "Game generated successfully!"
+                    else:
+                        # Fall back to full generation if incremental fails
+                        self.api_status = "Trying full generation (may take up to 2 minutes)..."
+                        self.game_data = client.generate_adventure_game(self.topic)
+                        if self.game_data:
+                            api_success = True
+                            self.api_status = "Response received! Processing..."
             except TimeoutError:
                 self.api_status = "API request timed out, using local generator..."
                 api_success = False
@@ -887,15 +922,24 @@ if __name__ == "__main__":
     year = 1978
     topic = None
 
-    if len(sys.argv) > 1:
+    # Check for --topic argument
+    for i, arg in enumerate(sys.argv):
+        if arg == "--topic" and i + 1 < len(sys.argv):
+            topic = sys.argv[i + 1]
+        elif arg == "--year" and i + 1 < len(sys.argv):
+            try:
+                year = int(sys.argv[i + 1])
+            except ValueError:
+                pass
+
+    # Legacy argument parsing for backward compatibility
+    if topic is None and len(sys.argv) > 1 and not sys.argv[1].startswith("--"):
         try:
             year = int(sys.argv[1])
         except ValueError:
-            # First argument might be topic
             topic = sys.argv[1]
 
-    if len(sys.argv) > 2:
-        # Second argument could be topic or year
+    if len(sys.argv) > 2 and not sys.argv[2].startswith("--"):
         try:
             year = int(sys.argv[2])
         except ValueError:
