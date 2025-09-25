@@ -1,0 +1,239 @@
+# GAME DEVELOPMENT COMBINATIONS
+# Total: 23 Game Types × 123 Topics = 2,829 Possible Combinations
+
+## GAME TYPES (23 total)
+
+### Starting Types (2)
+1. Text Adventure - Available from start
+2. Arcade - Available from start
+
+### Standard Types (13)
+3. Platformer
+4. Puzzle
+5. Shooter
+6. Fighting
+7. Adventure
+8. Action
+9. Sports - Gameplay +10% boost when combined with sports topics
+10. Simulation
+11. Rhythm
+12. Visual Novel
+13. Horror
+14. Sandbox
+
+### Special Unlock Types (10)
+15. RPG - Unlock: Create Text Adventure + Fantasy (permanent once unlocked)
+16. Racing - Unlock: Create 3 Arcade games (permanent once unlocked)
+17. Strategy - Unlock: Create 2 Board Games OR reach year 1992
+18. Online Game - Unlock: Reach year 1994 (available until 2000, -5% rating penalty)
+19. MMORPG - Unlock: Have RPG unlocked + year 1996+ (-10% rating penalty before 2004)
+20. Idle - Unlock: Don't use desktop for 1 year
+21. Retro - Unlock: Reach year 2000
+22. Educational - Unlock: Achieve 90% happiness (permanent once unlocked)
+23. Motion-Control - Unlock: Create Rhythm + Music-related topic
+24. Touch-Based
+25. Board Game - Unlock: Automatic in 1985 (permanent once unlocked)
+
+## TOPICS (123 total)
+
+### Original/Classic (5)
+1. Table Tennis - Available from start
+2. Fantasy - Available from start
+3. Space - Available from start
+4. Temple - Available from start
+5. Adventure - Available from start
+
+### Horror (7)
+6. Zombies
+7. Vampires
+8. Werewolves
+9. Ghosts
+10. Psychological Horror
+11. Survival Horror
+12. Post-Apocalyptic Horror
+
+### Sci-Fi & Futuristic (12)
+13. Space Exploration
+14. Alien Invasion
+15. Space Pirates
+16. Time Travel
+17. Cyberpunk
+18. AI Uprising
+19. Mechs
+20. Terraforming
+21. Galactic Warfare
+22. Interdimensional Travel
+23. Nanotechnology
+24. Virtual Reality Worlds
+
+### Real-World & Occupational (13)
+25. Roadwork
+26. Trucking
+27. Farming
+28. Construction
+29. Mining
+30. Fishing
+31. Logging
+32. Factory Work
+33. Delivery Services
+34. Emergency Response
+35. Garbage Collection
+36. Postal Work
+37. Oil Drilling
+
+### Fantasy & Mythology (12)
+38. Dragons
+39. Elves & Dwarves
+40. Magic Schools
+41. Kingdoms & Castles
+42. Gods & Titans
+43. Questing Heroes
+44. Mythical Creatures
+45. Ancient Ruins
+46. Fairy Tales
+47. Dark Forests
+48. Magical Artifacts
+49. Prophecies
+
+### Action & Conflict (11)
+50. War
+51. Espionage
+52. Heists
+53. Martial Arts
+54. Gladiator Arenas
+55. Gang Warfare
+56. Pirate Battles
+57. Monster Hunting
+58. Bounty Hunting
+59. Tactical Infiltration
+60. Survival Combat
+61. Urban Warfare
+
+### Historical & Cultural (11)
+62. Ancient Egypt
+63. Viking Raids
+64. Roman Empire
+65. Wild West
+66. World War I
+67. World War II
+68. Cold War
+69. Medieval Europe
+70. Renaissance
+71. Industrial Revolution
+72. Tribal Societies
+
+### Urban & Social (9)
+73. City Building
+74. Dating Sim
+75. Social Media Fame
+76. Fashion Design
+77. Restaurant Management
+78. Crime Investigation
+79. Journalism
+80. Political Campaigns
+81. Suburban Life
+
+### Nature & Environment (9)
+82. Wildlife Rescue
+83. Forest Survival
+84. Ocean Exploration
+85. Gardening
+86. Animal Behavior
+87. Weather Control
+88. Volcanoes
+89. Arctic Expeditions
+90. Desert Survival
+
+### Creative & Experimental (8)
+91. Music Creation
+92. Painting
+93. Dance
+94. Poetry
+95. Film Production
+96. Photography
+97. Fashion
+98. Toy Making
+
+### Sports (17)
+99. Golf
+100. Basketball
+101. Football
+102. Soccer
+103. Baseball
+104. Tennis
+105. Hockey
+106. Boxing
+107. Wrestling
+108. Skateboarding
+109. Skiing
+110. Olympics
+111. Rugby
+112. Volleyball
+113. Swimming
+114. Track & Field
+115. Racing
+
+### Other/Misc (8)
+116. Ninjas
+117. Pirates
+118. Dinosaurs - Special unlock: Create 3 adventure games
+119. Robots
+120. Bugs - Special unlock: Have <40% hygiene in 1978-1983
+121. Office - Special unlock: Create "Ping" (Arcade + Table Tennis)
+122. Monsters
+123. Dungeons
+
+## ALL POSSIBLE COMBINATIONS (3,198 total)
+
+### TEXT ADVENTURE COMBINATIONS (123)
+[Text Adventure + each of 123 topics]
+
+### ARCADE COMBINATIONS (123)
+[Arcade + each of 123 topics]
+Note: Arcade + Table Tennis ["Ping" UNLOCKS OFFICE TOPIC]
+
+[Pattern continues for all 26 game types with all 123 topics]
+
+## SPECIAL COMBINATIONS & BONUSES
+
+### Unlock Combinations
+- Text Adventure + Fantasy = Unlocks RPG type
+- Arcade + Table Tennis (named "Ping") = Unlocks Office topic
+- Rhythm + Music Creation/Dance = Unlocks Motion-Control type
+- Creating 3 Arcade games = Unlocks Racing type
+- Creating 2 Board Games = Unlocks Strategy type (also unlocked in 1992)
+- Creating 3 Adventure games = Unlocks Dinosaurs topic
+
+### Rating Modifiers
+- Sports Type + Sports Topic = +10% Gameplay bonus
+- Online Game (1994-2000) = -5% all ratings
+- MMORPG (before 2004) = -10% all ratings
+
+### Year-Based Unlocks
+- 1985: Board Game type unlocked automatically
+- 1992: Strategy type available (if not already unlocked)
+- 1994: Online Game type available (until 2000)
+- 1996: MMORPG available (if RPG unlocked)
+- 2000: Retro type unlocked
+
+### Condition-Based Unlocks
+- <40% hygiene (1978-1983) = Bugs topic
+- Don't use desktop for 1 year = Idle type
+- 90% happiness = Educational type
+
+## STARTING COMBINATIONS (Year 1978)
+With only Text Adventure and Arcade types, plus 5 starting topics:
+
+1. Text Adventure + Table Tennis
+2. Text Adventure + Fantasy [UNLOCKS RPG]
+3. Text Adventure + Space
+4. Text Adventure + Temple
+5. Text Adventure + Adventure
+6. Arcade + Table Tennis ["Ping" UNLOCKS OFFICE TOPIC]
+7. Arcade + Fantasy
+8. Arcade + Space
+9. Arcade + Temple
+10. Arcade + Adventure
+
+Total Starting Combinations: 10
+Total Possible Combinations: 2,829 (23 types × 123 topics)

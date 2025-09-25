@@ -25,47 +25,47 @@ class UnlockViewer:
                 # Original
                 'Table Tennis', 'Fantasy', 'Space', 'Temple', 'Adventure',
                 # Horror
-                'Zombies', 'Space Zombies', 'Vampires', 'Werewolves', 'Ghosts',
-                'Demons', 'Possession', 'Haunted Houses', 'Occult Rituals', 'Psychological Horror',
-                'Survival Horror', 'Cursed Artifacts', 'Eldritch Abominations', 'Post-Apocalyptic Horror',
+                'Zombies', 'Vampires', 'Werewolves', 'Ghosts',
+                'Psychological Horror',
+                'Survival Horror', 'Post-Apocalyptic Horror',
                 # Sci-Fi & Futuristic
                 'Space Exploration', 'Alien Invasion', 'Space Pirates', 'Time Travel', 'Cyberpunk',
-                'AI Uprising', 'Mechs', 'Terraforming', 'Galactic Warfare', 'Space Colonies',
-                'Interdimensional Travel', 'Nanotechnology', 'Virtual Reality Worlds', 'Robot Rebellion',
+                'AI Uprising', 'Mechs', 'Terraforming', 'Galactic Warfare',
+                'Interdimensional Travel', 'Nanotechnology', 'Virtual Reality Worlds',
                 # Real-World & Occupational
                 'Roadwork', 'Trucking', 'Farming', 'Construction', 'Mining',
                 'Fishing', 'Logging', 'Factory Work', 'Delivery Services', 'Emergency Response',
-                'Garbage Collection', 'Postal Work', 'Oil Drilling', 'Power Grid Management',
+                'Garbage Collection', 'Postal Work', 'Oil Drilling',
                 # Fantasy & Mythology
-                'Dragons', 'Elves & Dwarves', 'Magic Schools', 'Necromancy', 'Kingdoms & Castles',
-                'Gods & Titans', 'Elemental Powers', 'Questing Heroes', 'Mythical Creatures', 'Ancient Ruins',
+                'Dragons', 'Elves & Dwarves', 'Magic Schools', 'Kingdoms & Castles',
+                'Gods & Titans', 'Questing Heroes', 'Mythical Creatures', 'Ancient Ruins',
                 'Fairy Tales', 'Dark Forests', 'Magical Artifacts', 'Prophecies',
                 # Action & Conflict
                 'War', 'Espionage', 'Heists', 'Martial Arts', 'Gladiator Arenas',
-                'Gang Warfare', 'Pirate Battles', 'Monster Hunting', 'Bounty Hunting', 'Mercenary Missions',
-                'Tactical Infiltration', 'Riot Control', 'Survival Combat', 'Urban Warfare',
+                'Gang Warfare', 'Pirate Battles', 'Monster Hunting', 'Bounty Hunting',
+                'Tactical Infiltration', 'Survival Combat', 'Urban Warfare',
                 # Historical & Cultural
-                'Ancient Egypt', 'Feudal Japan', 'Viking Raids', 'Roman Empire', 'Wild West',
+                'Ancient Egypt', 'Viking Raids', 'Roman Empire', 'Wild West',
                 'World War I', 'World War II', 'Cold War', 'Medieval Europe', 'Renaissance',
-                'Industrial Revolution', 'Colonial Exploration', 'Tribal Societies', 'Revolutionary Movements',
+                'Industrial Revolution', 'Tribal Societies',
                 # Urban & Social
-                'City Building', 'Dating Sim', 'High School Drama', 'Office Politics', 'Nightlife',
-                'Apartment Living', 'Social Media Fame', 'Reality TV', 'Fashion Design', 'Restaurant Management',
+                'City Building', 'Dating Sim',
+                'Social Media Fame', 'Fashion Design', 'Restaurant Management',
                 'Crime Investigation', 'Journalism', 'Political Campaigns', 'Suburban Life',
                 # Nature & Environment
-                'Wildlife Rescue', 'Eco Activism', 'Forest Survival', 'Ocean Exploration', 'Climate Crisis',
-                'Natural Disasters', 'Gardening', 'Animal Behavior', 'Weather Control', 'Volcanoes',
-                'Arctic Expeditions', 'Desert Survival', 'Cave Diving', 'Meteorology',
+                'Wildlife Rescue', 'Forest Survival', 'Ocean Exploration',
+                'Gardening', 'Animal Behavior', 'Weather Control', 'Volcanoes',
+                'Arctic Expeditions', 'Desert Survival',
                 # Creative & Experimental
-                'Music Creation', 'Rhythm Games', 'Painting', 'Sculpture', 'Architecture',
-                'Dance', 'Poetry', 'Theater', 'Film Production', 'Photography',
-                'Fashion', 'Interior Design', 'Toy Making', 'Dreamscapes',
+                'Music Creation', 'Painting',
+                'Dance', 'Poetry', 'Film Production', 'Photography',
+                'Fashion', 'Toy Making',
                 # Sports
                 'Golf', 'Basketball', 'Football', 'Soccer', 'Baseball', 'Tennis',
-                'Hockey', 'Boxing', 'Wrestling', 'Skateboarding', 'Skiing', 'Surfing',
-                'Olympics', 'Cricket', 'Rugby', 'Volleyball', 'Swimming', 'Track & Field',
+                'Hockey', 'Boxing', 'Wrestling', 'Skateboarding', 'Skiing',
+                'Olympics', 'Rugby', 'Volleyball', 'Swimming', 'Track & Field',
                 # Other
-                'Ninjas', 'Pirates', 'Racing', 'Dinosaurs', 'Robots', 'Bugs'
+                'Ninjas', 'Pirates', 'Racing', 'Dinosaurs', 'Robots', 'Bugs', 'Office', 'Monsters', 'Dungeons'
             ]
             self.label_prefix = "Topic"
         else:  # types
@@ -74,12 +74,12 @@ class UnlockViewer:
             self.get_unlocked = self.unlock_system.get_all_unlocked_game_types
             self.all_items = [
                 'Text Adventure', 'Arcade', 'Platformer', 'Puzzle', 'Shooter',
-                'Beat em Up', 'RPG', 'Racing', 'Fighting', 'Action-Adventure',
-                'FPS', 'TPS', 'Sports', 'Simulation', 'Survival',
+                'RPG', 'Racing', 'Fighting',
+                'Sports', 'Simulation',
                 'Strategy', 'MMORPG', 'Rhythm', 'Visual Novel', 'Horror',
-                'Sandbox', 'Open World', 'Battle Royale', 'MOBA', 'Idle',
-                'Office', 'Retro', 'Educational', 'Motion-Control', 'Touch-Based',
-                'VR', 'AR', 'Monsters', 'Board Game'
+                'Sandbox', 'Idle',
+                'Retro', 'Educational', 'Motion-Control', 'Touch-Based',
+                'Board Game'
             ]
             self.label_prefix = "Type"
 

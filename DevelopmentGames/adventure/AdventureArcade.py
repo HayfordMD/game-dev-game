@@ -29,6 +29,8 @@ class Player:
         self.on_ground = False
         self.jump_count = 0
         self.max_jumps = 2
+        self.base_jump_power = -13
+        self.jump_multiplier = 1.0
         self.facing_right = True
         self.alive = True
 
@@ -84,7 +86,7 @@ class Player:
 
     def jump(self):
         if self.jump_count < self.max_jumps:
-            self.vel_y = -13
+            self.vel_y = self.base_jump_power * self.jump_multiplier
             self.jump_count += 1
 
     def move(self, direction):
@@ -297,12 +299,14 @@ class Game:
         self.enemies = []
         self.generate_entities()
         self.score = 0
+        self.room_number = 1
         self.time_played = 0
         self.last_speed_reduction = 0
         self.font = pygame.font.Font(None, 36)
         self.small_font = pygame.font.Font(None, 24)
         self.game_over = False
         self.level_complete = False
+        self.transitioning = False
 
     def generate_entities(self):
         # Place crystals on platforms
@@ -356,9 +360,10 @@ class Game:
 
         self.time_played += 1/60
 
-        # Reduce speed every 30 seconds
+        # Reduce speed and jump height every 30 seconds
         if self.time_played - self.last_speed_reduction >= 30:
             self.player.speed_multiplier *= 0.85
+            self.player.jump_multiplier *= 0.9  # Jump reduction is less severe than speed
             self.last_speed_reduction = self.time_played
 
         self.player.update(self.level)
@@ -374,9 +379,10 @@ class Game:
                     self.score += 1
 
         # Check if all crystals collected
-        if all(c.collected for c in self.crystals):
+        if all(c.collected for c in self.crystals) and not self.level_complete:
             self.level_complete = True
             self.score += 1  # Room completion bonus
+            self.transitioning = True
 
         # Update enemies
         for enemy in self.enemies:
@@ -417,6 +423,9 @@ class Game:
         crystal_text = self.small_font.render(f"Crystals: {crystals_left}", True, PALE_GREEN)
         screen.blit(crystal_text, (WIDTH - 150, 10))
 
+        room_text = self.small_font.render(f"Room: {self.room_number}", True, PALE_GREEN)
+        screen.blit(room_text, (WIDTH - 150, 35))
+
         if self.game_over:
             game_over_text = self.font.render("GAME OVER", True, PALE_GREEN)
             text_rect = game_over_text.get_rect(center=(WIDTH//2, HEIGHT//2))
@@ -427,13 +436,35 @@ class Game:
             screen.blit(restart_text, text_rect)
 
         elif self.level_complete:
-            complete_text = self.font.render("LEVEL COMPLETE!", True, PALE_GREEN)
+            complete_text = self.font.render("ROOM COMPLETE!", True, PALE_GREEN)
             text_rect = complete_text.get_rect(center=(WIDTH//2, HEIGHT//2))
             screen.blit(complete_text, text_rect)
 
-            score_text = self.small_font.render(f"Final Score: {self.score}", True, PALE_GREEN)
-            text_rect = score_text.get_rect(center=(WIDTH//2, HEIGHT//2 + 40))
-            screen.blit(score_text, text_rect)
+            next_room_text = self.small_font.render("Press ENTER for next room", True, PALE_GREEN)
+            text_rect = next_room_text.get_rect(center=(WIDTH//2, HEIGHT//2 + 40))
+            screen.blit(next_room_text, text_rect)
+
+    def next_room(self):
+        # Keep player stats but generate new level
+        self.room_number += 1
+        self.level = Level()
+        self.crystals = []
+        self.enemies = []
+        self.generate_entities()
+        self.player.x = 50
+        self.player.y = 400
+        self.player.vel_x = 0
+        self.player.vel_y = 0
+        self.level_complete = False
+        self.transitioning = False
+
+        # Increase difficulty with more enemies
+        extra_enemies = min(self.room_number - 1, 3)
+        for _ in range(extra_enemies):
+            col = random.randint(6, 20)
+            row = random.randint(2, 8)
+            enemy_type = "walker" if random.random() < 0.5 else "flyer"
+            self.enemies.append(Enemy(col * TILE_SIZE, row * TILE_SIZE, enemy_type))
 
     def restart(self):
         self.__init__()
@@ -448,10 +479,13 @@ def main():
                 running = False
             elif event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_SPACE:
-                    if game.game_over or game.level_complete:
+                    if game.game_over:
                         game.restart()
-                    else:
+                    elif not game.level_complete:
                         game.player.jump()
+                elif event.key == pygame.K_RETURN:
+                    if game.level_complete and not game.game_over:
+                        game.next_room()
 
         keys = pygame.key.get_pressed()
         if not game.game_over and not game.level_complete:

@@ -1,0 +1,411 @@
+# GAME COMBINATIONS WITH MICRO-GAME DESCRIPTIONS
+# Note: Text Adventure combinations use DeepAdventure.py with the topic passed as a parameter
+# Example: python DevelopmentGames/DeepAdventure.py "Fantasy"
+
+## ARCADE COMBINATIONS (155)
+
+Arcade + Table Tennis: "Ping!" - Simple two-paddle vertical game, ball speeds up each volley
+Arcade + Fantasy: "Dragon Drop" - Catch falling treasure while dodging dragon fire from above
+Arcade + Space: "Asteroid Blast" - Classic ship rotating and shooting asteroids that split
+Arcade + Temple: "Temple Run 2D" - Jump over pits and duck under darts in side-scrolling temple
+Arcade + Adventure: "Cave Dash" - Collect gems while avoiding bats in single-screen cave levels
+Arcade + Zombies: "Zombie Zapper" - Shoot approaching zombies before they reach your barricade
+Arcade + Vampires: "Stake Out" - Throw stakes at vampires appearing in windows before dawn
+Arcade + Werewolves: "Moon Shooter" - Shoot silver bullets at werewolves during full moon phases
+Arcade + Ghosts: "Ghost Gobbler" - Pac-Man style maze eating dots while avoiding ghosts
+Arcade + Psychological Horror: "Mind Maze" - Navigate maze that changes based on sanity meter
+Arcade + Survival Horror: "Ammo Count" - Limited bullets to survive zombie waves
+Arcade + Post-Apocalyptic Horror: "Mutant Mash" - Fight off mutants with makeshift weapons
+Arcade + Space Exploration: "Planet Hopper" - Land on planets with different gravity physics
+Arcade + Alien Invasion: "UFO Defense" - Shoot down UFOs before they abduct citizens
+Arcade + Space Pirates: "Asteroid Raiders" - Steal space cargo while fighting security
+Arcade + Time Travel: "Time Loops" - Complete levels before time paradox catches up
+Arcade + Cyberpunk: "Neon Runner" - Run through cyber city collecting data chips
+Arcade + AI Uprising: "Circuit Breaker" - Destroy rogue AIs by matching circuit patterns
+Arcade + Mechs: "Mech Stomp" - Control mech destroying city blocks for points
+Arcade + Terraforming: "Terra Tiles" - Place tiles to transform planet surface
+Arcade + Galactic Warfare: "Star Siege" - Defend space station from wave attacks
+Arcade + Interdimensional Travel: "Portal Jumper" - Jump between dimensions to collect items
+Arcade + Nanotechnology: "Nano Swarm" - Control nanobot swarm to consume obstacles
+Arcade + Virtual Reality Worlds: "Glitch Run" - Navigate glitching VR world platforms
+Arcade + Roadwork: "Traffic Tender" - Direct traffic around construction zones
+Arcade + Trucking: "Highway Hauler" - Deliver cargo while dodging traffic
+Arcade + Farming: "Harvest Rush" - Collect crops before storm arrives
+Arcade + Construction: "Block Builder" - Stack blocks to match blueprint
+Arcade + Mining: "Gem Grabber" - Mine gems while avoiding cave-ins
+Arcade + Fishing: "Fish Frenzy" - Catch specific fish types for points
+Arcade + Logging: "Timber!" - Cut trees in correct order to clear level
+Arcade + Factory Work: "Assembly Line" - Sort items on conveyor belt
+Arcade + Delivery Services: "Package Panic" - Deliver packages to correct houses
+Arcade + Emergency Response: "Rescue Rush" - Drive ambulance through traffic
+Arcade + Garbage Collection: "Trash Dash" - Collect garbage before time runs out
+Arcade + Postal Work: "Mail Mania" - Sort mail into correct slots quickly
+Arcade + Oil Drilling: "Oil Strike" - Drill for oil avoiding rock layers
+Arcade + Dragons: "Dragon Dodger" - Dodge dragon fire while collecting gold
+Arcade + Elves & Dwarves: "Fantasy Feud" - Rapid elf vs dwarf battles
+Arcade + Magic Schools: "Spell Shooter" - Shoot spells matching color patterns
+Arcade + Kingdoms & Castles: "Castle Crasher" - Destroy castle walls with catapult
+Arcade + Gods & Titans: "Titan Toppler" - Climb titan while avoiding attacks
+Arcade + Questing Heroes: "Quest Quick" - Speed run through quest objectives
+Arcade + Mythical Creatures: "Monster Mash" - Fight mythical beasts in arena
+Arcade + Ancient Ruins: "Ruin Runner" - Platform through crumbling ruins
+Arcade + Fairy Tales: "Fairy Fly" - Guide fairy through enchanted forest
+Arcade + Dark Forests: "Forest Fear" - Navigate dark forest with torch
+Arcade + Magical Artifacts: "Magic Grab" - Collect artifacts avoiding traps
+Arcade + Prophecies: "Prophet Puzzle" - Arrange prophecy symbols correctly
+Arcade + War: "War Zone" - Top-down shooter through battlefield
+Arcade + Espionage: "Spy Dash" - Sneak past guards to steal documents
+Arcade + Heists: "Bank Breaker" - Rob bank vault in time limit
+Arcade + Martial Arts: "Kung Fu Fighter" - Side-scrolling beat 'em up
+Arcade + Gladiator Arenas: "Arena Champion" - Fight waves of gladiators
+Arcade + Gang Warfare: "Turf War" - Capture territory from rival gangs
+Arcade + Pirate Battles: "Cannon Clash" - Ship battle with angle/power shots
+Arcade + Monster Hunting: "Beast Buster" - Hunt monsters for bounties
+Arcade + Bounty Hunting: "Wanted!" - Capture outlaws in Wild West
+Arcade + Tactical Infiltration: "Stealth Step" - Avoid guard sight lines
+Arcade + Survival Combat: "Last Stand" - Survive enemy waves with limited ammo
+Arcade + Urban Warfare: "Street Fight" - Urban combat with cover system
+Arcade + Ancient Egypt: "Pyramid Plunder" - Raid pyramids avoiding traps
+Arcade + Viking Raids: "Viking Voyage" - Naval raids on coastal towns
+Arcade + Roman Empire: "Gladiator Glory" - Fight in Colosseum for fame
+Arcade + Wild West: "Shootout Saloon" - Western gunfight quick-draw game
+Arcade + World War I: "Trench Runner" - Navigate trenches avoiding artillery
+Arcade + World War II: "Blitz Fighter" - Aerial dogfights over cities
+Arcade + Cold War: "Spy Hunter" - Chase spies through checkpoints
+Arcade + Medieval Europe: "Knight Fight" - Joust opponents off horses
+Arcade + Renaissance: "Art Attack" - Protect art from thieves
+Arcade + Industrial Revolution: "Steam Power" - Manage steam engines
+Arcade + Tribal Societies: "Tribal Trial" - Complete tribal challenges
+Arcade + City Building: "Block City" - Drop city blocks to build skyline
+Arcade + Dating Sim: "Love Match" - Match couples quickly for points
+Arcade + Social Media Fame: "Like Hunter" - Collect likes avoiding trolls
+Arcade + Fashion Design: "Runway Rush" - Dress models for fashion show
+Arcade + Restaurant Management: "Diner Dash" - Serve customers quickly
+Arcade + Crime Investigation: "Clue Finder" - Find evidence at crime scenes
+Arcade + Journalism: "News Rush" - Photograph breaking news events
+Arcade + Political Campaigns: "Vote Getter" - Collect votes avoiding scandals
+Arcade + Suburban Life: "Lawn Wars" - Competitive lawn maintenance
+Arcade + Wildlife Rescue: "Animal Rescue" - Save animals from dangers
+Arcade + Forest Survival: "Forest Ranger" - Survive forest hazards
+Arcade + Ocean Exploration: "Deep Diver" - Dive collecting treasure
+Arcade + Gardening: "Garden Grower" - Grow plants fighting pests
+Arcade + Animal Behavior: "Zoo Keeper" - Manage zoo animals happiness
+Arcade + Weather Control: "Storm Master" - Control weather to save cities
+Arcade + Volcanoes: "Lava Leaper" - Jump across lava flows
+Arcade + Arctic Expeditions: "Ice Explorer" - Navigate arctic avoiding hazards
+Arcade + Desert Survival: "Desert Runner" - Find oasis before dehydration
+Arcade + Music Creation: "Beat Maker" - Create beats matching patterns
+Arcade + Painting: "Paint Splash" - Splatter paint to match artwork
+Arcade + Dance: "Dance Battle" - Match dance moves for points
+Arcade + Poetry: "Word Fall" - Catch falling words to make poems
+Arcade + Film Production: "Scene Shooter" - Film scenes in correct order
+Arcade + Photography: "Photo Safari" - Photograph animals for points
+Arcade + Fashion: "Fashion Frenzy" - Match outfits to themes
+Arcade + Toy Making: "Toy Factory" - Assemble toys on production line
+Arcade + Golf: "Mini Golf Mania" - Crazy mini golf courses
+Arcade + Basketball: "Hoop Shooter" - Basketball shooting from positions
+Arcade + Football: "Field Goal Frenzy" - Kick field goals with wind
+Arcade + Soccer: "Goal Rush" - Score goals past moving goalkeeper
+Arcade + Baseball: "Home Run Derby" - Hit homers with timing swings
+Arcade + Tennis: "Tennis Ace" - Return serves with perfect timing
+Arcade + Hockey: "Slap Shot" - Score goals in hockey shootout
+Arcade + Boxing: "Punch Out" - Box opponents with pattern recognition
+Arcade + Wrestling: "Ring Master" - Wrestling moves with button combos
+Arcade + Skateboarding: "Skate Or Die" - Perform tricks for high score
+Arcade + Skiing: "Slalom Speed" - Ski through gates against time
+Arcade + Olympics: "Olympic Hero" - Multiple mini-games for medals
+Arcade + Rugby: "Rugby Run" - Run with ball dodging tackles
+Arcade + Volleyball: "Spike Ball" - Volleyball with power-ups
+Arcade + Swimming: "Swim Sprint" - Swimming races with button mashing
+Arcade + Track & Field: "Track Star" - Running and jumping events
+Arcade + Ninjas: "Ninja Star" - Throw shurikens at targets
+Arcade + Pirates: "Pirate Plunder" - Grab treasure avoiding sharks
+Arcade + Racing: "Speed Racer" - Top-down racing with power-ups
+Arcade + Dinosaurs: "Dino Run" - Escape meteor avoiding dinosaurs
+Arcade + Robots: "Robot Rumble" - Fight robots in arena combat
+Arcade + Bugs: "Bug Blast" - Zap bugs before they multiply
+
+## PLATFORMER COMBINATIONS (15 examples)
+
+Platformer + Fantasy: "Knight Jump" - Jump through castle collecting magic orbs, double-jump unlocked by spells
+Platformer + Space: "Gravity Hop" - Platform between asteroids with variable gravity fields
+Platformer + Zombies: "Dead Jump" - Escape zombie horde by platforming up building
+Platformer + Dragons: "Dragon Climb" - Scale dragon's back while it flies, avoiding fire breath
+Platformer + War: "Trench Hopper" - Platform across battlefield avoiding artillery
+Platformer + Ancient Egypt: "Pyramid Climber" - Ascend pyramid with crumbling platforms
+Platformer + City Building: "Scaffold Run" - Platform across construction sites as buildings rise
+Platformer + Music Creation: "Beat Bounce" - Platforms appear/disappear to music rhythm
+Platformer + Golf: "Golf World" - Use golf ball physics to navigate platforms
+Platformer + Ninjas: "Shadow Jump" - Wall-jump and dash through ninja temple
+Platformer + Racing: "Speed Platform" - Race through platforms that collapse behind you
+Platformer + Dinosaurs: "Dino Dash" - Run from T-Rex across prehistoric platforms
+Platformer + Cyberpunk: "Neon Heights" - Platform through cyberpunk city with wall-running
+Platformer + Ocean Exploration: "Aqua Jump" - Platform underwater with bubble mechanics
+Platformer + Robots: "Mech Platform" - Transform between robot forms for different jumps
+
+## PUZZLE COMBINATIONS (15 examples)
+
+Puzzle + Table Tennis: "Paddle Logic" - Redirect balls through maze to hit targets
+Puzzle + Fantasy: "Spell Grid" - Match runes to cast spells solving puzzles
+Puzzle + Space: "Orbit Puzzle" - Arrange planets to create gravitational paths
+Puzzle + Temple: "Block Temple" - Push blocks to activate ancient mechanisms
+Puzzle + Vampires: "Blood Lines" - Connect blood vessels to feed vampire castle
+Puzzle + Time Travel: "Paradox Puzzle" - Solve puzzles across multiple timelines
+Puzzle + Farming: "Crop Rotation" - Plant crops in patterns for maximum yield
+Puzzle + Magic Schools: "Alchemy Mix" - Combine magical ingredients for potions
+Puzzle + Crime Investigation: "Evidence Link" - Connect clues to solve cases
+Puzzle + Chess (Board Game): "Knight's Tour" - Move knight to visit all squares once
+Puzzle + Industrial Revolution: "Gear Works" - Connect gears to power machines
+Puzzle + Bugs: "Ant Colony" - Guide ants through tunnels to food sources
+
+## SHOOTER COMBINATIONS (15 examples)
+
+Shooter + Space: "Galaga Plus" - Classic vertical shooter with ship upgrades
+Shooter + Zombies: "Zombie Defense" - Top-down survival shooter with barricades
+Shooter + Wild West: "Six Shooter" - Western shootout with bullet-time mechanics
+Shooter + War: "Battlefield 2D" - Side-scrolling war shooter with cover system
+Shooter + Cyberpunk: "Cyber Strike" - Twin-stick shooter in neon-lit streets
+Shooter + Alien Invasion: "Earth Defense" - Defend cities from UFO waves
+Shooter + Pirates: "Cannon Battle" - Naval combat with projectile physics
+Shooter + Ninjas: "Shuriken Storm" - Throw projectiles while dodging enemy attacks
+Shooter + Robots: "Mech Wars" - Giant robot battles with weapon customization
+Shooter + Horror: "Nightmare Shooter" - Fight monsters in darkness with flashlight
+Shooter + Sports: "Paintball Arena" - Competitive team-based paint shooter
+Shooter + Arctic Expeditions: "Ice Hunter" - Hunt in arctic with survival elements
+Shooter + Espionage: "Agent Assault" - Stealth shooter with silenced weapons
+Shooter + Gang Warfare: "Street Shooter" - Gang territory control shooter
+Shooter + Space Pirates: "Void Raiders" - Space combat with boarding mechanics
+
+## RPG COMBINATIONS (15 examples)
+
+RPG + Fantasy: "Quest Realm" - Classic RPG with class system and magic
+RPG + Space: "Star Trader RPG" - Space trading with ship upgrades
+RPG + Cyberpunk: "Neural Knight" - Cyberpunk RPG with hacking skills
+RPG + Post-Apocalyptic: "Wasteland Survivor" - Survive with crafting and factions
+RPG + Pirates: "Pirate Captain" - Build crew and ship, explore islands
+RPG + Vampires: "Blood Legacy" - Play as vampire with bloodline powers
+RPG + Time Travel: "Chrono Quest" - Actions in past affect future world
+RPG + Magic Schools: "Wizard Academy" - Learn spells, attend classes, duel
+RPG + Detective: "Mystery RPG" - Solve cases while leveling detective skills
+RPG + Farming: "Harvest Hero" - Farm sim with RPG combat in dungeons
+RPG + Superhero: "Hero Rising" - Develop powers and fight crime
+RPG + Monster Hunting: "Hunter's Guild" - Take contracts to hunt beasts
+RPG + Mythology: "God Touched" - Gain favor from gods for powers
+RPG + Ninjas: "Shadow Path" - Ninja RPG with stealth skill tree
+RPG + Robots: "Mech Pilot RPG" - Customize mech and pilot skills
+
+## RACING COMBINATIONS (15 examples)
+
+Racing + Space: "Zero-G Racer" - Race in space with 3D track rotations
+Racing + Post-Apocalyptic: "Death Race" - Armed vehicles in wasteland races
+Racing + Fantasy: "Dragon Racing" - Race flying dragons through sky courses
+Racing + Cyberpunk: "Neon Speed" - Hover car racing in cyber city
+Racing + Pirates: "Ship Race" - Naval racing with wind mechanics
+Racing + Time Travel: "Time Trial" - Race through different time periods
+Racing + Animals: "Safari Sprint" - Race various animals with unique abilities
+Racing + Skateboarding: "Skate Race" - Downhill skateboard racing
+Racing + Winter Sports: "Snow Rush" - Ski/snowboard racing down mountains
+Racing + Delivery: "Pizza Rush" - Deliver pizzas racing against time
+Racing + Emergency: "Ambulance Race" - Race to save lives in city
+Racing + Boats: "Hydro Thunder" - Speedboat racing with jumps
+Racing + Bikes: "BMX Blitz" - Bicycle racing with trick system
+Racing + Flying: "Air Race" - Plane racing through checkpoints
+Racing + Underground: "Tunnel Run" - Race through underground tunnels
+
+## FIGHTING COMBINATIONS (15 examples)
+
+Fighting + Martial Arts: "Dojo Duel" - Traditional fighting with stance system
+Fighting + Robots: "Steel Warriors" - Robot fighting with part damage
+Fighting + Mythology: "God Fighter" - Fight as mythological deities
+Fighting + Superheroes: "Hero Clash" - Superhero fighting with powers
+Fighting + Monsters: "Kaiju Battle" - Giant monster fighting game
+Fighting + Ninjas: "Shadow Strike" - Ninja fighting with weapons
+Fighting + Wrestling: "Ring Warriors" - Wrestling with grapple system
+Fighting + Gladiators: "Colosseum Combat" - Historical gladiator fights
+Fighting + Animals: "Beast Brawl" - Anthropomorphic animal fighters
+Fighting + Elements: "Elemental Clash" - Fighters with elemental powers
+Fighting + Time Travel: "Time Fighters" - Warriors from different eras
+Fighting + Cyberpunk: "Cyber Brawl" - Augmented fighters in future
+Fighting + Fantasy: "Magic Duel" - Wizards fighting with spells
+Fighting + Pirates: "Deck Duel" - Pirate sword fighting game
+Fighting + Vikings: "Norse Combat" - Viking warriors with weapons
+
+## STRATEGY COMBINATIONS (15 examples)
+
+Strategy + War: "Battalion Command" - Turn-based tactical warfare
+Strategy + Space: "Galactic Empire" - 4X space colonization strategy
+Strategy + Fantasy: "Kingdom Tactics" - Fantasy army battles with magic
+Strategy + City Building: "Metro Master" - City planning and management
+Strategy + Business: "Corporate Wars" - Business strategy simulation
+Strategy + Pirates: "Fleet Admiral" - Naval strategy with exploration
+Strategy + Tower Defense: "Fortress Hold" - Defend castle from waves
+Strategy + Cyberpunk: "Data Wars" - Hack and control cyber territories
+Strategy + Farming: "Farm Empire" - Agricultural business strategy
+Strategy + Politics: "Election Strategy" - Win elections through campaigns
+Strategy + Zombies: "Undead Tactics" - Survive zombie apocalypse strategically
+Strategy + Board Game: "Digital Chess" - Enhanced chess with abilities
+Strategy + Trading: "Merchant Prince" - Trade route management
+Strategy + Mythology: "Divine Strategy" - Command mythological armies
+Strategy + Crime: "Mafia Manager" - Run criminal empire strategically
+
+## SIMULATION COMBINATIONS (15 examples)
+
+Simulation + Farming: "Farm Life" - Realistic farming with seasons
+Simulation + City Building: "City Sim" - Detailed city management
+Simulation + Business: "CEO Simulator" - Run company from startup
+Simulation + Hospital: "Medical Sim" - Manage hospital and treat patients
+Simulation + Restaurant: "Chef Sim" - Cook and manage restaurant
+Simulation + Airport: "Terminal Control" - Manage airport operations
+Simulation + Zoo: "Zoo Tycoon Mini" - Build and manage zoo
+Simulation + Theme Park: "Park Builder" - Design and run theme park
+Simulation + Prison: "Warden Sim" - Manage prison facility
+Simulation + School: "Principal Sim" - Run school and education
+Simulation + Space Station: "Station Commander" - Manage space station
+Simulation + Dating: "Romance Sim" - Dating and relationship simulator
+Simulation + Pet: "Virtual Pet" - Care for digital pet
+Simulation + Life: "Life Path" - Simulate entire life from birth
+Simulation + Truck: "Trucker Life" - Deliver cargo across country
+
+## SURVIVAL COMBINATIONS (15 examples)
+
+Survival + Zombies: "Last Day" - Survive zombie apocalypse with crafting
+Survival + Island: "Castaway" - Survive on deserted island
+Survival + Space: "Lost in Space" - Survive on alien planet
+Survival + Arctic: "Frozen" - Survive in arctic with temperature
+Survival + Desert: "Sand Storm" - Survive desert with water management
+Survival + Forest: "Woods Survivor" - Survive in forest with hunting
+Survival + Ocean: "Raft Life" - Survive on raft in ocean
+Survival + Post-Apocalyptic: "After War" - Survive nuclear wasteland
+Survival + Dinosaurs: "Primal Survive" - Survive with dinosaurs
+Survival + Underground: "Cave Dweller" - Survive in cave systems
+Survival + Mountain: "Peak Survivor" - Survive mountain climbing
+Survival + Jungle: "Jungle Life" - Survive tropical jungle
+Survival + Alien Planet: "Xeno Survive" - Survive hostile alien world
+Survival + Pandemic: "Plague Days" - Survive disease outbreak
+Survival + Natural Disaster: "Disaster Zone" - Survive catastrophes
+
+## HORROR COMBINATIONS (15 examples)
+
+Horror + Haunted House: "Dark Manor" - Explore haunted mansion with jump scares
+Horror + Psychological: "Mind Break" - Psychological horror with sanity system
+Horror + Zombies: "Dead Night" - Survival horror in zombie outbreak
+Horror + Hospital: "Asylum Fear" - Escape haunted hospital
+Horror + School: "Night School" - Survive haunted school after dark
+Horror + Forest: "Dark Woods" - Lost in cursed forest at night
+Horror + Dolls: "Puppet Master" - Haunted doll horror game
+Horror + Clowns: "Circus Fear" - Escape evil circus
+Horror + Ocean: "Deep Terror" - Underwater horror station
+Horror + Space: "Dead Station" - Space station horror isolation
+Horror + Vampires: "Blood Moon" - Survive vampire hunt
+Horror + Werewolves: "Full Moon" - Werewolf horror in village
+Horror + Ghosts: "Spirit House" - Ghost hunting gone wrong
+Horror + Cult: "The Ritual" - Escape cult compound
+
+## SANDBOX COMBINATIONS (15 examples)
+
+Sandbox + Building: "Block World" - Build anything with blocks
+Sandbox + Physics: "Physics Play" - Experiment with physics objects
+Sandbox + City: "City Canvas" - Free-form city creation
+Sandbox + Space: "Universe Sandbox" - Create solar systems
+Sandbox + Destruction: "Wreck It" - Destroy structures physics-based
+Sandbox + Medieval: "Castle Creator" - Build medieval kingdoms
+Sandbox + Machines: "Contraption Creator" - Build complex machines
+Sandbox + Life: "Life Sandbox" - Simulate ecosystem
+Sandbox + Chemistry: "Lab Sandbox" - Mix chemicals freely
+Sandbox + Music: "Sound Box" - Create music with tools
+Sandbox + Art: "Art Studio" - Digital art creation sandbox
+Sandbox + Garden: "Garden Designer" - Create gardens freely
+Sandbox + Vehicles: "Vehicle Builder" - Design custom vehicles
+Sandbox + Robots: "Bot Builder" - Build and program robots
+Sandbox + Magic: "Spell Craft" - Create custom magic spells
+
+
+## IDLE COMBINATIONS (15 examples)
+
+Idle + Business: "Idle CEO" - Build business empire automatically
+Idle + Fantasy: "Idle Heroes" - Heroes auto-quest for loot
+Idle + Space: "Idle Colony" - Space colonies grow automatically
+Idle + Mining: "Idle Miner" - Dig deeper automatically for gems
+Idle + Farming: "Idle Farm" - Crops grow and sell automatically
+Idle + Factory: "Idle Factory" - Production lines run themselves
+Idle + RPG: "Idle Quest" - Character levels while offline
+Idle + City: "Idle Mayor" - City grows without interaction
+Idle + Military: "Idle Army" - Build army that fights automatically
+Idle + Magic: "Idle Wizard" - Cast spells automatically for resources
+Idle + Restaurant: "Idle Chef" - Restaurant runs itself
+Idle + Zoo: "Idle Zoo" - Animals entertain guests automatically
+Idle + Pirates: "Idle Pirate" - Ships plunder automatically
+Idle + Evolution: "Idle Evolution" - Evolve creatures passively
+Idle + Capitalism: "Idle Capital" - Investments grow over time
+
+## MMORPG COMBINATIONS (15 examples)
+
+MMORPG + Fantasy: "Realm Online" - Classic fantasy MMORPG with raids
+MMORPG + Space: "Star Citizens" - Space MMORPG with ship combat
+MMORPG + Pirates: "Pirates Online" - Naval MMORPG with crew ships
+MMORPG + Cyberpunk: "Neon Online" - Cyberpunk city MMORPG
+MMORPG + Post-Apocalyptic: "Wasteland Online" - Survival MMORPG
+MMORPG + Superheroes: "Heroes United" - Superhero team MMORPG
+MMORPG + Martial Arts: "Dojo Online" - Martial arts school MMORPG
+MMORPG + Vampires: "Blood Lines Online" - Vampire clan MMORPG
+MMORPG + Trading: "Merchant Online" - Trading-focused MMORPG
+MMORPG + Crafting: "Craft World" - Crafting-based MMORPG
+MMORPG + Politics: "Nation Online" - Political MMORPG
+MMORPG + School: "Academy Online" - Magic school MMORPG
+MMORPG + Pets: "Pet World Online" - Pet collection MMORPG
+MMORPG + Music: "Band Online" - Form bands with players
+MMORPG + Sports: "Sports Online" - Competitive sports MMORPG
+
+## RHYTHM COMBINATIONS (15 examples)
+
+Rhythm + Music: "Beat Master" - Hit notes to create music
+Rhythm + Dance: "Dance Floor" - Dance to beat with arrow keys
+Rhythm + Fighting: "Beat Fighter" - Fight to rhythm of music
+Rhythm + Racing: "Rhythm Racer" - Speed based on beat accuracy
+Rhythm + Cooking: "Chef Beat" - Cook dishes to rhythm
+Rhythm + Sports: "Sport Beat" - Play sports to music timing
+Rhythm + RPG: "Rhythm Quest" - RPG battles with rhythm combat
+Rhythm + Puzzle: "Beat Puzzle" - Solve puzzles to music beat
+Rhythm + Platformer: "Jump Beat" - Platform to music rhythm
+Rhythm + Guitar: "Guitar Hero Mini" - Play guitar with keys
+Rhythm + Drums: "Drum Master" - Drum simulation rhythm game
+Rhythm + DJ: "DJ Mix" - Mix tracks with rhythm gameplay
+Rhythm + Orchestra: "Conductor" - Conduct orchestra with timing
+Rhythm + Singing: "Vocal Star" - Karaoke rhythm game
+Rhythm + Piano: "Key Master" - Piano rhythm game
+
+## EDUCATIONAL COMBINATIONS (15 examples)
+
+Educational + Math: "Math Quest" - Learn math through adventure
+Educational + Science: "Lab Adventure" - Science experiments as puzzles
+Educational + History: "Time Scholar" - Learn history through time travel
+Educational + Language: "Word World" - Language learning adventure
+Educational + Geography: "Globe Trotter" - Learn geography exploring
+Educational + Programming: "Code Hero" - Learn coding through game
+Educational + Art: "Art Academy" - Learn art techniques
+Educational + Music: "Music Theory Quest" - Learn music in RPG
+Educational + Biology: "Life Explorer" - Learn biology through simulation
+Educational + Chemistry: "Element Master" - Chemistry puzzle game
+Educational + Physics: "Physics Playground" - Learn physics laws
+Educational + Astronomy: "Star Student" - Learn astronomy exploring space
+Educational + Economics: "Market Master" - Learn economics trading
+Educational + Ecology: "Eco Warrior" - Learn environment protection
+Educational + Typing: "Type Racer" - Learn typing through racing
+
+## BOARD GAME COMBINATIONS (15 examples)
+
+Board Game + Strategy: "War Board" - Digital strategic board game
+Board Game + Fantasy: "Quest Board" - D&D-style board game
+Board Game + Business: "Monopoly Mini" - Property trading board game
+Board Game + Trivia: "Quiz Board" - Trivia board game
+Board Game + Word: "Letter Board" - Word-making board game
+Board Game + Detective: "Mystery Board" - Solve crime board game
+Board Game + Racing: "Race Board" - Racing board game with dice
+Board Game + Space: "Galaxy Board" - Space conquest board game
+Board Game + Pirates: "Treasure Board" - Pirate treasure hunt board
+Board Game + Card Battle: "Card Board" - Card-based board game
+Board Game + Farming: "Harvest Board" - Farming board game
+Board Game + Train: "Rail Board" - Train route board game
+Board Game + Dungeon: "Dungeon Board" - Dungeon crawler board
+Board Game + Politics: "Election Board" - Political board game
+Board Game + Trading: "Merchant Board" - Trading board game

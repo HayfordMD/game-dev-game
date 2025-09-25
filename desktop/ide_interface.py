@@ -49,26 +49,44 @@ class IDEInterface:
         if not os.path.exists(games_dir):
             os.makedirs(games_dir)
 
-        # Always include Temple Arcade
-        self.available_games = [
-            {
-                'name': 'Temple Arcade',
-                'file': 'TempleArcade.py',
-                'description': 'A thrilling side-scrolling adventure'
-            }
-        ]
+        self.available_games = []
 
-        # Scan for other .py files in the directory
-        if os.path.exists(games_dir):
-            for file in os.listdir(games_dir):
-                if file.endswith('.py') and file != 'TempleArcade.py' and file != '__init__.py':
-                    game_name = file[:-3].replace('_', ' ').title()
-                    if {'name': game_name, 'file': file, 'description': 'Custom game'} not in self.available_games:
+        # Game categories to scan
+        categories = {
+            'arcade': 'Arcade Games',
+            'rhythm': 'Rhythm Games',
+            'adventure': 'Adventure Games'
+        }
+
+        # Scan each category folder
+        for folder, category_name in categories.items():
+            folder_path = os.path.join(games_dir, folder)
+            if os.path.exists(folder_path):
+                for file in os.listdir(folder_path):
+                    if file.endswith('.py') and file != '__init__.py':
+                        game_name = file[:-3].replace('_', ' ').replace('Arcade', '').title()
                         self.available_games.append({
                             'name': game_name,
-                            'file': file,
-                            'description': 'Custom game'
+                            'file': os.path.join(folder, file),
+                            'category': category_name,
+                            'description': f'{category_name} - {game_name}'
                         })
+
+        # Also scan root directory for uncategorized games
+        if os.path.exists(games_dir):
+            for file in os.listdir(games_dir):
+                file_path = os.path.join(games_dir, file)
+                if os.path.isfile(file_path) and file.endswith('.py') and file != '__init__.py':
+                    game_name = file[:-3].replace('_', ' ').title()
+                    self.available_games.append({
+                        'name': game_name,
+                        'file': file,
+                        'category': 'Uncategorized',
+                        'description': f'Custom game - {game_name}'
+                    })
+
+        # Sort games by category then name
+        self.available_games.sort(key=lambda x: (x['category'], x['name']))
 
     def setup_ui(self):
         """Setup the IDE interface"""
@@ -144,17 +162,43 @@ class IDEInterface:
         )
         separator.pack()
 
-        # List games
+        # List games by category
+        current_category = None
         for i, game in enumerate(self.available_games, 1):
+            # Add category header if new category
+            if game['category'] != current_category:
+                current_category = game['category']
+
+                # Category separator
+                if i > 1:
+                    sep_label = tk.Label(
+                        self.content_frame,
+                        text="",
+                        font=('Courier', 8),
+                        fg=self.dim_color,
+                        bg=self.bg_color
+                    )
+                    sep_label.pack(pady=5)
+
+                # Category header
+                category_label = tk.Label(
+                    self.content_frame,
+                    text=f"── {current_category} ──",
+                    font=('Courier', 12, 'bold'),
+                    fg=self.text_color,
+                    bg=self.bg_color
+                )
+                category_label.pack(pady=10)
+
             game_frame = tk.Frame(self.content_frame, bg=self.bg_color)
-            game_frame.pack(pady=10)
+            game_frame.pack(pady=5)
 
             # Game button styled like terminal text
-            game_text = f"[{i}] {game['name']:<30} - {game['description']}"
+            game_text = f"  [{i}] {game['name']:<25}"
             game_btn = tk.Button(
                 game_frame,
                 text=game_text,
-                font=('Courier', 14),
+                font=('Courier', 12),
                 fg=self.text_color,
                 bg=self.bg_color,
                 bd=0,
