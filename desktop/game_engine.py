@@ -245,8 +245,8 @@ class GameEngineWindow:
 
             # Estimate development time (simplified)
             base_days = 30
-            if self.selected_type in ['MMORPG', 'Open World', 'Battle Royale']:
-                base_days = 180
+            if self.selected_type in ['Online']:
+                base_days = 120
             elif self.selected_type in ['RPG', 'Strategy', 'Simulation']:
                 base_days = 90
             elif self.selected_type in ['Arcade', 'Puzzle', 'Text Adventure']:

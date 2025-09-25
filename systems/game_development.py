@@ -204,48 +204,133 @@ class GameDevelopment:
     def _get_type_modifiers(self, game_type: str) -> Dict[str, int]:
         """Get score modifiers based on game type"""
         modifiers = {
-            'RPG': {'gameplay': 5, 'story': 10, 'innovation': 3},
-            'Action': {'gameplay': 8, 'technical': 5, 'graphics': 5},
-            'Adventure': {'story': 8, 'gameplay': 5, 'graphics': 3},
-            'Simulation': {'technical': 8, 'innovation': 5, 'gameplay': 3},
-            'Strategy': {'gameplay': 7, 'technical': 5, 'innovation': 3},
+            'Text Adventure': {'story': 15, 'innovation': 5, 'graphics': -10},
+            'Arcade': {'gameplay': 12, 'sound_audio': 5, 'technical': -3},
+            'Platformer': {'gameplay': 10, 'technical': 3, 'sound_audio': 3},
             'Puzzle': {'gameplay': 10, 'innovation': 5, 'technical': -2},
-            'Sports': {'gameplay': 8, 'technical': 5, 'graphics': 3},
+            'Shooter': {'gameplay': 8, 'technical': 5, 'sound_audio': 5},
+            'RPG': {'gameplay': 5, 'story': 10, 'innovation': 3},
             'Racing': {'technical': 8, 'graphics': 5, 'sound_audio': 5},
             'Fighting': {'gameplay': 8, 'technical': 5, 'graphics': 5},
-            'Platformer': {'gameplay': 10, 'technical': 3, 'sound_audio': 3},
-            'Shooter': {'gameplay': 8, 'technical': 5, 'sound_audio': 5},
-            'Horror': {'story': 8, 'sound_audio': 10, 'graphics': 5},
-            'MMORPG': {'technical': 10, 'gameplay': 8, 'innovation': 8},
-            'Battle Royale': {'technical': 8, 'gameplay': 8, 'innovation': 5},
-            'Open World': {'technical': 8, 'graphics': 8, 'gameplay': 5},
-            'Text Adventure': {'story': 15, 'innovation': 5, 'graphics': -10},
-            'Arcade': {'gameplay': 12, 'sound_audio': 5, 'technical': -3}
+            'Adventure': {'story': 8, 'gameplay': 5, 'graphics': 3},
+            'Action': {'gameplay': 8, 'technical': 5, 'graphics': 5},
+            'Simulation': {'technical': 8, 'innovation': 5, 'gameplay': 3},
+            'Strategy': {'gameplay': 7, 'technical': 5, 'innovation': 3},
+            'Online': {'technical': -5, 'gameplay': -5, 'innovation': 8},  # negative due to connection issues
+            'Visual Novel': {'story': 12, 'graphics': 5, 'gameplay': 2},
+            'Educational': {'innovation': 10, 'gameplay': 5, 'story': 3}
         }
         return modifiers.get(game_type, {})
 
     def _get_topic_modifiers(self, game_topic: str) -> Dict[str, int]:
         """Get score modifiers based on game topic"""
         modifiers = {
+            # Original/Classic
+            'Table Tennis': {'gameplay': 8, 'technical': 2},
             'Fantasy': {'story': 5, 'graphics': 3, 'innovation': 2},
-            'Sci-Fi': {'innovation': 5, 'graphics': 5, 'technical': 3},
-            'Horror': {'sound_audio': 8, 'story': 5, 'graphics': 3},
-            'Sports': {'gameplay': 5, 'technical': 3},
-            'Racing': {'technical': 5, 'sound_audio': 5},
             'Space': {'innovation': 5, 'graphics': 5},
-            'Medieval': {'story': 5, 'graphics': 3},
-            'War': {'sound_audio': 5, 'technical': 3, 'graphics': 3},
-            'Comedy': {'story': 5, 'sound_audio': 3, 'innovation': 3},
-            'Mystery': {'story': 8, 'gameplay': 3},
-            'Zombie': {'sound_audio': 5, 'graphics': 3},
-            'Superhero': {'graphics': 5, 'story': 3, 'innovation': 2},
-            'Pirates': {'story': 5, 'sound_audio': 3, 'graphics': 3},
-            'Ninja': {'gameplay': 5, 'technical': 3},
-            'Western': {'story': 5, 'sound_audio': 5},
+            'Temple': {'story': 3, 'graphics': 4, 'gameplay': 3},
+            # Horror
+            'Zombies': {'sound_audio': 5, 'graphics': 3},
+            'Vampires': {'story': 5, 'sound_audio': 4, 'graphics': 3},
+            'Ghosts': {'sound_audio': 6, 'story': 4},
+            'Haunted Houses': {'sound_audio': 7, 'graphics': 4},
+            'Psychological Horror': {'sound_audio': 8, 'story': 6},
+            'Post-Apocalyptic': {'story': 5, 'graphics': 4},
+            # Sci-Fi & Futuristic
+            'Space Exploration': {'innovation': 6, 'graphics': 5},
+            'Alien Invasion': {'sound_audio': 4, 'graphics': 5},
             'Cyberpunk': {'innovation': 8, 'graphics': 5, 'technical': 5},
-            'Nature': {'graphics': 8, 'sound_audio': 5},
-            'Business': {'innovation': 3, 'gameplay': 5},
-            'School': {'story': 5, 'gameplay': 3}
+            'AI Uprising': {'innovation': 7, 'technical': 5},
+            'Mechs': {'graphics': 6, 'technical': 5},
+            'Terraforming': {'innovation': 5, 'technical': 4},
+            'Galactic Warfare': {'graphics': 5, 'sound_audio': 5},
+            'Interdimensional Travel': {'innovation': 8, 'story': 4},
+            # Real-World & Occupational
+            'Trucking': {'technical': 4, 'gameplay': 3},
+            'Farming': {'gameplay': 5, 'graphics': 3},
+            'Mining': {'technical': 3, 'gameplay': 4},
+            'Fishing': {'graphics': 4, 'gameplay': 5},
+            'Logging': {'technical': 3, 'sound_audio': 3},
+            'Factory Work': {'technical': 4, 'gameplay': 3},
+            'Emergency Response': {'gameplay': 6, 'sound_audio': 5},
+            'Postal Work': {'gameplay': 4, 'story': 2},
+            'Oil Drilling': {'technical': 5, 'graphics': 3},
+            # Fantasy & Mythology
+            'Dragons': {'graphics': 6, 'story': 5},
+            'Elves & Dwarves': {'story': 5, 'graphics': 4},
+            'Magic Schools': {'story': 6, 'innovation': 4},
+            'Kingdoms & Castles': {'story': 5, 'graphics': 5},
+            'Gods & Titans': {'graphics': 7, 'story': 6},
+            'Mythical Creatures': {'graphics': 5, 'story': 4},
+            'Ancient Ruins': {'story': 5, 'graphics': 4},
+            'Fairy Tales': {'story': 7, 'graphics': 3},
+            'Magical Artifacts': {'story': 5, 'innovation': 4},
+            'Prophecies': {'story': 6, 'gameplay': 3},
+            # Action & Conflict
+            'War': {'sound_audio': 5, 'technical': 3, 'graphics': 3},
+            'Martial Arts': {'gameplay': 6, 'technical': 3},
+            'Gladiator Arenas': {'gameplay': 5, 'graphics': 4},
+            'Monster Hunting': {'gameplay': 6, 'graphics': 5},
+            'Mercenary Missions': {'gameplay': 5, 'story': 3},
+            'Tactical Infiltration': {'gameplay': 5, 'technical': 5},
+            # Historical & Cultural
+            'Egypt': {'story': 5, 'graphics': 4},
+            'Viking': {'story': 4, 'sound_audio': 4},
+            'Roman Empire': {'story': 5, 'graphics': 4},
+            'Wild West': {'story': 5, 'sound_audio': 5},
+            'World War I': {'sound_audio': 5, 'technical': 3},
+            'World War II': {'sound_audio': 5, 'technical': 4},
+            'Cold War': {'story': 5, 'technical': 3},
+            'Medieval Europe': {'story': 5, 'graphics': 3},
+            'Colonial Exploration': {'story': 4, 'gameplay': 4},
+            'Tribal Societies': {'story': 4, 'sound_audio': 3},
+            # Urban & Social
+            'City Building': {'technical': 5, 'gameplay': 6},
+            'Dating Sim': {'story': 7, 'graphics': 3},
+            'High School Drama': {'story': 6, 'gameplay': 3},
+            'Office': {'gameplay': 4, 'technical': 3},
+            'Social Media Fame': {'innovation': 5, 'gameplay': 4},
+            'Fashion Design': {'graphics': 6, 'innovation': 3},
+            'Restaurant Management': {'gameplay': 5, 'technical': 3},
+            'Journalism': {'story': 6, 'gameplay': 3},
+            # Nature & Environment
+            'Wildlife Rescue': {'graphics': 5, 'gameplay': 4},
+            'Ocean Exploration': {'graphics': 6, 'sound_audio': 4},
+            'Gardening': {'graphics': 5, 'gameplay': 4},
+            'Animal': {'graphics': 5, 'gameplay': 4},
+            'Weather Control': {'innovation': 6, 'graphics': 5},
+            'Arctic Expeditions': {'graphics': 5, 'sound_audio': 3},
+            'Cave Diving': {'sound_audio': 5, 'graphics': 4},
+            # Creative & Experimental
+            'Music Creation': {'sound_audio': 10, 'innovation': 5},
+            'Painting': {'graphics': 8, 'innovation': 3},
+            'Dance': {'sound_audio': 6, 'gameplay': 5},
+            'Poetry': {'story': 8, 'sound_audio': 3},
+            'Film Production': {'story': 6, 'graphics': 5},
+            'Photography': {'graphics': 7, 'innovation': 3},
+            'Fashion': {'graphics': 6, 'innovation': 3},
+            'Toy Making': {'innovation': 5, 'gameplay': 4},
+            # Sports
+            'Golf': {'gameplay': 5, 'technical': 3},
+            'Basketball': {'gameplay': 6, 'technical': 4},
+            'Football': {'gameplay': 6, 'technical': 4},
+            'Soccer': {'gameplay': 6, 'technical': 3},
+            'Baseball': {'gameplay': 5, 'technical': 3},
+            'Tennis': {'gameplay': 6, 'technical': 3},
+            'Boxing': {'gameplay': 5, 'sound_audio': 4},
+            'Skateboarding': {'gameplay': 6, 'sound_audio': 5},
+            'Surfing': {'gameplay': 5, 'graphics': 5},
+            'Olympics': {'gameplay': 5, 'graphics': 4},
+            'Volleyball': {'gameplay': 5, 'technical': 3},
+            'Swimming': {'gameplay': 5, 'graphics': 4},
+            'Track & Field': {'gameplay': 5, 'technical': 3},
+            # Other/Misc
+            'Ninjas': {'gameplay': 6, 'technical': 3},
+            'Pirates': {'story': 5, 'sound_audio': 3, 'graphics': 3},
+            'Dinosaurs': {'graphics': 6, 'sound_audio': 5},
+            'Robots': {'technical': 6, 'innovation': 5},
+            'Bugs': {'innovation': 4, 'graphics': 3}
         }
         return modifiers.get(game_topic, {})
 
@@ -343,17 +428,122 @@ class GameDevelopment:
         return self.default_rating_thresholds
 
     def get_rating_description(self, rating: GameRating) -> str:
-        """Get a description for the rating"""
+        """Get a random description for the rating"""
         descriptions = {
-            GameRating.MASTERPIECE: "An absolute masterpiece! This game will be remembered for decades!",
-            GameRating.LEGENDARY: "A legendary achievement in game development!",
-            GameRating.OUTSTANDING: "Outstanding work! This game sets new standards!",
-            GameRating.EXCELLENT: "Excellent game that will be highly praised!",
-            GameRating.NOTABLE: "A notable release that will get attention!",
-            GameRating.GOOD: "A good, solid game that players will enjoy!",
-            GameRating.FUN: "A fun game that will find its audience!",
-            GameRating.DECENT: "A decent effort with some good moments.",
-            GameRating.MEH: "Meh... It's playable but forgettable.",
-            GameRating.POOR: "Poor execution. Back to the drawing board."
+            GameRating.MASTERPIECE: [
+                "An absolute masterpiece! This game will be remembered for decades!",
+                "Gaming perfection! A title that defines the generation!",
+                "Breathtaking! This is why we make games!",
+                "A monumental achievement that pushes every boundary!",
+                "Instant classic! This game will inspire developers for years!",
+                "Flawless execution! A new benchmark for the industry!",
+                "Revolutionary! This changes everything we know about gaming!",
+                "Pure genius! A once-in-a-lifetime gaming experience!",
+                "Phenomenal! Critics are calling it the game of the decade!"
+            ],
+            GameRating.LEGENDARY: [
+                "A legendary achievement in game development!",
+                "Incredible work! This will be talked about for years!",
+                "Extraordinary! A true testament to gaming excellence!",
+                "Remarkable achievement! Setting new industry standards!",
+                "Absolutely brilliant! A defining moment in gaming history!",
+                "Stunning success! This is how games should be made!",
+                "Magnificent! A legendary title is born!",
+                "Exceptional quality! This game will stand the test of time!",
+                "Truly special! A legendary entry in gaming's hall of fame!"
+            ],
+            GameRating.OUTSTANDING: [
+                "Outstanding work! This game sets new standards!",
+                "Superb quality! Players will love every moment!",
+                "Impressive achievement! Well above the competition!",
+                "Excellent craftsmanship! A standout title this year!",
+                "Fantastic work! This game really shines!",
+                "Top-tier quality! Outstanding in every aspect!",
+                "Brilliant execution! Rising above expectations!",
+                "Superior design! An outstanding addition to any library!",
+                "Exceptional game! Critics and players are raving!"
+            ],
+            GameRating.EXCELLENT: [
+                "Excellent game that will be highly praised!",
+                "Great success! Players will thoroughly enjoy this!",
+                "Very impressive! A strong contender this year!",
+                "High quality work! Definitely worth playing!",
+                "Wonderful game! Exceeding most expectations!",
+                "Really well done! An excellent gaming experience!",
+                "Strong showing! This game delivers on its promises!",
+                "Quality title! Excellence in game design!",
+                "Highly polished! An excellent addition to the genre!"
+            ],
+            GameRating.NOTABLE: [
+                "A notable release that will get attention!",
+                "Good work! This game stands out from the crowd!",
+                "Solid title! Players will take notice!",
+                "Noteworthy effort! Has some really great moments!",
+                "Respectable showing! Worth checking out!",
+                "Interesting game! Notable for its unique approach!",
+                "Decent success! Getting positive attention!",
+                "Worth playing! A notable entry in the genre!",
+                "Pretty good! Has enough to make it memorable!"
+            ],
+            GameRating.GOOD: [
+                "A good, solid game that players will enjoy!",
+                "Nice work! A reliable and enjoyable experience!",
+                "Solid effort! Does what it sets out to do!",
+                "Good game! Players will have fun with this one!",
+                "Well made! A good addition to any collection!",
+                "Competent work! Delivers solid entertainment!",
+                "Enjoyable! A good way to spend some time!",
+                "Satisfying! Does the job and does it well!",
+                "Pleasant surprise! Better than expected!"
+            ],
+            GameRating.FUN: [
+                "A fun game that will find its audience!",
+                "Entertaining enough! Has its moments of joy!",
+                "Quirky fun! Not for everyone but has charm!",
+                "Casual fun! Perfect for its target audience!",
+                "Light entertainment! Fun in small doses!",
+                "Has potential! Fun despite some rough edges!",
+                "Modest success! Those who get it will love it!",
+                "Simple fun! Does what it says on the tin!",
+                "Niche appeal! The right players will enjoy this!"
+            ],
+            GameRating.DECENT: [
+                "A decent effort with some good moments.",
+                "Okay game. Has both highs and lows.",
+                "Mixed results. Some parts work, others don't.",
+                "Average. Neither great nor terrible.",
+                "Serviceable. Gets the basics right at least.",
+                "Passable. Worth a look on sale maybe.",
+                "Fair attempt. Shows promise but needs work.",
+                "Middling. Some will like it, many won't.",
+                "Adequate. Does the minimum required."
+            ],
+            GameRating.MEH: [
+                "Meh... It's playable but forgettable.",
+                "Mediocre. Nothing really stands out here.",
+                "Uninspiring. Goes through the motions.",
+                "Bland. Lacks any real personality.",
+                "Forgettable. Won't leave much impression.",
+                "Weak showing. Needed more development time.",
+                "Disappointing. Falls short of expectations.",
+                "Lackluster. Missing that special something.",
+                "Below average. Too many better options exist."
+            ],
+            GameRating.POOR: [
+                "Poor execution. Back to the drawing board.",
+                "Failed attempt. Numerous issues throughout.",
+                "Not ready. Should have stayed in development.",
+                "Rough. Too many problems to recommend.",
+                "Unfortunate. Good ideas, terrible execution.",
+                "Needs work. Not worth it in current state.",
+                "Miss. Completely misses the mark.",
+                "Flawed. Fundamental problems at its core.",
+                "Avoid. Save your money for something better."
+            ]
         }
-        return descriptions.get(rating, "No description available.")
+
+        # Get the list of descriptions for this rating
+        rating_descriptions = descriptions.get(rating, ["No description available."])
+
+        # Return a random description from the list
+        return random.choice(rating_descriptions)

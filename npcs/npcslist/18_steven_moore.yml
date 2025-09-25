@@ -1,0 +1,30 @@
+character:
+  name: "Steven Moore"
+  id: 18
+  gender: "male"
+  skills:
+    engineering: 4      # 0-10 scale - competent but not exceptional
+    marketing: 5        # 0-10 scale - understands market positioning
+    leadership: 7       # 0-10 scale - natural organizer
+    design: 4          # 0-10 scale - sees bigger picture
+    research: 3        # 0-10 scale - practical over theoretical
+    communication: 6   # 0-10 scale - clear meeting runner
+
+  job: Project Manager
+
+  personality:
+    description: "Steven is the oil that keeps the development machine running smoothly. Master of Gantt charts and burn-down rates, he translates between departments and keeps everyone on track. Known for his color-coded spreadsheets and ability to predict crunch time weeks in advance."
+
+  background:
+    education: "MBA with undergraduate in Information Systems"
+    work_history: "Software consultancy, shipped three AAA titles, rescued two failing projects"
+    personal_history: "Former military logistics, applies operational discipline to game development, has never missed a deadline"
+
+  ### max 3
+  hidden_traits:
+    - trait: "crunch prevention"
+      ability: "reduces development time by 10% through efficient scheduling without quality loss"
+    - trait: "milestone master"
+      ability: "publisher milestone payments arrive 1 week early due to exceptional reporting"
+    - trait: "risk radar"
+      ability: "provides warning 2 weeks before any major development problem, allowing prevention"

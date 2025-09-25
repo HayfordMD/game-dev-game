@@ -1,0 +1,30 @@
+character:
+  name: "Susan Jackson"
+  id: 15
+  gender: "female"
+  skills:
+    engineering: 5      # 0-10 scale - understands production
+    marketing: 3        # 0-10 scale - knows market needs
+    leadership: 4       # 0-10 scale - manages production teams
+    design: 3          # 0-10 scale - practical design sense
+    research: 3        # 0-10 scale - studies efficiency
+    communication: 5   # 0-10 scale - coordinates with factories
+
+  job: Manufacturing Engineer
+
+  personality:
+    description: "Susan bridges the gap between digital design and physical production, understanding both code and cartridges. She's practical and deadline-driven, always thinking about supply chains and production costs. Known for catching expensive mistakes before manufacturing."
+
+  background:
+    education: "Industrial Engineering degree with computer science minor"
+    work_history: "Toy manufacturing, calculator assembly line, early cartridge production"
+    personal_history: "Grew up near a factory, summer jobs in electronics assembly, collects manufacturing defects as curiosities"
+
+  ### max 3
+  hidden_traits:
+    - trait: "production optimizer"
+      ability: "reduces physical game production costs by 15% without quality loss"
+    - trait: "quality control queen"
+      ability: "catches game-breaking bugs in final build, preventing 1 critical bug per project"
+    - trait: "rush order specialist"
+      ability: "can expedite production by 1 week when deadline is critical, once per game"

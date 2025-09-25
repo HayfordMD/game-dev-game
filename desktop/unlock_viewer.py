@@ -22,50 +22,44 @@ class UnlockViewer:
             self.title_text = "TOPIC UNLOCKS"
             self.get_unlocked = self.unlock_system.get_all_unlocked_topics
             self.all_items = [
-                # Original
-                'Table Tennis', 'Fantasy', 'Space', 'Temple', 'Adventure',
+                # Original/Classic
+                'Table Tennis', 'Fantasy', 'Space', 'Temple',
                 # Horror
-                'Zombies', 'Vampires', 'Werewolves', 'Ghosts',
-                'Psychological Horror',
-                'Survival Horror', 'Post-Apocalyptic Horror',
+                'Zombies', 'Vampires', 'Ghosts', 'Haunted Houses',
+                'Psychological Horror', 'Post-Apocalyptic',
                 # Sci-Fi & Futuristic
-                'Space Exploration', 'Alien Invasion', 'Space Pirates', 'Time Travel', 'Cyberpunk',
+                'Space Exploration', 'Alien Invasion', 'Cyberpunk',
                 'AI Uprising', 'Mechs', 'Terraforming', 'Galactic Warfare',
-                'Interdimensional Travel', 'Nanotechnology', 'Virtual Reality Worlds',
+                'Interdimensional Travel',
                 # Real-World & Occupational
-                'Roadwork', 'Trucking', 'Farming', 'Construction', 'Mining',
-                'Fishing', 'Logging', 'Factory Work', 'Delivery Services', 'Emergency Response',
-                'Garbage Collection', 'Postal Work', 'Oil Drilling',
+                'Trucking', 'Farming', 'Mining', 'Fishing', 'Logging',
+                'Factory Work', 'Emergency Response', 'Postal Work', 'Oil Drilling',
                 # Fantasy & Mythology
                 'Dragons', 'Elves & Dwarves', 'Magic Schools', 'Kingdoms & Castles',
-                'Gods & Titans', 'Questing Heroes', 'Mythical Creatures', 'Ancient Ruins',
-                'Fairy Tales', 'Dark Forests', 'Magical Artifacts', 'Prophecies',
+                'Gods & Titans', 'Mythical Creatures', 'Ancient Ruins',
+                'Fairy Tales', 'Magical Artifacts', 'Prophecies',
                 # Action & Conflict
-                'War', 'Espionage', 'Heists', 'Martial Arts', 'Gladiator Arenas',
-                'Gang Warfare', 'Pirate Battles', 'Monster Hunting', 'Bounty Hunting',
-                'Tactical Infiltration', 'Survival Combat', 'Urban Warfare',
+                'War', 'Martial Arts', 'Gladiator Arenas', 'Monster Hunting',
+                'Mercenary Missions', 'Tactical Infiltration',
                 # Historical & Cultural
-                'Ancient Egypt', 'Viking Raids', 'Roman Empire', 'Wild West',
-                'World War I', 'World War II', 'Cold War', 'Medieval Europe', 'Renaissance',
-                'Industrial Revolution', 'Tribal Societies',
+                'Egypt', 'Viking', 'Roman Empire', 'Wild West',
+                'World War I', 'World War II', 'Cold War', 'Medieval Europe',
+                'Colonial Exploration', 'Tribal Societies',
                 # Urban & Social
-                'City Building', 'Dating Sim',
-                'Social Media Fame', 'Fashion Design', 'Restaurant Management',
-                'Crime Investigation', 'Journalism', 'Political Campaigns', 'Suburban Life',
+                'City Building', 'Dating Sim', 'High School Drama', 'Office',
+                'Social Media Fame', 'Fashion Design', 'Restaurant Management', 'Journalism',
                 # Nature & Environment
-                'Wildlife Rescue', 'Forest Survival', 'Ocean Exploration',
-                'Gardening', 'Animal Behavior', 'Weather Control', 'Volcanoes',
-                'Arctic Expeditions', 'Desert Survival',
+                'Wildlife Rescue', 'Ocean Exploration', 'Gardening', 'Animal',
+                'Weather Control', 'Arctic Expeditions', 'Cave Diving',
                 # Creative & Experimental
-                'Music Creation', 'Painting',
-                'Dance', 'Poetry', 'Film Production', 'Photography',
-                'Fashion', 'Toy Making',
+                'Music Creation', 'Painting', 'Dance', 'Poetry',
+                'Film Production', 'Photography', 'Fashion', 'Toy Making',
                 # Sports
                 'Golf', 'Basketball', 'Football', 'Soccer', 'Baseball', 'Tennis',
-                'Hockey', 'Boxing', 'Wrestling', 'Skateboarding', 'Skiing',
-                'Olympics', 'Rugby', 'Volleyball', 'Swimming', 'Track & Field',
-                # Other
-                'Ninjas', 'Pirates', 'Racing', 'Dinosaurs', 'Robots', 'Bugs', 'Office', 'Monsters', 'Dungeons'
+                'Boxing', 'Skateboarding', 'Surfing', 'Olympics',
+                'Volleyball', 'Swimming', 'Track & Field',
+                # Other/Misc
+                'Ninjas', 'Pirates', 'Dinosaurs', 'Robots', 'Bugs'
             ]
             self.label_prefix = "Topic"
         else:  # types
@@ -74,12 +68,8 @@ class UnlockViewer:
             self.get_unlocked = self.unlock_system.get_all_unlocked_game_types
             self.all_items = [
                 'Text Adventure', 'Arcade', 'Platformer', 'Puzzle', 'Shooter',
-                'RPG', 'Racing', 'Fighting',
-                'Sports', 'Simulation',
-                'Strategy', 'MMORPG', 'Rhythm', 'Visual Novel', 'Horror',
-                'Sandbox', 'Idle',
-                'Retro', 'Educational', 'Motion-Control', 'Touch-Based',
-                'Board Game'
+                'RPG', 'Racing', 'Fighting', 'Adventure', 'Action',
+                'Simulation', 'Strategy', 'Online', 'Visual Novel', 'Educational'
             ]
             self.label_prefix = "Type"
 

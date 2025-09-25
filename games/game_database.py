@@ -170,26 +170,6 @@ class {safe_name.title().replace('_', '')}Game:
                           font=('Arial', 24, 'bold'), fill='white', justify='center')
 '''
 
-        elif game['game_type'] == 'Office':
-            script_content += '''        # Office game interface - productivity suite
-        notebook = tk.Frame(content_frame, bg='white')
-        notebook.pack(fill='both', expand=True, padx=10, pady=10)
-
-        # Toolbar
-        toolbar = tk.Frame(notebook, bg='#ddd', height=40)
-        toolbar.pack(fill='x')
-        toolbar.pack_propagate(False)
-
-        tk.Button(toolbar, text="📄 New", font=('Arial', 10)).pack(side='left', padx=2, pady=2)
-        tk.Button(toolbar, text="💾 Save", font=('Arial', 10)).pack(side='left', padx=2, pady=2)
-        tk.Button(toolbar, text="📊 Chart", font=('Arial', 10)).pack(side='left', padx=2, pady=2)
-
-        # Spreadsheet-like interface
-        text_area = tk.Text(notebook, font=('Courier', 11))
-        text_area.pack(fill='both', expand=True)
-        text_area.insert(tk.END, "Welcome to Office Suite!\\n\\n")
-        text_area.insert(tk.END, "Productivity tools for the modern workplace.\\n")
-'''
         else:
             script_content += f'''        # Generic game interface for {game['game_type']}
         tk.Label(content_frame, text="Game Area", font=('Arial', 18),

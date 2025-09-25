@@ -1,0 +1,30 @@
+character:
+  name: "David Garcia"
+  id: 12
+  gender: "male"
+  skills:
+    engineering: 7      # 0-10 scale - strong hardware knowledge
+    marketing: 1        # 0-10 scale - not business minded
+    leadership: 2       # 0-10 scale - prefers working alone
+    design: 3          # 0-10 scale - thinks functionally
+    research: 5        # 0-10 scale - stays current with tech
+    communication: 2   # 0-10 scale - speaks in technical jargon
+
+  job: Hardware Engineer
+
+  personality:
+    description: "David speaks in circuit diagrams and timing charts, finding beauty in elegant hardware solutions. He's meticulous about optimization and can squeeze performance from minimal specs. Tends to work through lunch, forgetting to eat when deep in problem-solving mode."
+
+  background:
+    education: "Electrical Engineering degree, specialized in microprocessor design"
+    work_history: "Calculator company, early home computer development, freelance hardware consultant"
+    personal_history: "Built a radio from scratch at age 9, won science fairs with homemade computers, collects vintage processors"
+
+  ### max 3
+  hidden_traits:
+    - trait: "hardware whisperer"
+      ability: "reduces technical bugs by 2 when developing for consoles or early platforms"
+    - trait: "optimization wizard"
+      ability: "25% chance to boost technical score by +4 when working with limited hardware (pre-1995)"
+    - trait: "midnight oil"
+      ability: "during crunch time, works without fatigue penalty but needs 2 days recovery after project"

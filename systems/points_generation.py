@@ -136,52 +136,369 @@ class TeamMorale:
             return 0.8 + (morale / 100) * 0.4
 
 class RandomEvent:
-    """Random events during development"""
-    EVENTS = [
-        {
-            "name": "Eureka Moment",
-            "description": "Brilliant breakthrough!",
-            "effect": "double_points",
-            "chance": 0.05
-        },
-        {
-            "name": "Creative Block",
-            "description": "Team struggling with ideas",
-            "effect": "half_points",
-            "chance": 0.05
-        },
-        {
-            "name": "Technical Breakthrough",
-            "description": "New technique discovered",
-            "effect": "technical_boost",
-            "chance": 0.03
-        },
-        {
-            "name": "Team Synergy",
-            "description": "Everyone working perfectly together",
-            "effect": "all_boost",
-            "chance": 0.04
-        },
-        {
-            "name": "Bug Discovery",
-            "description": "Major issue found early",
-            "effect": "technical_penalty",
-            "chance": 0.04
-        },
-        {
-            "name": "Inspiration Strike",
-            "description": "Amazing creative vision",
-            "effect": "creativity_boost",
-            "chance": 0.04
-        }
-    ]
+    """Random events during development with conditional requirements"""
 
     @staticmethod
-    def check_for_event() -> Optional[Dict]:
-        """Check if a random event occurs"""
-        for event in RandomEvent.EVENTS:
+    def get_all_events():
+        """Get all possible events with their conditions"""
+        return [
+            # Positive Events
+            {
+                "name": "Team Synergy",
+                "description": "Everyone working perfectly together - all stats +50%!",
+                "effect": "all_boost",
+                "chance": 0.08,
+                "conditions": {
+                    "min_morale": 90,
+                    "min_team_tenure": 24,  # All team members 2+ years
+                    "min_communication": 7
+                }
+            },
+            {
+                "name": "Bug Extermination",
+                "description": "Research breakthrough eliminates ALL bugs instantly!",
+                "effect": "remove_all_bugs",
+                "chance": 0.06,
+                "conditions": {
+                    "min_research": 8,
+                    "has_bugs": True
+                }
+            },
+            {
+                "name": "Investor Interest",
+                "description": "Major investor impressed - funding boost!",
+                "effect": "money_boost",
+                "chance": 0.04,
+                "conditions": {
+                    "min_projects_completed": 3,
+                    "last_rating": ["EXCELLENT", "OUTSTANDING", "LEGENDARY", "MASTERPIECE"]
+                }
+            },
+            {
+                "name": "Industry Recognition",
+                "description": "Your work catches industry attention - reputation soars!",
+                "effect": "reputation_boost",
+                "chance": 0.05,
+                "conditions": {
+                    "min_year": 1985,
+                    "min_consecutive_successes": 2
+                }
+            },
+            {
+                "name": "Eureka Moment",
+                "description": "Brilliant breakthrough - double points this stage!",
+                "effect": "double_points",
+                "chance": 0.05,
+                "conditions": {
+                    "min_research": 6
+                }
+            },
+            {
+                "name": "Perfect Flow State",
+                "description": "Team in the zone - productivity skyrockets!",
+                "effect": "triple_speed",
+                "chance": 0.03,
+                "conditions": {
+                    "min_morale": 95,
+                    "min_engineering": 8
+                }
+            },
+            {
+                "name": "Community Contribution",
+                "description": "Open source community adds amazing features!",
+                "effect": "free_features",
+                "chance": 0.04,
+                "conditions": {
+                    "min_year": 1990,
+                    "engine": "OpenEngine"
+                }
+            },
+            {
+                "name": "Veteran Insight",
+                "description": "Experience pays off - massive efficiency boost!",
+                "effect": "experience_boost",
+                "chance": 0.06,
+                "conditions": {
+                    "min_experience": 50  # 200 months = 16+ years
+                }
+            },
+
+            # Neutral/Mixed Events
+            {
+                "name": "Press Coverage",
+                "description": "Gaming magazine wants early preview!",
+                "effect": "publicity",
+                "chance": 0.05,
+                "conditions": {
+                    "min_year": 1982,
+                    "stage": "PRODUCTION"
+                }
+            },
+            {
+                "name": "Platform Opportunity",
+                "description": "Console manufacturer offers exclusive deal!",
+                "effect": "platform_deal",
+                "chance": 0.03,
+                "conditions": {
+                    "min_year": 1985,
+                    "min_projects_completed": 2
+                }
+            },
+            {
+                "name": "Tech Conference Invite",
+                "description": "Invited to speak - lose time but gain reputation!",
+                "effect": "conference",
+                "chance": 0.04,
+                "conditions": {
+                    "min_leadership": 6,
+                    "min_projects_completed": 4
+                }
+            },
+
+            # Negative Events
+            {
+                "name": "Creative Block",
+                "description": "Team struggling with ideas - half points",
+                "effect": "half_points",
+                "chance": 0.04,
+                "conditions": {
+                    "max_morale": 40
+                }
+            },
+            {
+                "name": "Burnout Risk",
+                "description": "Team exhausted - major productivity drop!",
+                "effect": "burnout",
+                "chance": 0.06,
+                "conditions": {
+                    "min_consecutive_projects": 5,
+                    "max_morale": 50
+                }
+            },
+            {
+                "name": "Technical Debt",
+                "description": "Old code causing problems - progress slowed",
+                "effect": "technical_penalty",
+                "chance": 0.05,
+                "conditions": {
+                    "max_engineering": 4,
+                    "min_projects_completed": 2
+                }
+            },
+            {
+                "name": "Hardware Failure",
+                "description": "Computer crashes - lost progress!",
+                "effect": "lose_progress",
+                "chance": 0.03,
+                "conditions": {
+                    "max_year": 1990,  # More common in early years
+                    "no_backup": True
+                }
+            },
+            {
+                "name": "Copyright Claim",
+                "description": "Similar game released - must redesign features!",
+                "effect": "redesign_required",
+                "chance": 0.02,
+                "conditions": {
+                    "min_year": 1988,
+                    "stage": "PRODUCTION"
+                }
+            },
+            {
+                "name": "Team Conflict",
+                "description": "Personality clash disrupting work!",
+                "effect": "morale_drop",
+                "chance": 0.04,
+                "conditions": {
+                    "min_team_size": 3,
+                    "max_communication": 4
+                }
+            },
+            {
+                "name": "Market Shift",
+                "description": "Your genre suddenly unpopular - expectations rise!",
+                "effect": "rating_penalty",
+                "chance": 0.03,
+                "conditions": {
+                    "min_year": 1990
+                }
+            },
+
+            # Rare Special Events
+            {
+                "name": "Legend Visits",
+                "description": "Gaming legend offers advice - massive boost!",
+                "effect": "legend_boost",
+                "chance": 0.01,
+                "conditions": {
+                    "min_year": 1985,
+                    "min_reputation": 50
+                }
+            },
+            {
+                "name": "Office Pizza Party",
+                "description": "Spontaneous celebration - morale through the roof!",
+                "effect": "pizza_party",
+                "chance": 0.02,
+                "conditions": {
+                    "friday": True,
+                    "min_morale": 60
+                }
+            },
+            {
+                "name": "Competitor Flops",
+                "description": "Major competitor fails - your game looks better!",
+                "effect": "competitor_fail",
+                "chance": 0.02,
+                "conditions": {
+                    "min_year": 1988
+                }
+            },
+            {
+                "name": "Power Outage",
+                "description": "No electricity - development halted!",
+                "effect": "development_stop",
+                "chance": 0.02,
+                "conditions": {
+                    "max_year": 1995,
+                    "summer": True
+                }
+            },
+
+            # Conditional chain events
+            {
+                "name": "Breakthrough Discovery",
+                "description": "Research leads to revolutionary technique!",
+                "effect": "tech_revolution",
+                "chance": 0.02,
+                "conditions": {
+                    "min_research": 9,
+                    "min_engineering": 8,
+                    "min_projects_completed": 5
+                }
+            },
+            {
+                "name": "Perfect Storm",
+                "description": "Everything going wrong at once!",
+                "effect": "disaster",
+                "chance": 0.01,
+                "conditions": {
+                    "max_morale": 30,
+                    "has_bugs": True,
+                    "max_engineering": 3
+                }
+            }
+        ]
+
+    @staticmethod
+    def check_condition(condition_name: str, condition_value, context: Dict) -> bool:
+        """Check if a single condition is met"""
+
+        # Morale conditions
+        if condition_name == "min_morale":
+            return context.get("morale", 0) >= condition_value
+        elif condition_name == "max_morale":
+            return context.get("morale", 100) <= condition_value
+
+        # Team conditions
+        elif condition_name == "min_team_tenure":
+            team = context.get("team", [])
+            if not team:
+                return False
+            return all(dev.months_with_company >= condition_value for dev in team)
+        elif condition_name == "min_team_size":
+            return len(context.get("team", [])) >= condition_value
+
+        # Skill conditions
+        elif condition_name == "min_research":
+            lead = context.get("lead_developer")
+            return lead and lead.research >= condition_value
+        elif condition_name == "min_engineering":
+            lead = context.get("lead_developer")
+            return lead and lead.engineering >= condition_value
+        elif condition_name == "max_engineering":
+            lead = context.get("lead_developer")
+            return lead and lead.engineering <= condition_value
+        elif condition_name == "min_communication":
+            lead = context.get("lead_developer")
+            return lead and lead.communication >= condition_value
+        elif condition_name == "max_communication":
+            lead = context.get("lead_developer")
+            return lead and lead.communication <= condition_value
+        elif condition_name == "min_leadership":
+            lead = context.get("lead_developer")
+            return lead and lead.leadership >= condition_value
+
+        # Experience conditions
+        elif condition_name == "min_experience":
+            lead = context.get("lead_developer")
+            return lead and lead.months_with_company >= condition_value * 4  # Convert to months
+        elif condition_name == "min_projects_completed":
+            lead = context.get("lead_developer")
+            return lead and lead.projects_completed >= condition_value
+        elif condition_name == "min_consecutive_projects":
+            lead = context.get("lead_developer")
+            return lead and lead.consecutive_projects >= condition_value
+        elif condition_name == "min_consecutive_successes":
+            return context.get("consecutive_successes", 0) >= condition_value
+
+        # Game state conditions
+        elif condition_name == "has_bugs":
+            return context.get("bug_count", 0) > 0
+        elif condition_name == "stage":
+            return context.get("stage") == condition_value
+        elif condition_name == "last_rating":
+            last_rating = context.get("last_rating")
+            return last_rating in condition_value if isinstance(condition_value, list) else last_rating == condition_value
+
+        # Time conditions
+        elif condition_name == "min_year":
+            return context.get("year", 1978) >= condition_value
+        elif condition_name == "max_year":
+            return context.get("year", 2024) <= condition_value
+        elif condition_name == "friday":
+            return context.get("day_of_week") == "Friday"
+        elif condition_name == "summer":
+            month = context.get("month", 1)
+            return month in [6, 7, 8]
+
+        # Other conditions
+        elif condition_name == "engine":
+            return context.get("engine") == condition_value
+        elif condition_name == "no_backup":
+            return not context.get("has_backup", False)
+        elif condition_name == "min_reputation":
+            return context.get("reputation", 0) >= condition_value
+
+        return True  # Unknown conditions pass by default
+
+    @staticmethod
+    def check_for_event(context: Dict = None) -> Optional[Dict]:
+        """Check if a random event occurs based on current context"""
+        if context is None:
+            context = {}
+
+        eligible_events = []
+
+        for event in RandomEvent.get_all_events():
+            # Check if all conditions are met
+            conditions_met = True
+            if "conditions" in event:
+                for cond_name, cond_value in event["conditions"].items():
+                    if not RandomEvent.check_condition(cond_name, cond_value, context):
+                        conditions_met = False
+                        break
+
+            # If conditions are met, add to eligible events
+            if conditions_met:
+                eligible_events.append(event)
+
+        # Check each eligible event for occurrence
+        for event in eligible_events:
             if random.random() < event["chance"]:
                 return event
+
         return None
 
 class BounceCalculator:
@@ -277,14 +594,17 @@ class PointsGenerator:
     def calculate_stage_points(self,
                               stage: DevelopmentStage,
                               lead_developer: DeveloperStats,
-                              support_developers: List[DeveloperStats] = None) -> Dict[str, int]:
+                              support_developers: List[DeveloperStats] = None,
+                              context: Dict = None) -> Tuple[Dict[str, int], Optional[Dict]]:
         """
         Calculate points for a development stage based on developer stats
 
-        Returns dict with points for each category
+        Returns tuple of (points_dict, event_dict)
         """
         if support_developers is None:
             support_developers = []
+        if context is None:
+            context = {}
 
         # Get base ranges for the stage
         base_ranges = self._get_stage_base_ranges(stage)
@@ -295,8 +615,18 @@ class PointsGenerator:
         # Get morale modifier
         morale_mod = self.team_morale.get_morale_modifier()
 
-        # Check for random events
-        event = RandomEvent.check_for_event()
+        # Build context for random events
+        event_context = {
+            "morale": self.team_morale.calculate_morale(),
+            "lead_developer": lead_developer,
+            "team": support_developers,
+            "stage": stage.value.upper().replace(' ', '_'),
+            "year": self._get_current_year(),
+            **context  # Include any additional context passed in
+        }
+
+        # Check for random events with full context
+        event = RandomEvent.check_for_event(event_context)
         event_mod = self._get_event_modifier(event) if event else 1.0
 
         # Generate points for each category
@@ -544,14 +874,44 @@ class PointsGenerator:
             return 1.0
 
         effect = event.get("effect")
+
+        # Point modifiers
         if effect == "double_points":
             return 2.0
+        elif effect == "triple_speed":
+            return 3.0
         elif effect == "half_points":
             return 0.5
         elif effect in ["technical_boost", "creativity_boost", "all_boost"]:
             return 1.5
+        elif effect == "experience_boost":
+            return 1.8
+        elif effect == "legend_boost":
+            return 2.5
+        elif effect == "tech_revolution":
+            return 2.2
+        elif effect == "free_features":
+            return 1.4
+
+        # Penalty modifiers
         elif effect == "technical_penalty":
             return 0.7
+        elif effect == "burnout":
+            return 0.3
+        elif effect == "lose_progress":
+            return 0.4
+        elif effect == "redesign_required":
+            return 0.5
+        elif effect == "development_stop":
+            return 0.0  # Complete stop
+        elif effect == "disaster":
+            return 0.2
+
+        # Some effects don't modify points directly
+        elif effect in ["remove_all_bugs", "money_boost", "reputation_boost",
+                       "publicity", "platform_deal", "conference", "morale_drop",
+                       "rating_penalty", "pizza_party", "competitor_fail"]:
+            return 1.0  # These have other effects handled elsewhere
 
         return 1.0
 
@@ -563,15 +923,6 @@ class PointsGenerator:
         avg_comm = sum(dev.communication for dev in developers) / len(developers)
         self.team_morale.company_communication_avg = avg_comm
 
-    def calculate_single_bounce_points(self,
-                                      stage: DevelopmentStage,
-                                      developer: DeveloperStats) -> Dict[str, int]:
-        """
-        Calculate points for a single bounce in the animation
-        Simplified version for real-time generation
-        """
-        points, event = self.calculate_stage_points(stage, developer)
-        return points
 
 # Helper function to create default player stats
 def create_player_developer() -> DeveloperStats:

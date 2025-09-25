@@ -1,0 +1,30 @@
+character:
+  name: "John Lopez"
+  id: 14
+  gender: "male"
+  skills:
+    engineering: 6      # 0-10 scale - solid low-level coding
+    marketing: 1        # 0-10 scale - no interest in business
+    leadership: 1       # 0-10 scale - pure technical role
+    design: 2          # 0-10 scale - function over form
+    research: 4        # 0-10 scale - studies hardware specs
+    communication: 2   # 0-10 scale - documentation is sparse
+
+  job: Firmware Developer
+
+  personality:
+    description: "John thinks in assembly code and lives in the space between hardware and software. He's most comfortable working alone with headphones on, optimizing boot sequences and driver code. Has a dry sense of humor about buffer overflows and memory leaks."
+
+  background:
+    education: "Computer Engineering degree, focus on embedded systems"
+    work_history: "Printer company firmware, BIOS development, device drivers"
+    personal_history: "Learned programming on punch cards from his uncle, fascinated by making hardware 'come alive'"
+
+  ### max 3
+  hidden_traits:
+    - trait: "bare metal master"
+      ability: "eliminates 1 technical bug per week when working on games before 1990"
+    - trait: "memory miser"
+      ability: "games use 20% less RAM, allowing better performance on weak hardware"
+    - trait: "boot speed demon"
+      ability: "reduces all loading times by 25%, improving player experience and reviews"

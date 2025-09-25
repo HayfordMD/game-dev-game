@@ -1,0 +1,30 @@
+character:
+  name: "Christopher Adams"
+  id: 1
+  gender: "male"
+  skills:
+    engineering: 1      # 0-10 scale - minimal coding
+    marketing: 2        # 0-10 scale - basic market sense
+    leadership: 3       # 0-10 scale - some team coordination
+    design: 7          # 0-10 scale - strong creative vision
+    research: 4        # 0-10 scale - studies what works
+    communication: 5   # 0-10 scale - good at explaining ideas
+
+  job: Game Designer
+
+  personality:
+    description: "Christopher is a dreamer with notebooks full of game ideas, constantly sketching mechanics and storylines. He's passionate about player experience but sometimes overscopes projects. Gets genuinely excited when discussing game theory and loves analyzing why certain games succeed."
+
+  background:
+    education: "English Literature degree, self-taught game design through playing everything"
+    work_history: "Tabletop game designer, wrote choose-your-own-adventure books, just entering video games"
+    personal_history: "Dungeon Master since age 12, collected every gaming magazine, learned BASIC to make text adventures"
+
+  ### max 3
+  hidden_traits:
+    - trait: "genre innovator"
+      ability: "15% chance to add +3 innovation when combining unusual game type and topic"
+    - trait: "player psychology"
+      ability: "always adds +2 to gameplay score by understanding what makes games addictive"
+    - trait: "scope creep defender"
+      ability: "if project is behind schedule, 20% chance to cut features smartly and save 2 days without losing points"

@@ -1,0 +1,30 @@
+character:
+  name: "William Lee"
+  id: 20
+  gender: "male"
+  skills:
+    engineering: 5      # 0-10 scale - solid technical skills
+    marketing: 3        # 0-10 scale - understands user needs
+    leadership: 2       # 0-10 scale - works better solo
+    design: 4          # 0-10 scale - functional over fancy
+    research: 8        # 0-10 scale - voracious learner
+    communication: 4   # 0-10 scale - writes good documentation
+
+  job: Tools Programmer
+
+  personality:
+    description: "William builds the tools that make everyone else's job easier. He automates repetitive tasks and creates level editors, asset pipelines, and debug systems. Works behind the scenes but his tools save hundreds of hours. Gets satisfaction from seeing others work more efficiently."
+
+  background:
+    education: "Computer Science degree, specialized in development environments"
+    work_history: "IDE developer, compiler optimization team, enterprise automation specialist"
+    personal_history: "Started by automating his homework, creates personal productivity tools for fun, contributes to open source build systems"
+
+  ### max 3
+  hidden_traits:
+    - trait: "automation architect"
+      ability: "reduces overall development time by 15% through custom tool creation"
+    - trait: "debug wizard"
+      ability: "creates debugging tools that catch 3 bugs per week automatically"
+    - trait: "pipeline optimizer"
+      ability: "build times reduced by 50%, allowing faster iteration and +2 technical score"

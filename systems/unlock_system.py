@@ -61,7 +61,7 @@ class UnlockSystem:
 
         # Starting topics
         if year >= 1978:
-            unlocks['topics'].extend(['Table Tennis', 'Fantasy', 'Space', 'Temple', 'Adventure'])
+            unlocks['topics'].extend(['Table Tennis', 'Fantasy', 'Space', 'Temple'])
 
         return unlocks
 
@@ -82,14 +82,7 @@ class UnlockSystem:
                     self.save_permanent_unlocks()
                     unlocked.append(('game_type', 'Racing', 'Created 3 Arcade games - Racing unlocked!'))
 
-        # Office game type - unlocked by creating Ping game with Table Tennis and Arcade
-        if (game_name and game_name.lower() == 'ping' and
-            topic == 'Table Tennis' and
-            game_type == 'Arcade'):
-            if 'Office' not in self.permanent_unlocks['game_types']:
-                self.permanent_unlocks['game_types'].append('Office')
-                self.save_permanent_unlocks()
-                unlocked.append(('game_type', 'Office', 'Created the legendary Ping game!'))
+        # No special unlock for Ping game anymore (Office type removed)
 
         # RPG game type - unlocked by creating Text Adventure + Fantasy
         if (topic == 'Fantasy' and game_type == 'Text Adventure'):
@@ -98,13 +91,6 @@ class UnlockSystem:
                 self.save_permanent_unlocks()
                 unlocked.append(('game_type', 'RPG', 'Combined Fantasy with Text Adventures to discover RPGs!'))
 
-        # Motion-Control game type - unlocked by creating Rhythm + Music topic
-        if (game_type == 'Rhythm' and
-            (topic in ['Music Creation', 'Music', 'Rhythm Games', 'Dance'])):
-            if 'Motion-Control' not in self.permanent_unlocks['game_types']:
-                self.permanent_unlocks['game_types'].append('Motion-Control')
-                self.save_permanent_unlocks()
-                unlocked.append(('game_type', 'Motion-Control', 'Music and rhythm games inspired motion controls!'))
 
         return unlocked
 
@@ -127,12 +113,6 @@ class UnlockSystem:
         years_passed = year - last_use['year']
         months_passed = (month - last_use['month']) + (years_passed * 12)
 
-        # Idle game type - unlocked by not developing for 1 year
-        if months_passed >= 12:
-            if 'Idle' not in self.permanent_unlocks['game_types']:
-                self.permanent_unlocks['game_types'].append('Idle')
-                self.save_permanent_unlocks()
-                unlocked.append(('game_type', 'Idle', 'What if you never did anything ever?'))
 
         # Bug topic - unlocked by low hygiene in early years
         hygiene = self.game_data.data.get('player_data', {}).get('hygiene', 100)
@@ -156,12 +136,18 @@ class UnlockSystem:
                 self.save_permanent_unlocks()
                 unlocked.append(('topic', 'Dinosaurs', 'Created 3 adventure games!'))
 
-        # Retro game type - unlocked by reaching year 2000 (special unlock)
-        if year >= 2000:
-            if 'Retro' not in self.permanent_unlocks['game_types']:
-                self.permanent_unlocks['game_types'].append('Retro')
+        # Strategy game type - unlocked after 1992 or by making 2 board games
+        if year >= 1992:
+            if 'Strategy' not in self.permanent_unlocks['game_types']:
+                self.permanent_unlocks['game_types'].append('Strategy')
                 self.save_permanent_unlocks()
-                unlocked.append(('game_type', 'Retro', 'Reached the millennium!'))
+                unlocked.append(('game_type', 'Strategy', 'Year 1992 reached!'))
+
+        # Online game type - available 1994-2000
+        if year >= 1994 and year <= 2000:
+            if 'Online' not in self.game_data.data['unlocks']['game_types']:
+                self.game_data.data['unlocks']['game_types'].append('Online')
+                unlocked.append(('game_type', 'Online', 'Online gaming is now available (with connection issues)!'))
 
         # Educational game type - unlocked by high happiness
         happiness = self.game_data.data.get('player_data', {}).get('happiness', 60)
@@ -229,26 +215,28 @@ class UnlockSystem:
         """Get information about all possible unlocks and their requirements"""
         return {
             'generation_unlocks': [
-                {'year': 1978, 'topics': ['Space', 'Fantasy', 'Adventure', 'Mystery'],
+                {'year': 1978, 'topics': ['Table Tennis', 'Fantasy', 'Space', 'Temple'],
                  'game_types': ['Text Adventure', 'Arcade']},
-                {'year': 1983, 'topics': ['Sci-Fi', 'Medieval', 'Western', 'Pirates'],
+                {'year': 1983, 'topics': ['Dragons', 'Medieval Europe', 'Wild West', 'Pirates'],
                  'game_types': ['Platformer', 'Puzzle']},
-                {'year': 1988, 'topics': ['Horror', 'Cyberpunk', 'Ninjas', 'Racing'],
-                 'game_types': ['RPG', 'Racing', 'Fighting']},
-                {'year': 1993, 'topics': ['Post-Apocalyptic', 'Zombies', 'Aliens', 'Sports'],
-                 'game_types': ['3D Platformer', 'FPS', 'Sports']},
-                {'year': 1998, 'topics': ['Modern', 'Historical', 'Steampunk', 'Superheroes'],
-                 'game_types': ['Strategy', 'Simulation', 'MMORPG']},
-                {'year': 2003, 'topics': ['Mythology', 'Time Travel', 'Vampires', 'Robots'],
-                 'game_types': ['Open World', 'Battle Royale', 'MOBA']}
+                {'year': 1985, 'topics': ['Zombies', 'Cyberpunk', 'Ninjas'],
+                 'game_types': ['Shooter', 'Fighting']},
+                {'year': 1987, 'topics': ['Post-Apocalyptic', 'Vampires', 'Alien Invasion', 'Golf'],
+                 'game_types': ['Adventure', 'Action']},
+                {'year': 1990, 'topics': ['City Building', 'War', 'Mechs', 'Robots'],
+                 'game_types': ['Simulation']},
+                {'year': 1995, 'topics': ['Gods & Titans', 'Ghosts', 'AI Uprising'],
+                 'game_types': ['Visual Novel']}
             ],
             'special_unlocks': [
                 {'name': 'Bugs', 'type': 'topic', 'requirement': 'Have < 40% hygiene between 1978-1983',
                  'permanent': True},
                 {'name': 'Dinosaurs', 'type': 'topic', 'requirement': 'Create 3 successful adventure games',
                  'permanent': True},
-                {'name': 'Retro', 'type': 'game_type', 'requirement': 'Reach year 2000',
+                {'name': 'Strategy', 'type': 'game_type', 'requirement': 'Reach year 1992 or create 2 board games',
                  'permanent': True},
+                {'name': 'Online', 'type': 'game_type', 'requirement': 'Available from 1994 to 2000',
+                 'permanent': False},
                 {'name': 'Educational', 'type': 'game_type', 'requirement': 'Achieve 90% happiness',
                  'permanent': True}
             ],

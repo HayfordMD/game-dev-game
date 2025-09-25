@@ -1,0 +1,30 @@
+character:
+  name: "Nancy Taylor"
+  id: 17
+  gender: "female"
+  skills:
+    engineering: 6      # 0-10 scale - proficient programmer
+    marketing: 2        # 0-10 scale - focused on tech not business
+    leadership: 3       # 0-10 scale - leads by example
+    design: 5          # 0-10 scale - good eye for mechanics
+    research: 7        # 0-10 scale - constantly experimenting
+    communication: 3   # 0-10 scale - prefers code to conversation
+
+  job: Gameplay Programmer
+
+  personality:
+    description: "Nancy makes games feel right - the jump height, the collision detection, the input responsiveness. She obsesses over frame timing and hitboxes, often playing the same level hundreds of times to perfect one mechanic. Quiet but intensely focused, she communicates through gameplay prototypes."
+
+  background:
+    education: "Physics degree, self-taught programming through game modding"
+    work_history: "Arcade cabinet repair, pinball programmer, fighting game studio"
+    personal_history: "Speedrunner in multiple games, discovered major exploits in famous titles, maintains physics engine blog"
+
+  ### max 3
+  hidden_traits:
+    - trait: "feel engineer"
+      ability: "automatically adds +3 to gameplay score through perfect game feel tuning"
+    - trait: "input perfectionist"
+      ability: "eliminates all input lag, improving reviews by +2 for action-heavy games"
+    - trait: "physics intuition"
+      ability: "50% chance to add innovative physics mechanic that increases innovation by +4"

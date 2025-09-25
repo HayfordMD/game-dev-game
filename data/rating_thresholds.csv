@@ -1,211 +1,241 @@
 year,rating,min_total_score,min_avg_score,description
-1984,Masterpiece,180,30.0,An absolute masterpiece! This game will be remembered for decades!
-1984,Legendary,165,27.5,A legendary achievement in game development!
-1984,Outstanding,150,25.0,Outstanding work! This game sets new standards!
-1984,Excellent,135,22.5,Excellent game that will be highly praised!
-1984,Notable,120,20.0,A notable release that will get attention!
-1984,Good,105,17.5,A good solid game that players will enjoy!
-1984,Fun,90,15.0,A fun game that will find its audience!
-1984,Decent,75,12.5,A decent effort with some good moments.
-1984,Meh,60,10.0,Meh... It's playable but forgettable.
+1978,Masterpiece,45,7.5,An absolute masterpiece! This game will be remembered for decades!
+1978,Legendary,42,7.0,A legendary achievement in game development!
+1978,Outstanding,39,6.5,Outstanding work! This game sets new standards!
+1978,Excellent,36,6.0,Excellent game that will be highly praised!
+1978,Notable,33,5.5,A notable release that will get attention!
+1978,Good,30,5.0,A good solid game that players will enjoy!
+1978,Fun,27,4.5,A fun game that will find its audience!
+1978,Decent,24,4.0,A decent effort with some good moments.
+1978,Meh,21,3.5,Meh... It's playable but forgettable.
+1978,Poor,0,0.0,Poor execution. Back to the drawing board.
+1980,Masterpiece,56,9.3,An absolute masterpiece! This game will be remembered for decades!
+1980,Legendary,52,8.7,A legendary achievement in game development!
+1980,Outstanding,49,8.2,Outstanding work! This game sets new standards!
+1980,Excellent,45,7.5,Excellent game that will be highly praised!
+1980,Notable,41,6.8,A notable release that will get attention!
+1980,Good,38,6.3,A good solid game that players will enjoy!
+1980,Fun,34,5.7,A fun game that will find its audience!
+1980,Decent,30,5.0,A decent effort with some good moments.
+1980,Meh,26,4.3,Meh... It's playable but forgettable.
+1980,Poor,0,0.0,Poor execution. Back to the drawing board.
+1982,Masterpiece,70,11.7,An absolute masterpiece! This game will be remembered for decades!
+1982,Legendary,66,11.0,A legendary achievement in game development!
+1982,Outstanding,61,10.2,Outstanding work! This game sets new standards!
+1982,Excellent,56,9.3,Excellent game that will be highly praised!
+1982,Notable,52,8.7,A notable release that will get attention!
+1982,Good,47,7.8,A good solid game that players will enjoy!
+1982,Fun,42,7.0,A fun game that will find its audience!
+1982,Decent,38,6.3,A decent effort with some good moments.
+1982,Meh,33,5.5,Meh... It's playable but forgettable.
+1982,Poor,0,0.0,Poor execution. Back to the drawing board.
+1984,Masterpiece,88,14.7,An absolute masterpiece! This game will be remembered for decades!
+1984,Legendary,82,13.7,A legendary achievement in game development!
+1984,Outstanding,76,12.7,Outstanding work! This game sets new standards!
+1984,Excellent,70,11.7,Excellent game that will be highly praised!
+1984,Notable,64,10.7,A notable release that will get attention!
+1984,Good,59,9.8,A good solid game that players will enjoy!
+1984,Fun,53,8.8,A fun game that will find its audience!
+1984,Decent,47,7.8,A decent effort with some good moments.
+1984,Meh,41,6.8,Meh... It's playable but forgettable.
 1984,Poor,0,0.0,Poor execution. Back to the drawing board.
-1986,Masterpiece,185,30.8,An absolute masterpiece! This game will be remembered for decades!
-1986,Legendary,170,28.3,A legendary achievement in game development!
-1986,Outstanding,155,25.8,Outstanding work! This game sets new standards!
-1986,Excellent,140,23.3,Excellent game that will be highly praised!
-1986,Notable,125,20.8,A notable release that will get attention!
-1986,Good,110,18.3,A good solid game that players will enjoy!
-1986,Fun,95,15.8,A fun game that will find its audience!
-1986,Decent,80,13.3,A decent effort with some good moments.
-1986,Meh,65,10.8,Meh... It's playable but forgettable.
+1986,Masterpiece,110,18.3,An absolute masterpiece! This game will be remembered for decades!
+1986,Legendary,103,17.2,A legendary achievement in game development!
+1986,Outstanding,95,15.8,Outstanding work! This game sets new standards!
+1986,Excellent,88,14.7,Excellent game that will be highly praised!
+1986,Notable,81,13.5,A notable release that will get attention!
+1986,Good,73,12.2,A good solid game that players will enjoy!
+1986,Fun,66,11.0,A fun game that will find its audience!
+1986,Decent,59,9.8,A decent effort with some good moments.
+1986,Meh,51,8.5,Meh... It's playable but forgettable.
 1986,Poor,0,0.0,Poor execution. Back to the drawing board.
-1988,Masterpiece,190,31.7,An absolute masterpiece! This game will be remembered for decades!
-1988,Legendary,175,29.2,A legendary achievement in game development!
-1988,Outstanding,160,26.7,Outstanding work! This game sets new standards!
-1988,Excellent,145,24.2,Excellent game that will be highly praised!
-1988,Notable,130,21.7,A notable release that will get attention!
-1988,Good,115,19.2,A good solid game that players will enjoy!
-1988,Fun,100,16.7,A fun game that will find its audience!
-1988,Decent,85,14.2,A decent effort with some good moments.
-1988,Meh,70,11.7,Meh... It's playable but forgettable.
+1988,Masterpiece,140,23.3,An absolute masterpiece! This game will be remembered for decades!
+1988,Legendary,130,21.7,A legendary achievement in game development!
+1988,Outstanding,120,20.0,Outstanding work! This game sets new standards!
+1988,Excellent,110,18.3,Excellent game that will be highly praised!
+1988,Notable,100,16.7,A notable release that will get attention!
+1988,Good,90,15.0,A good solid game that players will enjoy!
+1988,Fun,80,13.3,A fun game that will find its audience!
+1988,Decent,70,11.7,A decent effort with some good moments.
+1988,Meh,60,10.0,Meh... It's playable but forgettable.
 1988,Poor,0,0.0,Poor execution. Back to the drawing board.
-1990,Masterpiece,195,32.5,An absolute masterpiece! This game will be remembered for decades!
-1990,Legendary,180,30.0,A legendary achievement in game development!
-1990,Outstanding,165,27.5,Outstanding work! This game sets new standards!
-1990,Excellent,150,25.0,Excellent game that will be highly praised!
-1990,Notable,135,22.5,A notable release that will get attention!
-1990,Good,120,20.0,A good solid game that players will enjoy!
-1990,Fun,105,17.5,A fun game that will find its audience!
+1990,Masterpiece,170,28.3,An absolute masterpiece! This game will be remembered for decades!
+1990,Legendary,160,26.7,A legendary achievement in game development!
+1990,Outstanding,150,25.0,Outstanding work! This game sets new standards!
+1990,Excellent,140,23.3,Excellent game that will be highly praised!
+1990,Notable,130,21.7,A notable release that will get attention!
+1990,Good,110,18.3,A good solid game that players will enjoy!
+1990,Fun,100,16.7,A fun game that will find its audience!
 1990,Decent,90,15.0,A decent effort with some good moments.
-1990,Meh,75,12.5,Meh... It's playable but forgettable.
+1990,Meh,80,13.3,Meh... It's playable but forgettable.
 1990,Poor,0,0.0,Poor execution. Back to the drawing board.
-1992,Masterpiece,200,33.3,An absolute masterpiece! This game will be remembered for decades!
-1992,Legendary,185,30.8,A legendary achievement in game development!
-1992,Outstanding,170,28.3,Outstanding work! This game sets new standards!
-1992,Excellent,155,25.8,Excellent game that will be highly praised!
-1992,Notable,140,23.3,A notable release that will get attention!
-1992,Good,125,20.8,A good solid game that players will enjoy!
-1992,Fun,110,18.3,A fun game that will find its audience!
-1992,Decent,95,15.8,A decent effort with some good moments.
-1992,Meh,80,13.3,Meh... It's playable but forgettable.
+1992,Masterpiece,210,35.0,An absolute masterpiece! This game will be remembered for decades!
+1992,Legendary,200,33.3,A legendary achievement in game development!
+1992,Outstanding,190,31.7,Outstanding work! This game sets new standards!
+1992,Excellent,170,28.3,Excellent game that will be highly praised!
+1992,Notable,160,26.7,A notable release that will get attention!
+1992,Good,140,23.3,A good solid game that players will enjoy!
+1992,Fun,130,21.7,A fun game that will find its audience!
+1992,Decent,110,18.3,A decent effort with some good moments.
+1992,Meh,100,16.7,Meh... It's playable but forgettable.
 1992,Poor,0,0.0,Poor execution. Back to the drawing board.
-1994,Masterpiece,205,34.2,An absolute masterpiece! This game will be remembered for decades!
-1994,Legendary,190,31.7,A legendary achievement in game development!
-1994,Outstanding,175,29.2,Outstanding work! This game sets new standards!
-1994,Excellent,160,26.7,Excellent game that will be highly praised!
-1994,Notable,145,24.2,A notable release that will get attention!
-1994,Good,130,21.7,A good solid game that players will enjoy!
-1994,Fun,115,19.2,A fun game that will find its audience!
-1994,Decent,100,16.7,A decent effort with some good moments.
-1994,Meh,85,14.2,Meh... It's playable but forgettable.
+1994,Masterpiece,270,45.0,An absolute masterpiece! This game will be remembered for decades!
+1994,Legendary,250,41.7,A legendary achievement in game development!
+1994,Outstanding,230,38.3,Outstanding work! This game sets new standards!
+1994,Excellent,210,35.0,Excellent game that will be highly praised!
+1994,Notable,200,33.3,A notable release that will get attention!
+1994,Good,180,30.0,A good solid game that players will enjoy!
+1994,Fun,160,26.7,A fun game that will find its audience!
+1994,Decent,140,23.3,A decent effort with some good moments.
+1994,Meh,130,21.7,Meh... It's playable but forgettable.
 1994,Poor,0,0.0,Poor execution. Back to the drawing board.
-1996,Masterpiece,210,35.0,An absolute masterpiece! This game will be remembered for decades!
-1996,Legendary,195,32.5,A legendary achievement in game development!
-1996,Outstanding,180,30.0,Outstanding work! This game sets new standards!
-1996,Excellent,165,27.5,Excellent game that will be highly praised!
-1996,Notable,150,25.0,A notable release that will get attention!
-1996,Good,135,22.5,A good solid game that players will enjoy!
-1996,Fun,120,20.0,A fun game that will find its audience!
-1996,Decent,105,17.5,A decent effort with some good moments.
-1996,Meh,90,15.0,Meh... It's playable but forgettable.
+1996,Masterpiece,340,56.7,An absolute masterpiece! This game will be remembered for decades!
+1996,Legendary,310,51.7,A legendary achievement in game development!
+1996,Outstanding,290,48.3,Outstanding work! This game sets new standards!
+1996,Excellent,270,45.0,Excellent game that will be highly praised!
+1996,Notable,250,41.7,A notable release that will get attention!
+1996,Good,220,36.7,A good solid game that players will enjoy!
+1996,Fun,200,33.3,A fun game that will find its audience!
+1996,Decent,180,30.0,A decent effort with some good moments.
+1996,Meh,160,26.7,Meh... It's playable but forgettable.
 1996,Poor,0,0.0,Poor execution. Back to the drawing board.
-1998,Masterpiece,215,35.8,An absolute masterpiece! This game will be remembered for decades!
-1998,Legendary,200,33.3,A legendary achievement in game development!
-1998,Outstanding,185,30.8,Outstanding work! This game sets new standards!
-1998,Excellent,170,28.3,Excellent game that will be highly praised!
-1998,Notable,155,25.8,A notable release that will get attention!
-1998,Good,140,23.3,A good solid game that players will enjoy!
-1998,Fun,125,20.8,A fun game that will find its audience!
-1998,Decent,110,18.3,A decent effort with some good moments.
-1998,Meh,95,15.8,Meh... It's playable but forgettable.
+1998,Masterpiece,420,70.0,An absolute masterpiece! This game will be remembered for decades!
+1998,Legendary,390,65.0,A legendary achievement in game development!
+1998,Outstanding,360,60.0,Outstanding work! This game sets new standards!
+1998,Excellent,340,56.7,Excellent game that will be highly praised!
+1998,Notable,310,51.7,A notable release that will get attention!
+1998,Good,280,46.7,A good solid game that players will enjoy!
+1998,Fun,250,41.7,A fun game that will find its audience!
+1998,Decent,220,36.7,A decent effort with some good moments.
+1998,Meh,200,33.3,Meh... It's playable but forgettable.
 1998,Poor,0,0.0,Poor execution. Back to the drawing board.
-2000,Masterpiece,220,36.7,An absolute masterpiece! This game will be remembered for decades!
-2000,Legendary,205,34.2,A legendary achievement in game development!
-2000,Outstanding,190,31.7,Outstanding work! This game sets new standards!
-2000,Excellent,175,29.2,Excellent game that will be highly praised!
-2000,Notable,160,26.7,A notable release that will get attention!
-2000,Good,145,24.2,A good solid game that players will enjoy!
-2000,Fun,130,21.7,A fun game that will find its audience!
-2000,Decent,115,19.2,A decent effort with some good moments.
-2000,Meh,100,16.7,Meh... It's playable but forgettable.
+2000,Masterpiece,520,86.7,An absolute masterpiece! This game will be remembered for decades!
+2000,Legendary,490,81.7,A legendary achievement in game development!
+2000,Outstanding,450,75.0,Outstanding work! This game sets new standards!
+2000,Excellent,420,70.0,Excellent game that will be highly praised!
+2000,Notable,380,63.3,A notable release that will get attention!
+2000,Good,350,58.3,A good solid game that players will enjoy!
+2000,Fun,310,51.7,A fun game that will find its audience!
+2000,Decent,280,46.7,A decent effort with some good moments.
+2000,Meh,240,40.0,Meh... It's playable but forgettable.
 2000,Poor,0,0.0,Poor execution. Back to the drawing board.
-2002,Masterpiece,225,37.5,An absolute masterpiece! This game will be remembered for decades!
-2002,Legendary,210,35.0,A legendary achievement in game development!
-2002,Outstanding,195,32.5,Outstanding work! This game sets new standards!
-2002,Excellent,180,30.0,Excellent game that will be highly praised!
-2002,Notable,165,27.5,A notable release that will get attention!
-2002,Good,150,25.0,A good solid game that players will enjoy!
-2002,Fun,135,22.5,A fun game that will find its audience!
-2002,Decent,120,20.0,A decent effort with some good moments.
-2002,Meh,105,17.5,Meh... It's playable but forgettable.
+2002,Masterpiece,650,108.3,An absolute masterpiece! This game will be remembered for decades!
+2002,Legendary,610,101.7,A legendary achievement in game development!
+2002,Outstanding,570,95.0,Outstanding work! This game sets new standards!
+2002,Excellent,520,86.7,Excellent game that will be highly praised!
+2002,Notable,480,80.0,A notable release that will get attention!
+2002,Good,440,73.3,A good solid game that players will enjoy!
+2002,Fun,390,65.0,A fun game that will find its audience!
+2002,Decent,350,58.3,A decent effort with some good moments.
+2002,Meh,310,51.7,Meh... It's playable but forgettable.
 2002,Poor,0,0.0,Poor execution. Back to the drawing board.
-2004,Masterpiece,230,38.3,An absolute masterpiece! This game will be remembered for decades!
-2004,Legendary,215,35.8,A legendary achievement in game development!
-2004,Outstanding,200,33.3,Outstanding work! This game sets new standards!
-2004,Excellent,185,30.8,Excellent game that will be highly praised!
-2004,Notable,170,28.3,A notable release that will get attention!
-2004,Good,155,25.8,A good solid game that players will enjoy!
-2004,Fun,140,23.3,A fun game that will find its audience!
-2004,Decent,125,20.8,A decent effort with some good moments.
-2004,Meh,110,18.3,Meh... It's playable but forgettable.
+2004,Masterpiece,820,136.7,An absolute masterpiece! This game will be remembered for decades!
+2004,Legendary,760,126.7,A legendary achievement in game development!
+2004,Outstanding,710,118.3,Outstanding work! This game sets new standards!
+2004,Excellent,650,108.3,Excellent game that will be highly praised!
+2004,Notable,600,100.0,A notable release that will get attention!
+2004,Good,550,91.7,A good solid game that players will enjoy!
+2004,Fun,490,81.7,A fun game that will find its audience!
+2004,Decent,440,73.3,A decent effort with some good moments.
+2004,Meh,380,63.3,Meh... It's playable but forgettable.
 2004,Poor,0,0.0,Poor execution. Back to the drawing board.
-2006,Masterpiece,235,39.2,An absolute masterpiece! This game will be remembered for decades!
-2006,Legendary,220,36.7,A legendary achievement in game development!
-2006,Outstanding,205,34.2,Outstanding work! This game sets new standards!
-2006,Excellent,190,31.7,Excellent game that will be highly praised!
-2006,Notable,175,29.2,A notable release that will get attention!
-2006,Good,160,26.7,A good solid game that players will enjoy!
-2006,Fun,145,24.2,A fun game that will find its audience!
-2006,Decent,130,21.7,A decent effort with some good moments.
-2006,Meh,115,19.2,Meh... It's playable but forgettable.
+2006,Masterpiece,1020,170.0,An absolute masterpiece! This game will be remembered for decades!
+2006,Legendary,950,158.3,A legendary achievement in game development!
+2006,Outstanding,890,148.3,Outstanding work! This game sets new standards!
+2006,Excellent,820,136.7,Excellent game that will be highly praised!
+2006,Notable,750,125.0,A notable release that will get attention!
+2006,Good,680,113.3,A good solid game that players will enjoy!
+2006,Fun,610,101.7,A fun game that will find its audience!
+2006,Decent,550,91.7,A decent effort with some good moments.
+2006,Meh,480,80.0,Meh... It's playable but forgettable.
 2006,Poor,0,0.0,Poor execution. Back to the drawing board.
-2008,Masterpiece,240,40.0,An absolute masterpiece! This game will be remembered for decades!
-2008,Legendary,225,37.5,A legendary achievement in game development!
-2008,Outstanding,210,35.0,Outstanding work! This game sets new standards!
-2008,Excellent,195,32.5,Excellent game that will be highly praised!
-2008,Notable,180,30.0,A notable release that will get attention!
-2008,Good,165,27.5,A good solid game that players will enjoy!
-2008,Fun,150,25.0,A fun game that will find its audience!
-2008,Decent,135,22.5,A decent effort with some good moments.
-2008,Meh,120,20.0,Meh... It's playable but forgettable.
+2008,Masterpiece,1280,213.3,An absolute masterpiece! This game will be remembered for decades!
+2008,Legendary,1190,198.3,A legendary achievement in game development!
+2008,Outstanding,1110,185.0,Outstanding work! This game sets new standards!
+2008,Excellent,1020,170.0,Excellent game that will be highly praised!
+2008,Notable,940,156.7,A notable release that will get attention!
+2008,Good,850,141.7,A good solid game that players will enjoy!
+2008,Fun,770,128.3,A fun game that will find its audience!
+2008,Decent,680,113.3,A decent effort with some good moments.
+2008,Meh,600,100.0,Meh... It's playable but forgettable.
 2008,Poor,0,0.0,Poor execution. Back to the drawing board.
-2010,Masterpiece,245,40.8,An absolute masterpiece! This game will be remembered for decades!
-2010,Legendary,230,38.3,A legendary achievement in game development!
-2010,Outstanding,215,35.8,Outstanding work! This game sets new standards!
-2010,Excellent,200,33.3,Excellent game that will be highly praised!
-2010,Notable,185,30.8,A notable release that will get attention!
-2010,Good,170,28.3,A good solid game that players will enjoy!
-2010,Fun,155,25.8,A fun game that will find its audience!
-2010,Decent,140,23.3,A decent effort with some good moments.
-2010,Meh,125,20.8,Meh... It's playable but forgettable.
+2010,Masterpiece,1600,266.7,An absolute masterpiece! This game will be remembered for decades!
+2010,Legendary,1490,248.3,A legendary achievement in game development!
+2010,Outstanding,1390,231.7,Outstanding work! This game sets new standards!
+2010,Excellent,1280,213.3,Excellent game that will be highly praised!
+2010,Notable,1170,195.0,A notable release that will get attention!
+2010,Good,1070,178.3,A good solid game that players will enjoy!
+2010,Fun,960,160.0,A fun game that will find its audience!
+2010,Decent,850,141.7,A decent effort with some good moments.
+2010,Meh,750,125.0,Meh... It's playable but forgettable.
 2010,Poor,0,0.0,Poor execution. Back to the drawing board.
-2012,Masterpiece,250,41.7,An absolute masterpiece! This game will be remembered for decades!
-2012,Legendary,235,39.2,A legendary achievement in game development!
-2012,Outstanding,220,36.7,Outstanding work! This game sets new standards!
-2012,Excellent,205,34.2,Excellent game that will be highly praised!
-2012,Notable,190,31.7,A notable release that will get attention!
-2012,Good,175,29.2,A good solid game that players will enjoy!
-2012,Fun,160,26.7,A fun game that will find its audience!
-2012,Decent,145,24.2,A decent effort with some good moments.
-2012,Meh,130,21.7,Meh... It's playable but forgettable.
+2012,Masterpiece,2000,333.3,An absolute masterpiece! This game will be remembered for decades!
+2012,Legendary,1870,311.7,A legendary achievement in game development!
+2012,Outstanding,1730,288.3,Outstanding work! This game sets new standards!
+2012,Excellent,1600,266.7,Excellent game that will be highly praised!
+2012,Notable,1470,245.0,A notable release that will get attention!
+2012,Good,1330,221.7,A good solid game that players will enjoy!
+2012,Fun,1200,200.0,A fun game that will find its audience!
+2012,Decent,1070,178.3,A decent effort with some good moments.
+2012,Meh,930,155.0,Meh... It's playable but forgettable.
 2012,Poor,0,0.0,Poor execution. Back to the drawing board.
-2014,Masterpiece,255,42.5,An absolute masterpiece! This game will be remembered for decades!
-2014,Legendary,240,40.0,A legendary achievement in game development!
-2014,Outstanding,225,37.5,Outstanding work! This game sets new standards!
-2014,Excellent,210,35.0,Excellent game that will be highly praised!
-2014,Notable,195,32.5,A notable release that will get attention!
-2014,Good,180,30.0,A good solid game that players will enjoy!
-2014,Fun,165,27.5,A fun game that will find its audience!
-2014,Decent,150,25.0,A decent effort with some good moments.
-2014,Meh,135,22.5,Meh... It's playable but forgettable.
+2014,Masterpiece,2500,416.7,An absolute masterpiece! This game will be remembered for decades!
+2014,Legendary,2330,388.3,A legendary achievement in game development!
+2014,Outstanding,2160,360.0,Outstanding work! This game sets new standards!
+2014,Excellent,2000,333.3,Excellent game that will be highly praised!
+2014,Notable,1830,305.0,A notable release that will get attention!
+2014,Good,1670,278.3,A good solid game that players will enjoy!
+2014,Fun,1500,250.0,A fun game that will find its audience!
+2014,Decent,1330,221.7,A decent effort with some good moments.
+2014,Meh,1170,195.0,Meh... It's playable but forgettable.
 2014,Poor,0,0.0,Poor execution. Back to the drawing board.
-2016,Masterpiece,260,43.3,An absolute masterpiece! This game will be remembered for decades!
-2016,Legendary,245,40.8,A legendary achievement in game development!
-2016,Outstanding,230,38.3,Outstanding work! This game sets new standards!
-2016,Excellent,215,35.8,Excellent game that will be highly praised!
-2016,Notable,200,33.3,A notable release that will get attention!
-2016,Good,185,30.8,A good solid game that players will enjoy!
-2016,Fun,170,28.3,A fun game that will find its audience!
-2016,Decent,155,25.8,A decent effort with some good moments.
-2016,Meh,140,23.3,Meh... It's playable but forgettable.
+2016,Masterpiece,3120,520.0,An absolute masterpiece! This game will be remembered for decades!
+2016,Legendary,2910,485.0,A legendary achievement in game development!
+2016,Outstanding,2710,451.7,Outstanding work! This game sets new standards!
+2016,Excellent,2500,416.7,Excellent game that will be highly praised!
+2016,Notable,2290,381.7,A notable release that will get attention!
+2016,Good,2080,346.7,A good solid game that players will enjoy!
+2016,Fun,1870,311.7,A fun game that will find its audience!
+2016,Decent,1670,278.3,A decent effort with some good moments.
+2016,Meh,1460,243.3,Meh... It's playable but forgettable.
 2016,Poor,0,0.0,Poor execution. Back to the drawing board.
-2018,Masterpiece,265,44.2,An absolute masterpiece! This game will be remembered for decades!
-2018,Legendary,250,41.7,A legendary achievement in game development!
-2018,Outstanding,235,39.2,Outstanding work! This game sets new standards!
-2018,Excellent,220,36.7,Excellent game that will be highly praised!
-2018,Notable,205,34.2,A notable release that will get attention!
-2018,Good,190,31.7,A good solid game that players will enjoy!
-2018,Fun,175,29.2,A fun game that will find its audience!
-2018,Decent,160,26.7,A decent effort with some good moments.
-2018,Meh,145,24.2,Meh... It's playable but forgettable.
+2018,Masterpiece,3900,650.0,An absolute masterpiece! This game will be remembered for decades!
+2018,Legendary,3640,606.7,A legendary achievement in game development!
+2018,Outstanding,3380,563.3,Outstanding work! This game sets new standards!
+2018,Excellent,3120,520.0,Excellent game that will be highly praised!
+2018,Notable,2860,476.7,A notable release that will get attention!
+2018,Good,2600,433.3,A good solid game that players will enjoy!
+2018,Fun,2340,390.0,A fun game that will find its audience!
+2018,Decent,2080,346.7,A decent effort with some good moments.
+2018,Meh,1820,303.3,Meh... It's playable but forgettable.
 2018,Poor,0,0.0,Poor execution. Back to the drawing board.
-2020,Masterpiece,270,45.0,An absolute masterpiece! This game will be remembered for decades!
-2020,Legendary,255,42.5,A legendary achievement in game development!
-2020,Outstanding,240,40.0,Outstanding work! This game sets new standards!
-2020,Excellent,225,37.5,Excellent game that will be highly praised!
-2020,Notable,210,35.0,A notable release that will get attention!
-2020,Good,195,32.5,A good solid game that players will enjoy!
-2020,Fun,180,30.0,A fun game that will find its audience!
-2020,Decent,165,27.5,A decent effort with some good moments.
-2020,Meh,150,25.0,Meh... It's playable but forgettable.
+2020,Masterpiece,4880,813.3,An absolute masterpiece! This game will be remembered for decades!
+2020,Legendary,4550,758.3,A legendary achievement in game development!
+2020,Outstanding,4230,705.0,Outstanding work! This game sets new standards!
+2020,Excellent,3900,650.0,Excellent game that will be highly praised!
+2020,Notable,3580,596.7,A notable release that will get attention!
+2020,Good,3250,541.7,A good solid game that players will enjoy!
+2020,Fun,2930,488.3,A fun game that will find its audience!
+2020,Decent,2600,433.3,A decent effort with some good moments.
+2020,Meh,2280,380.0,Meh... It's playable but forgettable.
 2020,Poor,0,0.0,Poor execution. Back to the drawing board.
-2022,Masterpiece,275,45.8,An absolute masterpiece! This game will be remembered for decades!
-2022,Legendary,260,43.3,A legendary achievement in game development!
-2022,Outstanding,245,40.8,Outstanding work! This game sets new standards!
-2022,Excellent,230,38.3,Excellent game that will be highly praised!
-2022,Notable,215,35.8,A notable release that will get attention!
-2022,Good,200,33.3,A good solid game that players will enjoy!
-2022,Fun,185,30.8,A fun game that will find its audience!
-2022,Decent,170,28.3,A decent effort with some good moments.
-2022,Meh,155,25.8,Meh... It's playable but forgettable.
+2022,Masterpiece,6100,1016.7,An absolute masterpiece! This game will be remembered for decades!
+2022,Legendary,5690,948.3,A legendary achievement in game development!
+2022,Outstanding,5290,881.7,Outstanding work! This game sets new standards!
+2022,Excellent,4880,813.3,Excellent game that will be highly praised!
+2022,Notable,4470,745.0,A notable release that will get attention!
+2022,Good,4070,678.3,A good solid game that players will enjoy!
+2022,Fun,3660,610.0,A fun game that will find its audience!
+2022,Decent,3250,541.7,A decent effort with some good moments.
+2022,Meh,2850,475.0,Meh... It's playable but forgettable.
 2022,Poor,0,0.0,Poor execution. Back to the drawing board.
-2024,Masterpiece,280,46.7,An absolute masterpiece! This game will be remembered for decades!
-2024,Legendary,265,44.2,A legendary achievement in game development!
-2024,Outstanding,250,41.7,Outstanding work! This game sets new standards!
-2024,Excellent,235,39.2,Excellent game that will be highly praised!
-2024,Notable,220,36.7,A notable release that will get attention!
-2024,Good,205,34.2,A good solid game that players will enjoy!
-2024,Fun,190,31.7,A fun game that will find its audience!
-2024,Decent,175,29.2,A decent effort with some good moments.
-2024,Meh,160,26.7,Meh... It's playable but forgettable.
+2024,Masterpiece,7620,1270.0,An absolute masterpiece! This game will be remembered for decades!
+2024,Legendary,7120,1186.7,A legendary achievement in game development!
+2024,Outstanding,6610,1101.7,Outstanding work! This game sets new standards!
+2024,Excellent,6100,1016.7,Excellent game that will be highly praised!
+2024,Notable,5590,931.7,A notable release that will get attention!
+2024,Good,5080,846.7,A good solid game that players will enjoy!
+2024,Fun,4570,761.7,A fun game that will find its audience!
+2024,Decent,4070,678.3,A decent effort with some good moments.
+2024,Meh,3560,593.3,Meh... It's playable but forgettable.
 2024,Poor,0,0.0,Poor execution. Back to the drawing board.

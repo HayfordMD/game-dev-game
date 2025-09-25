@@ -1,0 +1,30 @@
+character:
+  name: "Linda Rodriguez"
+  id: 13
+  gender: "female"
+  skills:
+    engineering: 8      # 0-10 scale - excellent system design
+    marketing: 2        # 0-10 scale - focused on tech not sales
+    leadership: 5       # 0-10 scale - can coordinate technical teams
+    design: 4          # 0-10 scale - understands user needs
+    research: 6        # 0-10 scale - always learning new architectures
+    communication: 4   # 0-10 scale - can document systems clearly
+
+  job: Systems Architect
+
+  personality:
+    description: "Linda sees the big picture in code architecture, designing systems that scale elegantly. She draws complex diagrams on whiteboards and can spot bottlenecks before they happen. Quietly confident, she lets her work speak for itself and mentors junior developers with patience."
+
+  background:
+    education: "Computer Science Masters, thesis on distributed systems"
+    work_history: "Database company, enterprise software, early networking pioneer"
+    personal_history: "Father was an architect, she applies building principles to code, maintains open-source projects on weekends"
+
+  ### max 3
+  hidden_traits:
+    - trait: "future proof"
+      ability: "games developed with her get +3 technical score that increases by +1 each year after release"
+    - trait: "clean code advocate"
+      ability: "reduces bug generation by 30% during development through better architecture"
+    - trait: "scalability sense"
+      ability: "if making an Online type game, automatic +5 to technical and +3 to innovation"

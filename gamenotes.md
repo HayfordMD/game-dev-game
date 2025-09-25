@@ -28,7 +28,7 @@
 - Buy/Rent/Skip
 - Metacritic color coding
 
-## All Possible Game Types (17 total)
+## All Possible Game Types (15 total)
 
 1. **Text Adventure** - *Available from start*
 2. **Arcade** - *Available from start*
@@ -40,203 +40,141 @@
 8. **Fighting**
 9. **Adventure**
 10. **Action**
-11. **Action-Adventure**
-12. **Simulation**
-13. **Strategy** unlocked when you make 2 board games or after 1992 whichever comes first
-14. **Online Game** - Reach year 1994 then this type is available until 2000 it is a negative modifier of -5% to all ratings due to connection issues and server problems
-15. **MMORPG** if rpg is unlocked and past 1996 then this type is available, priori to 2004 it is a negative modifier of -10% to all ratings due to connection issues and server problems
-16. **Visual Novel**
-17. **MOBA**
-18. **Educational** - *Special unlock: Achieve 90% happiness* once it is unlocked it is unlocked at the start of every play through afterwards
+11. **Simulation**
+12. **Strategy** - unlocked when you make 2 board games or after 1992 whichever comes first
+13. **Online** - Reach year 1994 then this type is available until 2000 it is a negative modifier of -5% to all ratings due to connection issues and server problems
+14. **Visual Novel**
+15. **Educational** - *Special unlock: Achieve 90% happiness* once it is unlocked it is unlocked at the start of every play through afterwards
 
-## All Possible Topics (155 total)
-### Original/Classic (5)
+## All Possible Topics (94 total)
+### Original/Classic (4)
 1. **Table Tennis** - *Available from start*
 2. **Fantasy** - *Available from start*
 3. **Space** - *Available from start*
 4. **Temple** - *Available from start*
 
-### Horror (14)
-6. **Zombies**
-7. **Space Zombies**
-8. **Vampires**
-9. **Werewolves**
-10. **Ghosts**
-11. **Demons**
-12. **Possession**
-13. **Haunted Houses**
-14. **Occult Rituals**
-15. **Psychological Horror**
-16. **Survival Horror**
-17. **Cursed Artifacts**
-18. **Eldritch Abominations**
-19. **Post-Apocalyptic Horror**
+### Horror (6)
+5. **Zombies**
+6. **Vampires**
+7. **Ghosts**
+8. **Haunted Houses**
+9. **Psychological Horror**
+10. **Post-Apocalyptic**
 
-### Sci-Fi & Futuristic (14)
-20. **Space Exploration**
-21. **Alien Invasion**
-22. **Space Pirates**
-23. **Time Travel**
-24. **Cyberpunk**
-25. **AI Uprising**
-26. **Mechs**
-27. **Terraforming**
-28. **Galactic Warfare**
-29. **Space Colonies**
-30. **Interdimensional Travel**
-31. **Nanotechnology**
-32. **Virtual Reality Worlds**
-33. **Robot Rebellion**
+### Sci-Fi & Futuristic (8)
+11. **Space Exploration**
+12. **Alien Invasion**
+13. **Cyberpunk**
+14. **AI Uprising**
+15. **Mechs**
+16. **Terraforming**
+17. **Galactic Warfare**
+18. **Interdimensional Travel**
 
-### Real-World & Occupational (14)
-34. **Roadwork**
-35. **Trucking**
-36. **Farming**
-37. **Construction**
-38. **Mining**
-39. **Fishing**
-40. **Logging**
-41. **Factory Work**
-42. **Delivery Services**
-43. **Emergency Response**
-44. **Garbage Collection**
-45. **Postal Work**
-46. **Oil Drilling**
-47. **Power Grid Management**
+### Real-World & Occupational (9)
+19. **Trucking**
+20. **Farming**
+21. **Mining**
+22. **Fishing**
+23. **Logging**
+24. **Factory Work**
+25. **Emergency Response**
+26. **Postal Work**
+27. **Oil Drilling**
 
-### Fantasy & Mythology (14)
-48. **Dragons**
-49. **Elves & Dwarves**
-50. **Magic Schools**
-51. **Necromancy**
-52. **Kingdoms & Castles**
-53. **Gods & Titans**
-54. **Elemental Powers**
-55. **Questing Heroes**
-56. **Mythical Creatures**
-57. **Ancient Ruins**
-58. **Fairy Tales**
-59. **Dark Forests**
-60. **Magical Artifacts**
-61. **Prophecies**
+### Fantasy & Mythology (10)
+28. **Dragons**
+29. **Elves & Dwarves**
+30. **Magic Schools**
+31. **Kingdoms & Castles**
+32. **Gods & Titans**
+33. **Mythical Creatures**
+34. **Ancient Ruins**
+35. **Fairy Tales**
+36. **Magical Artifacts**
+37. **Prophecies**
 
-### Action & Conflict (14)
-62. **War**
-63. **Espionage**
-64. **Heists**
-65. **Martial Arts**
-66. **Gladiator Arenas**
-67. **Gang Warfare**
-68. **Pirate Battles**
-69. **Monster Hunting**
-70. **Bounty Hunting**
-71. **Mercenary Missions**
-72. **Tactical Infiltration**
-73. **Riot Control**
-74. **Survival Combat**
-75. **Urban Warfare**
+### Action & Conflict (5)
+38. **War**
+39. **Martial Arts**
+40. **Gladiator Arenas**
+41. **Monster Hunting**
+42. **Mercenary Missions**
+43. **Tactical Infiltration**
 
-### Historical & Cultural (14)
-76. **Ancient Egypt**
-77. **Feudal Japan**
-78. **Viking Raids**
-79. **Roman Empire**
-80. **Wild West**
-81. **World War I**
-82. **World War II**
-83. **Cold War**
-84. **Medieval Europe**
-85. **Renaissance**
-86. **Industrial Revolution**
-87. **Colonial Exploration**
-88. **Tribal Societies**
-89. **Revolutionary Movements**
+### Historical & Cultural (9)
+44. **Egypt**
+45. **Viking**
+46. **Roman Empire**
+47. **Wild West**
+48. **World War I**
+49. **World War II**
+50. **Cold War**
+51. **Medieval Europe**
+52. **Colonial Exploration**
+53. **Tribal Societies**
 
-### Urban & Social (14)
-90. **City Building**
-91. **Dating Sim**
-92. **High School Drama**
-93. **Office Politics**
-94. **Nightlife**
-95. **Apartment Living**
-96. **Social Media Fame**
-97. **Reality TV**
-98. **Fashion Design**
-99. **Restaurant Management**
-100. **Crime Investigation**
-101. **Journalism**
-102. **Political Campaigns**
-103. **Suburban Life**
+### Urban & Social (8)
+54. **City Building**
+55. **Dating Sim**
+56. **High School Drama**
+57. **Office**
+58. **Social Media Fame**
+59. **Fashion Design**
+60. **Restaurant Management**
+61. **Journalism**
 
-### Nature & Environment (14)
-104. **Wildlife Rescue**
-105. **Eco Activism**
-106. **Forest Survival**
-107. **Ocean Exploration**
-108. **Climate Crisis**
-109. **Natural Disasters**
-110. **Gardening**
-111. **Animal Behavior**
-112. **Weather Control**
-113. **Volcanoes**
-114. **Arctic Expeditions**
-115. **Desert Survival**
-116. **Cave Diving**
-117. **Meteorology**
+### Nature & Environment (8)
+62. **Wildlife Rescue**
+63. **Ocean Exploration**
+64. **Gardening**
+65. **Animal**
+66. **Weather Control**
+67. **Arctic Expeditions**
+68. **Cave Diving**
 
-### Creative & Experimental (14)
-118. **Music Creation**
-120. **Painting**
-121. **Sculpture**
-122. **Architecture**
-123. **Dance**
-124. **Poetry**
-125. **Theater**
-126. **Film Production**
-127. **Photography**
-128. **Fashion**
-129. **Interior Design**
-130. **Toy Making**
-131. **Dreamscapes**
+### Creative & Experimental (8)
+69. **Music Creation**
+70. **Painting**
+71. **Dance**
+72. **Poetry**
+73. **Film Production**
+74. **Photography**
+75. **Fashion**
+76. **Toy Making**
 
-### Other/Misc (6)
-132. **Ninjas**
-133. **Pirates**
-134. **Racing**
-135. **Dinosaurs** - *Special unlock: Create 3 adventure games*
-136. **Robots**
-137. **Bugs** - *Special unlock: Have < 40% hygiene between 1978-1983*
+### Other/Misc (5)
+77. **Ninjas**
+78. **Pirates**
+79. **Dinosaurs** - *Special unlock: Create 3 adventure games*
+80. **Robots**
+81. **Bugs** - *Special unlock: Have < 40% hygiene between 1978-1983*
 
-### Sports Topics (18)
-138. **Golf**
-139. **Basketball**
-140. **Football**
-141. **Soccer**
-142. **Baseball**
-143. **Tennis**
-144. **Hockey**
-145. **Boxing**
-146. **Wrestling**
-147. **Skateboarding**
-148. **Skiing**
-149. **Surfing**
-150. **Olympics**
-151. **Cricket**
-152. **Rugby**
-153. **Volleyball**
-154. **Swimming**
-155. **Track & Field**
+### Sports Topics (13)
+82. **Golf**
+83. **Basketball**
+84. **Football**
+85. **Soccer**
+86. **Baseball**
+87. **Tennis**
+88. **Boxing**
+89. **Skateboarding**
+90. **Surfing**
+91. **Olympics**
+92. **Volleyball**
+93. **Swimming**
+94. **Track & Field**
 
 ## Starting Combinations
 
 At game start (1978), you have:
 - **2 Game Types**: Text Adventure, Arcade
-- **5 Topics**: Table Tennis, Fantasy, Space, Temple, Adventure
-- **10 Possible Combinations**
+- **4 Topics**: Table Tennis, Fantasy, Space, Temple
+- **8 Possible Combinations**
 
 ### Special Unlocks
 - **RPG Game Type**: Create any Text Adventure + Fantasy game
-- **Office Game Type**: Create "Ping" (Arcade + Table Tennis)
+- **Racing Game Type**: Create 3 Arcade games
 - **Bugs Topic**: Low hygiene (< 40%) in years 1978-1983
 - **Dinosaurs Topic**: Create 3 successful adventure games
 - **Educational Game Type**: Achieve 90% happiness

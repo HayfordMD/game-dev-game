@@ -1,0 +1,30 @@
+character:
+  name: "Kenneth Harris"
+  id: 16
+  gender: "male"
+  skills:
+    engineering: 2      # 0-10 scale - basic technical understanding
+    marketing: 7        # 0-10 scale - strong external relations
+    leadership: 5       # 0-10 scale - manages partnerships well
+    design: 3          # 0-10 scale - understands developer needs
+    research: 4        # 0-10 scale - tracks industry trends
+    communication: 8   # 0-10 scale - excellent networker
+
+  job: Developer Relations Manager
+
+  personality:
+    description: "Kenneth is the bridge between your studio and the platform holders. Charismatic and well-connected, he speaks fluent corporate while understanding developer struggles. Always has insider information from 'a friend at the company' and knows which executives to call."
+
+  background:
+    education: "Business degree with minor in Computer Science"
+    work_history: "Platform evangelist at console company, indie studio liaison, trade show organizer"
+    personal_history: "Father worked at major publisher, grew up going to industry events, has contact list worth gold"
+
+  ### max 3
+  hidden_traits:
+    - trait: "platform insider"
+      ability: "reduces console certification time by 1 week through connections"
+    - trait: "exclusive negotiator"
+      ability: "10% chance to secure platform-exclusive bonus worth $50,000 when releasing on console"
+    - trait: "patch expeditor"
+      ability: "can push one emergency patch per game without normal approval delays"

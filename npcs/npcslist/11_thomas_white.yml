@@ -1,0 +1,30 @@
+character:
+  name: "Thomas White"
+  id: 11
+  gender: "male"
+  skills:
+    engineering: 2      # 0-10 scale - low, art focused
+    marketing: 3        # 0-10 scale - understands market appeal
+    leadership: 4       # 0-10 scale - can guide art team
+    design: 6          # 0-10 scale - strong visual design
+    research: 3        # 0-10 scale - keeps up with trends
+    communication: 4   # 0-10 scale - decent at explaining vision
+
+  job: Art Director
+
+  personality:
+    description: "Thomas has a keen eye for visual cohesion and believes every pixel tells a story. He's enthusiastic about color theory and composition but sometimes struggles to compromise his artistic vision for technical limitations. Works best with clear deadlines."
+
+  background:
+    education: "Fine Arts degree, self-taught in digital art tools"
+    work_history: "Started as traditional illustrator, transitioned to pixel art for early games, learned on the job"
+    personal_history: "Drew comics as a kid, spent hours recreating game sprites by hand, first computer art was in MS Paint"
+
+  ### max 3
+  hidden_traits:
+    - trait: "pixel perfect"
+      ability: "when working on games before 1990, +3 to graphics score due to mastery of limited palettes"
+    - trait: "color theorist"
+      ability: "10% chance each development stage to boost graphics by +2 when he finds the perfect palette"
+    - trait: "art block breaker"
+      ability: "if graphics score would be below 10, has 25% chance to add +5 through sudden inspiration"

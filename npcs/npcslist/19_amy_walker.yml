@@ -1,0 +1,30 @@
+character:
+  name: "Amy Walker"
+  id: 19
+  gender: "female"
+  skills:
+    engineering: 3      # 0-10 scale - understands basics
+    marketing: 8        # 0-10 scale - excellent market researcher
+    leadership: 4       # 0-10 scale - coordinates focus groups
+    design: 6          # 0-10 scale - knows what players want
+    research: 7        # 0-10 scale - deep competitive analysis
+    communication: 5   # 0-10 scale - presents findings clearly
+
+  job: Market Research Analyst
+
+  personality:
+    description: "Amy knows every game that's shipped, flopped, or succeeded in the last decade. She tracks metacritic scores, sales figures, and player sentiment with scientific precision. Presents market opportunities others miss and can predict trends before they happen. Always has data to back up her hunches."
+
+  background:
+    education: "Statistics degree with focus on consumer behavior"
+    work_history: "Nielsen ratings analyst, toy company trend spotter, gaming magazine reviewer"
+    personal_history: "Maintains spreadsheet of every game she's played since 1985, predicted the casual gaming boom, runs anonymous gaming survey site"
+
+  ### max 3
+  hidden_traits:
+    - trait: "trend prophet"
+      ability: "warns 6 months early which game types will become oversaturated, preventing -5 market penalty"
+    - trait: "competitor intel"
+      ability: "reveals exact release dates of competing games 2 months in advance"
+    - trait: "hidden audience"
+      ability: "discovers untapped market segment once per year, guaranteeing +20% sales for matching game"
