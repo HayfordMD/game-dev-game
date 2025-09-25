@@ -28,34 +28,26 @@
 - Buy/Rent/Skip
 - Metacritic color coding
 
-## All Possible Game Types (26 total)
+## All Possible Game Types (17 total)
 
 1. **Text Adventure** - *Available from start*
 2. **Arcade** - *Available from start*
 3. **Platformer**
 4. **Puzzle**
 5. **Shooter**
-6. **Beat em Up**
-7. **RPG** (Role-Playing Game) - *Special unlock: Create any Text Adventure + Fantasy game* once it is unlocked it is unlocked at the start of every play through afterwards
-8. **Racing** - *Special unlock: Create 3 Arcade games* once it is unlocked it is unlocked at the start of every play through afterwards
-9. **Fighting**  
-10. **Adventure**
-11. **Action**
-12. **Action-Adventure**
-13. **FPS** (First-Person Shooter)
-14. **TPS** (Third-Person Shooter)
-15. **Sports** Gameplay if sports game and a sports topcic are selected then gameplay rating is boosted by 10%
-16. **Simulation**
-17. **Survival** 
-18. **Strategy** unlocked when you make 2 board games or after 1992 whichever comes first
-19. **Online Game** - Reach year 1994 then this type is available until 2000 it is a negative modifier of -5% to all ratings due to connection issues and server problems
-20. **MMORPG** if rpg is unlocked and past 1996 then this type is available, priori to 2004 it is a negative modifier of -10% to all ratings due to connection issues and server problems
-21. **Visual Novel**
-22. **Horror**
-23. **Open World**
-24. **Battle Royale**
-25. **MOBA**
-26. **Educational** - *Special unlock: Achieve 90% happiness* once it is unlocked it is unlocked at the start of every play through afterwards
+6. **RPG** (Role-Playing Game) - *Special unlock: Create any Text Adventure + Fantasy game* once it is unlocked it is unlocked at the start of every play through afterwards
+7. **Racing** - *Special unlock: Create 3 Arcade games* once it is unlocked it is unlocked at the start of every play through afterwards
+8. **Fighting**
+9. **Adventure**
+10. **Action**
+11. **Action-Adventure**
+12. **Simulation**
+13. **Strategy** unlocked when you make 2 board games or after 1992 whichever comes first
+14. **Online Game** - Reach year 1994 then this type is available until 2000 it is a negative modifier of -5% to all ratings due to connection issues and server problems
+15. **MMORPG** if rpg is unlocked and past 1996 then this type is available, priori to 2004 it is a negative modifier of -10% to all ratings due to connection issues and server problems
+16. **Visual Novel**
+17. **MOBA**
+18. **Educational** - *Special unlock: Achieve 90% happiness* once it is unlocked it is unlocked at the start of every play through afterwards
 
 ## All Possible Topics (155 total)
 ### Original/Classic (5)
