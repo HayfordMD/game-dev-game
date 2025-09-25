@@ -38,19 +38,22 @@
 6. **Beat em Up**
 7. **RPG** (Role-Playing Game) - *Special unlock: Create any Text Adventure + Fantasy game* once it is unlocked it is unlocked at the start of every play through afterwards
 8. **Racing** - *Special unlock: Create 3 Arcade games* once it is unlocked it is unlocked at the start of every play through afterwards
-9. **Fighting**
-10. **Action-Adventure**
-11. **FPS** (First-Person Shooter)
-12. **TPS** (Third-Person Shooter)
-13. **Sports**
+9. **Fighting**  
+10. **Adventure**
+11. **Action**
+12. **Action-Adventure**
+13. **FPS** (First-Person Shooter)
+14. **TPS** (Third-Person Shooter)
+15. **Sports** Gameplay if sports game and a sports topcic are selected then gameplay rating is boosted by 10%
 14. **Simulation**
-15. **Survival**
-16. **Strategy**
-17. **MMORPG**
-18. **Rhythm**
-19. **Visual Novel**
-20. **Horror**
-21. **Sandbox**
+15. **Survival** 
+16. **Strategy** unlocked when you make 2 board games or after 1992 whichever comes first 
+17. **Online Game** - Reach year 1994 then this type is available until 2000 it is a negative modifier of -5% to all ratings due to connection issues and server problems
+18. **MMORPG** if rpg is unlocked and past 1996 then this type is available, priori to 2004 it is a negative modifier of -10% to all ratings due to connection issues and server problems
+19. **Rhythm**
+20. **Visual Novel** 
+21. **Horror**
+22. **Sandbox**
 22. **Open World**
 23. **Battle Royale**
 24. **MOBA**
@@ -62,8 +65,7 @@
 30. **Touch-Based**
 31. **VR** (Virtual Reality)
 32. **AR** (Augmented Reality)
-33. **Monsters**
-34. **Board Game**
+34. **Board Game** unlocked automaticall in 1985 once it is unlocked it is unlocked at the start of every play through afterwards
 
 ## All Possible Topics (155 total)
 ### Original/Classic (5)

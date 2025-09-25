@@ -1,0 +1,26 @@
+character:
+  name: "Jennifer Thompson"
+  id: 3
+  gender: "female"
+  skills:
+    engineering: 2      # 0-10 scale
+    marketing: 3        # 0-10 scale
+    leadership: 2       # 0-10 scale
+    design: 6          # 0-10 scale
+    research: 4        # 0-10 scale
+    communication: 4   # 0-10 scale
+  
+  job: Artist
+  
+  personality:
+    description: "Creative and expressive, Jennifer has a keen eye for visual storytelling and aesthetic cohesion. She's collaborative and enjoys brainstorming sessions but can become defensive when her artistic vision is questioned. Works in bursts of inspiration."
+    
+  background:
+    education: "Fine Arts degree with a focus on digital media from an art school"
+    work_history: "Freelanced as a concept artist for indie games, worked at a small animation studio before joining the game industry"
+    personal_history: "Grew up sketching characters from her favorite games, won several local art competitions in high school"
+    
+  ### max 3
+  hidden_traits:
+    - trait: "artistic eureka"
+      ability: "10% chance to add +1 to game graphics"

@@ -2,8 +2,10 @@ import tkinter as tk
 from tkinter import Canvas, messagebox, ttk
 import math
 from systems.game_systems import TimeSystem, EnergySystem, SleepSchedule, HygieneSystem, HappinessSystem
+from systems.money_system import MoneySystem
 from buildings.base_room import BaseRoom
 from desktop.desktop_system import DesktopScreen
+from buildings.bank import BankInterface
 
 class StudioRoomScreen(BaseRoom):
     def __init__(self, root, game_data, on_back=None):
@@ -29,13 +31,14 @@ class StudioRoomScreen(BaseRoom):
 
         # Station tracking for collision system
         self.current_station = None
-        self.station_names = ['bed', 'desk', 'shower', 'fridge', 'microwave']
+        self.station_names = ['bed', 'desk', 'shower', 'fridge', 'microwave', 'door']
 
         # Initialize game systems
         self.time_system = TimeSystem(game_data)
         self.energy_system = EnergySystem(game_data)
         self.hygiene_system = HygieneSystem(game_data)
         self.happiness_system = HappinessSystem(game_data)
+        self.money_system = MoneySystem(game_data)
 
         self.setup_ui()
         self.draw_room()
@@ -85,6 +88,11 @@ class StudioRoomScreen(BaseRoom):
         self.happiness_label = tk.Label(status_frame, text="", font=('Arial', 11, 'bold'),
                                        bg='#2a2a2a', fg='white')
         self.happiness_label.pack(side='left', padx=10)
+
+        # Money display (cash/bank)
+        self.money_label = tk.Label(status_frame, text="", font=('Arial', 11, 'bold'),
+                                   bg='#2a2a2a', fg='#FFD700')
+        self.money_label.pack(side='left', padx=20)
 
         # Speed control button (right)
         self.speed_button = tk.Button(status_frame, text="⏩ 1x",
@@ -284,6 +292,13 @@ class StudioRoomScreen(BaseRoom):
             self.use_shower()
             return
 
+        # Check if click is on door
+        door = self.furniture_items.get('door', {})
+        if (door.get('x', 0) <= click_x <= door.get('x', 0) + door.get('width', 0) and
+            door.get('y', 0) <= click_y <= door.get('y', 0) + door.get('height', 0)):
+            self.show_door_menu()
+            return
+
         # Otherwise, set as movement target
         self.target_x = click_x
         self.target_y = click_y
@@ -432,6 +447,51 @@ class StudioRoomScreen(BaseRoom):
         # Redraw the room since desktop was modal
         self.draw_room()
         self.update_status_display()
+
+    def show_door_menu(self):
+        """Show menu when clicking on door"""
+        # Create door menu dialog
+        door_window = tk.Toplevel(self.root)
+        door_window.title("Where to go?")
+        door_window.geometry("300x200")
+        door_window.transient(self.root)
+        door_window.grab_set()
+
+        # Center the window
+        door_window.update_idletasks()
+        x = (door_window.winfo_screenwidth() // 2) - 150
+        y = (door_window.winfo_screenheight() // 2) - 100
+        door_window.geometry(f"300x200+{x}+{y}")
+
+        # Title
+        tk.Label(door_window, text="Choose Destination", font=('Arial', 16, 'bold')).pack(pady=15)
+
+        # Bank button
+        tk.Button(door_window, text="🏦 Bank", command=lambda: self.go_to_bank(door_window),
+                 font=('Arial', 14), width=15, height=2).pack(pady=10)
+
+        # Other locations (placeholder for future)
+        tk.Label(door_window, text="More locations coming soon...",
+                font=('Arial', 10, 'italic'), fg='gray').pack(pady=10)
+
+        # Cancel button
+        tk.Button(door_window, text="Cancel", command=door_window.destroy,
+                 font=('Arial', 12), width=10).pack(pady=10)
+
+    def go_to_bank(self, door_window):
+        """Navigate to bank interface"""
+        door_window.destroy()
+
+        # Clear the current UI
+        for widget in self.root.winfo_children():
+            widget.destroy()
+
+        # Open bank interface
+        BankInterface(
+            self.root,
+            self.game_data,
+            on_back=lambda: self.__init__(self.root, self.game_data, self.on_back)
+        )
 
     def update_player_position(self):
         """Update player position based on target"""
@@ -615,8 +675,32 @@ class StudioRoomScreen(BaseRoom):
         # Update real-time clock
         self.time_system.update_real_time()
         self.update_status_display()
+
+        # Process monthly expenses (like rent)
+        self.process_monthly_expenses()
+
         # Schedule next update (60 FPS)
         self.root.after(16, self.start_game_loop)
+
+    def process_monthly_expenses(self):
+        """Process monthly expenses like rent"""
+        # Get current date
+        if 'game_time' in self.game_data.data:
+            current_date = self.game_data.data['game_time'].get('current_date', '1984-01-01')
+        else:
+            current_date = '1984-01-01'
+
+        # Process expenses
+        result, message = self.money_system.process_monthly_expenses(current_date)
+
+        # Show message if rent was paid or overdue
+        if result is not None and message:
+            if result:
+                # Rent paid successfully - just update display
+                self.update_status_display()
+            else:
+                # Rent issue - show warning
+                messagebox.showwarning("Rent Due", message)
 
     def cycle_speed(self):
         """Cycle through speed presets"""
@@ -666,14 +750,20 @@ class StudioRoomScreen(BaseRoom):
             time_str = f"{display_hour:02d}:{minute:02d}:{second:02d} {am_pm}"
             date_str = self.time_system.get_date_string()
             self.time_label.config(text=f"{date_str} - {time_str}")
-        elif current_speed >= 60000:  # MAX speed - only show date
-            date_str = self.time_system.get_date_string()
-            self.time_label.config(text=date_str)
-        elif current_speed >= 64800:  # 5x speed - show day and AM/PM
+        elif current_speed >= 60500:  # MAX speed - show date and AM/PM only
             hour = int(time_data.get('hour', 8))
             am_pm = "AM" if hour < 12 else "PM"
             date_str = self.time_system.get_date_string()
             self.time_label.config(text=f"{date_str} {am_pm}")
+        elif current_speed >= 64800:  # 5x speed - show date and simplified time
+            hour = int(time_data.get('hour', 8))
+            minute = int(time_data.get('minute', 0))
+            am_pm = "AM" if hour < 12 else "PM"
+            display_hour = hour if hour <= 12 else hour - 12
+            if display_hour == 0:
+                display_hour = 12
+            date_str = self.time_system.get_date_string()
+            self.time_label.config(text=f"{date_str} - {display_hour}:{minute:02d} {am_pm}")
         else:  # 3x, 4x speed - normal display
             time_str = self.time_system.get_time_string()
             date_str = self.time_system.get_date_string()
@@ -695,3 +785,8 @@ class StudioRoomScreen(BaseRoom):
         happiness = self.happiness_system.get_happiness()
         happiness_color = '#90EE90' if happiness >= 70 else '#FFD700' if happiness >= 50 else '#FF6B6B'
         self.happiness_label.config(text=f"Happiness: {happiness}%", fg=happiness_color)
+
+        # Update money display
+        cash = self.money_system.get_cash()
+        bank = self.money_system.get_bank_balance()
+        self.money_label.config(text=f"Cash: ${cash:.0f} | Bank: ${bank:.0f}")

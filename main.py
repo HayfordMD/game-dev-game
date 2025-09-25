@@ -2,11 +2,12 @@ import tkinter as tk
 from tkinter import ttk, messagebox, filedialog
 import yaml
 import os
+import argparse
 from datetime import datetime
 from pathlib import Path
 import sys
 sys.path.append(os.path.dirname(os.path.abspath(__file__)))
-from deepseek.services.naming import get_random_studio_names, get_random_player_names, get_competitor_companies
+from deepseek.services.naming import get_random_studio_names, get_random_player_names, get_competitor_companies, get_default_competitor_companies
 from buildings.studio_room import StudioRoomScreen
 from systems.dev_menu import DevMenu
 
@@ -128,12 +129,13 @@ class GameData:
         current[keys[-1]] = value
 
 class StartMenu:
-    def __init__(self, parent, on_new_game, on_load_game, on_options, on_quit):
+    def __init__(self, parent, on_new_game, on_load_game, on_options, on_quit, on_quick_start=None):
         self.parent = parent
         self.on_new_game = on_new_game
         self.on_load_game = on_load_game
         self.on_options = on_options
         self.on_quit = on_quit
+        self.on_quick_start = on_quick_start
         self.frame = None
 
     def show(self):
@@ -159,6 +161,8 @@ class StartMenu:
         # Buttons
         ttk.Button(button_frame, text="New Game",
                   command=self.on_new_game, width=20).pack(pady=5)
+        ttk.Button(button_frame, text="Quick Start (Default Companies)",
+                  command=self.on_quick_start, width=20).pack(pady=5)
         ttk.Button(button_frame, text="Load Game",
                   command=self.on_load_game, width=20).pack(pady=5)
         ttk.Button(button_frame, text="Options",
@@ -800,7 +804,8 @@ class GameDevStudioApp:
                                   self.show_new_game_screen,
                                   self.show_load_menu,
                                   self.show_options,
-                                  self.quit_game)
+                                  self.quit_game,
+                                  self.quick_start_game)
 
         self.load_menu = LoadGameMenu(self.root,
                                     self.save_manager,
@@ -863,6 +868,62 @@ class GameDevStudioApp:
         """Clear all widgets from the main window"""
         for widget in self.root.winfo_children():
             widget.destroy()
+
+    def quick_start_game(self):
+        """Quick start a new game with default settings and companies"""
+        # Generate random studio and player names
+        import random
+
+        # Default studio names
+        default_studios = ["Pixel Studios", "Digital Dreams", "Code Masters", "Game Forge", "Bit Factory"]
+        studio_name = random.choice(default_studios)
+
+        # Default player names
+        default_players = ["Alex", "Jordan", "Taylor", "Casey", "Morgan", "Riley", "Cameron", "Quinn"]
+        player_name = random.choice(default_players)
+
+        # Show loading screen
+        self.clear_screen()
+        loading_frame = tk.Frame(self.root, bg='#1a1a2e')
+        loading_frame.pack(fill='both', expand=True)
+
+        loading_label = tk.Label(loading_frame, text="Quick Start - Setting up your studio...",
+                               font=('Arial', 16, 'bold'), bg='#1a1a2e', fg='white')
+        loading_label.pack(pady=200)
+
+        info_label = tk.Label(loading_frame, text=f"Studio: {studio_name}\nPlayer: {player_name}",
+                            font=('Arial', 12), bg='#1a1a2e', fg='#cccccc')
+        info_label.pack(pady=10)
+
+        status_label = tk.Label(loading_frame, text="Loading default competitor companies...",
+                              font=('Arial', 12), bg='#1a1a2e', fg='#888888')
+        status_label.pack(pady=10)
+
+        # Update display
+        self.root.update()
+
+        # Create new game data
+        self.game_data.reset_to_defaults()
+        self.game_data.set(studio_name, 'player_data', 'studio_name')
+        self.game_data.set(player_name, 'player_data', 'player_name')
+        self.game_data.set("Normal", 'settings', 'difficulty')
+
+        # Use default competitor companies
+        print("Using default competitor companies...")
+        competitors = get_default_competitor_companies()
+        self.game_data.data['competitors'] = {
+            'companies': competitors,
+            'generated_date': datetime.now().isoformat(),
+            'is_default': True
+        }
+
+        # Update status
+        status_label.config(text=f"Loaded {len(competitors)} default companies. Starting game...")
+        self.root.update()
+        print(f"Loaded {len(competitors)} default competitor companies")
+
+        # Brief delay to show the message
+        self.root.after(500, self.show_studio_room)
 
     def create_new_studio(self, studio_name, player_name):
         """Create new studio with provided data"""
@@ -948,10 +1009,79 @@ class GameDevStudioApp:
         if messagebox.askyesno("Quit", "Are you sure you want to quit?"):
             self.root.quit()
 
+    def apply_dev_args(self, args):
+        """Apply development command line arguments"""
+        # Create a quick development game
+        self.game_data.data = {
+            'game_time': {
+                'start_date': f'{args.year or 1984}-01-01',
+                'current_date': f'{args.year or 1984}-01-01',
+                'speed': 1
+            },
+            'player_data': {
+                'studio_name': 'Dev Test Studio',
+                'founder_name': 'Developer',
+                'starting_funds': args.money or 1530,
+                'starting_year': args.year or 1984,
+                'difficulty': 'normal'
+            },
+            'money': {
+                'cash_on_hand': 30,
+                'bank_balance': (args.money or 1530) - 30,
+                'monthly_rent': 150,
+                'transaction_history': [],
+                'recurring_expenses': [
+                    {'name': 'Apartment Rent', 'amount': 150, 'day_of_month': 1}
+                ],
+                'last_rent_paid': None
+            }
+        }
+
+        # Jump to specific development screen if requested
+        if args.screen:
+            self.jump_to_dev_screen(args.screen)
+        else:
+            # Just start normally with the dev data
+            self.start_game()
+
+    def jump_to_dev_screen(self, screen):
+        """Jump directly to a development screen for testing"""
+        # Start the game first
+        self.start_game()
+
+        # Then open the appropriate development screen
+        if screen == 'planning' or screen == 'select-planner':
+            # Open game engine and start development
+            from desktop.development_stages import MultiStageDevelopment
+            multi_stage = MultiStageDevelopment(
+                self.root,
+                self.game_data,
+                "Test Game",
+                "Action",
+                "Sci-Fi"
+            )
+        # Add more screen options as needed
+
     def run(self):
         """Start the application"""
         self.root.mainloop()
 
 if __name__ == "__main__":
+    # Parse command line arguments
+    parser = argparse.ArgumentParser(description='Game Dev Studio Tycoon')
+    parser.add_argument('--year', type=int, default=None, help='Start year (e.g., 1978)')
+    parser.add_argument('--money', type=int, default=None, help='Starting money amount')
+    parser.add_argument('--screen', type=str, default=None,
+                       choices=['planning', 'select-planner', 'development', 'production', 'bug-squashing'],
+                       help='Jump to specific screen for development')
+    parser.add_argument('--dev', action='store_true', help='Enable developer menu')
+
+    args = parser.parse_args()
+
     app = GameDevStudioApp()
+
+    # Apply development arguments if provided
+    if args.year or args.money or args.screen:
+        app.apply_dev_args(args)
+
     app.run()

@@ -21,10 +21,8 @@
 - **What creates replayability?** Different market conditions, random events, multiple game genres, various business models
 
 ### Player Experience Questions
-- **Who is the target player?** Game developers, aspiring developers, and simulation game enthusiasts
 - **What emotions should players feel?** Excitement of creation, stress of deadlines, satisfaction of success, learning from failure
 - **How long should a session last?** 30-90 minutes for meaningful progress
-- **What's the learning curve?** Easy to start making simple games, complex to master advanced mechanics and market dynamics
 
 ### Mechanical Questions
 - **How complex should game creation be?** Scalable complexity - simple drag-and-drop for beginners, deep systems for experts

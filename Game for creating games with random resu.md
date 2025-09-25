@@ -24,7 +24,7 @@
 **Character Creation:**
 - Top-down view of cramped studio apartment
 - Click to name your character
-- Starting stats: Programming, Art, Design, Marketing, Energy, Money ($500-2000 depending on background)
+Energy, Money ($500-2000 depending on background)
 - Starting debt: Student loans, credit cards
 
 **Survival Mode:**

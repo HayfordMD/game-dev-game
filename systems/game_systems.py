@@ -21,6 +21,7 @@ class TimeSystem:
     def __init__(self, game_data):
         self.game_data = game_data
         self.last_update_time = time.time()
+        self.accumulated_seconds = 0.0  # Track fractional seconds
 
         # Time scale presets:
         # 1 = Real-time (1:1)
@@ -117,8 +118,12 @@ class TimeSystem:
                 # Don't track seconds at high speeds
                 self.game_data.data['time']['second'] = 0
         else:  # At 1x or 2x speed, track seconds
-            if game_seconds_elapsed >= 1:
-                self.advance_time_seconds(int(game_seconds_elapsed))
+            # Accumulate fractional seconds
+            self.accumulated_seconds += game_seconds_elapsed
+            if self.accumulated_seconds >= 1:
+                seconds_to_advance = int(self.accumulated_seconds)
+                self.advance_time_seconds(seconds_to_advance)
+                self.accumulated_seconds -= seconds_to_advance
 
     def advance_time_seconds(self, seconds):
         """Advance game time by specified seconds"""
@@ -193,6 +198,12 @@ class TimeSystem:
                 time_data['crunch_weeks'] += 1
             else:
                 time_data['crunch_weeks'] = 0
+
+        # Trigger daily updates for other systems
+        if 'hygiene_system' in self.game_data.data:
+            from systems.game_systems import HygieneSystem
+            hygiene_system = HygieneSystem(self.game_data)
+            hygiene_system.daily_update()
 
     def get_days_in_month(self, month, year):
         """Get number of days in a given month"""

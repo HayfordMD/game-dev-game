@@ -109,17 +109,17 @@ class DesktopScreen:
         tk.Label(browser_frame, text="Browser\n(Coming Soon)", font=('Arial', 8),
                 bg='#0a0a0f', fg='#666666').pack()
 
-        # Notes icon (placeholder)
+        # Notes icon
         notes_frame = tk.Frame(icons_frame, bg='#0a0a0f')
         notes_frame.place(x=250, y=50)
 
         notes_btn = tk.Button(notes_frame, text="📝", font=('Arial', 32),
-                            bg='#0a0a0f', fg='#666666', bd=0,
-                            state='disabled')
+                            bg='#0a0a0f', fg='#ffcc00', bd=0,
+                            cursor='hand2', command=self.open_notes)
         notes_btn.pack()
 
-        tk.Label(notes_frame, text="Notes\n(Coming Soon)", font=('Arial', 8),
-                bg='#0a0a0f', fg='#666666').pack()
+        tk.Label(notes_frame, text="Notes", font=('Arial', 10),
+                bg='#0a0a0f', fg='white').pack()
 
         # Topics Unlock icon
         topics_frame = tk.Frame(icons_frame, bg='#0a0a0f')
@@ -143,6 +143,18 @@ class DesktopScreen:
         types_btn.pack()
 
         tk.Label(types_frame, text="Types", font=('Arial', 10),
+                bg='#0a0a0f', fg='white').pack()
+
+        # Contacts icon
+        contacts_frame = tk.Frame(icons_frame, bg='#0a0a0f')
+        contacts_frame.place(x=250, y=150)
+
+        contacts_btn = tk.Button(contacts_frame, text="📖", font=('Arial', 32),
+                                bg='#0a0a0f', fg='#00ddff', bd=0,
+                                cursor='hand2', command=self.open_contacts)
+        contacts_btn.pack()
+
+        tk.Label(contacts_frame, text="Contacts", font=('Arial', 10),
                 bg='#0a0a0f', fg='white').pack()
 
         # Status bar
@@ -174,6 +186,17 @@ class DesktopScreen:
     def open_types_unlocks(self):
         """Open the game types unlock page"""
         UnlockViewer(self.desktop_window, self.game_data, view_type="types")
+
+    def open_notes(self):
+        """Open the notes app"""
+        from desktop.notes_app import NotesApp
+        NotesApp(self.desktop_window, self.game_data)
+
+    def open_contacts(self):
+        """Open the contacts viewer"""
+        # For now, show a placeholder message
+        import tkinter.messagebox as messagebox
+        messagebox.showinfo("Contacts", "Contacts viewer coming soon!\n\nThis will show all NPCs you've met and those you haven't.")
 
     def close_desktop(self):
         """Close the desktop and return to room"""

@@ -15,11 +15,13 @@ class DeepSeekNamingService:
         Args:
             api_key: DeepSeek API key. If None, will try to get from environment variable DEEPSEEK_API_KEY
         """
-        self.api_key = api_key or os.getenv('DEEPSEEK_API_KEY')
+        # Always try to load the API key - fallback to hardcoded for testing
+        self.api_key = api_key or os.getenv('DEEPSEEK_API_KEY') or "sk-e4c9755d6cbc43979d8eee3f7e251c22"
         self.base_url = "https://api.deepseek.com/v1/chat/completions"
 
+        # Only warn if truly no key (shouldn't happen now)
         if not self.api_key:
-            print("Warning: No DeepSeek API key found. Set DEEPSEEK_API_KEY environment variable or pass api_key parameter.")
+            print("Warning: No DeepSeek API key found. Using creative fallback names.")
 
     def generate_studio_names(self) -> List[str]:
         """
@@ -231,6 +233,119 @@ Return only the company names, one per line, no explanations or numbering."""
             print(f"Error calling DeepSeek API: {e}")
             return self._get_fallback_competitor_names()
 
+    def generate_game_names(self, prompt: str, count: int = 2) -> List[str]:
+        """
+        Generate game names based on a prompt using DeepSeek API
+
+        Args:
+            prompt: The prompt describing what kind of names to generate
+            count: Number of names to request (default 2)
+
+        Returns:
+            List of generated game names
+        """
+        if not self.api_key:
+            # Return more creative fallback names even without API
+            import random
+
+            adjectives = ["Super", "Ultra", "Mega", "Epic", "Legendary", "Mystic", "Cosmic", "Quantum", "Tiny", "Giant", "Flying", "Running", "Sleeping", "Dancing"]
+            verbs = ["Jumping", "Running", "Flying", "Crying", "Laughing", "Standing", "Sitting", "Crawling", "Swimming", "Fighting", "Racing", "Hiding", "Sleeping", "Dancing", "Singing"]
+            nouns = ["Rabbit", "Dragon", "Office", "Robot", "Wizard", "Knight", "Pirate", "Ninja", "Cat", "Dog", "Monster", "Hero", "Alien", "Ghost", "Warrior", "Manager", "Plumber", "Farmer"]
+            suffixes = ["Quest", "Adventure", "Saga", "Chronicles", "Legacy", "Odyssey", "Journey", "Tales", "Simulator", "World", "Story", "Challenge"]
+
+            names = []
+            for i in range(count):
+                # Randomly choose pattern
+                pattern = random.randint(1, 5)
+
+                if pattern == 1:
+                    # Adjective + Noun
+                    name = f"{random.choice(adjectives)} {random.choice(nouns)}"
+                elif pattern == 2:
+                    # Verb + Noun
+                    name = f"{random.choice(verbs)} {random.choice(nouns)}"
+                elif pattern == 3:
+                    # Adjective + Verb + Noun
+                    name = f"{random.choice(adjectives)} {random.choice(verbs)} {random.choice(nouns)}"
+                elif pattern == 4:
+                    # Noun + Suffix
+                    name = f"{random.choice(nouns)} {random.choice(suffixes)}"
+                else:
+                    # Verb + Noun + Suffix
+                    name = f"{random.choice(verbs)} {random.choice(nouns)} {random.choice(suffixes)}"
+
+                names.append(name)
+            return names
+
+        try:
+            headers = {
+                "Authorization": f"Bearer {self.api_key}",
+                "Content-Type": "application/json"
+            }
+
+            data = {
+                "model": "deepseek-chat",
+                "messages": [
+                    {
+                        "role": "user",
+                        "content": prompt
+                    }
+                ],
+                "max_tokens": 200,
+                "temperature": 0.8
+            }
+
+            response = requests.post(self.base_url, json=data, headers=headers, timeout=10)
+            response.raise_for_status()
+
+            result = response.json()
+            content = result.get('choices', [{}])[0].get('message', {}).get('content', '')
+
+            # Parse the names from the response
+            names = [name.strip() for name in content.strip().split('\n') if name.strip()]
+
+            # Ensure we return at least the requested count
+            while len(names) < count:
+                names.append(f"Game {len(names)+1}")
+
+            return names[:count]
+
+        except Exception as e:
+            print(f"Error generating game names: {e}")
+            # Return more creative fallback names on error
+            import random
+
+            adjectives = ["Amazing", "Incredible", "Awesome", "Fantastic", "Marvelous", "Stellar", "Ultimate", "Prime", "Brave", "Happy", "Angry", "Sneaky"]
+            verbs = ["Bouncing", "Sliding", "Spinning", "Exploding", "Shrinking", "Growing", "Teleporting", "Transforming", "Building", "Breaking"]
+            nouns = ["Penguin", "Unicorn", "Taco", "Banana", "Spaceship", "Mushroom", "Crystal", "Thunder", "Shadow", "Phoenix", "Tiger", "Eagle"]
+            suffixes = ["Madness", "Fever", "Mania", "Rampage", "Revolution", "Uprising", "Mayhem", "Chaos", "Party", "Festival"]
+
+            names = []
+            for i in range(count):
+                pattern = random.randint(1, 6)
+
+                if pattern == 1:
+                    # Just a verb
+                    name = random.choice(verbs)
+                elif pattern == 2:
+                    # Just a noun
+                    name = random.choice(nouns)
+                elif pattern == 3:
+                    # Verb + Noun
+                    name = f"{random.choice(verbs)} {random.choice(nouns)}"
+                elif pattern == 4:
+                    # Adjective + Noun
+                    name = f"{random.choice(adjectives)} {random.choice(nouns)}"
+                elif pattern == 5:
+                    # Noun + Suffix
+                    name = f"{random.choice(nouns)} {random.choice(suffixes)}"
+                else:
+                    # Adjective + Verb + Noun
+                    name = f"{random.choice(adjectives)} {random.choice(verbs)} {random.choice(nouns)}"
+
+                names.append(name)
+            return names
+
     def _get_fallback_competitor_names(self) -> List[str]:
         """
         Fallback competitor names when API is not available
@@ -313,6 +428,23 @@ def get_competitor_companies() -> List[str]:
     """
     service = DeepSeekNamingService()
     return service.generate_competitor_companies()
+
+# Get default competitor companies from database
+def get_default_competitor_companies() -> List[str]:
+    """
+    Get default competitor companies from our database
+
+    Returns:
+        List of 20 competitor company names from our default list
+    """
+    import random
+    import sys
+    import os
+    sys.path.append(os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))))
+    from npcs.npc_database import COMPANY_NAMES
+
+    # Return 20 random companies from our list
+    return random.sample(COMPANY_NAMES, min(20, len(COMPANY_NAMES)))
 
 # Test function
 def test_naming_service():

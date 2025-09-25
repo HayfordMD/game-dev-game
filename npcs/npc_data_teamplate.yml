@@ -1,0 +1,33 @@
+character:
+  name: "Christopher Adams"
+  id: 1
+  gender: "male"
+  skills:
+    engineering: 6      # 0-10 scale
+    marketing: 2        # 0-10 scale
+    leadership: 1       # 0-10 scale
+    design: 5          # 0-10 scale
+    research: 4        # 0-10 scale
+    communication: 2   # 0-10 scale
+
+  job: Game Designer
+
+  personality:
+    description: ""    # Brief personality overview
+    
+  background:
+    education: ""      # Educational background
+    work_history: ""   # Previous work experience
+    personal_history: "" # Notable life events
+    
+
+  ### max 3  
+  hidden_traits:
+    - trait: ""       # Traits that influence behavior but are not immediately visible
+      ability: ""
+    - trait: ""       # Traits that influence behavior but are not immediately visible
+      ability: ""
+    - trait: ""       # Traits that influence behavior but are not immediately visible
+      ability: ""
+    
+  notes: ""           # Player can add custom notes here

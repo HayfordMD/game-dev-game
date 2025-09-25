@@ -66,14 +66,9 @@ class RunPlatforms:
         """Select 10-20 competitor companies for this run"""
         num_companies = random.randint(10, 20)
 
-        # Create a pool of unique company names from different eras
-        company_pool = set()
-        for era_companies in COMPANY_NAMES.values():
-            company_pool.update(era_companies)
-
-        # Convert to list and select random companies
-        company_list = list(company_pool)
-        self.run_companies = random.sample(company_list, min(num_companies, len(company_list)))
+        # COMPANY_NAMES is a list of company names
+        # Select random companies from the list
+        self.run_companies = random.sample(COMPANY_NAMES, min(num_companies, len(COMPANY_NAMES)))
 
         # Sort alphabetically for easier viewing
         self.run_companies.sort()

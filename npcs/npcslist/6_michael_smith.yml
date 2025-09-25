@@ -1,0 +1,30 @@
+character:
+  name: "Michael Smith"
+  id: 6
+  gender: "male"
+  skills:
+    engineering: 5      # 0-10 scale
+    marketing: 1        # 0-10 scale
+    leadership: 2       # 0-10 scale
+    design: 3          # 0-10 scale
+    research: 6        # 0-10 scale
+    communication: 2   # 0-10 scale
+  
+  job: Quality Assurance Tester
+  
+  personality:
+    description: "Meticulous and persistent, Michael has an uncanny ability to break games in unexpected ways. He takes pride in finding the bugs others miss and documenting them thoroughly. Can be seen as nitpicky but is genuinely passionate about quality."
+    
+  background:
+    education: "Computer Science degree with coursework in software testing methodologies"
+    work_history: "Started as a beta tester for MMORPGs, worked QA at a mobile gaming company, specialized in regression testing"
+    personal_history: "Avid gamer since childhood, known among friends for finding exploits and glitches in every game"
+    
+  ### max 3
+  hidden_traits:
+    - trait: "bug magnet"
+      ability: "25% faster bug squashing"
+    - trait: "pattern recognition"
+      ability: "after working on 3+ projects, has a 5% chance to remove a bug during development"
+
+---

@@ -70,23 +70,8 @@ class ConsoleDatabase:
 
     def get_random_company(self, year):
         """Get a random company name for the given year"""
-        # Find the appropriate period
-        period = None
-        for period_key in COMPANY_NAMES.keys():
-            start_year, end_year = map(int, period_key.split('-'))
-            if start_year <= year <= end_year:
-                period = period_key
-                break
-
-        if not period:
-            if year < 1970:
-                period = "1970-1974"
-            elif year > 2030:
-                period = "2025-2030"
-            else:
-                period = "1995-1999"
-
-        return random.choice(COMPANY_NAMES[period])
+        # COMPANY_NAMES is a list, just pick a random one
+        return random.choice(COMPANY_NAMES)
 
 
     def generate_all_console_generations(self):

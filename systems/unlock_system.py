@@ -144,7 +144,12 @@ class UnlockSystem:
                 unlocked.append(('topic', 'Bugs', 'Low hygiene in early years!'))
 
         # Dinosaur topic - unlocked by making 3 successful adventure games
-        adventure_games = self.game_data.data.get('completed_games', {}).get('Adventure', 0)
+        completed_games = self.game_data.data.get('completed_games', {})
+        if isinstance(completed_games, dict):
+            adventure_games = completed_games.get('Adventure', 0)
+        else:
+            adventure_games = 0
+
         if adventure_games >= 3:
             if 'Dinosaurs' not in self.permanent_unlocks['topics']:
                 self.permanent_unlocks['topics'].append('Dinosaurs')
@@ -159,7 +164,7 @@ class UnlockSystem:
                 unlocked.append(('game_type', 'Retro', 'Reached the millennium!'))
 
         # Educational game type - unlocked by high happiness
-        happiness = self.game_data.data.get('player_data', {}).get('happiness', 50)
+        happiness = self.game_data.data.get('player_data', {}).get('happiness', 60)
         if happiness >= 90:
             if 'Educational' not in self.permanent_unlocks['game_types']:
                 self.permanent_unlocks['game_types'].append('Educational')

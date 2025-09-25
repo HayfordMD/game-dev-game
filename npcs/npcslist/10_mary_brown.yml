@@ -1,0 +1,26 @@
+character:
+  name: "Mary Brown"
+  id: 10
+  gender: "female"
+  skills:
+    engineering: 7      # 0-10 scale
+    marketing: 2        # 0-10 scale
+    leadership: 4       # 0-10 scale
+    design: 3          # 0-10 scale
+    research: 6        # 0-10 scale
+    communication: 4   # 0-10 scale
+  
+  job: Technical Director
+  
+  personality:
+    description: "Brilliant engineer with deep technical expertise and strong problem-solving skills. Mary is pragmatic and results-oriented, often serving as the voice of technical feasibility. She's respected but can be intimidating to junior developers."
+    
+  background:
+    education: "Computer Science PhD with focus on Graphics and Rendering Systems"
+    work_history: "Worked at major tech companies on graphics drivers, joined games industry to work on cutting-edge rendering technology"
+    personal_history: "Built her first computer at age 12, won programming competitions in college, contributed to open-source graphics libraries"
+    
+  ### max 3
+  hidden_traits:
+    - trait: "technical debt aversion"
+      ability: "insists on clean architecture, slower development but after 5 projects never more than 20 bugs in a game"

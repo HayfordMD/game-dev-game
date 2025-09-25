@@ -1,0 +1,26 @@
+character:
+  name: "Carol Martinez"
+  id: 2
+  gender: "female"
+  skills:
+    engineering: 4      # 0-10 scale
+    marketing: 1        # 0-10 scale
+    leadership: 2       # 0-10 scale
+    design: 3          # 0-10 scale
+    research: 5        # 0-10 scale
+    communication: 3   # 0-10 scale
+  
+  job: Programmer/Software Engineer
+  
+  personality:
+    description: "Highly focused and detail-oriented, Carol thrives on solving complex technical problems. She's competitive and takes pride in writing clean, efficient code. Can be impatient with non-technical team members but is generous with mentoring junior developers."
+    
+  background:
+    education: "Software Engineering degree with honors from a technical institute"
+    work_history: "Interned at a startup during college, worked on backend systems for a fintech company before moving into games"
+    personal_history: "First-generation college graduate, taught herself programming in high school using online tutorials"
+    
+  ### max 3
+  hidden_traits:
+    - trait: "caffeine dependent"
+      ability: "If coffee is available +3 to communication"

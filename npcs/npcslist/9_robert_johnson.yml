@@ -1,0 +1,26 @@
+character:
+  name: "Robert Johnson"
+  id: 9
+  gender: "male"
+  skills:
+    engineering: 4      # 0-10 scale
+    marketing: 5        # 0-10 scale
+    leadership: 6       # 0-10 scale
+    design: 6          # 0-10 scale
+    research: 4        # 0-10 scale
+    communication: 7   # 0-10 scale
+  
+  job: Game Director
+  
+  personality:
+    description: "Visionary leader with strong opinions about game design and market trends. Robert is charismatic and inspiring but can be demanding and impatient with execution. He has good instincts for what players want but sometimes clashes with technical constraints."
+    
+  background:
+    education: "MBA with undergraduate degree in Interactive Media"
+    work_history: "Started as a designer, led several successful mobile titles, promoted to director after shipping a breakout hit"
+    personal_history: "Gaming enthusiast since the arcade era, studied successful games obsessively to understand what makes them work"
+    
+  ### max 3
+  hidden_traits:
+    - trait: "market intuition"
+      ability: "+10 to all game stats if the type and topic match"

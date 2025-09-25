@@ -1,0 +1,26 @@
+character:
+  name: "Patricia Davis"
+  id: 8
+  gender: "female"
+  skills:
+    engineering: 4      # 0-10 scale
+    marketing: 2        # 0-10 scale
+    leadership: 3       # 0-10 scale
+    design: 7          # 0-10 scale
+    research: 4        # 0-10 scale
+    communication: 3   # 0-10 scale
+  
+  job: Level Designer
+  
+  personality:
+    description: "Spatial thinker with excellent game flow intuition, Patricia creates engaging and balanced gameplay experiences. She's detail-oriented and enjoys iterating on designs based on playtesting feedback. Sometimes gets too attached to clever but obscure design elements."
+    
+  background:
+    education: "Game Design degree with emphasis on Environmental Design"
+    work_history: "Modded levels for popular FPS games, interned at an indie studio, specialized in puzzle and platformer design"
+    personal_history: "Spent hours in level editors as a kid, fascinated by architecture and how spaces make people feel"
+    
+  ### max 3
+  hidden_traits:
+    - trait: "secret hunter"
+      ability: "always includes hidden areas and easter eggs, increasing Gameplay by 5 points"

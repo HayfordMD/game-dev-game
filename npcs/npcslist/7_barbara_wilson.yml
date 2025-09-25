@@ -1,0 +1,26 @@
+character:
+  name: "Barbara Wilson"
+  id: 7
+  gender: "female"
+  skills:
+    engineering: 1      # 0-10 scale
+    marketing: 3        # 0-10 scale
+    leadership: 3       # 0-10 scale
+    design: 5          # 0-10 scale
+    research: 6        # 0-10 scale
+    communication: 5   # 0-10 scale
+  
+  job: Narrative Designer
+  
+  personality:
+    description: "Creative storyteller with a deep understanding of character development and world-building. Barbara is empathetic and insightful, often serving as the team's emotional compass. She's collaborative but can be protective of narrative integrity."
+    
+  background:
+    education: "English Literature degree with a Creative Writing MFA"
+    work_history: "Published short stories, worked as a freelance copywriter, wrote dialogue for visual novels before joining game development"
+    personal_history: "Grew up reading fantasy novels, ran tabletop RPG campaigns for friends throughout college"
+    
+  ### max 3
+  hidden_traits:
+    - trait: "character whisperer"
+      ability: "Creates memorable NPCs that become fan favorites, + 3% to all sales "

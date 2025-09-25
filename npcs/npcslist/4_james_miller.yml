@@ -1,0 +1,28 @@
+character:
+  name: "James Miller"
+  id: 4
+  gender: "male"
+  skills:
+    engineering: 4      # 0-10 scale
+    marketing: 2        # 0-10 scale
+    leadership: 2       # 0-10 scale
+    design: 6          # 0-10 scale
+    research: 3        # 0-10 scale
+    communication: 3   # 0-10 scale
+  
+  job: Audio Designer/Sound Engineer
+  
+  personality:
+    description: "Passionate about creating immersive soundscapes, James has an excellent ear for detail and atmosphere. He's patient and methodical, often working late to get the perfect sound mix. Tends to be quiet in meetings but speaks up confidently about audio matters."
+    
+  background:
+    education: "Music Technology degree with a minor in Computer Science"
+    work_history: "Started in music production, moved to film sound design, then transitioned to game audio"
+    personal_history: "Played multiple instruments growing up, built his first home recording studio in his garage as a teenager"
+    
+  ### max 3
+  hidden_traits:
+    - trait: "golden ear"
+      ability: "5% chance to add +1 Sound/Audio and innovation"
+    - trait: "vinyl collector"
+      ability: "inspiration from rare records gives +2 to design when working on retro type projects""

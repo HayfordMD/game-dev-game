@@ -1,0 +1,28 @@
+character:
+  name: "Richard Anderson"
+  id: 5
+  gender: "male"
+  skills:
+    engineering: 3      # 0-10 scale
+    marketing: 4        # 0-10 scale
+    leadership: 6       # 0-10 scale
+    design: 2          # 0-10 scale
+    research: 3        # 0-10 scale
+    communication: 5   # 0-10 scale
+  
+  job: Producer
+  
+  personality:
+    description: "Organized and diplomatic, Richard excels at keeping projects on track and teams motivated. He's skilled at managing competing priorities and stakeholder expectations. Sometimes struggles with technical details but compensates with strong people skills."
+    
+  background:
+    education: "Business Administration degree with a focus on Project Management"
+    work_history: "Started in software project management, moved to mobile apps, then specialized in game production"
+    personal_history: "Former team captain in college sports, learned leadership through organizing gaming tournaments"
+    
+  ### max 3
+  hidden_traits:
+    - trait: "deadline driven"
+      ability: "can push team to meet impossible deadlines, +10% project speed but -1 on innovation"
+    - trait: "crisis manager"
+      ability: "when projects are behind schedule, gains +3 leadership and can rally the team"
