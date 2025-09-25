@@ -23,8 +23,15 @@ character:
   ### max 3
   hidden_traits:
     - trait: "bug magnet"
-      ability: "25% faster bug squashing"
+      ability: "finds and fixes bugs 25% faster, reducing debug time by 1 week"
     - trait: "pattern recognition"
-      ability: "after working on 3+ projects, has a 5% chance to remove a bug during development"
+      ability: "after working on 3+ projects, automatically prevents 2 bugs per week"
+    - trait: "edge case expert"
+      ability: "discovers critical bugs before release, preventing -5 penalty to reviews"
+  unlock:
+    meet: "online"  # Where you can first meet them
+    condition: "after_1990"  # Special condition required
 
----
+  topic_unlock:
+    - topic: "Debugging"
+      permanent_unlock_chance: 0.15

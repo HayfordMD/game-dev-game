@@ -28,3 +28,10 @@ character:
       ability: "reduces bug generation by 30% during development through better architecture"
     - trait: "scalability sense"
       ability: "if making an Online type game, automatic +5 to technical and +3 to innovation"
+  unlock:
+    meet: "university"  # Where you can first meet them
+    condition: "none"  # Special condition required
+
+  topic_unlock:
+    - topic: "Cyberpunk"
+      permanent_unlock_chance: 0.35

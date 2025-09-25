@@ -28,3 +28,10 @@ character:
       ability: "eliminates all input lag, improving reviews by +2 for action-heavy games"
     - trait: "physics intuition"
       ability: "50% chance to add innovative physics mechanic that increases innovation by +4"
+  unlock:
+    meet: "arcade"  # Where you can first meet them
+    condition: "playing_fighting_game"  # Special condition required
+
+  topic_unlock:
+    - topic: "Martial Arts"
+      permanent_unlock_chance: 0.4

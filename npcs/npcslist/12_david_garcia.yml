@@ -28,3 +28,10 @@ character:
       ability: "25% chance to boost technical score by +4 when working with limited hardware (pre-1995)"
     - trait: "midnight oil"
       ability: "during crunch time, works without fatigue penalty but needs 2 days recovery after project"
+  unlock:
+    meet: "electronics"  # Where you can first meet them
+    condition: "saturday_shopping"  # Special condition required
+
+  topic_unlock:
+    - topic: "Robots"
+      permanent_unlock_chance: 0.25

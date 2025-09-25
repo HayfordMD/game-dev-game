@@ -28,3 +28,11 @@ character:
       ability: "10% chance to secure platform-exclusive bonus worth $50,000 when releasing on console"
     - trait: "patch expeditor"
       ability: "can push one emergency patch per game without normal approval delays"
+  
+  unlock:
+    meet: "conference"  # Where you can first meet them
+    condition: "e3_or_gdc"  # Special condition required
+
+  topic_unlock:
+    - topic: "Game Shows"
+      permanent_unlock_chance: 0.3

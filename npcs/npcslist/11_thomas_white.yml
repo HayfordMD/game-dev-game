@@ -28,3 +28,10 @@ character:
       ability: "10% chance each development stage to boost graphics by +2 when he finds the perfect palette"
     - trait: "art block breaker"
       ability: "if graphics score would be below 10, has 25% chance to add +5 through sudden inspiration"
+  unlock:
+    meet: "dream"  # Where you can first meet them
+    condition: "developing_visual_novel"  # Special condition required
+
+  topic_unlock:
+    - topic: "Surrealism"
+      permanent_unlock_chance: 0.3

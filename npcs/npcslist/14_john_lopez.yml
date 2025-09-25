@@ -28,3 +28,10 @@ character:
       ability: "games use 20% less RAM, allowing better performance on weak hardware"
     - trait: "boot speed demon"
       ability: "reduces all loading times by 25%, improving player experience and reviews"
+  unlock:
+    meet: "hacker"  # Where you can first meet them
+    condition: "friday_night"  # Special condition required
+
+  topic_unlock:
+    - topic: "Retro Computing"
+      permanent_unlock_chance: 0.2

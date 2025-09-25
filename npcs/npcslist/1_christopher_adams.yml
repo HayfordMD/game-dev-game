@@ -28,3 +28,11 @@ character:
       ability: "always adds +2 to gameplay score by understanding what makes games addictive"
     - trait: "scope creep defender"
       ability: "if project is behind schedule, 20% chance to cut features smartly and save 2 days without losing points"
+
+  unlock:
+    meet: "conference"  # Where you can first meet them
+    condition: "none"  # No special condition, can meet at any conference
+
+  topic_unlock:
+    - topic: "Fantasy"
+      permanent_unlock_chance: 0.35

@@ -23,4 +23,16 @@ character:
   ### max 3
   hidden_traits:
     - trait: "caffeine dependent"
-      ability: "If coffee is available +3 to communication"
+      ability: "with coffee available, +3 productivity and eliminates 1 bug per week"
+    - trait: "night owl"
+      ability: "codes 30% faster between 8pm and 4am, but -2 productivity during mornings"
+    - trait: "refactoring expert"
+      ability: "once per project, can refactor code to remove 5 bugs and improve technical score by +2"
+
+  unlock:
+    meet: "university"  # Where you can first meet them
+    condition: "none"  # Special condition required
+
+  topic_unlock:
+    - topic: "Hacking"
+      permanent_unlock_chance: 0.25

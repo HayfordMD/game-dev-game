@@ -28,3 +28,10 @@ character:
       ability: "publisher milestone payments arrive 1 week early due to exceptional reporting"
     - trait: "risk radar"
       ability: "provides warning 2 weeks before any major development problem, allowing prevention"
+  unlock:
+    meet: "referral"  # Where you can first meet them
+    condition: "working_with_10_for_4_months"  # Special condition required
+
+  topic_unlock:
+    - topic: "Time Management"
+      permanent_unlock_chance: 0.25

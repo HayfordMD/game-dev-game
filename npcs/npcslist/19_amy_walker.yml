@@ -28,3 +28,10 @@ character:
       ability: "reveals exact release dates of competing games 2 months in advance"
     - trait: "hidden audience"
       ability: "discovers untapped market segment once per year, guaranteeing +20% sales for matching game"
+  unlock:
+    meet: "library"  # Where you can first meet them
+    condition: "tuesday_morning"  # Special condition required
+
+  topic_unlock:
+    - topic: "Economics"
+      permanent_unlock_chance: 0.35

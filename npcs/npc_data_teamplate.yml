@@ -12,9 +12,13 @@ character:
 
   job: Game Designer
 
+  meet_location: "referral"
+  unlock_condition: "hired an artist"
+  meet_chance: 1    # Probability of meeting the NPC under the specified condition
+
   personality:
-    description: ""    # Brief personality overview
-    
+    description: "Creative and detail-oriented, Christopher has a strong vision for game aesthetics and user experience. He values collaboration but can be stubborn about his design choices."
+
   background:
     education: ""      # Educational background
     work_history: ""   # Previous work experience
@@ -29,5 +33,9 @@ character:
       ability: ""
     - trait: ""       # Traits that influence behavior but are not immediately visible
       ability: ""
-    
+  
+  topic_unlock:
+    - topic: "World War I"
+      permanent_unlock_chance: 0.4
+
   notes: ""           # Player can add custom notes here

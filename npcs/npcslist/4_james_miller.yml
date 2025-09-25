@@ -23,6 +23,16 @@ character:
   ### max 3
   hidden_traits:
     - trait: "golden ear"
-      ability: "5% chance to add +1 Sound/Audio and innovation"
+      ability: "always adds +5 to sound score through perfect audio mixing"
     - trait: "vinyl collector"
-      ability: "inspiration from rare records gives +2 to design when working on retro type projects""
+      ability: "inspiration from rare records gives +2 to design when working on retro projects"
+    - trait: "adaptive soundtrack"
+      ability: "creates dynamic music that changes with gameplay, +2 to both sound and gameplay scores"
+
+  unlock:
+    meet: "arcade"  # Where you can first meet them
+    condition: "developing_arcade_game"  # Special condition required
+
+  topic_unlock:
+    - topic: "Music"
+      permanent_unlock_chance: 0.5

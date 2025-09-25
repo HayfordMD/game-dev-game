@@ -23,4 +23,16 @@ character:
   ### max 3
   hidden_traits:
     - trait: "character whisperer"
-      ability: "Creates memorable NPCs that become fan favorites, + 3% to all sales "
+      ability: "creates memorable NPCs that become fan favorites, +3% to all sales"
+    - trait: "branching dialogue master"
+      ability: "adds +4 to gameplay for RPG and Visual Novel games through compelling choices"
+    - trait: "lore weaver"
+      ability: "builds deep world backstory, +3 to innovation for story-driven games"
+
+  unlock:
+    meet: "dream"  # Where you can first meet them
+    condition: "developing_rpg"  # Special condition required
+
+  topic_unlock:
+    - topic: "Literature"
+      permanent_unlock_chance: 0.45

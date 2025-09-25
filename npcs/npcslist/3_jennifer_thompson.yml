@@ -4,11 +4,11 @@ character:
   gender: "female"
   skills:
     engineering: 2      # 0-10 scale
-    marketing: 3        # 0-10 scale
-    leadership: 2       # 0-10 scale
+    marketing: 2        # 0-10 scale
+    leadership: 1       # 0-10 scale
     design: 6          # 0-10 scale
-    research: 4        # 0-10 scale
-    communication: 4   # 0-10 scale
+    research: 2        # 0-10 scale
+    communication: 2   # 0-10 scale
   
   job: Artist
   
@@ -23,4 +23,16 @@ character:
   ### max 3
   hidden_traits:
     - trait: "artistic eureka"
-      ability: "10% chance to add +1 to game graphics"
+      ability: "10% chance each week to add +3 to graphics score through sudden inspiration"
+    - trait: "color harmony"
+      ability: "automatically improves visual cohesion, +2 to graphics for all games"
+    - trait: "speed sketcher"
+      ability: "can create concept art 50% faster, reducing pre-production time by 3 days"
+
+  unlock:
+    meet: "arcade"  # Where you can first meet them
+    condition: "none"  # Special condition required
+
+  topic_unlock:
+    - topic: "Anime"
+      permanent_unlock_chance: 0.4

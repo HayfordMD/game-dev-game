@@ -28,3 +28,10 @@ character:
       ability: "creates debugging tools that catch 3 bugs per week automatically"
     - trait: "pipeline optimizer"
       ability: "build times reduced by 50%, allowing faster iteration and +2 technical score"
+  unlock:
+    meet: "online"  # Where you can first meet them
+    condition: "posting_job_ad"  # Special condition required
+
+  topic_unlock:
+    - topic: "Programming"
+      permanent_unlock_chance: 0.3

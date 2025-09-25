@@ -23,4 +23,16 @@ character:
   ### max 3
   hidden_traits:
     - trait: "market intuition"
-      ability: "+10 to all game stats if the type and topic match"
+      ability: "+10 to all game stats if the type and topic match current trends"
+    - trait: "franchise builder"
+      ability: "sequels directed by him get +15% sales boost and +3 to all scores"
+    - trait: "hype generator"
+      ability: "marketing campaigns are 30% more effective, reducing marketing costs"
+
+  unlock:
+    meet: "library"  # Where you can first meet them
+    condition: "researching_new_tech"  # Special condition required
+
+  topic_unlock:
+    - topic: "Movies"
+      permanent_unlock_chance: 0.35

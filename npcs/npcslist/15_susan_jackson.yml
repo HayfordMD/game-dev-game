@@ -28,3 +28,10 @@ character:
       ability: "catches game-breaking bugs in final build, preventing 1 critical bug per project"
     - trait: "rush order specialist"
       ability: "can expedite production by 1 week when deadline is critical, once per game"
+  unlock:
+    meet: "bankruptcy"  # Where you can first meet them
+    condition: "studio_failed_nearby"  # Special condition required
+
+  topic_unlock:
+    - topic: "Manufacturing"
+      permanent_unlock_chance: 0.15

@@ -99,14 +99,13 @@ class DevelopmentStageWindow:
         """Show pre-bounce calculation menu on the side"""
         self.calc_window = tk.Toplevel(self.root)
         self.calc_window.title(f"{self.stage.value} - Bounce Calculation")
-        self.calc_window.geometry("400x800")
         self.calc_window.configure(bg='#1a1a1a')
 
-        # Position on the left side of the screen
+        # Position on the left side of the screen with proper size
         self.calc_window.update_idletasks()
         x = 50  # Left side
-        y = (self.calc_window.winfo_screenheight() // 2) - (400)
-        self.calc_window.geometry(f"400x800+{x}+{y}")
+        y = 50  # Near top to fit the full height
+        self.calc_window.geometry(f"550x1000+{x}+{y}")
 
         # Title
         title = tk.Label(
@@ -699,6 +698,7 @@ class DevelopmentStageWindow:
 
     def set_animation_speed(self, speed: float):
         """Set the animation speed multiplier"""
+        print(f"[DEBUG] Animation speed changed to {speed}x")
         self.animation_speed = speed
         # Adjust animation delay inversely (faster speed = shorter delay)
         self.animation_delay = max(5, int(20 / speed))  # Min 5ms delay
@@ -709,11 +709,13 @@ class DevelopmentStageWindow:
 
     def animate(self):
         """Main animation loop"""
-        if not self.is_bouncing:
+        if not self.is_bouncing and len(self.floating_bubbles) == 0:
+            print(f"[DEBUG] Animation complete - no bouncing and no bubbles")
             return
 
         # Check if window still exists
         if not hasattr(self, 'window') or not self.window.winfo_exists():
+            print(f"[DEBUG] Animation stopped - window destroyed")
             return
 
         # Apply speed multiplier to physics
@@ -732,9 +734,14 @@ class DevelopmentStageWindow:
                 floor_y = 380 - dev['offset'] // 5  # Slight variation in floor level (adjusted for new canvas)
                 if dev['y'] >= floor_y:
                     dev['y'] = floor_y
-                    dev['velocity'] = bounce_force_adjusted + (dev['offset'] / 10)  # Variation in bounce
-                    if i == 0:  # Only count bounces for the first developer
-                        any_bounced = True
+                    # Only bounce if we haven't reached max bounces
+                    if self.bounce_count < self.max_bounces:
+                        dev['velocity'] = bounce_force_adjusted + (dev['offset'] / 10)  # Variation in bounce
+                        if i == 0:  # Only count bounces for the first developer
+                            any_bounced = True
+                    else:
+                        # Stay on the floor after max bounces
+                        dev['velocity'] = 0
 
                 # Update developer position
                 graphics = self.developer_graphics[i]
@@ -760,8 +767,13 @@ class DevelopmentStageWindow:
             floor_y = 380  # Floor position for the developer (adjusted for new canvas)
             if self.developer_y >= floor_y:
                 self.developer_y = floor_y
-                self.developer_velocity = bounce_force_adjusted
-                self.on_bounce()
+                # Only bounce if we haven't reached max bounces
+                if self.bounce_count < self.max_bounces:
+                    self.developer_velocity = bounce_force_adjusted
+                    self.on_bounce()
+                else:
+                    # Stay on the floor after max bounces
+                    self.developer_velocity = 0
 
             # Update developer position
             self.canvas.coords(
@@ -778,13 +790,19 @@ class DevelopmentStageWindow:
         # Update score popup animations
         self.update_score_popups()
 
-        # Continue animation with adjusted delay
-        if self.is_bouncing:
+        # Continue animation if still bouncing OR if there are floating bubbles
+        if self.is_bouncing or len(self.floating_bubbles) > 0:
             self.window.after(self.animation_delay, self.animate)
 
     def on_bounce(self):
         """Handle bounce event - generate points and possibly bugs"""
+        # Check if we've already completed all bounces
+        if self.bounce_count >= self.max_bounces:
+            print(f"[DEBUG] Ignoring extra bounce - already at max ({self.max_bounces})")
+            return
+
         self.bounce_count += 1
+        print(f"[DEBUG] Bounce {self.bounce_count}/{self.max_bounces} - Stage: {self.stage.value}")
         self.progress_label.config(text=f"Bounce: {self.bounce_count}/{self.max_bounces}")
 
         # Reset index for scoring if needed
@@ -825,6 +843,7 @@ class DevelopmentStageWindow:
 
         # Check if complete
         if self.bounce_count >= self.max_bounces:
+            print(f"[DEBUG] All bounces complete - waiting for bubbles to clear")
             self.is_bouncing = False
             # Start checking if all bubbles have reached their destinations
             self.check_for_completion()
@@ -905,7 +924,7 @@ class DevelopmentStageWindow:
             tags='bubble'
         )
 
-        # Add to floating bubbles list
+        # Add to floating bubbles list with increased speed and life
         self.floating_bubbles.append({
             'id': bubble,
             'x': start_x,
@@ -913,8 +932,8 @@ class DevelopmentStageWindow:
             'target_x': target_x,
             'target_y': target_y,
             'category': category,
-            'speed': 3.0,
-            'life': 100
+            'speed': 8.0,  # Increased from 3.0 for faster movement
+            'life': 200  # Increased from 100 to give more time to reach target
         })
 
     def update_score_popups(self):
@@ -938,11 +957,16 @@ class DevelopmentStageWindow:
                 bubble['y'] += (dy / distance) * bubble['speed'] * self.animation_speed
 
                 # Update bubble position
-                self.canvas.coords(
-                    bubble['id'],
-                    bubble['x'] - 8, bubble['y'] - 8,
-                    bubble['x'] + 8, bubble['y'] + 8
-                )
+                try:
+                    self.canvas.coords(
+                        bubble['id'],
+                        bubble['x'] - 8, bubble['y'] - 8,
+                        bubble['x'] + 8, bubble['y'] + 8
+                    )
+                except:
+                    # Canvas item might be deleted already
+                    print(f"[DEBUG] Failed to update bubble {bubble['id']} - removing")
+                    to_remove.append(bubble)
             else:
                 # Reached target - update score and remove
                 if bubble['category'] in self.category_scores:
@@ -956,9 +980,11 @@ class DevelopmentStageWindow:
 
                 self.canvas.delete(bubble['id'])
                 to_remove.append(bubble)
+                print(f"[DEBUG] Bubble reached target - {bubble['category']}")
 
             bubble['life'] -= 1
             if bubble['life'] <= 0:
+                print(f"[DEBUG] Bubble expired - removing {bubble['category']}")
                 self.canvas.delete(bubble['id'])
                 to_remove.append(bubble)
 
@@ -975,9 +1001,19 @@ class DevelopmentStageWindow:
 
         # If there are still bubbles floating, check again in 100ms
         if len(self.floating_bubbles) > 0:
+            # Log details about stuck bubbles
+            stuck_info = []
+            for bubble in self.floating_bubbles[:3]:  # Just log first 3 to avoid spam
+                dx = bubble['target_x'] - bubble['x']
+                dy = bubble['target_y'] - bubble['y']
+                distance = math.sqrt(dx**2 + dy**2)
+                stuck_info.append(f"{bubble['category']}(dist:{distance:.1f},life:{bubble['life']})")
+
+            print(f"[DEBUG] Waiting for {len(self.floating_bubbles)} bubbles: {', '.join(stuck_info)}")
             self.window.after(100, self.check_for_completion)
         else:
             # All bubbles have reached their destinations, wait a bit then complete
+            print(f"[DEBUG] All bubbles cleared - completing stage")
             self.window.after(500, self.complete_stage)
 
     def complete_stage(self):
@@ -1168,6 +1204,7 @@ class MultiStageDevelopment:
 
     def skip_stage(self, window):
         """Skip current stage (for testing)"""
+        print(f"[DEBUG] Skip Stage button clicked - skipping {self.stage.value}")
         window.destroy()
         # Generate minimal points
         scores = StageScores()

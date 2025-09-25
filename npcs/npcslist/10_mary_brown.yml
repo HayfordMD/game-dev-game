@@ -24,3 +24,15 @@ character:
   hidden_traits:
     - trait: "technical debt aversion"
       ability: "insists on clean architecture, slower development but after 5 projects never more than 20 bugs in a game"
+    - trait: "performance optimizer"
+      ability: "games run 40% faster on same hardware, enabling better graphics and gameplay"
+    - trait: "mentorship mindset"
+      ability: "junior developers working with her gain +1 to engineering skill permanently"
+
+  unlock:
+    meet: "referral"  # Where you can first meet them
+    condition: "working_with_3_for_4_months"  # Special condition required
+
+  topic_unlock:
+    - topic: "Technology"
+      permanent_unlock_chance: 0.4

@@ -1,3 +1,11 @@
+NPC skills:
+- Engineering
+- Marketing
+- Leadership
+- Design
+- Research
+- Communication
+
 # Game Development Studio - Game Notes
 
 ## Game Rating System

@@ -449,34 +449,19 @@ class StudioRoomScreen(BaseRoom):
         self.update_status_display()
 
     def show_door_menu(self):
-        """Show menu when clicking on door"""
-        # Create door menu dialog
-        door_window = tk.Toplevel(self.root)
-        door_window.title("Where to go?")
-        door_window.geometry("300x200")
-        door_window.transient(self.root)
-        door_window.grab_set()
+        """Show menu when clicking on door - opens full location selection UI"""
+        print("[DEBUG] Door clicked - opening location menu")
 
-        # Center the window
-        door_window.update_idletasks()
-        x = (door_window.winfo_screenwidth() // 2) - 150
-        y = (door_window.winfo_screenheight() // 2) - 100
-        door_window.geometry(f"300x200+{x}+{y}")
+        # Import here to avoid circular imports
+        from desktop.door_menu_ui import DoorMenuWindow
 
-        # Title
-        tk.Label(door_window, text="Choose Destination", font=('Arial', 16, 'bold')).pack(pady=15)
+        # Open the new comprehensive door menu
+        def on_location_selected():
+            print("[DEBUG] Returned from location visit")
+            # Update any necessary game state after returning
+            self.update_status_display()
 
-        # Bank button
-        tk.Button(door_window, text="🏦 Bank", command=lambda: self.go_to_bank(door_window),
-                 font=('Arial', 14), width=15, height=2).pack(pady=10)
-
-        # Other locations (placeholder for future)
-        tk.Label(door_window, text="More locations coming soon...",
-                font=('Arial', 10, 'italic'), fg='gray').pack(pady=10)
-
-        # Cancel button
-        tk.Button(door_window, text="Cancel", command=door_window.destroy,
-                 font=('Arial', 12), width=10).pack(pady=10)
+        DoorMenuWindow(self.game_data.data, on_location_selected)
 
     def go_to_bank(self, door_window):
         """Navigate to bank interface"""

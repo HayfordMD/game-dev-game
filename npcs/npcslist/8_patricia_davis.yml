@@ -23,4 +23,16 @@ character:
   ### max 3
   hidden_traits:
     - trait: "secret hunter"
-      ability: "always includes hidden areas and easter eggs, increasing Gameplay by 5 points"
+      ability: "always includes hidden areas and easter eggs, +5 to gameplay score"
+    - trait: "flow state designer"
+      ability: "creates perfect difficulty curves, +3 to gameplay and +2% to sales"
+    - trait: "speedrun friendly"
+      ability: "designs levels with unintended shortcuts, attracts competitive community, +10% long-term sales"
+
+  unlock:
+    meet: "university"  # Where you can first meet them
+    condition: "tuesday_night"  # Special condition required
+
+  topic_unlock:
+    - topic: "Architecture"
+      permanent_unlock_chance: 0.2

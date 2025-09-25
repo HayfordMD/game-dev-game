@@ -26,3 +26,13 @@ character:
       ability: "can push team to meet impossible deadlines, +10% project speed but -1 on innovation"
     - trait: "crisis manager"
       ability: "when projects are behind schedule, gains +3 leadership and can rally the team"
+    - trait: "budget wizard"
+      ability: "reduces overall development costs by 15% without affecting quality"
+
+  unlock:
+    meet: "hacker"  # Where you can first meet them
+    condition: "after_1985"  # Special condition required
+
+  topic_unlock:
+    - topic: "Business"
+      permanent_unlock_chance: 0.3

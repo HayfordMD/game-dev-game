@@ -297,6 +297,27 @@ class BarLocation(Location):
 
         return False, "Bar opens at 5pm on weekdays"
 
+class GroceryStoreLocation(Location):
+    """Grocery store for buying items - Always available during business hours"""
+    def __init__(self):
+        super().__init__(
+            "Grocery Store",
+            "24/7 convenience store for developer essentials"
+        )
+        self.npc_pool = []  # No NPCs at grocery store
+
+    def is_available(self, game_date: datetime) -> Tuple[bool, str]:
+        # Always available 24/7
+        return True, ""
+
+    def visit(self, game_state: Dict) -> Dict:
+        """Open the store interface"""
+        return {
+            "success": True,
+            "message": "Welcome to DevMart - Your 24/7 Developer Essentials Store",
+            "action": "open_store"
+        }
+
 class SpecialEncounterLocation(Location):
     """Special encounter types that can happen under certain conditions"""
     pass
@@ -410,6 +431,7 @@ class DoorSystem:
             "hacker": HackerMeetupLocation(),
             "bank": BankLocation(),
             "bar": BarLocation(),
+            "grocery": GroceryStoreLocation(),
             "friend_referral": FriendReferralLocation(),
             "headhunter": HeadhunterLocation(),
             "bankruptcy": BankruptcyAuctionLocation(),
