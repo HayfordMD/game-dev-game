@@ -28,7 +28,7 @@
 - Buy/Rent/Skip
 - Metacritic color coding
 
-## All Possible Game Types (34 total)
+## All Possible Game Types (26 total)
 
 1. **Text Adventure** - *Available from start*
 2. **Arcade** - *Available from start*
@@ -45,27 +45,17 @@
 13. **FPS** (First-Person Shooter)
 14. **TPS** (Third-Person Shooter)
 15. **Sports** Gameplay if sports game and a sports topcic are selected then gameplay rating is boosted by 10%
-14. **Simulation**
-15. **Survival** 
-16. **Strategy** unlocked when you make 2 board games or after 1992 whichever comes first 
-17. **Online Game** - Reach year 1994 then this type is available until 2000 it is a negative modifier of -5% to all ratings due to connection issues and server problems
-18. **MMORPG** if rpg is unlocked and past 1996 then this type is available, priori to 2004 it is a negative modifier of -10% to all ratings due to connection issues and server problems
-19. **Rhythm**
-20. **Visual Novel** 
-21. **Horror**
-22. **Sandbox**
-22. **Open World**
-23. **Battle Royale**
-24. **MOBA**
-25. **Idle** - *Special unlock: Don't use desktop for 1 year*
-26. **Office** - *Special unlock: Create Arcade + Table Tennis named "Ping"* once it is unlocked it is unlocked at the start of every play through afterwards
-27. **Retro** - *Special unlock: Reach year 2000* 
-28. **Educational** - *Special unlock: Achieve 90% happiness* once it is unlocked it is unlocked at the start of every play through afterwards
-29. **Motion-Control**
-30. **Touch-Based**
-31. **VR** (Virtual Reality)
-32. **AR** (Augmented Reality)
-34. **Board Game** unlocked automaticall in 1985 once it is unlocked it is unlocked at the start of every play through afterwards
+16. **Simulation**
+17. **Survival** 
+18. **Strategy** unlocked when you make 2 board games or after 1992 whichever comes first
+19. **Online Game** - Reach year 1994 then this type is available until 2000 it is a negative modifier of -5% to all ratings due to connection issues and server problems
+20. **MMORPG** if rpg is unlocked and past 1996 then this type is available, priori to 2004 it is a negative modifier of -10% to all ratings due to connection issues and server problems
+21. **Visual Novel**
+22. **Horror**
+23. **Open World**
+24. **Battle Royale**
+25. **MOBA**
+26. **Educational** - *Special unlock: Achieve 90% happiness* once it is unlocked it is unlocked at the start of every play through afterwards
 
 ## All Possible Topics (155 total)
 ### Original/Classic (5)
@@ -73,7 +63,6 @@
 2. **Fantasy** - *Available from start*
 3. **Space** - *Available from start*
 4. **Temple** - *Available from start*
-5. **Adventure** - *Available from start*
 
 ### Horror (14)
 6. **Zombies**
@@ -255,12 +244,9 @@ At game start (1978), you have:
 
 ### Special Unlocks
 - **RPG Game Type**: Create any Text Adventure + Fantasy game
-- **Motion-Control Game Type**: Create Rhythm game + Music-related topic (Music Creation, Dance, etc.)
 - **Office Game Type**: Create "Ping" (Arcade + Table Tennis)
 - **Bugs Topic**: Low hygiene (< 40%) in years 1978-1983
 - **Dinosaurs Topic**: Create 3 successful adventure games
-- **Idle Game Type**: Don't use desktop for 1 year
-- **Retro Game Type**: Reach year 2000
 - **Educational Game Type**: Achieve 90% happiness
 
 ## Game Engines
