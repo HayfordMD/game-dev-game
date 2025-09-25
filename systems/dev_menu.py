@@ -44,6 +44,11 @@ class DevMenu:
                  bg='#4CAF50', fg='white', font=('Arial', 10, 'bold'),
                  padx=10, pady=10, wraplength=200).pack(pady=5)
 
+        tk.Button(quick_frame, text="TEST: PLANNING\n(Test Bouncing & Summary Screen)",
+                 command=self.test_planning_stage,
+                 bg='#9C27B0', fg='white', font=('Arial', 10, 'bold'),
+                 padx=10, pady=10, wraplength=200).pack(pady=5)
+
         # Game State Section
         state_frame = ttk.LabelFrame(self.window, text="Game State", padding=10)
         state_frame.pack(fill='x', padx=20, pady=10)
@@ -169,6 +174,35 @@ class DevMenu:
         self.app.show_studio_room()
 
         messagebox.showinfo("Dev Mode", "Skipped to Studio Room with test data!")
+
+    def test_planning_stage(self):
+        """Launch the planning stage directly for testing"""
+        from desktop.development_stages import DevelopmentStageWindow, DevelopmentStage
+
+        # Setup test game data
+        if 'current_game' not in self.app.game_data.data:
+            self.app.game_data.data['current_game'] = {}
+
+        # Set test game info
+        self.app.game_data.data['current_game']['name'] = "Test Game"
+        self.app.game_data.data['current_game']['type'] = "Action"
+        self.app.game_data.data['current_game']['topic'] = "Space"
+
+        # Close dev menu
+        if self.window:
+            self.window.destroy()
+
+        # Create and show planning stage window
+        planning_window = DevelopmentStageWindow(
+            self.app.root,
+            self.app.game_data,  # Pass the game_data object, not .data
+            DevelopmentStage.PLANNING,
+            "Test Player",
+            None,  # Will use default developer stats
+            on_complete=lambda: messagebox.showinfo("Test Complete", "Planning stage test completed!")
+        )
+
+        messagebox.showinfo("Dev Mode", "Launching Planning Stage Test!\nClick space to bounce the developer.")
 
     def add_money(self, amount):
         """Add money to player"""

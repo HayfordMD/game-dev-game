@@ -96,210 +96,43 @@ class DevelopmentStageWindow:
         self.show_calculation_menu()
 
     def show_calculation_menu(self):
-        """Show pre-bounce calculation menu on the side"""
-        self.calc_window = tk.Toplevel(self.root)
-        self.calc_window.title(f"{self.stage.value} - Bounce Calculation")
-        self.calc_window.configure(bg='#1a1a1a')
+        """Log bounce calculations to console instead of showing UI"""
+        print("\n" + "="*60)
+        print(f"DEVELOPER PERFORMANCE ANALYSIS - {self.stage.value} Stage")
+        print("="*60)
+        print(f"Developer: {self.developer_name}")
+        print("\n" + "-"*30 + " SKILL BREAKDOWN " + "-"*30)
 
-        # Position on the left side of the screen with proper size
-        self.calc_window.update_idletasks()
-        x = 50  # Left side
-        y = 50  # Near top to fit the full height
-        self.calc_window.geometry(f"550x1000+{x}+{y}")
-
-        # Title
-        title = tk.Label(
-            self.calc_window,
-            text="Developer Performance Analysis",
-            font=('Arial', 18, 'bold'),
-            fg='#00ff00',
-            bg='#1a1a1a'
-        )
-        title.pack(pady=20)
-
-        # Developer name
-        dev_label = tk.Label(
-            self.calc_window,
-            text=f"Developer: {self.developer_name}",
-            font=('Arial', 14, 'bold'),
-            fg='white',
-            bg='#1a1a1a'
-        )
-        dev_label.pack()
-
-        # Skills breakdown frame
-        skills_frame = tk.Frame(self.calc_window, bg='#2a2a2a', relief=tk.RAISED, bd=2)
-        skills_frame.pack(pady=20, padx=40, fill='x')
-
-        tk.Label(
-            skills_frame,
-            text="Skill Breakdown",
-            font=('Arial', 12, 'bold'),
-            fg='white',
-            bg='#2a2a2a'
-        ).pack(pady=10)
-
-        # Show each skill
+        # Log each skill
         for skill_name, skill_value in self.bounce_details['skills'].items():
-            self.create_skill_bar(skills_frame, skill_name.title(), skill_value)
+            bar = "█" * int(skill_value) + "░" * (10 - int(skill_value))
+            print(f"{skill_name.title():15} [{bar}] {skill_value}/10")
 
-        # Composite score section
-        composite_frame = tk.Frame(self.calc_window, bg='#2a2a2a', relief=tk.RAISED, bd=2)
-        composite_frame.pack(pady=20, padx=40, fill='x')
+        print("\n" + "-"*30 + " COMPOSITE SCORE " + "-"*30)
+        print(f"Composite Score: {self.bounce_details['composite_score']}/{self.bounce_details['max_score']}")
+        print(f"Performance Level: {self.bounce_details['percentage']:.1f}%")
+        print(f"Weighted Skill: {self.weighted_skill:.1f}/100")
+        print(f"Pre-calculated scores: {self.precalculated_scores}")
+        print(f"Expected Avg: {sum(self.precalculated_scores)/len(self.precalculated_scores):.1f} pts/bounce")
 
-        tk.Label(
-            composite_frame,
-            text=f"Composite Score: {self.bounce_details['composite_score']}/{self.bounce_details['max_score']}",
-            font=('Arial', 14, 'bold'),
-            fg='#4CAF50',
-            bg='#2a2a2a'
-        ).pack(pady=10)
+        print("\n" + "-"*30 + " BOUNCE CALCULATION " + "-"*28)
+        print(f"Expected Bounces: {self.bounce_details['expected_bounces']}")
+        print(f"Actual Bounces: {self.bounce_details['actual_bounces']} {self.bounce_details['luck_factor']}")
+        print(f"Percentile: {self.bounce_details['percentile']:.1f}%")
 
-        tk.Label(
-            composite_frame,
-            text=f"Performance Level: {self.bounce_details['percentage']:.1f}%",
-            font=('Arial', 12),
-            fg='white',
-            bg='#2a2a2a'
-        ).pack()
-
-        tk.Label(
-            composite_frame,
-            text=f"Weighted Skill: {self.weighted_skill:.1f}/100",
-            font=('Arial', 11),
-            fg='#888888',
-            bg='#2a2a2a'
-        ).pack()
-
-        # Pre-calculated scores preview
-        tk.Label(
-            composite_frame,
-            text=f"Pre-calculated: {self.precalculated_scores}",
-            font=('Arial', 9),
-            fg='#666666',
-            bg='#2a2a2a'
-        ).pack(pady=5)
-
-        tk.Label(
-            composite_frame,
-            text=f"Expected Avg: {sum(self.precalculated_scores)/len(self.precalculated_scores):.1f} pts/bounce",
-            font=('Arial', 10),
-            fg='#FFC107',
-            bg='#2a2a2a'
-        ).pack()
-
-        # Bounce calculation frame
-        bounce_frame = tk.Frame(self.calc_window, bg='#2a2a2a', relief=tk.RAISED, bd=2)
-        bounce_frame.pack(pady=20, padx=40, fill='x')
-
-        tk.Label(
-            bounce_frame,
-            text="Bounce Calculation",
-            font=('Arial', 12, 'bold'),
-            fg='white',
-            bg='#2a2a2a'
-        ).pack(pady=10)
-
-        # Expected vs Actual
-        tk.Label(
-            bounce_frame,
-            text=f"Expected Bounces: {self.bounce_details['expected_bounces']}",
-            font=('Arial', 11),
-            fg='#888888',
-            bg='#2a2a2a'
-        ).pack(pady=2)
-
-        # Actual bounces with color based on luck
-        bounce_color = '#4CAF50' if self.bounce_details['luck_factor'] == 'Lucky!' else '#F44336' if self.bounce_details['luck_factor'] == 'Unlucky' else '#FFC107'
-
-        tk.Label(
-            bounce_frame,
-            text=f"Actual Bounces: {self.bounce_details['actual_bounces']}",
-            font=('Arial', 14, 'bold'),
-            fg=bounce_color,
-            bg='#2a2a2a'
-        ).pack(pady=5)
-
-        tk.Label(
-            bounce_frame,
-            text=f"Percentile: {self.bounce_details['percentile']:.1f}%",
-            font=('Arial', 11),
-            fg='white',
-            bg='#2a2a2a'
-        ).pack(pady=2)
-
-        tk.Label(
-            bounce_frame,
-            text=self.bounce_details['luck_factor'],
-            font=('Arial', 12, 'bold'),
-            fg=bounce_color,
-            bg='#2a2a2a'
-        ).pack(pady=5)
-
-        # Bell curve visualization
-        curve_frame = tk.Frame(self.calc_window, bg='#2a2a2a', relief=tk.RAISED, bd=2)
-        curve_frame.pack(pady=15, padx=20, fill='x')
-
-        tk.Label(
-            curve_frame,
-            text="Bell Curve Distribution",
-            font=('Arial', 11, 'bold'),
-            fg='white',
-            bg='#2a2a2a'
-        ).pack(pady=5)
-
-        # Create canvas for bell curve
-        curve_canvas = tk.Canvas(
-            curve_frame,
-            width=350,
-            height=150,
-            bg='#1a1a1a',
-            highlightthickness=0
-        )
-        curve_canvas.pack(pady=10)
-
-        # Draw bell curve
-        self.draw_bell_curve(curve_canvas, self.bounce_details)
-
-        # Visual bounce indicator
-        visual_frame = tk.Frame(self.calc_window, bg='#1a1a1a')
-        visual_frame.pack(pady=10)
-
-        # Create two rows for 10 bounces
+        # Visual bounce indicator in console
+        bounce_visual = ""
         for i in range(10):
-            row = 0 if i < 5 else 1
-            col = i if i < 5 else i - 5
+            if i < self.max_bounces:
+                bounce_visual += "⬤ "
+            else:
+                bounce_visual += "○ "
+        print(f"\nBounces Available: {bounce_visual}")
+        print("="*60 + "\n")
 
-            color = '#4CAF50' if i < self.max_bounces else '#333333'
-            bounce_indicator = tk.Frame(
-                visual_frame,
-                width=35,
-                height=35,
-                bg=color,
-                relief=tk.RAISED if i < self.max_bounces else tk.SUNKEN,
-                bd=2
-            )
-            bounce_indicator.grid(row=row, column=col, padx=3, pady=3)
-
-            tk.Label(
-                bounce_indicator,
-                text=str(i+1),
-                font=('Arial', 9, 'bold'),
-                fg='white' if i < self.max_bounces else '#666666',
-                bg=color
-            ).place(relx=0.5, rely=0.5, anchor='center')
-
-        # Auto-start message
-        tk.Label(
-            self.calc_window,
-            text="Development Starting...",
-            font=('Arial', 12, 'italic'),
-            fg='#4CAF50',
-            bg='#1a1a1a'
-        ).pack(pady=20)
-
-        # Start the stage automatically after short delay
-        self.calc_window.after(500, self.start_stage)
+        # Skip creating calc_window - just start the stage directly
+        self.root.after(500, self.start_stage)
+        # Method body removed - replaced by console logging above
 
     def draw_bell_curve(self, canvas, details):
         """Draw a bell curve visualization showing where the result landed"""
@@ -419,9 +252,7 @@ class DevelopmentStageWindow:
         value_label.pack(side='left')
 
     def start_stage(self):
-        """Start the stage while keeping calculation window open on the side"""
-        # Don't destroy calc_window - keep it visible
-
+        """Start the stage"""
         self.window = tk.Toplevel(self.root)
         self.window.title(f"{self.stage.value} Stage - {self.developer_name}")
         self.window.geometry("800x600")
@@ -1012,12 +843,548 @@ class DevelopmentStageWindow:
             print(f"[DEBUG] Waiting for {len(self.floating_bubbles)} bubbles: {', '.join(stuck_info)}")
             self.window.after(100, self.check_for_completion)
         else:
-            # All bubbles have reached their destinations, wait a bit then complete
-            print(f"[DEBUG] All bubbles cleared - completing stage")
-            self.window.after(500, self.complete_stage)
+            # All bubbles have reached their destinations, show summary first
+            print(f"[DEBUG] All bubbles cleared - showing summary")
+            self.show_stage_summary()
+
+    def show_stage_summary(self):
+        """Show summary of scores on the existing canvas"""
+        print(f"[DEBUG] show_stage_summary called for {self.stage.value}")
+
+        # Check if window and canvas still exist
+        if not hasattr(self, 'window') or not self.window.winfo_exists():
+            print(f"[DEBUG] Window doesn't exist, cannot show summary")
+            return
+
+        if not hasattr(self, 'canvas'):
+            print(f"[DEBUG] Canvas doesn't exist, cannot show summary")
+            return
+
+        # Stop bouncing completely
+        self.is_bouncing = False
+
+        # Clear any remaining animations
+        try:
+            self.canvas.delete("bubble")
+        except:
+            print(f"[DEBUG] Failed to delete bubbles")
+
+        # For Planning stage, show special planning complete screen
+        if self.stage == DevelopmentStage.PLANNING:
+            print(f"[DEBUG] Creating Planning stage summary")
+            # Create semi-transparent overlay
+            overlay = self.canvas.create_rectangle(
+                0, 0, 800, 600,
+                fill='#000000',
+                stipple='gray50',
+                tags='summary'
+            )
+            print(f"[DEBUG] Created overlay: {overlay}")
+
+            # Create large summary box for planning complete
+            summary_box = self.canvas.create_rectangle(
+                100, 50, 700, 550,
+                fill='#2a2a2a',
+                outline='#4CAF50',
+                width=3,
+                tags='summary'
+            )
+            print(f"[DEBUG] Created summary box: {summary_box}")
+
+            # Get game info - self.game_data is a GameData object, access .data
+            if hasattr(self.game_data, 'data'):
+                current_game = self.game_data.data.get('current_game', {})
+            else:
+                # self.game_data is already a dict
+                current_game = self.game_data.get('current_game', {})
+
+            game_name = current_game.get('name', 'Untitled Game')
+            game_type = current_game.get('type', 'Unknown')
+            topic = current_game.get('topic', 'Unknown')
+
+            # Log what we're about to display
+            print(f"\n" + "="*60)
+            print("PLANNING SUMMARY - WHAT SHOULD BE DISPLAYED:")
+            print("="*60)
+            print(f"Game Name: {game_name.upper()}")
+            print(f"Type/Topic: {game_type} - {topic}")
+            print("Status: PLANNING COMPLETE")
+            print("\nPLANNING SCORES:")
+
+            # Large Game Name Title
+            title_id = self.canvas.create_text(
+                400, 100,
+                text=game_name.upper(),
+                font=('Arial', 28, 'bold'),
+                fill='#FFD700',
+                tags='summary'
+            )
+            print(f"[DEBUG] Created title text: {title_id}")
+
+            # Game Type and Topic
+            type_id = self.canvas.create_text(
+                400, 135,
+                text=f"{game_type} - {topic}",
+                font=('Arial', 16),
+                fill='#888888',
+                tags='summary'
+            )
+            print(f"[DEBUG] Created type/topic text: {type_id}")
+
+            # PLANNING COMPLETE text
+            complete_id = self.canvas.create_text(
+                400, 180,
+                text="PLANNING COMPLETE",
+                font=('Arial', 24, 'bold'),
+                fill='#4CAF50',
+                tags='summary'
+            )
+            print(f"[DEBUG] Created complete text: {complete_id}")
+
+            # Divider line
+            divider_id = self.canvas.create_line(
+                150, 210, 650, 210,
+                fill='#555555',
+                width=2,
+                tags='summary'
+            )
+            print(f"[DEBUG] Created divider: {divider_id}")
+
+            # PLANNING SCORES header
+            scores_header_id = self.canvas.create_text(
+                400, 235,
+                text="PLANNING SCORES",
+                font=('Arial', 18, 'bold'),
+                fill='white',
+                tags='summary'
+            )
+            print(f"[DEBUG] Created scores header: {scores_header_id}")
+
+            # Make sure window and canvas are visible
+            self.window.lift()
+            self.window.focus_force()
+            self.canvas.update()
+            print(f"[DEBUG] Summary should now be visible on canvas")
+        else:
+            # Original summary for other stages
+            # Create semi-transparent overlay
+            overlay = self.canvas.create_rectangle(
+                0, 0, 800, 600,
+                fill='#000000',
+                stipple='gray50',
+                tags='summary'
+            )
+
+            # Create summary box in center
+            summary_box = self.canvas.create_rectangle(
+                200, 150, 600, 450,
+                fill='#2a2a2a',
+                outline='#4CAF50',
+                width=3,
+                tags='summary'
+            )
+
+            # Title
+            self.canvas.create_text(
+                400, 180,
+                text=f"{self.stage.value} Complete!",
+                font=('Arial', 20, 'bold'),
+                fill='#4CAF50',
+                tags='summary'
+            )
+
+        # Display score boxes with values
+        categories = [
+            ('Gameplay', self.category_scores.get('gameplay', 0), '#FF6B6B'),
+            ('Technical', self.category_scores.get('technical', 0), '#4ECDC4'),
+            ('Graphics', self.category_scores.get('graphics', 0), '#45B7D1'),
+            ('Innovation', self.category_scores.get('innovation', 0), '#96CEB4'),
+            ('Sound', self.category_scores.get('sound_audio', 0), '#FECA57'),
+            ('Story', self.category_scores.get('story', 0), '#DDA0DD')
+        ]
+
+        # Log the scores
+        if self.stage == DevelopmentStage.PLANNING:
+            for cat_name, score, color in categories:
+                print(f"  {cat_name}: {score}")
+            print(f"\nTOTAL PLANNING POINTS: {sum(self.category_scores.values())}")
+            print("="*60 + "\n")
+
+        # Different layouts for Planning vs other stages
+        if self.stage == DevelopmentStage.PLANNING:
+            # Larger score boxes for Planning stage
+            x_start = 200
+            y_start = 280
+            box_width = 100
+            box_height = 80
+            spacing = 20
+        else:
+            # Original size for other stages
+            x_start = 250
+            y_start = 230
+            box_width = 60
+            box_height = 60
+            spacing = 10
+
+        for i, (category, score, color) in enumerate(categories):
+            col = i % 3
+            row = i // 3
+
+            x = x_start + col * (box_width + spacing * 2) if not self.stage == DevelopmentStage.PLANNING else x_start + col * (box_width + spacing)
+            y = y_start + row * (box_height + spacing * 2) if not self.stage == DevelopmentStage.PLANNING else y_start + row * (box_height + spacing)
+
+            if self.stage == DevelopmentStage.PLANNING:
+                # Larger, more detailed boxes for Planning stage
+                # Score box with colored border
+                self.canvas.create_rectangle(
+                    x, y,
+                    x + box_width, y + box_height,
+                    fill='#3a3a3a',
+                    outline=color,
+                    width=3,
+                    tags='summary'
+                )
+
+                # Category label at top
+                self.canvas.create_text(
+                    x + box_width // 2, y + 20,
+                    text=category,
+                    font=('Arial', 11),
+                    fill='#cccccc',
+                    tags='summary'
+                )
+
+                # Large score value
+                self.canvas.create_text(
+                    x + box_width // 2, y + 50,
+                    text=str(score),
+                    font=('Arial', 24, 'bold'),
+                    fill=color,
+                    tags='summary'
+                )
+            else:
+                # Original style for other stages
+                # Score box
+                self.canvas.create_rectangle(
+                    x, y,
+                    x + box_width, y + box_height,
+                    fill=color,
+                    outline='white',
+                    width=2,
+                    tags='summary'
+                )
+
+                # Score value
+                self.canvas.create_text(
+                    x + box_width // 2, y + box_height // 2 - 5,
+                    text=str(score),
+                    font=('Arial', 18, 'bold'),
+                    fill='white',
+                    tags='summary'
+                )
+
+                # Category label
+                self.canvas.create_text(
+                    x + box_width // 2, y + box_height + 10,
+                    text=category[:4],  # First 4 letters
+                    font=('Arial', 9),
+                    fill=color,
+                    tags='summary'
+                )
+
+        # Total score
+        total = sum(self.category_scores.values())
+
+        if self.stage == DevelopmentStage.PLANNING:
+            # Another divider for Planning stage
+            self.canvas.create_line(
+                150, 470, 650, 470,
+                fill='#555555',
+                width=2,
+                tags='summary'
+            )
+
+            # Large total score display for Planning
+            self.canvas.create_text(
+                400, 495,
+                text="TOTAL PLANNING POINTS",
+                font=('Arial', 14),
+                fill='#888888',
+                tags='summary'
+            )
+            self.canvas.create_text(
+                400, 525,
+                text=str(total),
+                font=('Arial', 32, 'bold'),
+                fill='#4CAF50',
+                tags='summary'
+            )
+
+            button_y = 510  # Moved down to not overlap with total score
+            button_text = "CONTINUE"
+            button_font = ('Arial', 18, 'bold')
+            button_width = 15
+            button_height = 2
+            print(f"[DEBUG] Continue button will be placed at y={button_y}")
+        else:
+            # Original display for other stages
+            self.canvas.create_text(
+                400, 380,
+                text=f"Total: {total} points",
+                font=('Arial', 18, 'bold'),
+                fill='#FFD700',
+                tags='summary'
+            )
+
+            button_y = 420
+            button_text = "▶ Continue"
+            button_font = ('Arial', 14, 'bold')
+            button_width = 20
+            button_height = 1
+
+        # Continue button frame
+        button_frame = tk.Frame(self.window, bg='#2a2a2a')
+        button_window = self.canvas.create_window(400, button_y, window=button_frame, tags='summary')
+
+        # Continue button
+        continue_btn = tk.Button(
+            button_frame,
+            text=button_text,
+            font=button_font,
+            bg='#4CAF50',
+            fg='white',
+            activebackground='#5CBF60',
+            width=button_width,
+            height=button_height,
+            command=lambda: self.proceed_from_summary()
+        )
+        continue_btn.pack()
+
+        print(f"[DEBUG] Created continue button window: {button_window}")
+
+        # Force canvas to update to ensure all items are rendered
+        self.canvas.update_idletasks()
+
+        # List all canvas items to verify they exist
+        all_items = self.canvas.find_withtag('summary')
+        print(f"[DEBUG] Total summary items on canvas: {len(all_items)}")
+
+    def proceed_from_summary(self):
+        """Clear summary and proceed to next stage"""
+        if self.stage == DevelopmentStage.PLANNING:
+            # For Planning stage, launch the minigame directly
+            game_type = self.game_data.get('current_game', {}).get('type', 'Unknown')
+            game_topic = self.game_data.get('current_game', {}).get('topic', 'Unknown')
+
+            # Clear summary elements
+            self.canvas.delete("summary")
+
+            # Launch minigame
+            self.launch_minigame(game_type, game_topic)
+        else:
+            # Clear summary elements
+            self.canvas.delete("summary")
+            # Now complete the stage
+            self.complete_stage()
 
     def complete_stage(self):
         """Complete the current stage"""
+        # Show completion screen for Planning stage
+        if self.stage == DevelopmentStage.PLANNING:
+            self.show_planning_complete_screen()
+        else:
+            # For other stages, proceed as normal
+            self.finish_stage_completion()
+
+    def show_planning_complete_screen(self):
+        """Show the planning complete screen with scores and continue button"""
+        # Clear the canvas
+        self.canvas.delete("all")
+
+        # Dark background
+        self.canvas.configure(bg='#1a1a1a')
+
+        # Get game info if available
+        game_name = self.game_data.get('current_game', {}).get('name', 'Untitled Game')
+        game_type = self.game_data.get('current_game', {}).get('type', 'Unknown')
+        game_topic = self.game_data.get('current_game', {}).get('topic', 'Unknown')
+
+        # Title - Game Name
+        self.canvas.create_text(
+            400, 80,
+            text=game_name,
+            font=('Arial', 32, 'bold'),
+            fill='#4CAF50',
+            tags='complete'
+        )
+
+        # Stage Complete text
+        self.canvas.create_text(
+            400, 130,
+            text="PLANNING COMPLETE",
+            font=('Arial', 24, 'bold'),
+            fill='white',
+            tags='complete'
+        )
+
+        # Scores header
+        self.canvas.create_text(
+            400, 180,
+            text="Planning Scores:",
+            font=('Arial', 18, 'bold'),
+            fill='#FFC107',
+            tags='complete'
+        )
+
+        # Display scores
+        score_y = 220
+        categories = [
+            ('Gameplay', self.category_scores.get('gameplay', 0), '#FF6B6B'),
+            ('Technical', self.category_scores.get('technical', 0), '#4ECDC4'),
+            ('Graphics', self.category_scores.get('graphics', 0), '#45B7D1'),
+            ('Innovation', self.category_scores.get('innovation', 0), '#96CEB4'),
+            ('Sound/Audio', self.category_scores.get('sound_audio', 0), '#FECA57'),
+            ('Story', self.category_scores.get('story', 0), '#DDA0DD')
+        ]
+
+        for category, score, color in categories:
+            self.canvas.create_text(
+                300, score_y,
+                text=f"{category}:",
+                font=('Arial', 14),
+                fill=color,
+                anchor='e',
+                tags='complete'
+            )
+            self.canvas.create_text(
+                320, score_y,
+                text=str(score),
+                font=('Arial', 16, 'bold'),
+                fill='white',
+                anchor='w',
+                tags='complete'
+            )
+            score_y += 30
+
+        # Total score
+        total = sum(self.category_scores.values())
+        self.canvas.create_text(
+            400, score_y + 20,
+            text=f"Total Points: {total}",
+            font=('Arial', 20, 'bold'),
+            fill='#4CAF50',
+            tags='complete'
+        )
+
+        # Continue button frame
+        button_frame = tk.Frame(self.window, bg='#1a1a1a')
+        button_window = self.canvas.create_window(400, 480, window=button_frame, tags='complete')
+
+        # Continue button
+        continue_btn = tk.Button(
+            button_frame,
+            text="▶ Continue to Development",
+            font=('Arial', 16, 'bold'),
+            bg='#4CAF50',
+            fg='white',
+            activebackground='#5CBF60',
+            width=25,
+            height=2,
+            command=lambda: self.launch_minigame(game_type, game_topic)
+        )
+        continue_btn.pack(pady=10)
+
+        # Skip minigame button (for testing)
+        skip_btn = tk.Button(
+            button_frame,
+            text="Skip Minigame",
+            font=('Arial', 10),
+            bg='#666666',
+            fg='white',
+            command=self.finish_stage_completion
+        )
+        skip_btn.pack(pady=5)
+
+    def launch_minigame(self, game_type: str, game_topic: str):
+        """Launch the appropriate minigame based on game type and topic"""
+        print(f"[DEBUG] Launching minigame for {game_type} - {game_topic}")
+
+        try:
+            # Map game types to minigames
+            if game_type.lower() == "arcade":
+                if "tennis" in game_topic.lower() or "table tennis" in game_topic.lower():
+                    # Launch Table Tennis Arcade
+                    print(f"[DEBUG] Starting Table Tennis Arcade game")
+                    import subprocess
+                    import sys
+                    # Run as separate process and wait for completion
+                    result = subprocess.run(
+                        [sys.executable, "DevelopmentGames/arcade/TableTennisArcade.py"],
+                        capture_output=True,
+                        text=True
+                    )
+                    # Get score from output if available
+                    self.on_minigame_complete(50)  # Default score for now
+
+                elif "space" in game_topic.lower():
+                    # Launch Space Arcade
+                    print(f"[DEBUG] Starting Space Arcade game")
+                    import subprocess
+                    import sys
+                    result = subprocess.run(
+                        [sys.executable, "DevelopmentGames/arcade/SpaceArcade.py"],
+                        capture_output=True,
+                        text=True
+                    )
+                    self.on_minigame_complete(50)
+
+                else:
+                    # Generic arcade game - use Temple Arcade
+                    print(f"[DEBUG] Starting Temple Arcade game for {game_topic}")
+                    import subprocess
+                    import sys
+                    result = subprocess.run(
+                        [sys.executable, "DevelopmentGames/arcade/TempleArcade.py"],
+                        capture_output=True,
+                        text=True
+                    )
+                    self.on_minigame_complete(50)
+
+            elif game_type.lower() in ["text adventure", "adventure"]:
+                # Launch DeepAdventure with topic
+                print(f"[DEBUG] Starting Text Adventure for topic: {game_topic}")
+                from DevelopmentGames.textadventure.DeepAdventure import play_game
+                self.window.withdraw()
+
+                # Create a simple wrapper to run the game
+                score = play_game(game_topic=game_topic)
+                self.on_minigame_complete(score if score else 50)
+
+            else:
+                # No minigame for this type yet
+                print(f"[DEBUG] No minigame available for {game_type}")
+                self.finish_stage_completion()
+
+        except Exception as e:
+            print(f"[ERROR] Failed to launch minigame: {e}")
+            self.finish_stage_completion()
+
+    def on_minigame_complete(self, minigame_score: int):
+        """Handle minigame completion"""
+        print(f"[DEBUG] Minigame complete with score: {minigame_score}")
+
+        # Add minigame score bonus to development
+        if minigame_score > 0:
+            # Distribute bonus points based on minigame performance
+            bonus = minigame_score // 10  # Convert minigame score to development points
+            self.category_scores['gameplay'] += bonus
+            self.category_scores['innovation'] += bonus // 2
+
+        self.window.deiconify()
+        self.finish_stage_completion()
+
+    def finish_stage_completion(self):
+        """Finish the stage completion process"""
         # Advance time by 1 week if this is the planning stage
         if self.stage == DevelopmentStage.PLANNING:
             from systems.game_systems import TimeSystem
@@ -1028,12 +1395,7 @@ class DevelopmentStageWindow:
         if self.on_complete:
             self.on_complete(self.stage_scores)
 
-        # Close both windows
-        if hasattr(self, 'calc_window') and self.calc_window:
-            try:
-                self.calc_window.destroy()
-            except:
-                pass
+        # Close window
         self.window.destroy()
 
 

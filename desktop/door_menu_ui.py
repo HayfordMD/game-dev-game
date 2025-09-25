@@ -19,7 +19,7 @@ class DoorMenuWindow:
         # Create window with larger size for all options
         self.window = tk.Toplevel()
         self.window.title("Choose Location to Visit")
-        self.window.geometry("900x700")  # Large window to fit all locations
+        self.window.geometry("1200x800")  # Even larger window for better visibility
         self.window.configure(bg='#2b2b2b')
 
         # Prevent closing without proper cleanup
@@ -120,17 +120,20 @@ class DoorMenuWindow:
                             description: str, row: int, col: int,
                             is_available: bool, reason: str = ""):
         """Create a card for a location"""
-        # Card frame
+        # Card frame - larger size
         card_frame = tk.Frame(
             self.scrollable_frame,
             bg='#3a3a3a' if is_available else '#1a1a1a',
             relief='raised' if is_available else 'sunken',
-            bd=2
+            bd=3,
+            width=350,
+            height=200
         )
-        card_frame.grid(row=row, column=col, padx=10, pady=5, sticky='nsew')
+        card_frame.grid(row=row, column=col, padx=15, pady=10, sticky='nsew')
+        card_frame.pack_propagate(False)
 
         # Configure grid to expand cards
-        self.scrollable_frame.grid_columnconfigure(col, weight=1, minsize=250)
+        self.scrollable_frame.grid_columnconfigure(col, weight=1, minsize=350)
 
         # Location icon (different for each type)
         icons = {
@@ -154,75 +157,79 @@ class DoorMenuWindow:
 
         # Location name with icon
         name_frame = tk.Frame(card_frame, bg=card_frame['bg'])
-        name_frame.pack(fill='x', padx=10, pady=(10, 5))
+        name_frame.pack(fill='x', padx=15, pady=(15, 10))
 
         tk.Label(
             name_frame,
             text=icon,
-            font=('Arial', 20),
+            font=('Arial', 28),
             bg=card_frame['bg']
-        ).pack(side='left', padx=(0, 10))
+        ).pack(side='left', padx=(0, 15))
 
         tk.Label(
             name_frame,
             text=location_name,
-            font=('Arial', 14, 'bold'),
-            fg='white' if is_available else '#666666',
+            font=('Arial', 18, 'bold'),
+            fg='white' if is_available else '#555555',
             bg=card_frame['bg']
         ).pack(side='left')
 
-        # Description
-        tk.Label(
-            card_frame,
-            text=description,
-            font=('Arial', 10),
-            fg='#cccccc' if is_available else '#555555',
-            bg=card_frame['bg'],
-            wraplength=230,
-            justify='left'
-        ).pack(padx=10, pady=5)
-
-        # Availability or reason
-        if not is_available and reason:
+        # Description (only show for available locations)
+        if is_available:
             tk.Label(
                 card_frame,
-                text=f"⏰ {reason}",
-                font=('Arial', 9, 'italic'),
-                fg='#FF9800',
-                bg=card_frame['bg']
-            ).pack(padx=10, pady=5)
+                text=description,
+                font=('Arial', 12),
+                fg='#cccccc',
+                bg=card_frame['bg'],
+                wraplength=320,
+                justify='left'
+            ).pack(padx=15, pady=5)
 
-        # Special indicators
+        # Special indicator for 24/7
         if location_key == 'grocery':
             tk.Label(
                 card_frame,
-                text="✨ 24/7 Open",
-                font=('Arial', 9, 'bold'),
+                text="✨ Always Open",
+                font=('Arial', 11, 'bold'),
                 fg='#4CAF50',
                 bg=card_frame['bg']
             ).pack()
 
-        # Visit button
+        # Visit button - make it look active or inactive
+        button_frame = tk.Frame(card_frame, bg=card_frame['bg'])
+        button_frame.pack(side='bottom', pady=15)
+
         if is_available:
             visit_btn = tk.Button(
-                card_frame,
-                text="Visit",
-                font=('Arial', 12, 'bold'),
+                button_frame,
+                text="ENTER",
+                font=('Arial', 16, 'bold'),
                 bg='#4CAF50',
                 fg='white',
                 activebackground='#5CBF60',
+                activeforeground='white',
+                relief='raised',
+                bd=3,
                 command=lambda: self.visit_location(location_key),
-                width=15
+                width=20,
+                height=2
             )
-            visit_btn.pack(pady=10)
+            visit_btn.pack()
         else:
-            tk.Label(
-                card_frame,
-                text="[Closed]",
-                font=('Arial', 11),
-                fg='#666666',
-                bg=card_frame['bg']
-            ).pack(pady=10)
+            # Disabled button appearance
+            disabled_btn = tk.Label(
+                button_frame,
+                text="CLOSED",
+                font=('Arial', 16, 'bold'),
+                bg='#2a2a2a',
+                fg='#444444',
+                relief='sunken',
+                bd=2,
+                width=20,
+                height=2
+            )
+            disabled_btn.pack()
 
     def refresh_locations(self):
         """Refresh the available locations display"""

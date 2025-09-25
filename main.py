@@ -820,7 +820,7 @@ class GameDevStudioApp:
         self.dev_menu = DevMenu(self)
 
         # Bind global hotkey for dev menu
-        self.root.bind('<Alt-Shift-Q>', lambda e: self.dev_menu.show())
+        self.root.bind('<F12>', lambda e: self.dev_menu.show())
 
         # Show start menu
         self.show_start_menu()
