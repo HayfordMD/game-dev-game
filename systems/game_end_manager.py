@@ -94,7 +94,7 @@ class GameEndManager:
 
     def handle_game_end(self, minigame_score: int, root: tk.Tk = None, return_callback: Callable = None):
         """Handle the end of a minigame"""
-        self.minigame_score = minigame_score
+        self.minigame_score = max(0, minigame_score)  # Ensure non-negative
         self.root = root or tk.Tk()
         self.return_callback = return_callback
 
@@ -103,9 +103,10 @@ class GameEndManager:
             self._load_temp_data()
 
         # Distribute the minigame score to GTGISS categories
-        self.distribute_score(minigame_score)
+        # Even if score is 0, we still show the results
+        self.distribute_score(self.minigame_score)
 
-        # Show the results window
+        # Always show the results window
         self.show_results_window()
 
     def _load_temp_data(self):
@@ -135,6 +136,11 @@ class GameEndManager:
 
         # Start with before scores
         self.after_scores = self.before_scores.copy()
+
+        # If score is 0, no distribution needed
+        if minigame_score <= 0:
+            print(f"[GAME END] No points to distribute")
+            return
 
         # Categories and their weights based on game type
         weights = self.get_category_weights()
@@ -272,11 +278,19 @@ class GameEndManager:
         minigame_frame = tk.Frame(main_frame, bg='#1a1a2e', relief='ridge', bd=2)
         minigame_frame.pack(fill='x', pady=10)
 
+        # Different message based on score
+        if self.minigame_score > 0:
+            score_text = f"Minigame Score: {self.minigame_score} points"
+            score_color = '#ffc107'
+        else:
+            score_text = "Minigame Score: 0 points - Try harder next time!"
+            score_color = '#ff6666'
+
         tk.Label(
             minigame_frame,
-            text=f"Minigame Score: {self.minigame_score} points",
+            text=score_text,
             font=('Arial', 14, 'bold'),
-            fg='#ffc107',
+            fg=score_color,
             bg='#1a1a2e'
         ).pack(pady=10)
 
@@ -326,28 +340,38 @@ class GameEndManager:
 
         # Total change
         total_change = self.after_scores.total - self.before_scores.total
+        if total_change > 0:
+            change_text = f"Total Points Gained: +{total_change}"
+            change_color = '#00ff88'
+        elif total_change == 0:
+            change_text = "No Points Gained"
+            change_color = '#888888'
+        else:
+            change_text = f"Total Points Lost: {total_change}"
+            change_color = '#ff6666'
+
         change_label = tk.Label(
             main_frame,
-            text=f"Total Points Gained: +{total_change}",
+            text=change_text,
             font=('Arial', 16, 'bold'),
-            fg='#00ff88',
+            fg=change_color,
             bg='#0a0a0f'
         )
         change_label.pack(pady=20)
 
-        # Continue button
-        continue_btn = tk.Button(
+        # Next button
+        next_btn = tk.Button(
             main_frame,
-            text="Continue to Development",
+            text="Next",
             font=('Arial', 14, 'bold'),
             bg='#4a9eff',
             fg='white',
-            padx=30,
+            padx=40,
             pady=10,
             cursor='hand2',
             command=self.continue_to_development
         )
-        continue_btn.pack(pady=20)
+        next_btn.pack(pady=20)
 
         # Make window modal
         self.results_window.transient(self.root)

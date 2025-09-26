@@ -16,6 +16,7 @@ from systems.points_generation import (
     create_player_developer,
     DevelopmentStage as PGDevelopmentStage
 )
+from systems.game_end_manager import GameEndManager, GTGISSScores
 
 class DevelopmentStage(Enum):
     PLANNING = "Planning"
@@ -1393,6 +1394,26 @@ class DevelopmentStageWindow:
         print(f"[MINIGAME] Planning Score: {sum(self.category_scores.values())}")
         print("="*60 + "\n")
 
+        # Prepare GameEndManager with current scores
+        manager = GameEndManager()
+        current_gtgiss = GTGISSScores(
+            gameplay=self.category_scores.get('gameplay', 0),
+            technical=self.category_scores.get('technical', 0),
+            graphics=self.category_scores.get('graphics', 0),
+            innovation=self.category_scores.get('innovation', 0),
+            sound=self.category_scores.get('sound_audio', 0),
+            story=self.category_scores.get('story', 0)
+        )
+
+        # Get game name
+        if hasattr(self.game_data, 'data'):
+            current_game = self.game_data.data.get('current_game', {})
+        else:
+            current_game = self.game_data.get('current_game', {})
+        game_name = current_game.get('name', 'Untitled Game')
+
+        manager.set_game_info(game_name, game_type, game_topic, current_gtgiss)
+
         try:
             import subprocess
             import sys
@@ -1417,6 +1438,14 @@ class DevelopmentStageWindow:
                     else:
                         minigame_path = "DevelopmentGames/arcade/TempleArcade.py"
                         print(f"[MINIGAME] Space game not found, using Temple Arcade")
+                elif "bugs" in game_topic.lower() or "bug" in game_topic.lower():
+                    # Use BugsArcade for bug-themed games
+                    if os.path.exists("DevelopmentGames/arcade/BugsArcade.py"):
+                        minigame_path = "DevelopmentGames/arcade/BugsArcade.py"
+                        print(f"[MINIGAME] Selected: Bugs Arcade (Centipede-style)")
+                    else:
+                        minigame_path = "DevelopmentGames/arcade/TempleArcade.py"
+                        print(f"[MINIGAME] Bugs game not found, using Temple Arcade")
                 else:
                     # Default arcade game
                     minigame_path = "DevelopmentGames/arcade/TempleArcade.py"
@@ -1424,15 +1453,27 @@ class DevelopmentStageWindow:
 
                 if minigame_path and os.path.exists(minigame_path):
                     print(f"[MINIGAME] Launching: {minigame_path}")
+                    # Hide current window while minigame runs
+                    if hasattr(self, 'window') and self.window:
+                        self.window.withdraw()
+
+                    # Run minigame
                     result = subprocess.run(
                         [sys.executable, minigame_path],
-                        capture_output=True,
+                        capture_output=False,  # Let it show its own window
                         text=True
                     )
-                    # Parse score from output or use default
-                    score = self.parse_minigame_score(result.stdout)
-                    print(f"[MINIGAME] Completed with score: {score}")
-                    self.distribute_minigame_score_to_gtgiss(score)
+
+                    # Show window again
+                    if hasattr(self, 'window') and self.window:
+                        self.window.deiconify()
+
+                    # The minigame will handle its own scoring via GameEndManager
+                    # Set callback to receive updated scores
+                    manager.return_callback = self.on_minigame_scores_updated
+
+                    # For now, continue directly
+                    self.finish_stage_completion()
                 else:
                     print(f"[MINIGAME] File not found: {minigame_path}")
                     self.distribute_minigame_score_to_gtgiss(30)  # Default score
@@ -1488,37 +1529,27 @@ class DevelopmentStageWindow:
         print(f"[MINIGAME] No score found in output, using default")
         return 30  # Default score if not found
 
-    def distribute_minigame_score_to_gtgiss(self, score: int):
-        """Distribute minigame score randomly to GTGISS categories"""
-        print(f"\n[GTGISS] Distributing {score} points from minigame")
+    def on_minigame_scores_updated(self, updated_scores: GTGISSScores):
+        """Handle updated scores from minigame"""
+        print(f"\n[MINIGAME] Received updated scores from GameEndManager")
 
-        # GTGISS = Gameplay, Technical, Graphics, Innovation, Sound, Story
-        categories = ['gameplay', 'technical', 'graphics', 'innovation', 'sound_audio', 'story']
+        # Update our category scores
+        self.category_scores['gameplay'] = updated_scores.gameplay
+        self.category_scores['technical'] = updated_scores.technical
+        self.category_scores['graphics'] = updated_scores.graphics
+        self.category_scores['innovation'] = updated_scores.innovation
+        self.category_scores['sound_audio'] = updated_scores.sound
+        self.category_scores['story'] = updated_scores.story
 
-        # Randomly distribute the score
-        remaining = score
-        distribution = {}
+        print(f"[MINIGAME] New total score: {sum(self.category_scores.values())}\n")
 
-        while remaining > 0 and categories:
-            # Pick a random category
-            category = random.choice(categories)
-
-            # Assign 1-5 points (or remaining if less)
-            points = min(random.randint(1, min(5, remaining)), remaining)
-
-            if category not in distribution:
-                distribution[category] = 0
-            distribution[category] += points
-            remaining -= points
-
-        # Apply distribution
-        for category, points in distribution.items():
-            if category not in self.category_scores:
-                self.category_scores[category] = 0
-            self.category_scores[category] += points
-            print(f"[GTGISS] +{points} to {category} (total: {self.category_scores[category]})")
-
-        print(f"[GTGISS] New total score: {sum(self.category_scores.values())}\n")
+        # Update stage scores as well
+        self.stage_scores.gameplay = updated_scores.gameplay
+        self.stage_scores.technical = updated_scores.technical
+        self.stage_scores.graphics = updated_scores.graphics
+        self.stage_scores.innovation = updated_scores.innovation
+        self.stage_scores.sound_audio = updated_scores.sound
+        self.stage_scores.story = updated_scores.story
 
         # Continue with stage completion
         if hasattr(self, 'window') and self.window:

@@ -1,0 +1,103 @@
+Game Combinations List
+======================
+
+Text Adventure + Zombies |  DONE
+Text Adventure + Temple |  DONE
+Text Adventure + Fantasy |  DONE
+Text Adventure + Space |  DONE
+Text Adventure + Table Tennis |  DONE
+Text Adventure + Postal Work |  DONE
+Text Adventure + Questing Heroes |  DONE
+Text Adventure + World War II |  DONE
+Text Adventure + City Building |  DONE
+Text Adventure + Ocean Exploration |  DONE
+Text Adventure + Golf |  DONE
+Text Adventure + Painting |  DONE
+Text Adventure + Bugs |  DONE
+
+Arcade + Zombies | NOT DONE
+Arcade + Temple |  DONE
+Arcade + Fantasy | NOT DONE
+Arcade + Space |  DONE
+Arcade + Table Tennis |  DONE
+Arcade + Postal Work | NOT DONE PAPERBY GAME
+Arcade + Questing Heroes | NOT DONE
+Arcade + World War II | NOT DONE
+Arcade + City Building | NOT DONE
+Arcade + Ocean Exploration | NOT DONE
+Arcade + Golf | NOT DONE MINI GOLF WHERE YOU CLICK YOUR BAAL AND POINT AND HOLD TO POWER IT UP
+Arcade + Painting | NOT DONE
+Arcade + Bugs | DONE
+
+Platformer + Zombies | NOT DONE
+Platformer + Temple | NOT DONE
+Platformer + Fantasy | NOT DONE
+Platformer + Space | NOT DONE
+Platformer + Table Tennis | NOT DONE
+Platformer + Postal Work | NOT DONE
+Platformer + Questing Heroes | NOT DONE
+Platformer + World War II | NOT DONE
+Platformer + City Building | NOT DONE
+Platformer + Ocean Exploration | NOT DONE
+Platformer + Golf | NOT DONE
+Platformer + Painting | NOT DONE
+Platformer + Bugs | NOT DONE
+
+Puzzle + Zombies | NOT DONE
+Puzzle + Temple | NOT DONE
+Puzzle + Fantasy | NOT DONE
+Puzzle + Space | NOT DONE
+Puzzle + Table Tennis | NOT DONE
+Puzzle + Postal Work | NOT DONE
+Puzzle + Questing Heroes | NOT DONE
+Puzzle + World War II | NOT DONE
+Puzzle + City Building | NOT DONE
+Puzzle + Ocean Exploration | NOT DONE
+Puzzle + Golf | NOT DONE
+Puzzle + Painting | NOT DONE
+Puzzle + Bugs | NOT DONE
+
+Shooter + Zombies | NOT DONE
+Shooter + Temple | NOT DONE
+Shooter + Fantasy | NOT DONE
+Shooter + Space | NOT DONE
+Shooter + Table Tennis | NOT DONE
+Shooter + Postal Work | NOT DONE
+Shooter + Questing Heroes | NOT DONE
+Shooter + World War II | NOT DONE
+Shooter + City Building | NOT DONE
+Shooter + Ocean Exploration | NOT DONE
+Shooter + Golf | NOT DONE
+Shooter + Painting | NOT DONE
+Shooter + Bugs | NOT DONE
+
+Simulation + Zombies | NOT DONE
+Simulation + Temple | NOT DONE
+Simulation + Fantasy | NOT DONE
+Simulation + Space | NOT DONE
+Simulation + Table Tennis | NOT DONE
+Simulation + Postal Work | NOT DONE
+Simulation + Questing Heroes | NOT DONE
+Simulation + World War II | NOT DONE
+Simulation + City Building | NOT DONE
+Simulation + Ocean Exploration | NOT DONE
+Simulation + Golf | NOT DONE
+Simulation + Painting | NOT DONE
+Simulation + Bugs | NOT DONE
+
+RPG + Zombies | NOT DONE
+RPG + Temple | NOT DONE
+RPG + Fantasy | NOT DONE
+RPG + Space | NOT DONE
+RPG + Table Tennis | NOT DONE
+RPG + Postal Work | NOT DONE
+RPG + Questing Heroes | NOT DONE
+RPG + World War II | NOT DONE
+RPG + City Building | NOT DONE
+RPG + Ocean Exploration | NOT DONE
+RPG + Golf | NOT DONE
+RPG + Painting | NOT DONE
+RPG + Bugs | NOT DONE
+
+Total Combinations: 91 (7 game types × 13 topics)
+All Status: NOT DONE

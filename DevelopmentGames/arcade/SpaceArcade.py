@@ -1,6 +1,13 @@
 import pygame
 import math
 import random
+import sys
+import os
+import tkinter as tk
+
+# Add parent directory to path for imports
+sys.path.append(os.path.dirname(os.path.dirname(os.path.dirname(__file__))))
+from systems.game_end_manager import GameEndManager
 
 pygame.init()
 
@@ -253,8 +260,12 @@ class Game:
             text_rect = game_over_text.get_rect(center=(WIDTH//2, HEIGHT//2))
             screen.blit(game_over_text, text_rect)
 
-            restart_text = self.small_font.render("Press SPACE to restart", True, WHITE)
-            text_rect = restart_text.get_rect(center=(WIDTH//2, HEIGHT//2 + 40))
+            score_text = self.font.render(f"Final Score: {self.score}", True, WHITE)
+            text_rect = score_text.get_rect(center=(WIDTH//2, HEIGHT//2 + 40))
+            screen.blit(score_text, text_rect)
+
+            restart_text = self.small_font.render("Press SPACE to continue", True, WHITE)
+            text_rect = restart_text.get_rect(center=(WIDTH//2, HEIGHT//2 + 80))
             screen.blit(restart_text, text_rect)
 
     def restart(self):
@@ -263,6 +274,7 @@ class Game:
 def main():
     game = Game()
     running = True
+    game_ended = False
 
     while running:
         for event in pygame.event.get():
@@ -270,10 +282,24 @@ def main():
                 running = False
             elif event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_SPACE:
-                    if game.game_over:
-                        game.restart()
-                    else:
+                    if game.game_over and not game_ended:
+                        # End game and show results
+                        game_ended = True
+                        pygame.quit()
+
+                        # Use GameEndManager to handle the ending
+                        root = tk.Tk()
+                        root.withdraw()  # Hide the root window
+                        manager = GameEndManager()
+                        manager.handle_game_end(game.score, root)
+
+                        # Exit after handling
+                        sys.exit(0)
+                    elif not game.game_over:
                         game.shoot()
+                elif event.key == pygame.K_ESCAPE:
+                    # Allow escape to exit
+                    running = False
 
         keys = pygame.key.get_pressed()
         if not game.game_over:
@@ -290,6 +316,13 @@ def main():
         clock.tick(60)
 
     pygame.quit()
+
+    # Always show results, even with 0 score
+    if not game_ended:
+        root = tk.Tk()
+        root.withdraw()
+        manager = GameEndManager()
+        manager.handle_game_end(game.score, root)
 
 if __name__ == "__main__":
     main()
