@@ -444,23 +444,53 @@ class FirstPersonStreetGame:
                 self.game_over = True
 
     def check_delivery(self, direction):
-        # Check if paper will hit a house mailbox
+        # Check if paper will hit any target
+        hit_something = False
+
         for house in self.houses:
             relative_z = house.z - self.camera_z
 
             # Check if house is in throwing range
-            if 0 < relative_z < 200:
+            if 0 < relative_z < 250:
                 # Check if throwing in correct direction
                 correct_side = (direction < 0 and house.side < 0) or (direction > 0 and house.side > 0)
 
                 if correct_side:
-                    if house.needs_delivery and not house.delivered:
-                        house.delivered = True
-                        self.score += 50
-                        self.papers_delivered += 1
-                    elif not house.needs_delivery:
-                        # Delivered to non-subscriber
-                        self.score -= 25
+                    # Random chance to hit different targets based on distance
+                    hit_roll = random.random()
+
+                    if relative_z < 100:  # Close range - better accuracy
+                        if hit_roll < 0.4 and not house.mailbox_hit:
+                            # Hit mailbox
+                            house.mailbox_hit = True
+                            self.score += 1
+                            hit_something = True
+                            break
+                        elif hit_roll < 0.6 and house.window_open and not house.window_hit:
+                            # Hit open window
+                            house.window_hit = True
+                            self.score += 1
+                            hit_something = True
+                            break
+                        elif hit_roll < 0.7 and house.has_cat and not house.cat_hit:
+                            # Hit cat (cat runs away)
+                            house.cat_hit = True
+                            self.score += 1
+                            hit_something = True
+                            break
+                    else:  # Longer range - less accurate
+                        if hit_roll < 0.2 and not house.mailbox_hit:
+                            house.mailbox_hit = True
+                            self.score += 1
+                            hit_something = True
+                            break
+                        elif hit_roll < 0.3 and house.window_open and not house.window_hit:
+                            house.window_hit = True
+                            self.score += 1
+                            hit_something = True
+                            break
+
+        return hit_something
 
     def update(self):
         if self.game_over:
