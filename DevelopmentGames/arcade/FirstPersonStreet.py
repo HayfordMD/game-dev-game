@@ -611,6 +611,9 @@ class FirstPersonStreetGame:
         papers_text = self.font.render(f"Papers: {self.papers}", True, WHITE)
         self.screen.blit(papers_text, (10, 50))
 
+        misses_text = self.font.render(f"Misses: {self.misses}/{self.max_misses}", True, RED if self.misses > 2 else WHITE)
+        self.screen.blit(misses_text, (10, 90))
+
         # Draw crosshair at mouse position
         crosshair_color = WHITE
         mouse_x = self.mouse_x
@@ -636,11 +639,18 @@ class FirstPersonStreetGame:
         self.screen.blit(inst1, (SCREEN_WIDTH // 2 - 220, SCREEN_HEIGHT - 60))
 
         # Legend
-        pygame.draw.rect(self.screen, GREEN, (10, 90, 15, 15))
-        self.screen.blit(self.small_font.render("= Need delivery", True, WHITE), (30, 87))
+        legend_y = 130
+        self.screen.blit(self.small_font.render("TARGETS:", True, WHITE), (10, legend_y))
 
-        pygame.draw.rect(self.screen, BLUE, (10, 110, 15, 15))
-        self.screen.blit(self.small_font.render("= Delivered", True, WHITE), (30, 107))
+        pygame.draw.rect(self.screen, GREEN, (10, legend_y + 20, 15, 10))
+        self.screen.blit(self.small_font.render("= Mailbox", True, WHITE), (30, legend_y + 17))
+
+        pygame.draw.rect(self.screen, BLACK, (10, legend_y + 40, 15, 15))
+        pygame.draw.rect(self.screen, WHITE, (10, legend_y + 40, 15, 15), 1)
+        self.screen.blit(self.small_font.render("= Open Window", True, WHITE), (30, legend_y + 40))
+
+        pygame.draw.circle(self.screen, ORANGE, (17, legend_y + 65), 6)
+        self.screen.blit(self.small_font.render("= Cat", True, WHITE), (30, legend_y + 58))
 
         # Game over
         if self.game_over:
@@ -649,7 +659,11 @@ class FirstPersonStreetGame:
             overlay.fill(BLACK)
             self.screen.blit(overlay, (0, 0))
 
-            game_over_text = self.font.render("LEVEL COMPLETE!", True, WHITE)
+            if self.misses >= self.max_misses:
+                game_over_text = self.font.render("TOO MANY MISSES!", True, RED)
+            else:
+                game_over_text = self.font.render("ROUTE COMPLETE!", True, WHITE)
+
             text_rect = game_over_text.get_rect(center=(SCREEN_WIDTH // 2, SCREEN_HEIGHT // 2 - 50))
             self.screen.blit(game_over_text, text_rect)
 
@@ -657,9 +671,9 @@ class FirstPersonStreetGame:
             score_rect = final_score_text.get_rect(center=(SCREEN_WIDTH // 2, SCREEN_HEIGHT // 2))
             self.screen.blit(final_score_text, score_rect)
 
-            delivered_text = self.small_font.render(f"Delivered: {self.papers_delivered} | Missed: {self.papers_missed}", True, WHITE)
-            delivered_rect = delivered_text.get_rect(center=(SCREEN_WIDTH // 2, SCREEN_HEIGHT // 2 + 40))
-            self.screen.blit(delivered_text, delivered_rect)
+            hits_text = self.small_font.render(f"Targets Hit: {self.score} | Misses: {self.misses}", True, WHITE)
+            hits_rect = hits_text.get_rect(center=(SCREEN_WIDTH // 2, SCREEN_HEIGHT // 2 + 40))
+            self.screen.blit(hits_text, hits_rect)
 
             restart_text = self.small_font.render("Press SPACE to continue", True, WHITE)
             restart_rect = restart_text.get_rect(center=(SCREEN_WIDTH // 2, SCREEN_HEIGHT // 2 + 80))
