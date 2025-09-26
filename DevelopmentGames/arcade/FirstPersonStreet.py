@@ -531,13 +531,6 @@ class FirstPersonStreetGame:
             if paper.z - self.camera_z < -100:
                 self.newspapers.remove(paper)
 
-        # Check for missed deliveries
-        for house in self.houses:
-            if house.needs_delivery and not house.delivered:
-                if house.z < self.camera_z - 100:
-                    self.papers_missed += 1
-                    house.needs_delivery = False  # Don't count again
-
         # Check if level complete
         last_house_z = max([h.z for h in self.houses]) if self.houses else 0
         if self.camera_z > last_house_z + 200:
